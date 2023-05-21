@@ -1,3 +1,9 @@
+# Results
+Results/
+
+# Mac files 
+*.DS_Store
+
 # Development files
 *.swp
 
