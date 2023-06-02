@@ -1,0 +1,12 @@
+202305-2911-2320-5a95df0e-3008-4ebe-acd8-ecb3b50607c7 
+paroutes n5
+
+202305-3013-3922-91ae99d6-b41d-4092-8b31-246c7703f50f
+guacamol, up to molecule 1396, ie. O=S(=O)(CC(CN1CCCCC1)N1CCCCC1)c1ccccc1
+
+O=S(=O)(CC(CN1CCCCC1)N1CCCCC1)c1ccccc1 or
+COCC(O)=Nc1n[nH]c2cc(NC(O)=NC(C)c3ccccc3)ncc12 kills the computation?
+
+202305-3117-3758-b1be5935-f3f0-43dd-bc2e-49cb5bb1772c
+guacamol, from to molecule 1397, i.e. COCC(O)=Nc1n[nH]c2cc(NC(O)=NC(C)c3ccccc3)ncc12
+
