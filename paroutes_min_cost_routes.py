@@ -157,7 +157,9 @@ if __name__ == "__main__":
             index_start = args.start_from_smiles_index_n
         else:
             index_start = 0
-        for i, smiles in enumerate(tqdm(test_smiles[index_start:], start=index_start)):
+        for i, smiles in enumerate(test_smiles[index_start:], start=index_start):
+            print("Smiles index: ", i)
+            print(smiles)
             # Run search
             algorithm.reset()
             output_graph, n_iter = algorithm.run_from_mol(Molecule(smiles))
