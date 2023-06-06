@@ -1,0 +1,2 @@
+2023-06-02 13:21:05,593 root INFO Namespace(input_file='/scratch/is541/retrosynthesis_dev/Data/Guacamol/guacamol_v1_test_10ksample.txt', limit_iterations=10000, limit_rxn_model_calls=1000, paroutes_n=5, limit_num_smiles=None, start_from_smiles_index_n=2816, save_output_pickle=True)
+2023-06-02 13:21:09,882 h5py._conv DEBUG Creating converter from 3 to 5
