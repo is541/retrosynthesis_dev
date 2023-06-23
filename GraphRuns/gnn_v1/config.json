@@ -1,0 +1,14 @@
+{
+    "not_in_route_sample_size": 100,
+    "seed": 42,
+    "run_id": "202305-2911-2320-5a95df0e-3008-4ebe-acd8-ecb3b50607c7",
+    "nr_sample_targets": -1,
+    "model_type": "gnn",
+    "batch_size": 64,
+    "shuffle": true,
+    "hidden_dim": 512,
+    "output_dim": 256,
+    "temperature": 0.1,
+    "lr": 0.001,
+    "num_epochs": 100
+}
