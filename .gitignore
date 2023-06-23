@@ -1,6 +1,10 @@
 # Graph pickles
 **/constant0_graph_pickles/
 
+# Other pickle results
+**/targ_to_purch_distances.pickle
+**/targ_routes.pickle
+
 # Results
 Results/
 
