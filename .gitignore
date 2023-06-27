@@ -4,6 +4,7 @@
 # Other pickle results
 **/targ_to_purch_distances.pickle
 **/targ_routes.pickle
+GraphRuns/**/*.pickle
 
 # Results
 Results/

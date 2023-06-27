@@ -195,8 +195,34 @@ if __name__ == "__main__":
         # "CC(C)N(CCCNC(=O)Nc1ccc(Cl)c(C(F)(F)F)c1)C[C@H]1O[C@@H](n2cnc3c(N)ncnc32)[C@H](O)[C@@H]1O"
     ]
     test_smiles = [
-        "FC(F)(F)c1csc(Nc2cc3ccccc3cn2)n1", # Example for easy synthesis route (4)
+        "FC(F)(F)c1csc(Nc2cc3ccccc3cn2)n1", # Example for easy synthesis route
         "CS(=O)(=O)Cc1cccc2c(C(c3ccc(Cl)cc3F)C3CC3C#N)c[nH]c12", # Example for building tree
+    ]
+    test_smiles = [
+    "COc1c(N2CCN(C(=O)COC(C)=O)CC2)cc(Br)cc1C(C)(C)C", # Nice (1)
+    "C=CC(OCOC)c1ccc(N(c2cc3oc(-c4ccc(F)cc4)c(C(=O)NC)c3cc2C2CC2)S(C)(=O)=O)cc1Cl", # USED - Route molecole easy all'inizio, complesse in profondità
+#     "CC(C(=O)O)c1ccc2nc(N)oc2c1",
+#     "Cc1ccc2ccccc2c1CC(C)Oc1ccccc1N",
+#     "Cc1c(Oc2ccc(C(CO)CO)cc2)ncnc1OC1CCN(c2ncccn2)CC1",
+#     "CCCCCCCCCCCCCCCCSCC(CBr)OC",
+    "O=C(NCCc1ccc(Cl)cc1C1CC1)c1ccc(Oc2cc3c(cc2Cl)C(C(=O)O)CCO3)cc1", # USED - Nice (2)
+    "N#Cc1ccccc1-c1cc(F)cc(-c2ccnc3nc(C(F)(F)F)ccc23)c1", # Nice (3)
+    "Cc1cccc2c(Cl)ncc(C(=O)NCC3CCOCC3)c12", # Ok
+#     "Cc1nc(C(C)(CS(C)(=O)=O)NC(=O)c2cc(O[C@@H](C)C(F)(F)F)c(C3CCC3)cn2)no1",
+#     "CC(C)(CC1CCN(c2ccc([N+](=O)[O-])cn2)CC1)C(=O)O",
+#     "FC(F)(F)c1ccc(COc2ccc(Br)cc2CC2CNC2)o1",
+#     "CC(=O)NCCOc1ccc2c(c1)c(Cl)cn2S(=O)(=O)c1ccccc1",
+#     "COc1ccc(Oc2ccccc2Cl)cc1C(C)C(=O)O",
+#     "CC1(NC(=O)OC(C)(C)C)CCCN(c2c(N)cnc3c2CCC3)C1",
+#     "CCN1CCN(C2(C(=O)N3C[C@H](S(=O)(=O)c4ccccc4Cl)C[C@H]3C(=O)NC3(C#N)CC3)CC2)CC1",
+#     "Oc1ccc2nc(-c3ccc(-c4nn[nH]n4)cc3Cl)ccc2c1",
+#     "CCOC(=O)Cc1ccc(OC)c(-c2ccc(NC(C)=O)cc2CN(CC)C(=O)OCc2ccccc2)c1",
+#     "Cc1cccc(NC2(CO)CCN(Cc3ccccc3)CC2)c1",
+    "CN(C)Cc1cc(C(C)(C)C)cc(Cl)n1", # Nice
+#     "CCOC(=O)C(C)(CCCc1ccccc1)Cc1ccc(OCCN)cc1",
+#     "CCCC(Oc1ccccc1Br)C(C)=O",
+#     "CN(Cc1ccccc1)C(=O)c1cc(NC(=O)c2cc(F)c(F)cc2Cl)[nH]n1",
+    "COC(=O)c1cc(N=Nc2ccc(OCCCCCCCCN=[N+]=[N-])cc2)ccc1O", # From 1 reaction exit 3 molecules
     ]
     
     # # Try with 3 templates
@@ -205,7 +231,7 @@ if __name__ == "__main__":
     # ]
 
     # Make reaction model, inventory, value functions, algorithm
-    rxn_model = PaRoutesModel(max_num_templates=2)
+    rxn_model = PaRoutesModel(max_num_templates=4)
     inventory = PaRoutesInventory(n=args.paroutes_n)
     value_function = ConstantNodeEvaluator(0.0)
     algorithm = ReduceValueFunctionCallsRetroStar(
@@ -213,7 +239,7 @@ if __name__ == "__main__":
         mol_inventory=inventory,
         limit_reaction_model_calls=args.limit_rxn_model_calls,
         limit_iterations=args.limit_iterations,
-        max_expansion_depth=3,  # prevent overly-deep solutions
+        max_expansion_depth=5,  # prevent overly-deep solutions
         prevent_repeat_mol_in_trees=True,  # original paper did this
         and_node_cost_fn=PaRoutesRxnCost(),
         value_function=value_function,
