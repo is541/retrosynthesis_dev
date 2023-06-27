@@ -75,19 +75,7 @@ def compute_cost_below_node(node, graph, route, total, cost_type):
 
     return total
 
-
-if __name__ == "__main__":
-    # Create df routes from search graph
-    run_id = "202305-2911-2320-5a95df0e-3008-4ebe-acd8-ecb3b50607c7"
-    input_folder = f"Runs/{run_id}/constant0_graph_pickles"
-    output_file = f"Runs/{run_id}/routes_df.csv"
-
-    num_top_routes_to_extract = 3
-
-    cost_type = "cost_1_react"
-    # cost_type = "cost_react_from_data"
-    # cost_type = "cost_react_from_data_pow01"
-
+def create_df_routes(input_folder, num_top_routes_to_extract, cost_type, output_file):
     with open(output_file, "w") as f:
         f.write(
             "target_smiles,n_routes_found,route_rank,route_cost,"
@@ -124,7 +112,6 @@ if __name__ == "__main__":
                     )
                     if n_routes_found > 0:
                         # Assign costs and extract top routes
-                        # CHECK is there a more efficient implementation using message_passing instead of custom_assign_cost?
                         output_graph = custom_assign_cost(output_graph, cost_type)
 
                         for route_rank, (route_cost, route) in enumerate(
@@ -180,3 +167,78 @@ if __name__ == "__main__":
                             f.flush()
 
                         smiles_id += 1
+
+# Create dict with sets of purchasable molecules in each of the top 3 routes (for every target)
+def create_routes_dict(routes_df, target_smiles, cols_to_keep_renamed, output_file_routes):
+    routes_data_dict = {}
+    for target in tqdm(target_smiles):
+        target_df = routes_df.loc[routes_df["target_smiles"] == target]
+        routes_data_dict[target] = {}
+
+        for route_rank in target_df["route_rank"].dropna().unique():
+            target_route_df = target_df.loc[
+                (
+                    (target_df["intermediate_is_purchasable"])
+                    | (target_df["intermediate_smiles"] == target)
+                )
+                & (target_df["route_rank"] == route_rank),
+                cols_to_keep_renamed.keys(),
+            ].drop_duplicates()
+            route_name = "route_" + str(int(route_rank))
+            target_route_df["route_rank"] = route_name
+            #         target_route_df['route_rank'] = 'route_' + target_route_df['route_rank'].astype(int).astype(str)
+
+            target_route_df = target_route_df.rename(columns=cols_to_keep_renamed)
+
+            # target_route_df = pd.merge(
+            #     target_route_df, distance_df_sorted, how="left", on="smiles"
+            # )
+
+            target_mask = target_route_df["smiles"] == target
+            target_route_df.loc[target_mask, "label"] = "Target"
+            # target_route_df.loc[target_mask, "Tanimoto_distance_from_target"] = 0
+
+            routes_data_dict[target].update({route_name: target_route_df})
+
+        with open(output_file_routes, "wb") as handle:
+            pickle.dump(routes_data_dict, handle, protocol=pickle.HIGHEST_PROTOCOL)
+    
+
+if __name__ == "__main__":
+    # Create df routes from search graph
+    # dataset_str = 'paroutes'
+    dataset_str = 'guacamol'
+    # PAROUTES or GUACAMOL
+    if dataset_str=='paroutes':
+        run_id = "202305-2911-2320-5a95df0e-3008-4ebe-acd8-ecb3b50607c7"
+    elif dataset_str=='guacamol':
+        run_id = "Guacamol_combined"
+    input_folder = f"Runs/{run_id}/constant0_graph_pickles"
+    
+    
+    # 1. Create df_routes
+    output_file = f"Runs/{run_id}/routes_df.csv"
+
+    num_top_routes_to_extract = 3
+
+    cost_type = "cost_1_react"
+    # cost_type = "cost_react_from_data"
+    # cost_type = "cost_react_from_data_pow01"
+    
+    create_df_routes(input_folder, num_top_routes_to_extract, cost_type, output_file)
+    
+    # 2. create routes dict (reading the file just created)
+    input_file = f"Runs/{run_id}/routes_df.csv"
+    routes_df = pd.read_csv(input_file)
+    output_file_routes = f"Runs/{run_id}/targ_routes.pickle"
+    
+    target_smiles = routes_df["target_smiles"].unique()
+    cols_to_keep_renamed = {
+        "route_rank": "label",
+        "intermediate_smiles": "smiles",
+        "intermediate_depth": "depth",
+    }
+
+    create_routes_dict(routes_df, target_smiles, cols_to_keep_renamed, output_file_routes)
+
+    
