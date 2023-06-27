@@ -92,7 +92,7 @@ if __name__ == "__main__":
 
     # Create eventid
     eventid = datetime.now().strftime("%Y%m-%d%H-%M%S-") + str(uuid4())
-    output_folder = f"Runs/{eventid}"
+    output_folder = f"Runs_for_visual/{eventid}"
 
     if not os.path.exists(output_folder):
         os.makedirs(output_folder)

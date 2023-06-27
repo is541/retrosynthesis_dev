@@ -1,3 +1,0 @@
-smiles,n_iter,first_soln_time,lowest_cost_route_found,best_route_cost_lower_bound,lowest_depth_route_found,best_route_depth_lower_bound,num_calls_rxn_model,num_nodes_in_tree
-FC(F)(F)c1csc(Nc2cc3ccccc3cn2)n1,3,2,1.492988625024855,1.492988625024855,2.0,1.0,2,10
-CS(=O)(=O)Cc1cccc2c(C(c3ccc(Cl)cc3F)C3CC3C#N)c[nH]c12,9,inf,inf,1.246484219344448,inf,2.0,4,18

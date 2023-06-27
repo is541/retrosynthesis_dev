@@ -1,0 +1,8 @@
+smiles,n_iter,first_soln_time,lowest_cost_route_found,best_route_cost_lower_bound,lowest_depth_route_found,best_route_depth_lower_bound,num_calls_rxn_model,num_nodes_in_tree
+COc1c(N2CCN(C(=O)COC(C)=O)CC2)cc(Br)cc1C(C)(C)C,1,inf,inf,inf,inf,inf,1,1
+C=CC(OCOC)c1ccc(N(c2cc3oc(-c4ccc(F)cc4)c(C(=O)NC)c3cc2C2CC2)S(C)(=O)=O)cc1Cl,11,5,3.1573275213066494,2.1953135531630257,3.0,2.0,5,32
+O=C(NCCc1ccc(Cl)cc1C1CC1)c1ccc(Oc2cc3c(cc2Cl)C(C(=O)O)CCO3)cc1,29,inf,inf,1.43407541331509,inf,4.0,9,55
+N#Cc1ccccc1-c1cc(F)cc(-c2ccnc3nc(C(F)(F)F)ccc23)c1,5,3,1.7417031641485279,1.3948825530747084,3.0,1.0,3,25
+Cc1cccc2c(Cl)ncc(C(=O)NCC3CCOCC3)c12,7,inf,inf,4.242893732139016,inf,3.0,4,11
+CN(C)Cc1cc(C(C)(C)C)cc(Cl)n1,7,inf,inf,3.3185449382227272,inf,3.0,4,17
+COC(=O)c1cc(N=Nc2ccc(OCCCCCCCCN=[N+]=[N-])cc2)ccc1O,9,inf,inf,3.0440706075520167,inf,3.0,5,25
