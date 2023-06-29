@@ -20,6 +20,7 @@ import numpy as np
 # )
 from syntheseus.search.node_evaluation.common import ConstantNodeEvaluator
 from value_functions import initialize_value_functions
+from embedding_model import FingerprintModel, GNNModel, load_embedding_model
 
 from paroutes import PaRoutesInventory#, PaRoutesModel, get_target_smiles
 # from example_paroutes import PaRoutesRxnCost
@@ -57,17 +58,21 @@ if __name__ == "__main__":
     value_fns_names = [
         'constant-0',
         'Tanimoto-distance',
-        'Tanimoto-distance-TIMES10',
-        'Tanimoto-distance-TIMES100',
-        'Tanimoto-distance-EXP',
-        'Tanimoto-distance-SQRT',
+        # 'Tanimoto-distance-TIMES10',
+        # 'Tanimoto-distance-TIMES100',
+        # 'Tanimoto-distance-EXP',
+        # 'Tanimoto-distance-SQRT',
         "Tanimoto-distance-NUM_NEIGHBORS_TO_1",
         "Embedding-from-fingerprints",
-        "Embedding-from-fingerprints-TIMES10",
-        "Embedding-from-fingerprints-TIMES100",
+        # "Embedding-from-fingerprints-TIMES10",
+        # "Embedding-from-fingerprints-TIMES100",
     ]
+    fnps_experiment_name = 'fingerprints_v1'
     
-    value_fns = initialize_value_functions(value_fns_names, inventory)
+    
+    device, model_fnps, config_fnps = load_embedding_model(experiment_name=fnps_experiment_name)
+    distance_type_fnps = 'cosine'
+    value_fns = initialize_value_functions(value_fns_names=value_fns_names, inventory=inventory, model_fnps=model_fnps, distance_type_fnps=distance_type_fnps)
     
     
     # 1. Remove infs
