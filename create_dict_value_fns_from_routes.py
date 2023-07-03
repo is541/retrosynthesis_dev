@@ -8,6 +8,7 @@ from tqdm.auto import tqdm
 from paroutes import PaRoutesInventory
 from rdkit.Chem import DataStructs, AllChem
 from value_functions import initialize_value_functions
+from embedding_model import FingerprintModel, GNNModel, load_embedding_model
 
 import numpy as np
 import pandas as pd
@@ -18,7 +19,8 @@ def fingerprint_from_smiles(mol_smiles):
 
 
 if __name__ == "__main__":
-    dataset_str = 'guacamol'
+    dataset_str = 'paroutes'
+    # dataset_str = 'guacamol'
     # PAROUTES or GUACAMOL
     if dataset_str=='paroutes':
         run_id = "202305-2911-2320-5a95df0e-3008-4ebe-acd8-ecb3b50607c7"
@@ -49,17 +51,21 @@ if __name__ == "__main__":
         'Tanimoto-distance',
         "Embedding-from-fingerprints",
     ]
+    fnps_experiment_name = 'fingerprints_v1'
     
-    value_fns = initialize_value_functions(value_fns_names, inventory)
+    device, model_fnps, config_fnps = load_embedding_model(experiment_name=fnps_experiment_name)
+    distance_type_fnps = 'cosine'
+    value_fns = initialize_value_functions(value_fns_names=value_fns_names, inventory=inventory, model_fnps=model_fnps, distance_type_fnps=distance_type_fnps)
 
-    for target_smiles in target_smiles:
-        for value_function_name, value_function in tqdm(value_fns):
+    for target_smiles in tqdm(target_smiles):
+        for value_function_name, value_function in value_fns:
             if value_function_name == 'Tanimoto-distance':
-                purch_target_distance = 1 - value_function.get_similarity_with_purchasable_molecules(target_smiles)
+                purch_target_sim = value_function.get_similarity_with_purchasable_molecules(target_smiles)
+                purch_target_distance = [1.0 - sim for sim in purch_target_sim]
                 distance_tanimoto_df = pd.DataFrame(
                     {
                         "smiles": purch_smiles,
-                        "Tanimoto_distance_from_target": purch_target_distance,
+                        "Tanimoto_distance_to_target": purch_target_distance,
                     }
                 )
                 distance_tanimoto_df_sorted = distance_tanimoto_df.sort_values(
@@ -72,7 +78,7 @@ if __name__ == "__main__":
                 distance_fnps_df = pd.DataFrame(
                     {
                         "smiles": purch_smiles,
-                        "Fnps_distance_from_target": purch_target_distance,
+                        "Fnps_distance_to_target": purch_target_distance,
                     }
                 )
                 distance_fnps_df_sorted = distance_fnps_df.sort_values(
@@ -81,13 +87,13 @@ if __name__ == "__main__":
                 distance_fnps_df_sorted["Fnps_distance_to_target_rank"] = distance_fnps_df_sorted.index + 1
                 
                 
-            distance_df = pd.merge(distance_tanimoto_df,distance_fnps_df, on='smiles', how='outer') 
+        distance_df = pd.merge(distance_tanimoto_df_sorted,distance_fnps_df_sorted, on='smiles', how='outer') 
             
-            distances_df_dict[target_smiles] = distance_df
+        distances_df_dict[target_smiles] = distance_df
             
-        with open(output_file_distances, "wb") as handle:
-            pickle.dump(distances_df_dict, handle, protocol=pickle.HIGHEST_PROTOCOL)
-        
+    with open(output_file_distances, "wb") as handle:
+        pickle.dump(distances_df_dict, handle, protocol=pickle.HIGHEST_PROTOCOL)
+    
         # data_dict[name][value_function_name] = data_dict[name]['smiles'].map(smiles_value_fn_dict)
                 
         ##### OLD CODE

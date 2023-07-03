@@ -9,9 +9,7 @@ from rdkit.Chem import DataStructs, AllChem
 from syntheseus.search.graph.and_or import OrNode
 from syntheseus.search.node_evaluation.base import NoCacheNodeEvaluator
 from syntheseus.search.mol_inventory import ExplicitMolInventory
-from syntheseus.search.node_evaluation.common import ConstantNodeEvaluator
-
-
+# from syntheseus.search.node_evaluation.common import ConstantNodeEvaluator
 
 import torch
 import torch.nn.functional as F
@@ -125,7 +123,7 @@ class TanimotoNNCostEstimator(NoCacheNodeEvaluator):
     
     def evaluate_molecules(self, molecules_smiles: list[str]) -> dict:
         """Returns a dictionary of {molecule_smiles:molecule_value}."""
-        values = self._evaluate_nodes(self, nodes=[FakeOrNode(smiles) for smiles in molecules_smiles])
+        values = self._evaluate_nodes(nodes=[FakeOrNode(smiles) for smiles in molecules_smiles])
         return {k: v for k, v in zip(molecules_smiles, values)}
 
 
@@ -241,7 +239,7 @@ class Emb_from_fingerprints_NNCostEstimator(NoCacheNodeEvaluator):
     
     def evaluate_molecules(self, molecules_smiles: list[str]) -> dict:
         """Returns a dictionary of {molecule_smiles:molecule_value}."""
-        values = self._evaluate_nodes(self, nodes=[FakeOrNode(smiles) for smiles in molecules_smiles])
+        values = self._evaluate_nodes(nodes=[FakeOrNode(smiles) for smiles in molecules_smiles])
         return {k: v for k, v in zip(molecules_smiles, values)}
 
 class ConstantMolEvaluator():  
@@ -270,11 +268,11 @@ labelalias = {
 }
 
 
-def initialize_value_functions(value_fns_names, inventory, model_fingerprints_v1=None, distance_type_fingerprints_v1=None):
+def initialize_value_functions(value_fns_names, inventory, model_fnps=None, distance_type_fnps=None):
     value_fns = []
     for value_fns_name in value_fns_names:
         if value_fns_name == "constant-0":
-            value_fns.append(("constant-0", ConstantNodeEvaluator(0.0)))
+            value_fns.append(("constant-0", ConstantMolEvaluator(0.0)))
         elif value_fns_name == "Tanimoto-distance":
             value_fns.append(("Tanimoto-distance", TanimotoNNCostEstimator(
                 inventory=inventory, distance_to_cost=DistanceToCost.NOTHING
@@ -300,18 +298,18 @@ def initialize_value_functions(value_fns_names, inventory, model_fingerprints_v1
                 inventory=inventory, distance_to_cost=DistanceToCost.NUM_NEIGHBORS_TO_1
             )))
         elif value_fns_name == "Embedding-from-fingerprints":
-            if model_fingerprints_v1 is None or distance_type_fingerprints_v1 is None:
-                raise ValueError("Both model_fingerprints_v1 and distance_type_fingerprints_v1 must be provided.")
+            if model_fnps is None or distance_type_fnps is None:
+                raise ValueError("Both model_fnps and distance_type_fnps must be provided.")
             value_fns.append(("Embedding-from-fingerprints", Emb_from_fingerprints_NNCostEstimator(
                 inventory=inventory, distance_to_cost=DistanceToCost.NOTHING,
-                model=model_fingerprints_v1, distance_type=distance_type_fingerprints_v1
+                model=model_fnps, distance_type=distance_type_fnps
             )))
         elif value_fns_name == "Embedding-from-fingerprints-TIMES10":
-            if model_fingerprints_v1 is None or distance_type_fingerprints_v1 is None:
-                raise ValueError("Both model_fingerprints_v1 and distance_type_fingerprints_v1 must be provided.")
+            if model_fnps is None or distance_type_fnps is None:
+                raise ValueError("Both model_fnps and distance_type_fnps must be provided.")
             value_fns.append(("Embedding-from-fingerprints-TIMES10", Emb_from_fingerprints_NNCostEstimator(
                 inventory=inventory, distance_to_cost=DistanceToCost.TIMES10,
-                model=model_fingerprints_v1, distance_type=distance_type_fingerprints_v1
+                model=model_fnps, distance_type=distance_type_fnps
             )))
 
     return value_fns
