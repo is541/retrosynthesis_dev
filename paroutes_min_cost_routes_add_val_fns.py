@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import pandas as pd
 import numpy as np
+import torch
 # import os
 
 # from syntheseus.search.chem import Molecule
@@ -69,8 +70,8 @@ if __name__ == "__main__":
     ]
     fnps_experiment_name = 'fingerprints_v1'
     
-    
-    device, model_fnps, config_fnps = load_embedding_model(experiment_name=fnps_experiment_name)
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    model_fnps, config_fnps = load_embedding_model(experiment_name=fnps_experiment_name)
     distance_type_fnps = 'cosine'
     value_fns = initialize_value_functions(value_fns_names=value_fns_names, inventory=inventory, model_fnps=model_fnps, distance_type_fnps=distance_type_fnps)
     

@@ -7,6 +7,10 @@
 **/OLDtarg_to_purch_distances.pickle
 **/OLDtarg_routes.pickle
 GraphRuns/**/*.pickle
+CompareTanimotoLearnt/**/*.pickle
+
+# Checkpoints
+GraphRuns/**/*checkpoint.pth
 
 # Results
 Results/
