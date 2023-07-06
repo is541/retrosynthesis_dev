@@ -14,6 +14,7 @@ import pickle
 import os
 import plotly.express as px
 from tqdm.auto import tqdm
+import time
 
 
 
@@ -109,7 +110,9 @@ if __name__ == "__main__":
                 )
     fig.update_layout(xaxis_title=None)
     fig.update_xaxes(labelalias=labelalias, categoryorder='array', categoryarray=list(labelalias.keys()))
-    fig.write_image(f'{output_folder}/Boxplot_time_first_solution.png') 
+    fig.write_image(f'{output_folder}/Boxplot_time_first_solution.pdf') 
+    time.sleep(10)
+    fig.write_image(f'{output_folder}/Boxplot_time_first_solution.pdf') 
 
 
 

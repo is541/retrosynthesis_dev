@@ -171,8 +171,13 @@ def gnn_preprocess_target_pos_negs(
     target_smiles,
     samples,
     featurizer,
-    compute_featurizer_dict,
+    featurizer_dict,
 ):
+    if featurizer_dict is None:
+        compute_featurizer_dict = True
+    else:
+        compute_featurizer_dict = False
+        
     target_feats = featurizer.featurize(Chem.MolFromSmiles(target_smiles))
     if compute_featurizer_dict:
         all_samples_set = set(samples["positive_samples"] + samples["negative_samples"])
@@ -202,14 +207,9 @@ def gnn_preprocess_input_react(
     cost_pos_react = []
     cost_neg_react = []
 
-    if featurizer_dict is None:
-        compute_featurizer_dict = True
-    else:
-        compute_featurizer_dict = False
-
     for target_smiles, samples in tqdm(input_data.items()):
         target_feats, pos_feats, neg_feats = gnn_preprocess_target_pos_negs(
-            target_smiles, samples, featurizer, compute_featurizer_dict
+            target_smiles, samples, featurizer, featurizer_dict
         )
         targets.append(target_feats)
         positive_samples.append(pos_feats)
@@ -241,14 +241,9 @@ def gnn_preprocess_input(
     negative_samples = []
     pos_weights = []
 
-    if featurizer_dict is None:
-        compute_featurizer_dict = True
-    else:
-        compute_featurizer_dict = False
-
     for target_smiles, samples in tqdm(input_data.items()):
         target_feats, pos_feats, neg_feats = gnn_preprocess_target_pos_negs(
-            target_smiles, samples, featurizer, compute_featurizer_dict
+            target_smiles, samples, featurizer, featurizer_dict
         )
         targets.append(target_feats)
         positive_samples.append(pos_feats)
@@ -270,12 +265,12 @@ def gnn_preprocess_input(
 
         pos_weights.append(positive_weights)
 
-        return CustomDataset(
-            targets=targets,
-            positive_samples=positive_samples,
-            negative_samples=negative_samples,
-            pos_weights=pos_weights,
-        )
+    return CustomDataset(
+        targets=targets,
+        positive_samples=positive_samples,
+        negative_samples=negative_samples,
+        pos_weights=pos_weights,
+    )
 
 
 def fingerprint_vect_from_smiles(mol_smiles):

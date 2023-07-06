@@ -361,7 +361,7 @@ if __name__ == "__main__":
     # gnn_emb_model_input_folder = f'GraphRuns/{args.gnn_embedding_model_to_use}'
 
     value_fns_names = [
-        'constant-0',
+        # 'constant-0',
         'Tanimoto-distance',
         'Tanimoto-distance-TIMES10',
         # 'Tanimoto-distance-TIMES100',

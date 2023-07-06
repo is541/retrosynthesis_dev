@@ -13,6 +13,7 @@ import torch
 import torch.optim as optim
 from torch.utils.tensorboard import SummaryWriter
 import pandas as pd
+import time
 
 from tqdm.auto import tqdm
 from paroutes import PaRoutesInventory, get_target_smiles
@@ -254,7 +255,8 @@ if __name__ == "__main__":
     validation_ratio = config["validation_ratio"]
     num_samples = len(dataset)
     num_val_samples = int(validation_ratio * num_samples)
-
+    breakpoint()
+    
     train_indices, val_indices = train_test_split(
         range(num_samples), test_size=num_val_samples, random_state=42
     )
@@ -327,7 +329,8 @@ if __name__ == "__main__":
 
     num_epochs = config["num_epochs"]
 
-    load_from_checkpoint = False
+    load_from_checkpoint = True
+    checkpoint_path = 'GraphRuns/gnn_0629/epoch_71_checkpoint.pth'
 
     # STEP 5: Train loop
     # Check if a checkpoint exists and load the model state and optimizer state if available
@@ -479,4 +482,6 @@ if __name__ == "__main__":
     fig.update_layout(width=1000, height=600, showlegend=True)
 
     # Save the figure as a PDF file
+    fig.write_image(f"{checkpoint_folder}/Train_and_Val_loss.pdf")
+    time.sleep(10)
     fig.write_image(f"{checkpoint_folder}/Train_and_Val_loss.pdf")

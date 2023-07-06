@@ -13,6 +13,7 @@ import torch
 import torch.optim as optim
 from torch.utils.tensorboard import SummaryWriter
 import pandas as pd
+import time
 
 from tqdm.auto import tqdm
 from paroutes import PaRoutesInventory, get_target_smiles
@@ -124,25 +125,25 @@ if __name__ == "__main__":
         flattened_positive_samples = [
             sample for sublist in positive_samples for sample in sublist
         ]
+        if len(negative_samples) > 0:
+            flattened_negative_samples = [
+                sample for sublist in negative_samples for sample in sublist
+            ]
+            num_mols_each_negative = [len(sublist) for sublist in negative_samples]
 
-        flattened_negative_samples = [
-            sample for sublist in negative_samples for sample in sublist
-        ]
-        num_mols_each_negative = [len(sublist) for sublist in negative_samples]
-
-        targ_first_react_dict[target_smiles] = {
-            "positive_samples": flattened_positive_samples,  # Only one positive sample (i.e. set of molecules), no need to keep track of how to split it
-            "negative_samples": flattened_negative_samples,
-            "num_mols_each_negative": torch.tensor(
-                num_mols_each_negative, dtype=torch.double
-            ),
-            "cost_pos_react": torch.tensor(
-                values["cost_pos_react"], dtype=torch.double
-            ),
-            "cost_neg_react": torch.tensor(
-                values["cost_neg_react"], dtype=torch.double
-            ),
-        }
+            targ_first_react_dict[target_smiles] = {
+                "positive_samples": flattened_positive_samples,  # Only one positive sample (i.e. set of molecules), no need to keep track of how to split it
+                "negative_samples": flattened_negative_samples,
+                "num_mols_each_negative": torch.tensor(
+                    num_mols_each_negative, dtype=torch.double
+                ),
+                "cost_pos_react": torch.tensor(
+                    values["cost_pos_react"], dtype=torch.double
+                ),
+                "cost_neg_react": torch.tensor(
+                    values["cost_neg_react"], dtype=torch.double
+                ),
+            }
         # targ_num_mols_each_negative[target_smiles] = torch.tensor(num_mols_each_negative, dtype=torch.double)
 
     # # # Load distances data
@@ -513,3 +514,6 @@ if __name__ == "__main__":
 
     # Save the figure as a PDF file
     fig.write_image(f"{checkpoint_folder}/Train_and_Val_loss.pdf")
+    time.sleep(10)
+    fig.write_image(f"{checkpoint_folder}/Train_and_Val_loss.pdf")
+    
