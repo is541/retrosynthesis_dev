@@ -23,10 +23,11 @@ from embedding_model import (
     collate_fn,
     # SampleData,
     fingerprint_vect_from_smiles,
-    compute_embeddings_and_loss,
+    compute_embeddings,
     GNNModel,
     FingerprintModel,
     NTXentLoss,
+    num_heavy_atoms
 )
 from paroutes import PaRoutesInventory
 from torch.utils.data import Subset
@@ -35,9 +36,6 @@ import plotly.express as px
 from rdkit import Chem
 import deepchem as dc
 
-
-def num_heavy_atoms(mol):
-    return Chem.rdchem.Mol.GetNumAtoms(mol, onlyExplicit=True)
 
 
 if __name__ == "__main__":
@@ -178,16 +176,13 @@ if __name__ == "__main__":
             pickle.dump(purch_featurizer_dict, handle, protocol=pickle.HIGHEST_PROTOCOL)
         fingerprint_num_atoms_dict = None
 
-        (
-            preprocessed_targets,
-            preprocessed_positive_samples,
-            preprocessed_negative_samples,
-        ) = gnn_preprocess_input(input_data, featurizer, purch_featurizer_dict)
-        dataset = CustomDataset(
-            preprocessed_targets,
-            preprocessed_positive_samples,
-            preprocessed_negative_samples,
+        dataset = gnn_preprocess_input(
+            input_data=input_data, 
+            featurizer=featurizer, 
+            featurizer_dict=purch_featurizer_dict,
+            pos_sampling=config["pos_sampling"],
         )
+        
     elif config["model_type"] == "fingerprints":
         purch_fingerprints = list(map(fingerprint_vect_from_smiles, purch_smiles))
         purch_fingerprints_dict = dict(zip(purch_smiles, purch_fingerprints))
@@ -199,27 +194,23 @@ if __name__ == "__main__":
             )
 
         # Also save dict to retrieve number of atoms from fingerprints
-        fingerprint_num_atoms_dict = {
-            torch.tensor(fp, dtype=torch.double): purch_nr_heavy_atoms[smiles]
-            for smiles, fp in purch_fingerprints_dict.items()
-        }
-        with open(
-            f"{checkpoint_folder}/fingerprint_num_atoms_dict.pickle", "wb"
-        ) as handle:
-            pickle.dump(
-                fingerprint_num_atoms_dict, handle, protocol=pickle.HIGHEST_PROTOCOL
-            )
+        # fingerprint_num_atoms_dict = {
+        #     torch.tensor(fp, dtype=torch.double): purch_nr_heavy_atoms[smiles]
+        #     for smiles, fp in purch_fingerprints_dict.items()
+        # }
+        # with open(
+        #     f"{checkpoint_folder}/fingerprint_num_atoms_dict.pickle", "wb"
+        # ) as handle:
+        #     pickle.dump(
+        #         fingerprint_num_atoms_dict, handle, protocol=pickle.HIGHEST_PROTOCOL
+        #     )
 
-        (
-            preprocessed_targets,
-            preprocessed_positive_samples,
-            preprocessed_negative_samples,
-        ) = fingerprint_preprocess_input(input_data, purch_fingerprints_dict)
-        dataset = CustomDataset(
-            preprocessed_targets,
-            preprocessed_positive_samples,
-            preprocessed_negative_samples,
+        dataset = fingerprint_preprocess_input(
+            input_data, 
+            fingerprints_dict=purch_fingerprints_dict, 
+            pos_sampling=config["pos_sampling"],
         )
+        
     else:
         raise NotImplementedError(f'Model type {config["model_type"]}')
 
@@ -290,7 +281,7 @@ if __name__ == "__main__":
 
     # Define network dimensions
     if config["model_type"] == "gnn":
-        gnn_input_dim = preprocessed_targets[0].node_features.shape[1]
+        gnn_input_dim = dataset.targets[0].node_features.shape[1]
         gnn_hidden_dim = config["hidden_dim"]
         gnn_output_dim = config["output_dim"]
 
@@ -299,7 +290,7 @@ if __name__ == "__main__":
 
     elif config["model_type"] == "fingerprints":
         #     fingerprint_input_dim = preprocessed_targets[0].GetNumBits()
-        fingerprint_input_dim = preprocessed_targets[0].size()[
+        fingerprint_input_dim = dataset.targets[0].size()[
             0
         ]  # len(preprocessed_targets[0].node_features)
         fingerprint_hidden_dim = config["hidden_dim"]
@@ -365,21 +356,17 @@ if __name__ == "__main__":
         train_batches = 0
 
         for batch_idx, batch_data in enumerate(train_data_loader):
-            batch_targets, batch_positive_samples, batch_negative_samples, _ = batch_data
-
             optimizer.zero_grad()
 
-            embeddings, loss = compute_embeddings_and_loss(
-                device,
-                config['model_type'],
-                model,
-                batch_targets,
-                batch_positive_samples,
-                batch_negative_samples,
-                loss_fn,
-                config["pos_sampling"],
-                fingerprint_num_atoms_dict,
+            # Compute embeddings
+            embeddings_dataset = compute_embeddings(
+                device=device,
+                model_type=config['model_type'],
+                model=model,
+                batch_data=batch_data,
             )
+            # Compute loss
+            loss = loss_fn(embeddings_dataset)
 
             # Backward pass and optimization
             loss.backward()
@@ -395,24 +382,15 @@ if __name__ == "__main__":
         val_batches = 0
         with torch.no_grad():  # Disable gradient calculation during validation
             for val_batch_idx, val_batch_data in enumerate(val_data_loader):
-                (
-                    val_batch_targets,
-                    val_batch_positive_samples,
-                    val_batch_negative_samples,
-                    _
-                ) = val_batch_data
-
-                val_embeddings, val_batch_loss = compute_embeddings_and_loss(
-                    device,
-                    config['model_type'],
-                    model,
-                    val_batch_targets,
-                    val_batch_positive_samples,
-                    val_batch_negative_samples,
-                    loss_fn,
-                    config["pos_sampling"],
-                    fingerprint_num_atoms_dict,
+                # Compute embeddings
+                val_embeddings = compute_embeddings(
+                    device=device,
+                    model_type=config['model_type'],
+                    model=model,
+                    batch_data=val_batch_data,
                 )
+                # Compute loss
+                val_batch_loss = loss_fn(val_embeddings)
 
                 val_loss += val_batch_loss.item()
                 val_batches += 1
@@ -439,6 +417,10 @@ if __name__ == "__main__":
             }
         )
         epoch_loss = pd.concat([epoch_loss, new_row], axis=0)
+        
+        if average_val_loss < best_val_loss:
+            best_val_loss = average_val_loss
+            best_model = model
 
         if (epoch % 10 == 0) | (epoch == num_epochs - 1):
             print(
@@ -456,21 +438,21 @@ if __name__ == "__main__":
 
             #         loss_df = pd.DataFrame({'Epoch': range(len(epoch_loss)), 'TrainLoss': epoch_loss})
             epoch_loss.to_csv(f"{checkpoint_folder}/train_val_loss.csv", index=False)
+            
+            # Save the best model as a pickle
+            best_model_path = (
+                f"{checkpoint_folder}/model_min_val.pkl"  #'path/to/best_model.pkl'
+            )
 
-        if average_val_loss < best_val_loss:
-            best_val_loss = average_val_loss
-            best_model = model
+            with open(best_model_path, "wb") as f:
+                pickle.dump(best_model, f)
+
+        
 
     # Close the SummaryWriter
     writer.close()
 
-    # Save the best model as a pickle
-    best_model_path = (
-        f"{checkpoint_folder}/model_min_val.pkl"  #'path/to/best_model.pkl'
-    )
 
-    with open(best_model_path, "wb") as f:
-        pickle.dump(best_model, f)
 
     # STEP 6: Plot
 

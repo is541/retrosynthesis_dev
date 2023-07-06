@@ -204,7 +204,7 @@ if __name__ == "__main__":
         "--input_file",
         type=str,
         # required=True,
-        default="Guacamol_100_hard_to_solve"
+        default="Guacamol_100_mid_hard_to_solve"
         # help="Text file with SMILES to run search on."
         # " One SMILES per line, no header.",
     )
@@ -296,6 +296,7 @@ if __name__ == "__main__":
     # Create eventid
     eventid = datetime.now().strftime("%Y%m-%d%H-%M%S-") + str(uuid4())
     # eventid = '202306-3017-5132-d4cd54bf-e5a4-44c5-82af-c629a3692d87_HARDEST'
+    # eventid = '202307-0320-4900-d4c27728-a5aa-4177-8681-268a17c3d208_HARD'
     output_folder = f"CompareTanimotoLearnt/{eventid}"
 
     if not os.path.exists(output_folder):
@@ -362,19 +363,19 @@ if __name__ == "__main__":
     value_fns_names = [
         'constant-0',
         'Tanimoto-distance',
-        # 'Tanimoto-distance-TIMES10',
+        'Tanimoto-distance-TIMES10',
         # 'Tanimoto-distance-TIMES100',
         # 'Tanimoto-distance-TIMES1000',
         # 'Tanimoto-distance-EXP',
         # 'Tanimoto-distance-SQRT',
         # 'Tanimoto-distance-NUM_NEIGHBORS_TO_1',
         "Embedding-from-fingerprints",
-        # "Embedding-from-fingerprints-TIMES10",
+        "Embedding-from-fingerprints-TIMES10",
         # "Embedding-from-fingerprints-TIMES100",
         # "Embedding-from-fingerprints-TIMES1000",
         # "Embedding-from-fingerprints-TIMES10000",
         "Embedding-from-gnn",
-        # "Embedding-from-gnn-TIMES10",
+        "Embedding-from-gnn-TIMES10",
     ]
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")

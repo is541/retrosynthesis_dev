@@ -48,7 +48,8 @@ def create_result_df(result, name):
 
 
 if __name__ == "__main__":
-    eventid = '202306-3017-5132-d4cd54bf-e5a4-44c5-82af-c629a3692d87'
+    # eventid = '202306-3017-5132-d4cd54bf-e5a4-44c5-82af-c629a3692d87_HARDEST'
+    eventid = '202307-0320-4900-d4c27728-a5aa-4177-8681-268a17c3d208_HARD'
     
     output_folder = f"CompareTanimotoLearnt/{eventid}"
     
@@ -108,7 +109,7 @@ if __name__ == "__main__":
                 )
     fig.update_layout(xaxis_title=None)
     fig.update_xaxes(labelalias=labelalias, categoryorder='array', categoryarray=list(labelalias.keys()))
-    fig.write_image(f'{output_folder}/Boxplot_time_first_solution.pdf') 
+    fig.write_image(f'{output_folder}/Boxplot_time_first_solution.png') 
 
 
 

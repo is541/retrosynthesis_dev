@@ -51,10 +51,10 @@ def create_dict_pos_neg_first_reaction(input_folder, keep_only_not_purchasable, 
     for file_name in tqdm([file for file in os.listdir(input_folder) if "pickle" in file]):
         with open(f"{input_folder}/{file_name}", "rb") as handle:
             for smiles, output_graph in (pickle.load(handle)).items():
-                result_dict[smiles] = {}
                 if output_graph.root_node.has_solution:
-                    result_dict[smiles]['positives'] = []
-                    result_dict[smiles]['negatives'] = []
+                    result_dict[smiles] = {}
+                    result_dict[smiles]['positive_samples'] = []
+                    result_dict[smiles]['negative_samples'] = []
                     # Extract best route
                     (best_route_cost, best_route) = next(_iter_top_routes(
                                     graph=output_graph,
@@ -69,6 +69,7 @@ def create_dict_pos_neg_first_reaction(input_folder, keep_only_not_purchasable, 
                     for node in best_route:
                         if isinstance(node, AndNode) & (node.depth==1):
                             best_reaction_idx = node.reaction.metadata["template_idx"]
+                            best_reaction_cost = node.data["retro_star_rxn_cost"]
                         elif isinstance(node, OrNode):
                             if keep_only_not_purchasable:
                                 check_purch = node.mol.metadata["is_purchasable"]
@@ -76,9 +77,11 @@ def create_dict_pos_neg_first_reaction(input_folder, keep_only_not_purchasable, 
                                 check_purch = False                      
                             if (node.depth==2) & (not check_purch):
                                 positive_children.append(node.mol.smiles)
-                    result_dict[smiles]['positives'].append(positive_children)
+                    result_dict[smiles]['positive_samples'].append(positive_children)
+                    result_dict[smiles]['cost_pos_react'] = best_reaction_cost
                     
                     # Negatives are: all first reactions not chosen, along with the respective children
+                    other_reaction_costs = []
                     for node in output_graph.successors(output_graph._root_node):
                         if isinstance(node, AndNode) & (node.reaction.metadata["template_idx"]!=best_reaction_idx):
                             reaction_children_nodes = output_graph.successors(node)
@@ -87,7 +90,9 @@ def create_dict_pos_neg_first_reaction(input_folder, keep_only_not_purchasable, 
                                 reaction_children = [node.mol.smiles for node in reaction_children_nodes if not node.mol.metadata["is_purchasable"]]  
                             else:
                                 reaction_children = [node.mol.smiles for node in reaction_children_nodes]
-                            result_dict[smiles]['negatives'].append(reaction_children)
+                            result_dict[smiles]['negative_samples'].append(reaction_children)
+                            other_reaction_costs.append(node.data["retro_star_rxn_cost"])
+                    result_dict[smiles]['cost_neg_react'] = other_reaction_costs
                 else:
                     pass
     
@@ -106,12 +111,12 @@ if __name__ == "__main__":
         run_id = "Guacamol_combined"
     input_folder = f"Runs/{run_id}/constant0_graph_pickles"
     
-    keep_only_not_purchasable = False
+    keep_only_not_purchasable = True
     if keep_only_not_purchasable:
         only_purch = "not_purch"
     else:
         only_purch = "all"
-    # 1. Create df_routes
+    
     output_dict = f"Runs/{run_id}/first_reaction_positive_negatives_" + only_purch + ".pickle"
 
     

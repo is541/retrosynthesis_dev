@@ -607,7 +607,7 @@ def initialize_value_functions(
                 )
             value_fns.append(
                 (
-                    "Embedding-from-fingerprints",
+                    "Embedding-from-gnn",
                     Emb_from_gnn_NNCostEstimator(
                         inventory=inventory,
                         distance_to_cost=DistanceToCost.NOTHING,
