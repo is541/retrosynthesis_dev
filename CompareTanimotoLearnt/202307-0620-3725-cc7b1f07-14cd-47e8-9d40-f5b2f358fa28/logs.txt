@@ -1,0 +1,220 @@
+2023-07-06 20:37:25,591 root INFO Namespace(input_file='Guacamol_100_mid_hard_to_solve', fnp_embedding_model_to_use='fnp_nn_0629', gnn_embedding_model_to_use='gnn_0629', limit_iterations=10000, limit_rxn_model_calls=1000, paroutes_n=5, limit_num_smiles=None, start_from_smiles_index_n=None, max_expansion_depth=20, max_num_templates=10, prevent_repeat_mol_in_trees=True, rxn_model='PAROUTES', inventory='PAROUTES', and_node_cost_fn='PAROUTES', or_node_cost_fn='MOL_PURCHASABLE')
+2023-07-06 20:37:27,909 h5py._conv DEBUG Creating converter from 3 to 5
+2023-07-06 20:38:17,255 deepchem.feat.base_classes WARNING Failed to featurize datapoint 828, I. Appending empty array
+2023-07-06 20:38:17,255 deepchem.feat.base_classes WARNING Exception message: zero-size array to reduction operation maximum which has no identity
+2023-07-06 20:38:17,499 deepchem.utils.molecule_feature_utils INFO input SP3D2 not in allowable set ['SP', 'SP2', 'SP3']:
+2023-07-06 20:38:19,745 deepchem.feat.base_classes WARNING Failed to featurize datapoint 1854, F. Appending empty array
+2023-07-06 20:38:19,745 deepchem.feat.base_classes WARNING Exception message: zero-size array to reduction operation maximum which has no identity
+2023-07-06 20:38:20,921 deepchem.utils.molecule_feature_utils INFO input SP3D2 not in allowable set ['SP', 'SP2', 'SP3']:
+2023-07-06 20:38:22,171 deepchem.utils.molecule_feature_utils INFO input SP3D2 not in allowable set ['SP', 'SP2', 'SP3']:
+2023-07-06 20:38:23,176 deepchem.feat.base_classes WARNING Failed to featurize datapoint 3254, Br. Appending empty array
+2023-07-06 20:38:23,176 deepchem.feat.base_classes WARNING Exception message: zero-size array to reduction operation maximum which has no identity
+2023-07-06 20:38:24,799 deepchem.utils.molecule_feature_utils INFO input SP3D2 not in allowable set ['SP', 'SP2', 'SP3']:
+2023-07-06 20:38:26,801 deepchem.utils.molecule_feature_utils INFO input SP3D2 not in allowable set ['SP', 'SP2', 'SP3']:
+2023-07-06 20:38:28,854 deepchem.utils.molecule_feature_utils INFO input S not in allowable set ['SP', 'SP2', 'SP3']:
+2023-07-06 20:38:30,163 deepchem.utils.molecule_feature_utils INFO input S not in allowable set ['SP', 'SP2', 'SP3']:
+2023-07-06 20:38:31,001 deepchem.utils.molecule_feature_utils INFO input SP3D not in allowable set ['SP', 'SP2', 'SP3']:
+2023-07-06 20:38:32,408 deepchem.feat.base_classes WARNING Failed to featurize datapoint 6878, [Mg]. Appending empty array
+2023-07-06 20:38:32,409 deepchem.feat.base_classes WARNING Exception message: zero-size array to reduction operation maximum which has no identity
+2023-07-06 20:38:32,537 deepchem.feat.base_classes WARNING Failed to featurize datapoint 6923, O. Appending empty array
+2023-07-06 20:38:32,538 deepchem.feat.base_classes WARNING Exception message: zero-size array to reduction operation maximum which has no identity
+2023-07-06 20:38:32,645 deepchem.utils.molecule_feature_utils INFO input SP3D not in allowable set ['SP', 'SP2', 'SP3']:
+2023-07-06 20:38:34,844 deepchem.utils.molecule_feature_utils INFO input SP3D2 not in allowable set ['SP', 'SP2', 'SP3']:
+2023-07-06 20:38:35,514 deepchem.feat.base_classes WARNING Failed to featurize datapoint 8084, N. Appending empty array
+2023-07-06 20:38:35,514 deepchem.feat.base_classes WARNING Exception message: zero-size array to reduction operation maximum which has no identity
+2023-07-06 20:38:36,775 deepchem.utils.molecule_feature_utils INFO input S not in allowable set ['SP', 'SP2', 'SP3']:
+2023-07-06 20:38:36,949 deepchem.utils.molecule_feature_utils INFO input SP3D not in allowable set ['SP', 'SP2', 'SP3']:
+2023-07-06 20:38:37,293 deepchem.utils.molecule_feature_utils INFO input SP3D2 not in allowable set ['SP', 'SP2', 'SP3']:
+2023-07-06 20:38:38,472 deepchem.utils.molecule_feature_utils INFO input S not in allowable set ['SP', 'SP2', 'SP3']:
+2023-07-06 20:38:39,772 deepchem.feat.base_classes WARNING Failed to featurize datapoint 9667, [S-2]. Appending empty array
+2023-07-06 20:38:39,772 deepchem.feat.base_classes WARNING Exception message: zero-size array to reduction operation maximum which has no identity
+2023-07-06 20:38:41,138 deepchem.feat.base_classes WARNING Failed to featurize datapoint 10179, Cl. Appending empty array
+2023-07-06 20:38:41,138 deepchem.feat.base_classes WARNING Exception message: zero-size array to reduction operation maximum which has no identity
+2023-07-06 20:38:41,442 deepchem.utils.molecule_feature_utils INFO input SP3D2 not in allowable set ['SP', 'SP2', 'SP3']:
+2023-07-06 20:38:41,751 deepchem.utils.molecule_feature_utils INFO input S not in allowable set ['SP', 'SP2', 'SP3']:
+2023-07-06 20:38:43,066 deepchem.utils.molecule_feature_utils INFO input SP3D2 not in allowable set ['SP', 'SP2', 'SP3']:
+2023-07-06 20:38:46,558 deepchem.utils.molecule_feature_utils INFO input S not in allowable set ['SP', 'SP2', 'SP3']:
+2023-07-06 20:38:49,715 deepchem.feat.base_classes WARNING Failed to featurize datapoint 13318, S. Appending empty array
+2023-07-06 20:38:49,715 deepchem.feat.base_classes WARNING Exception message: zero-size array to reduction operation maximum which has no identity
+2023-07-06 20:39:00,634 root INFO Start experiment 202307-0620-3725-cc7b1f07-14cd-47e8-9d40-f5b2f358fa28
+2023-07-06 20:39:00,635 root INFO Args: 
+and_node_cost_fn: PAROUTES
+fnp_embedding_model_to_use: fnp_nn_0629
+gnn_embedding_model_to_use: gnn_0629
+input_file: Guacamol_100_mid_hard_to_solve
+inventory: PAROUTES
+limit_iterations: 10000
+limit_num_smiles: None
+limit_rxn_model_calls: 1000
+max_expansion_depth: 20
+max_num_templates: 10
+or_node_cost_fn: MOL_PURCHASABLE
+paroutes_n: 5
+prevent_repeat_mol_in_trees: True
+rxn_model: PAROUTES
+start_from_smiles_index_n: None
+2023-07-06 20:39:00,635 root INFO dim_test: 100
+2023-07-06 20:39:00,635 root INFO Start search with Tanimoto-distance
+2023-07-06 20:39:00,635 root DEBUG Start search 0/100. SMILES: COc1ccncc1-n1c(=O)c(CN(CCc2ccc(Cl)cc2)C2CCN(C(=O)c3c(F)cccc3F)CC2)c(C)n1C
+2023-07-06 20:40:04,159 root DEBUG Done Tanimoto-distance: nodes=23365, solution time = inf, num routes = 0 (capped at 10000), final num rxn model calls = 367 (NOTE: this was less than the maximum budget), final num value model calls = 2413.
+2023-07-06 20:40:04,159 root DEBUG Start search 1/100. SMILES: CC(C)Sc1nc(-c2ccccc2)nc2c1COC(C)(C)C2
+2023-07-06 20:40:05,105 root DEBUG Done Tanimoto-distance: nodes=212, solution time = inf, num routes = 0 (capped at 10000), final num rxn model calls = 9 (NOTE: this was less than the maximum budget), final num value model calls = 50.
+2023-07-06 20:40:05,106 root DEBUG Start search 2/100. SMILES: ClCCC1OC2(CCN(CC3CCCCC3)CC2)c2ccccc21
+2023-07-06 20:42:13,986 root DEBUG Done Tanimoto-distance: nodes=68093, solution time = 479, num routes = 4 (capped at 10000), final num rxn model calls = 774 (NOTE: this was less than the maximum budget), final num value model calls = 5748.
+2023-07-06 20:42:13,986 root DEBUG Start search 3/100. SMILES: O=C(O)c1ccc(-c2nc(C(=O)c3c(Cl)cccc3C3CC3)n3cccnc23)cc1O
+2023-07-06 20:42:45,382 root DEBUG Done Tanimoto-distance: nodes=9268, solution time = inf, num routes = 0 (capped at 10000), final num rxn model calls = 291 (NOTE: this was less than the maximum budget), final num value model calls = 1131.
+2023-07-06 20:42:45,382 root DEBUG Start search 4/100. SMILES: COc1cc(C)c2nc3[nH]nc(C)c3c(NCC3CCNCC3)c2c1
+2023-07-06 20:43:14,579 root DEBUG Done Tanimoto-distance: nodes=11234, solution time = inf, num routes = 0 (capped at 10000), final num rxn model calls = 305 (NOTE: this was less than the maximum budget), final num value model calls = 1127.
+2023-07-06 20:43:14,579 root DEBUG Start search 5/100. SMILES: c1cc(CNc2cncc(-c3ccnc4[nH]c(C5CCNCC5)cc34)n2)ccn1
+2023-07-06 20:45:19,052 root DEBUG Done Tanimoto-distance: nodes=27895, solution time = 731, num routes = 9 (capped at 10000), final num rxn model calls = 791 (NOTE: this was less than the maximum budget), final num value model calls = 2879.
+2023-07-06 20:45:19,052 root DEBUG Start search 6/100. SMILES: CN(CC(CCN1CC(n2ccnc2)C1)c1ccc(Cl)c(Cl)c1)C(=O)c1ccccc1
+2023-07-06 20:46:18,952 root DEBUG Done Tanimoto-distance: nodes=16699, solution time = inf, num routes = 0 (capped at 10000), final num rxn model calls = 300 (NOTE: this was less than the maximum budget), final num value model calls = 1807.
+2023-07-06 20:46:18,953 root DEBUG Start search 7/100. SMILES: Cc1c(-c2ccccc2)c(-c2ccc(OCCN(C)C)cc2)n2ccccc12
+2023-07-06 20:48:34,413 root DEBUG Done Tanimoto-distance: nodes=39179, solution time = 151, num routes = 12 (capped at 10000), final num rxn model calls = 373 (NOTE: this was less than the maximum budget), final num value model calls = 4927.
+2023-07-06 20:48:34,413 root DEBUG Start search 8/100. SMILES: Fc1cccc(F)c1-c1cccc(-n2nnc(-c3ccccn3)n2)c1
+2023-07-06 20:48:50,125 root DEBUG Done Tanimoto-distance: nodes=3749, solution time = inf, num routes = 0 (capped at 10000), final num rxn model calls = 160 (NOTE: this was less than the maximum budget), final num value model calls = 446.
+2023-07-06 20:48:50,126 root DEBUG Start search 9/100. SMILES: CCCCc1cc(=O)oc2cc(OC3CCCCC3=O)ccc12
+2023-07-06 20:50:15,819 root DEBUG Done Tanimoto-distance: nodes=15847, solution time = 488, num routes = 16 (capped at 10000), final num rxn model calls = 673 (NOTE: this was less than the maximum budget), final num value model calls = 2095.
+2023-07-06 20:50:15,819 root DEBUG Start search 10/100. SMILES: Nc1cc(C2CCCNC2)nc2c(-c3ccn[nH]3)cnn12
+2023-07-06 20:51:22,193 root DEBUG Done Tanimoto-distance: nodes=13212, solution time = 228, num routes = 51 (capped at 10000), final num rxn model calls = 358 (NOTE: this was less than the maximum budget), final num value model calls = 1777.
+2023-07-06 20:51:22,194 root DEBUG Start search 11/100. SMILES: CN1CCCC(CN2c3ccccc3Sc3cc(Cl)ccc32)C1
+2023-07-06 20:54:41,723 root DEBUG Done Tanimoto-distance: nodes=56488, solution time = 621, num routes = 28 (capped at 10000), final num rxn model calls = 1000, final num value model calls = 5560.
+2023-07-06 20:54:41,723 root DEBUG Start search 12/100. SMILES: CCC(=O)OC1(c2ccccc2)CC2CCC1CN2C
+2023-07-06 20:56:49,602 root DEBUG Done Tanimoto-distance: nodes=38219, solution time = inf, num routes = 0 (capped at 10000), final num rxn model calls = 361 (NOTE: this was less than the maximum budget), final num value model calls = 4918.
+2023-07-06 20:56:49,603 root DEBUG Start search 13/100. SMILES: COc1c(C(=O)O)c(O)c(N=Nc2ccc(S(=O)(=O)Nc3ccccn3)cc2)c2occc12
+2023-07-06 20:58:01,210 root DEBUG Done Tanimoto-distance: nodes=23286, solution time = 198, num routes = 1 (capped at 10000), final num rxn model calls = 337 (NOTE: this was less than the maximum budget), final num value model calls = 2198.
+2023-07-06 20:58:01,210 root DEBUG Start search 14/100. SMILES: Cc1ccc(F)cc1C(C)(C)CC(O)(Cn1cc(C)c(=O)c(C)c1)C(F)(F)F
+2023-07-06 20:58:05,677 root DEBUG Done Tanimoto-distance: nodes=843, solution time = inf, num routes = 0 (capped at 10000), final num rxn model calls = 52 (NOTE: this was less than the maximum budget), final num value model calls = 97.
+2023-07-06 20:58:05,679 root DEBUG Start search 15/100. SMILES: CC(C)CS(=O)(=O)N(Cc1ccco1)CC(O)Cn1c2ccccc2c2ccccc21
+2023-07-06 21:00:12,631 root DEBUG Done Tanimoto-distance: nodes=24315, solution time = inf, num routes = 0 (capped at 10000), final num rxn model calls = 290 (NOTE: this was less than the maximum budget), final num value model calls = 4554.
+2023-07-06 21:00:12,631 root DEBUG Start search 16/100. SMILES: O=C(c1nnc(-c2ccccc2)[nH]1)C1CCCN1C(=O)CCc1ccc(-c2ccccc2)cc1
+2023-07-06 21:00:26,705 root DEBUG Done Tanimoto-distance: nodes=3022, solution time = inf, num routes = 0 (capped at 10000), final num rxn model calls = 71 (NOTE: this was less than the maximum budget), final num value model calls = 374.
+2023-07-06 21:00:26,705 root DEBUG Start search 17/100. SMILES: COc1ccc(CCNC(=O)Cc2c(C)c3cc4c(C(C)(C)C)coc4c(C)c3oc2=O)cc1
+2023-07-06 21:02:26,554 root DEBUG Done Tanimoto-distance: nodes=24939, solution time = 561, num routes = 1 (capped at 10000), final num rxn model calls = 575 (NOTE: this was less than the maximum budget), final num value model calls = 3442.
+2023-07-06 21:02:26,554 root DEBUG Start search 18/100. SMILES: CC1(C)Cc2ccccc2C(C(C#N)=NO)=N1
+2023-07-06 21:04:38,134 root DEBUG Done Tanimoto-distance: nodes=39122, solution time = inf, num routes = 0 (capped at 10000), final num rxn model calls = 82 (NOTE: this was less than the maximum budget), final num value model calls = 5599.
+2023-07-06 21:04:38,135 root DEBUG Start search 19/100. SMILES: O=C(O)CCc1ccc(S(=O)(=O)NNc2ccc(Br)cc2)cc1
+2023-07-06 21:06:54,874 root DEBUG Done Tanimoto-distance: nodes=46980, solution time = inf, num routes = 0 (capped at 10000), final num rxn model calls = 315 (NOTE: this was less than the maximum budget), final num value model calls = 5417.
+2023-07-06 21:06:54,874 root DEBUG Start search 20/100. SMILES: N#Cc1ccc(NCCNc2nc(-c3ccc(Cl)cc3Cl)cn3nc(C(=O)O)cc23)nc1
+2023-07-06 21:08:09,935 root DEBUG Done Tanimoto-distance: nodes=17574, solution time = inf, num routes = 0 (capped at 10000), final num rxn model calls = 278 (NOTE: this was less than the maximum budget), final num value model calls = 2234.
+2023-07-06 21:08:09,935 root DEBUG Start search 21/100. SMILES: O=C(CSc1n[nH]c(-c2ccccc2)n1)Nc1ccccc1O
+2023-07-06 21:09:35,668 root DEBUG Done Tanimoto-distance: nodes=28792, solution time = inf, num routes = 0 (capped at 10000), final num rxn model calls = 194 (NOTE: this was less than the maximum budget), final num value model calls = 3424.
+2023-07-06 21:09:35,669 root DEBUG Start search 22/100. SMILES: O=C(O)CCC1CN(c2ccncc2)CCC1N1CCOCC1
+2023-07-06 21:10:56,102 root DEBUG Done Tanimoto-distance: nodes=23224, solution time = 311, num routes = 4 (capped at 10000), final num rxn model calls = 448 (NOTE: this was less than the maximum budget), final num value model calls = 2297.
+2023-07-06 21:10:56,103 root DEBUG Start search 23/100. SMILES: C#CCN1CCS(=O)(=O)N(Cc2ccc(Br)cc2)C(CC(C)C)C1
+2023-07-06 21:12:47,135 root DEBUG Done Tanimoto-distance: nodes=25961, solution time = inf, num routes = 0 (capped at 10000), final num rxn model calls = 476 (NOTE: this was less than the maximum budget), final num value model calls = 3656.
+2023-07-06 21:12:47,135 root DEBUG Start search 24/100. SMILES: O=S(=O)(C=Cc1ccco1)Nc1nc(-c2ccccc2)c(-c2ccccc2)s1
+2023-07-06 21:12:47,447 root DEBUG Done Tanimoto-distance: nodes=25, solution time = inf, num routes = 0 (capped at 10000), final num rxn model calls = 5 (NOTE: this was less than the maximum budget), final num value model calls = 9.
+2023-07-06 21:12:47,448 root DEBUG Start search 25/100. SMILES: Cc1cccc(CN2CCCn3c(nnc3CN3CCCC3=O)C2)n1
+2023-07-06 21:15:33,820 root DEBUG Done Tanimoto-distance: nodes=51904, solution time = inf, num routes = 0 (capped at 10000), final num rxn model calls = 926 (NOTE: this was less than the maximum budget), final num value model calls = 5105.
+2023-07-06 21:15:33,820 root DEBUG Start search 26/100. SMILES: CCC(C)(C)NC(=O)C(c1cccn1C)N(C(=O)Cn1nnc2ccccc21)c1ccc(F)cc1
+2023-07-06 21:17:53,400 root DEBUG Done Tanimoto-distance: nodes=45544, solution time = 227, num routes = 10 (capped at 10000), final num rxn model calls = 556 (NOTE: this was less than the maximum budget), final num value model calls = 4742.
+2023-07-06 21:17:53,401 root DEBUG Start search 27/100. SMILES: CCC(Sc1nc(N)c2cnn(-c3ccccc3)c2n1)C(N)=O
+2023-07-06 21:20:26,299 root DEBUG Done Tanimoto-distance: nodes=48794, solution time = inf, num routes = 0 (capped at 10000), final num rxn model calls = 432 (NOTE: this was less than the maximum budget), final num value model calls = 5667.
+2023-07-06 21:20:26,299 root DEBUG Start search 28/100. SMILES: CCCNc1ncc2c(O)nnc(O)c2n1
+2023-07-06 21:22:50,576 root DEBUG Done Tanimoto-distance: nodes=48467, solution time = 172, num routes = 225 (capped at 10000), final num rxn model calls = 416 (NOTE: this was less than the maximum budget), final num value model calls = 5697.
+2023-07-06 21:22:50,576 root DEBUG Start search 29/100. SMILES: CN(C)Cc1ccc(S(=O)(=O)c2ccc3c(c2)c2c(n3C)CC3CCC2N3)cc1
+2023-07-06 21:24:48,941 root DEBUG Done Tanimoto-distance: nodes=27374, solution time = 375, num routes = 4 (capped at 10000), final num rxn model calls = 515 (NOTE: this was less than the maximum budget), final num value model calls = 2912.
+2023-07-06 21:24:48,942 root DEBUG Start search 30/100. SMILES: COc1ccc(S(=O)(=O)NC2CN(C(C)=O)CC2C2CC2)cc1C
+2023-07-06 21:26:29,886 root DEBUG Done Tanimoto-distance: nodes=28264, solution time = 273, num routes = 8 (capped at 10000), final num rxn model calls = 426 (NOTE: this was less than the maximum budget), final num value model calls = 3239.
+2023-07-06 21:26:29,886 root DEBUG Start search 31/100. SMILES: CN(C)C1Cc2cc(O)c(O)cc2C(c2ccccc2)C1
+2023-07-06 21:29:27,614 root DEBUG Done Tanimoto-distance: nodes=54457, solution time = 148, num routes = 129 (capped at 10000), final num rxn model calls = 816 (NOTE: this was less than the maximum budget), final num value model calls = 5710.
+2023-07-06 21:29:27,615 root DEBUG Start search 32/100. SMILES: CCCc1cnc2c(c1SCc1cccc(C)c1)c(=O)n(C)c(=O)n2C
+2023-07-06 21:30:31,278 root DEBUG Done Tanimoto-distance: nodes=17614, solution time = 257, num routes = 15 (capped at 10000), final num rxn model calls = 318 (NOTE: this was less than the maximum budget), final num value model calls = 2115.
+2023-07-06 21:30:31,278 root DEBUG Start search 33/100. SMILES: NC1=C(c2nc3ccccc3[nH]2)C(=O)CN1c1ccc(CC(=O)O)cc1
+2023-07-06 21:33:33,510 root DEBUG Done Tanimoto-distance: nodes=32399, solution time = inf, num routes = 0 (capped at 10000), final num rxn model calls = 468 (NOTE: this was less than the maximum budget), final num value model calls = 5451.
+2023-07-06 21:33:33,511 root DEBUG Start search 34/100. SMILES: CC1CCN(C(=O)CSc2nc(N)c3c4c(sc3n2)CN(C)CC4)CC1
+2023-07-06 21:36:16,078 root DEBUG Done Tanimoto-distance: nodes=31389, solution time = 101, num routes = 126 (capped at 10000), final num rxn model calls = 386 (NOTE: this was less than the maximum budget), final num value model calls = 5168.
+2023-07-06 21:36:16,078 root DEBUG Start search 35/100. SMILES: COC(=O)c1ccc(C=C(C)c2ccc3c(c2)C(C)(C)CC(C)(C)S3)cc1
+2023-07-06 21:38:12,706 root DEBUG Done Tanimoto-distance: nodes=42679, solution time = inf, num routes = 0 (capped at 10000), final num rxn model calls = 191 (NOTE: this was less than the maximum budget), final num value model calls = 5109.
+2023-07-06 21:38:12,706 root DEBUG Start search 36/100. SMILES: Cc1cccc(N2CCN(Cc3cncn3Cc3ccc(C#N)cc3)C(=O)C2=O)c1C
+2023-07-06 21:39:25,338 root DEBUG Done Tanimoto-distance: nodes=13697, solution time = 111, num routes = 121 (capped at 10000), final num rxn model calls = 470 (NOTE: this was less than the maximum budget), final num value model calls = 1811.
+2023-07-06 21:39:25,338 root DEBUG Start search 37/100. SMILES: NCCCCCCNC(=Nc1ccc(F)cc1)N1CCCCC1
+2023-07-06 21:41:35,436 root DEBUG Done Tanimoto-distance: nodes=40628, solution time = inf, num routes = 0 (capped at 10000), final num rxn model calls = 619 (NOTE: this was less than the maximum budget), final num value model calls = 4353.
+2023-07-06 21:41:35,436 root DEBUG Start search 38/100. SMILES: Cc1c(S(=O)(=O)N2CC(C(=O)N(C)C3CCN(C)CC3)c3ccccc32)sc2ccc(Cl)cc12
+2023-07-06 21:43:02,727 root DEBUG Done Tanimoto-distance: nodes=25363, solution time = 217, num routes = 8 (capped at 10000), final num rxn model calls = 347 (NOTE: this was less than the maximum budget), final num value model calls = 2419.
+2023-07-06 21:43:02,727 root DEBUG Start search 39/100. SMILES: CC(C)Nc1nc2c(nc1N1CCC(C(F)c3ccc(F)cc3F)CC1)CCN(C=O)C2
+2023-07-06 21:43:53,183 root DEBUG Done Tanimoto-distance: nodes=10618, solution time = 167, num routes = 12 (capped at 10000), final num rxn model calls = 279 (NOTE: this was less than the maximum budget), final num value model calls = 1270.
+2023-07-06 21:43:53,183 root DEBUG Start search 40/100. SMILES: COc1c(C)c(C)cc(Cl)c1CC=C(C)CCC(=O)O
+2023-07-06 21:44:41,758 root DEBUG Done Tanimoto-distance: nodes=15132, solution time = 162, num routes = 5 (capped at 10000), final num rxn model calls = 221 (NOTE: this was less than the maximum budget), final num value model calls = 1651.
+2023-07-06 21:44:41,758 root DEBUG Start search 41/100. SMILES: O=C(c1ccccc1)N1CCCC2(CC(OCc3ccccn3)CO2)C1
+2023-07-06 21:46:41,008 root DEBUG Done Tanimoto-distance: nodes=26455, solution time = inf, num routes = 0 (capped at 10000), final num rxn model calls = 193 (NOTE: this was less than the maximum budget), final num value model calls = 4286.
+2023-07-06 21:46:41,008 root DEBUG Start search 42/100. SMILES: CC(C)N(Cc1cn(C)nc1-c1cccc(Cl)c1)CC1CCC(=O)N1
+2023-07-06 21:48:52,187 root DEBUG Done Tanimoto-distance: nodes=26078, solution time = 179, num routes = 162 (capped at 10000), final num rxn model calls = 506 (NOTE: this was less than the maximum budget), final num value model calls = 4111.
+2023-07-06 21:48:52,188 root DEBUG Start search 43/100. SMILES: Cc1c(O)c(O)cc2c1C(=O)c1c(O)cccc1C2=O
+2023-07-06 21:51:50,803 root DEBUG Done Tanimoto-distance: nodes=72867, solution time = 462, num routes = 2 (capped at 10000), final num rxn model calls = 595 (NOTE: this was less than the maximum budget), final num value model calls = 6089.
+2023-07-06 21:51:50,803 root DEBUG Start search 44/100. SMILES: CC(=O)c1ccc(CCCCCCCCSc2ncc(Cc3cccnc3)c(O)n2)cc1
+2023-07-06 21:53:02,248 root DEBUG Done Tanimoto-distance: nodes=21670, solution time = 228, num routes = 1 (capped at 10000), final num rxn model calls = 370 (NOTE: this was less than the maximum budget), final num value model calls = 2273.
+2023-07-06 21:53:02,248 root DEBUG Start search 45/100. SMILES: COc1nc(N(C)C)ncc1-c1nc2c(n1C(C)C)C(c1ccc(C#N)c(F)c1)N(c1cccc(Cl)c1F)C2=O
+2023-07-06 21:55:07,194 root DEBUG Done Tanimoto-distance: nodes=21819, solution time = inf, num routes = 0 (capped at 10000), final num rxn model calls = 261 (NOTE: this was less than the maximum budget), final num value model calls = 3515.
+2023-07-06 21:55:07,194 root DEBUG Start search 46/100. SMILES: CCCc1cc(=O)oc2c1c(O)cc1oc([N+](=O)[O-])cc12
+2023-07-06 21:56:45,268 root DEBUG Done Tanimoto-distance: nodes=34826, solution time = 235, num routes = 16 (capped at 10000), final num rxn model calls = 353 (NOTE: this was less than the maximum budget), final num value model calls = 3699.
+2023-07-06 21:56:45,269 root DEBUG Start search 47/100. SMILES: COc1ccc2cc(C3CC(c4ccco4)=NN3S(C)(=O)=O)c(Cl)nc2c1
+2023-07-06 21:58:16,900 root DEBUG Done Tanimoto-distance: nodes=41497, solution time = 36, num routes = 3200 (capped at 10000), final num rxn model calls = 357 (NOTE: this was less than the maximum budget), final num value model calls = 3317.
+2023-07-06 21:58:16,900 root DEBUG Start search 48/100. SMILES: NC(=O)c1ccccc1N1CC=C(c2ccc([N+](=O)[O-])cc2)NC1=O
+2023-07-06 22:00:22,336 root DEBUG Done Tanimoto-distance: nodes=41313, solution time = inf, num routes = 0 (capped at 10000), final num rxn model calls = 516 (NOTE: this was less than the maximum budget), final num value model calls = 4047.
+2023-07-06 22:00:22,336 root DEBUG Start search 49/100. SMILES: COc1ccc(C(C)=O)c(OCc2nc(C)c(C)nc2C)c1
+2023-07-06 22:00:56,173 root DEBUG Done Tanimoto-distance: nodes=19204, solution time = inf, num routes = 0 (capped at 10000), final num rxn model calls = 217 (NOTE: this was less than the maximum budget), final num value model calls = 1515.
+2023-07-06 22:00:56,173 root DEBUG Start search 50/100. SMILES: O=c1c2c(-c3ccc(Cl)cc3)c3c(nc2nc2sc4nc5ccccc5nc4n12)C(=Cc1ccc(Cl)cc1)CCC3
+2023-07-06 22:01:21,008 root DEBUG Done Tanimoto-distance: nodes=3614, solution time = 133, num routes = 17 (capped at 10000), final num rxn model calls = 170 (NOTE: this was less than the maximum budget), final num value model calls = 494.
+2023-07-06 22:01:21,008 root DEBUG Start search 51/100. SMILES: Cc1ccc(CN2CCN(C3(C)C(=O)N(C)c4ccccc43)CC2)cc1
+2023-07-06 22:03:02,274 root DEBUG Done Tanimoto-distance: nodes=35230, solution time = inf, num routes = 0 (capped at 10000), final num rxn model calls = 513 (NOTE: this was less than the maximum budget), final num value model calls = 3246.
+2023-07-06 22:03:02,274 root DEBUG Start search 52/100. SMILES: CCCN1CCN(c2cc(-c3n[nH]c4ccc(OC(C)C)cc34)ncn2)CC1=O
+2023-07-06 22:04:36,555 root DEBUG Done Tanimoto-distance: nodes=24467, solution time = inf, num routes = 0 (capped at 10000), final num rxn model calls = 317 (NOTE: this was less than the maximum budget), final num value model calls = 2782.
+2023-07-06 22:04:36,556 root DEBUG Start search 53/100. SMILES: CCN(CC)CCC=Cc1ccccc1S(=O)(=O)Nc1ccc2c(c1C(=O)O)CCCC2
+2023-07-06 22:05:15,977 root DEBUG Done Tanimoto-distance: nodes=10975, solution time = 178, num routes = 16 (capped at 10000), final num rxn model calls = 319 (NOTE: this was less than the maximum budget), final num value model calls = 989.
+2023-07-06 22:05:15,978 root DEBUG Start search 54/100. SMILES: c1ccc2c(c1)C1CCCCC21N1CCCCC1
+2023-07-06 22:07:26,814 root DEBUG Done Tanimoto-distance: nodes=27857, solution time = inf, num routes = 0 (capped at 10000), final num rxn model calls = 1000, final num value model calls = 3492.
+2023-07-06 22:07:26,815 root DEBUG Start search 55/100. SMILES: CCC1(N)CC1c1ccc(Br)cc1
+2023-07-06 22:09:49,806 root DEBUG Done Tanimoto-distance: nodes=44512, solution time = inf, num routes = 0 (capped at 10000), final num rxn model calls = 495 (NOTE: this was less than the maximum budget), final num value model calls = 5487.
+2023-07-06 22:09:49,806 root DEBUG Start search 56/100. SMILES: C#CCN1CC(NC(=O)c2ccc(Cc3c(C)[nH]c4ccccc34)cc2)C(C(=O)NO)C1
+2023-07-06 22:10:36,650 root DEBUG Done Tanimoto-distance: nodes=13207, solution time = inf, num routes = 0 (capped at 10000), final num rxn model calls = 274 (NOTE: this was less than the maximum budget), final num value model calls = 1173.
+2023-07-06 22:10:36,650 root DEBUG Start search 57/100. SMILES: CCCCNC(=O)CSc1nnc(C)c2c(C)n(-c3ccccc3)nc12
+2023-07-06 22:12:09,103 root DEBUG Done Tanimoto-distance: nodes=29394, solution time = 85, num routes = 76 (capped at 10000), final num rxn model calls = 374 (NOTE: this was less than the maximum budget), final num value model calls = 3431.
+2023-07-06 22:12:09,103 root DEBUG Start search 58/100. SMILES: O=C(O)Cc1cnc(C(c2ccc(F)cc2)c2ccc(F)cc2)nc1-c1cccc(F)c1
+2023-07-06 22:13:34,585 root DEBUG Done Tanimoto-distance: nodes=32488, solution time = 93, num routes = 429 (capped at 10000), final num rxn model calls = 154 (NOTE: this was less than the maximum budget), final num value model calls = 3309.
+2023-07-06 22:13:34,585 root DEBUG Start search 59/100. SMILES: CCC(CC)N1CCn2c(=O)n(-c3ccc(OC)cc3)c3nc(C)cc1c32
+2023-07-06 22:15:43,009 root DEBUG Done Tanimoto-distance: nodes=41521, solution time = 123, num routes = 394 (capped at 10000), final num rxn model calls = 364 (NOTE: this was less than the maximum budget), final num value model calls = 4445.
+2023-07-06 22:15:43,009 root DEBUG Start search 60/100. SMILES: CCCCCc1ccc(-c2ccc3c(=O)n(CC4CCC(c5ccccc5)O4)c(N)nc3c2)cc1
+2023-07-06 22:16:09,218 root DEBUG Done Tanimoto-distance: nodes=9775, solution time = inf, num routes = 0 (capped at 10000), final num rxn model calls = 161 (NOTE: this was less than the maximum budget), final num value model calls = 748.
+2023-07-06 22:16:09,219 root DEBUG Start search 61/100. SMILES: CCCC(=O)c1oc2ccc3c(c2c1CCNC(C)=O)CCCO3
+2023-07-06 22:19:17,868 root DEBUG Done Tanimoto-distance: nodes=59767, solution time = 96, num routes = 68 (capped at 10000), final num rxn model calls = 964 (NOTE: this was less than the maximum budget), final num value model calls = 5844.
+2023-07-06 22:19:17,869 root DEBUG Start search 62/100. SMILES: CCc1ccc(C2CC(=O)c3c([nH]c(C(=O)OC4CCC(C)CC4)c3C)C2)cc1
+2023-07-06 22:20:17,193 root DEBUG Done Tanimoto-distance: nodes=13922, solution time = 117, num routes = 38 (capped at 10000), final num rxn model calls = 402 (NOTE: this was less than the maximum budget), final num value model calls = 1661.
+2023-07-06 22:20:17,194 root DEBUG Start search 63/100. SMILES: CCOC(=O)CCC(=O)N1CCOCCOCCN(C(=O)CCC(=O)OCC)CCOCCOCC1
+2023-07-06 22:21:06,520 root DEBUG Done Tanimoto-distance: nodes=14411, solution time = inf, num routes = 0 (capped at 10000), final num rxn model calls = 144 (NOTE: this was less than the maximum budget), final num value model calls = 1808.
+2023-07-06 22:21:06,520 root DEBUG Start search 64/100. SMILES: COc1ccc(-c2csc(Nc3ccc(CCN4CCC(O)CC4CO)cc3)n2)cc1
+2023-07-06 22:23:06,657 root DEBUG Done Tanimoto-distance: nodes=38272, solution time = 294, num routes = 16 (capped at 10000), final num rxn model calls = 662 (NOTE: this was less than the maximum budget), final num value model calls = 3304.
+2023-07-06 22:23:06,657 root DEBUG Start search 65/100. SMILES: Cc1ccc(-n2c(SCC(=O)N3CCCCC3)nc(=O)c(Cc3ccccc3)c2O)cc1
+2023-07-06 22:24:44,814 root DEBUG Done Tanimoto-distance: nodes=27164, solution time = 86, num routes = 620 (capped at 10000), final num rxn model calls = 267 (NOTE: this was less than the maximum budget), final num value model calls = 3645.
+2023-07-06 22:24:44,814 root DEBUG Start search 66/100. SMILES: O=[N+]([O-])c1ccc2c(c1)Sc1cc(OCCF)ccc1N2
+2023-07-06 22:27:26,788 root DEBUG Done Tanimoto-distance: nodes=63927, solution time = 383, num routes = 12 (capped at 10000), final num rxn model calls = 577 (NOTE: this was less than the maximum budget), final num value model calls = 5532.
+2023-07-06 22:27:26,789 root DEBUG Start search 67/100. SMILES: Cc1[nH]c(-c2ccccc2)c(-c2ccccc2)c1-c1cccc(C(F)(F)F)c1
+2023-07-06 22:29:05,451 root DEBUG Done Tanimoto-distance: nodes=38306, solution time = 59, num routes = 47 (capped at 10000), final num rxn model calls = 176 (NOTE: this was less than the maximum budget), final num value model calls = 2657.
+2023-07-06 22:29:05,451 root DEBUG Start search 68/100. SMILES: N#Cc1nc(-c2ccco2)oc1NCCCN1CCOCC1
+2023-07-06 22:30:22,778 root DEBUG Done Tanimoto-distance: nodes=11955, solution time = inf, num routes = 0 (capped at 10000), final num rxn model calls = 160 (NOTE: this was less than the maximum budget), final num value model calls = 1248.
+2023-07-06 22:30:22,779 root DEBUG Start search 69/100. SMILES: Cc1cc(O)cc(-c2c(-c3ccnc(-c4ccc(Oc5ccccc5)cc4)c3)cnn2CC#N)c1
+2023-07-06 22:32:49,998 root DEBUG Done Tanimoto-distance: nodes=23370, solution time = 233, num routes = 16 (capped at 10000), final num rxn model calls = 425 (NOTE: this was less than the maximum budget), final num value model calls = 1719.
+2023-07-06 22:32:49,998 root DEBUG Start search 70/100. SMILES: O=C(O)c1ccc2c(c1)C(SCCN1CCC(Cc3ccccc3)CC1)c1ccccc1CO2
+2023-07-06 22:34:23,290 root DEBUG Done Tanimoto-distance: nodes=17654, solution time = inf, num routes = 0 (capped at 10000), final num rxn model calls = 251 (NOTE: this was less than the maximum budget), final num value model calls = 1506.
+2023-07-06 22:34:23,291 root DEBUG Start search 71/100. SMILES: Cc1ccc(F)c(NC(=O)Nc2ccc(-c3ccc(CN4CCOCC4)c4onc(N)c34)cc2)c1
+2023-07-06 22:36:54,370 root DEBUG Done Tanimoto-distance: nodes=45639, solution time = 256, num routes = 6 (capped at 10000), final num rxn model calls = 301 (NOTE: this was less than the maximum budget), final num value model calls = 4237.
+2023-07-06 22:36:54,370 root DEBUG Start search 72/100. SMILES: Oc1ncc2c(n1)-c1[nH]c3ccc(Cl)cc3c1CCC2
+2023-07-06 22:39:06,017 root DEBUG Done Tanimoto-distance: nodes=34138, solution time = 398, num routes = 60 (capped at 10000), final num rxn model calls = 775 (NOTE: this was less than the maximum budget), final num value model calls = 4311.
+2023-07-06 22:39:06,018 root DEBUG Start search 73/100. SMILES: O=c1c2ccccc2nnn1CSc1nccc(O)n1
+2023-07-06 22:39:33,942 root DEBUG Done Tanimoto-distance: nodes=8915, solution time = inf, num routes = 0 (capped at 10000), final num rxn model calls = 131 (NOTE: this was less than the maximum budget), final num value model calls = 1109.
+2023-07-06 22:39:33,942 root DEBUG Start search 74/100. SMILES: c1ccc(CN2CCc3c(CNc4nccs4)n[nH]c3C2)nc1
+2023-07-06 22:41:50,135 root DEBUG Done Tanimoto-distance: nodes=34555, solution time = 290, num routes = 47 (capped at 10000), final num rxn model calls = 1000, final num value model calls = 3564.
+2023-07-06 22:41:50,135 root DEBUG Start search 75/100. SMILES: COc1ccc(C2CCc3cc(OC)c(OC)c(OC)c32)cc1O
+2023-07-06 22:44:51,863 root DEBUG Done Tanimoto-distance: nodes=97516, solution time = 176, num routes = 19 (capped at 10000), final num rxn model calls = 571 (NOTE: this was less than the maximum budget), final num value model calls = 6246.
+2023-07-06 22:44:51,863 root DEBUG Start search 76/100. SMILES: COc1ccc(-c2c3c([nH]c(=S)c2C#N)-c2ccccc2SCC3)cc1
+2023-07-06 22:46:59,203 root DEBUG Done Tanimoto-distance: nodes=47515, solution time = inf, num routes = 0 (capped at 10000), final num rxn model calls = 322 (NOTE: this was less than the maximum budget), final num value model calls = 4728.
+2023-07-06 22:46:59,257 root DEBUG Start search 77/100. SMILES: COc1ccc(C2Oc3cc(OC)c(OC)c(OC)c3C(=O)C2O)cc1O
+2023-07-06 22:50:32,800 root DEBUG Done Tanimoto-distance: nodes=90125, solution time = 287, num routes = 32 (capped at 10000), final num rxn model calls = 764 (NOTE: this was less than the maximum budget), final num value model calls = 6449.
+2023-07-06 22:50:32,800 root DEBUG Start search 78/100. SMILES: CC(C)n1nc(C(=O)NC2CC3CCC(C2)N3CCCCCCN2CCC(CNS(C)(=O)=O)CC2)c2ccccc21
+2023-07-06 22:51:34,332 root DEBUG Done Tanimoto-distance: nodes=19436, solution time = inf, num routes = 0 (capped at 10000), final num rxn model calls = 321 (NOTE: this was less than the maximum budget), final num value model calls = 1456.
+2023-07-06 22:51:34,332 root DEBUG Start search 79/100. SMILES: C=CS(=O)(=O)Nc1cccc(Cc2nn(C3CCCC3)c3ncnc(N)c23)c1
+2023-07-06 22:53:59,526 root DEBUG Done Tanimoto-distance: nodes=31688, solution time = 429, num routes = 16 (capped at 10000), final num rxn model calls = 1000, final num value model calls = 3686.
+2023-07-06 22:53:59,556 root DEBUG Start search 80/100. SMILES: O=C(O)C(Cc1ccccc1)CC(Cc1ccccc1)C(=O)NC(Cc1c[nH]c2ccccc12)C(=O)O
+2023-07-06 22:54:18,630 root DEBUG Done Tanimoto-distance: nodes=5259, solution time = inf, num routes = 0 (capped at 10000), final num rxn model calls = 70 (NOTE: this was less than the maximum budget), final num value model calls = 556.
+2023-07-06 22:54:18,631 root DEBUG Start search 81/100. SMILES: CC1=C(C(=O)OC(C)C)C(c2cccc([N+](=O)[O-])c2)C(C(=O)OC(C)C)=C(N)O1
