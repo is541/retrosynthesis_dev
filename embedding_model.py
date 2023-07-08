@@ -181,9 +181,12 @@ def gnn_preprocess_target_pos_negs(
     target_feats = featurizer.featurize(Chem.MolFromSmiles(target_smiles))
     if compute_featurizer_dict:
         all_samples_set = set(samples["positive_samples"] + samples["negative_samples"])
-        mol_to_featurize = [Chem.MolFromSmiles(smiles) for smiles in all_samples_set]
+        all_sample_list = list(all_samples_set)
+        mol_to_featurize = [Chem.MolFromSmiles(smiles) for smiles in all_sample_list]
         mol_featurized = featurizer.featurize(mol_to_featurize)
-        featurizer_dict = dict(zip(mol_to_featurize, mol_featurized))
+        featurizer_dict = dict(zip(list(all_sample_list), mol_featurized))
+    # print("All samples set: ", all_samples_set)
+    # print("Positive samples: ", samples["positive_samples"])
     pos_feats = [
         featurizer_dict[positive_smiles]
         for positive_smiles in samples["positive_samples"]
@@ -220,14 +223,14 @@ def gnn_preprocess_input_react(
         cost_pos_react.append(samples["cost_pos_react"])
         cost_neg_react.append(samples["cost_neg_react"])
 
-        return CustomDatasetReact(
-            targets=targets,
-            positive_samples=positive_samples,
-            negative_samples=negative_samples,
-            num_mols_each_negative=num_mols_each_negative,
-            cost_pos_react=cost_pos_react,
-            cost_neg_react=cost_neg_react,
-        )
+    return CustomDatasetReact(
+        targets=targets,
+        positive_samples=positive_samples,
+        negative_samples=negative_samples,
+        num_mols_each_negative=num_mols_each_negative,
+        cost_pos_react=cost_pos_react,
+        cost_neg_react=cost_neg_react,
+    )
 
 
 def gnn_preprocess_input(
@@ -516,8 +519,8 @@ class ContrastiveReact(nn.Module):
 
             # Compute sample loss
             # # OLD implementation
-            numerator = torch.sum(torch.exp(negative_values)) 
-            denominator = torch.exp(positive_value)
+            numerator = torch.exp(-positive_value) 
+            denominator = torch.sum(torch.exp(-negative_values))
             sample_loss = -torch.log(numerator / (numerator + denominator))
             # # NEW implementation
             # print(positive_value)
@@ -527,6 +530,7 @@ class ContrastiveReact(nn.Module):
             # )
 
             # Store sample loss in the tensor
+            # breakpoint()
             sample_losses[i] = sample_loss
 
         return torch.mean(sample_losses)

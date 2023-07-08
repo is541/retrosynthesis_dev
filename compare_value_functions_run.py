@@ -294,9 +294,10 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     # Create eventid
-    eventid = datetime.now().strftime("%Y%m-%d%H-%M%S-") + str(uuid4())
+    # eventid = datetime.now().strftime("%Y%m-%d%H-%M%S-") + str(uuid4())
     # eventid = '202306-3017-5132-d4cd54bf-e5a4-44c5-82af-c629a3692d87_HARDEST'
     # eventid = '202307-0320-4900-d4c27728-a5aa-4177-8681-268a17c3d208_HARD'
+    eventid = '202307-0620-3725-cc7b1f07-14cd-47e8-9d40-f5b2f358fa28_MID_HARD'
     output_folder = f"CompareTanimotoLearnt/{eventid}"
 
     if not os.path.exists(output_folder):
@@ -361,9 +362,9 @@ if __name__ == "__main__":
     # gnn_emb_model_input_folder = f'GraphRuns/{args.gnn_embedding_model_to_use}'
 
     value_fns_names = [
-        # 'constant-0',
-        'Tanimoto-distance',
-        'Tanimoto-distance-TIMES10',
+        'constant-0',
+        # 'Tanimoto-distance',
+        # 'Tanimoto-distance-TIMES10',
         # 'Tanimoto-distance-TIMES100',
         # 'Tanimoto-distance-TIMES1000',
         # 'Tanimoto-distance-EXP',

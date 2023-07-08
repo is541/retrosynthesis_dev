@@ -91,8 +91,8 @@ if __name__ == "__main__":
     purch_smiles = [mol.smiles for mol in inventory.purchasable_mols()]
     # len(purch_smiles)
 
-    def num_heavy_atoms(mol):
-        return Chem.rdchem.Mol.GetNumAtoms(mol, onlyExplicit=True)
+    # def num_heavy_atoms(mol):
+    #     return Chem.rdchem.Mol.GetNumAtoms(mol, onlyExplicit=True)
 
     purch_mol_to_exclude = []
     purch_nr_heavy_atoms = {}
@@ -255,7 +255,6 @@ if __name__ == "__main__":
     validation_ratio = config["validation_ratio"]
     num_samples = len(dataset)
     num_val_samples = int(validation_ratio * num_samples)
-    breakpoint()
     
     train_indices, val_indices = train_test_split(
         range(num_samples), test_size=num_val_samples, random_state=42
@@ -329,18 +328,27 @@ if __name__ == "__main__":
 
     num_epochs = config["num_epochs"]
 
-    load_from_checkpoint = True
-    checkpoint_path = 'GraphRuns/gnn_0629/epoch_71_checkpoint.pth'
+    load_from_checkpoint = False
+    # input_checkpoint_folder  = 'GraphRuns/gnn_0629'
+    # input_checkpoint_path = f'{checkpoint_folder}/epoch_71_checkpoint.pth'
 
     # STEP 5: Train loop
     # Check if a checkpoint exists and load the model state and optimizer state if available
     if load_from_checkpoint:
-        checkpoint = torch.load(checkpoint_path)
+        checkpoint = torch.load(input_checkpoint_path)
         model.load_state_dict(checkpoint["model_state_dict"])
         optimizer.load_state_dict(checkpoint["optimizer_state_dict"])
         start_epoch = checkpoint["epoch"] + 1
+        
+        epoch_loss = pd.read_csv(f'{input_checkpoint_folder}/train_val_loss.csv')
+        best_val_loss = epoch_loss["ValLoss"].min()
+        with open(f'{input_checkpoint_folder}/model_min_val.pkl', "rb") as handle:
+            best_model = pickle.load(handle)
     else:
         start_epoch = 0
+        best_val_loss = float("inf")
+        best_model = None
+        epoch_loss = pd.DataFrame(columns=["Epoch", "TrainLoss", "ValLoss"])
 
     # Create a SummaryWriter for TensorBoard logging
     log_dir = (
@@ -348,10 +356,10 @@ if __name__ == "__main__":
     )
     writer = SummaryWriter(log_dir)
 
-    best_val_loss = float("inf")
-    best_model = None
+    # best_val_loss = float("inf")
+    # best_model = None
 
-    epoch_loss = pd.DataFrame(columns=["Epoch", "TrainLoss", "ValLoss"])
+    # epoch_loss = pd.DataFrame(columns=["Epoch", "TrainLoss", "ValLoss"])
     for epoch in tqdm(range(start_epoch, num_epochs)):
         # TRAIN
         model.train()

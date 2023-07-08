@@ -1,6 +1,5 @@
 {
   "experiment_name": "gnn_0629_react",
-  "not_in_route_sample_size": 100,
   "seed": 42,
   "run_id": "202305-2911-2320-5a95df0e-3008-4ebe-acd8-ecb3b50607c7",
   "nr_sample_targets": -1,

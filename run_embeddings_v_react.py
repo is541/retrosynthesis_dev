@@ -31,6 +31,7 @@ from embedding_model import (
     # NTXentLoss,
     ContrastiveReact,
 )
+from run_embeddings import num_heavy_atoms
 from paroutes import PaRoutesInventory
 from torch.utils.data import Subset
 from sklearn.model_selection import train_test_split
@@ -46,30 +47,31 @@ import deepchem as dc
 def compute_embedding_purch_mols(
     device, model_type, model, purch_featurizer, purch_fingerprints
 ):
-    if model_type == "gnn":
-        purch_embeddings = torch.stack(
-            [
-                model(
-                    torch.tensor(purch_mol.node_features, dtype=torch.double).to(
-                        device
-                    ),
-                    torch.tensor(purch_mol.edge_index, dtype=torch.long).to(device),
-                )
-                for purch_mol in purch_featurizer
-            ],
-            dim=0,
-        )
-    elif model_type == "fingerprints":
-        purch_embeddings = torch.stack(
-            [
-                model(torch.tensor(fingerprint, dtype=torch.double).to(device))
-                for fingerprint in purch_fingerprints
-            ],
-            dim=0,
-        )
-    else:
-        raise NotImplementedError(f"Model type {model_type}")
-    return purch_embeddings
+    with torch.no_grad():
+        if model_type == "gnn":
+            purch_embeddings = torch.stack(
+                [
+                    model(
+                        torch.tensor(purch_mol.node_features, dtype=torch.double).to(
+                            device
+                        ),
+                        torch.tensor(purch_mol.edge_index, dtype=torch.long).to(device),
+                    )
+                    for purch_mol in purch_featurizer
+                ],
+                dim=0,
+            )
+        elif model_type == "fingerprints":
+            purch_embeddings = torch.stack(
+                [
+                    model(torch.tensor(fingerprint, dtype=torch.double).to(device))
+                    for fingerprint in purch_fingerprints
+                ],
+                dim=0,
+            )
+        else:
+            raise NotImplementedError(f"Model type {model_type}")
+        return purch_embeddings
 
 
 if __name__ == "__main__":
@@ -120,28 +122,40 @@ if __name__ == "__main__":
     # targ_num_mols_each_negative = {}
     for target_smiles, values in targ_first_react_dict_original.items():
         positive_samples = values["positive_samples"]
-        negative_samples = values["negative_samples"]
-
         flattened_positive_samples = [
             sample for sublist in positive_samples for sample in sublist
         ]
-        if len(negative_samples) > 0:
-            flattened_negative_samples = [
-                sample for sublist in negative_samples for sample in sublist
-            ]
-            num_mols_each_negative = [len(sublist) for sublist in negative_samples]
+        flattened_positive_samples = [
+            smiles
+            for smiles in flattened_positive_samples
+            if num_heavy_atoms(Chem.MolFromSmiles(smiles)) >= 2
+        ]
+        if (len(flattened_positive_samples) > 0) & (len(values["negative_samples"]) > 0):
+            flattened_negative_samples = []
+            num_mols_negative = []
+            cost_neg_react_updated = []
+            for negative_sample, cost_react in zip(values["negative_samples"], values["cost_neg_react"]):
+                negative_sample = [
+                    smiles
+                    for smiles in negative_sample
+                    if num_heavy_atoms(Chem.MolFromSmiles(smiles)) >= 2
+                ]
+                if len(negative_sample) > 0:
+                    flattened_negative_samples = flattened_negative_samples + negative_sample
+                    num_mols_negative.append(len(negative_sample))
+                    cost_neg_react_updated.append(cost_react)
 
             targ_first_react_dict[target_smiles] = {
                 "positive_samples": flattened_positive_samples,  # Only one positive sample (i.e. set of molecules), no need to keep track of how to split it
                 "negative_samples": flattened_negative_samples,
                 "num_mols_each_negative": torch.tensor(
-                    num_mols_each_negative, dtype=torch.double
+                    num_mols_negative, dtype=torch.double
                 ),
                 "cost_pos_react": torch.tensor(
                     values["cost_pos_react"], dtype=torch.double
                 ),
                 "cost_neg_react": torch.tensor(
-                    values["cost_neg_react"], dtype=torch.double
+                    cost_neg_react_updated, dtype=torch.double
                 ),
             }
         # targ_num_mols_each_negative[target_smiles] = torch.tensor(num_mols_each_negative, dtype=torch.double)
@@ -154,17 +168,20 @@ if __name__ == "__main__":
     inventory = PaRoutesInventory(n=5)
     purch_smiles = [mol.smiles for mol in inventory.purchasable_mols()]
     # # len(purch_smiles)
+    
+    purch_mol_to_exclude = []
+    purch_nr_heavy_atoms = {}
+    for smiles in purch_smiles:
+        nr_heavy_atoms = num_heavy_atoms(Chem.MolFromSmiles(smiles))
+        if nr_heavy_atoms < 2:
+            purch_mol_to_exclude = purch_mol_to_exclude + [smiles]
+        purch_nr_heavy_atoms[smiles] = nr_heavy_atoms
+    
+    purch_smiles_reduced = [smiles for smiles in purch_smiles if smiles not in purch_mol_to_exclude]
+    
 
     # def num_heavy_atoms(mol):
     #     return Chem.rdchem.Mol.GetNumAtoms(mol, onlyExplicit=True)
-
-    # purch_mol_to_exclude = []
-    # purch_nr_heavy_atoms = {}
-    # for smiles in purch_smiles:
-    #     nr_heavy_atoms = num_heavy_atoms(Chem.MolFromSmiles(smiles))
-    #     if nr_heavy_atoms < 2:
-    #         purch_mol_to_exclude = purch_mol_to_exclude + [smiles]
-    #     purch_nr_heavy_atoms[smiles] = nr_heavy_atoms
 
     # if config["run_id"] == "202305-2911-2320-5a95df0e-3008-4ebe-acd8-ecb3b50607c7":
     #     all_targets = get_target_smiles(n=5)
@@ -234,12 +251,11 @@ if __name__ == "__main__":
     if config["model_type"] == "gnn":
         featurizer = dc.feat.MolGraphConvFeaturizer()
 
-        purch_mols = [Chem.MolFromSmiles(smiles) for smiles in purch_smiles]
+        purch_mols = [Chem.MolFromSmiles(smiles) for smiles in purch_smiles_reduced]
         purch_featurizer = featurizer.featurize(purch_mols)
-        purch_featurizer_dict = dict(zip(purch_smiles, purch_featurizer))
+        purch_featurizer_dict = dict(zip(purch_smiles_reduced, purch_featurizer))
         with open(f"{checkpoint_folder}/purch_featurizer_dict.pickle", "wb") as handle:
             pickle.dump(purch_featurizer_dict, handle, protocol=pickle.HIGHEST_PROTOCOL)
-        fingerprint_num_atoms_dict = None
 
         dataset = gnn_preprocess_input_react(
             input_data=input_data,
@@ -248,8 +264,8 @@ if __name__ == "__main__":
         )
 
     elif config["model_type"] == "fingerprints":
-        purch_fingerprints = list(map(fingerprint_vect_from_smiles, purch_smiles))
-        purch_fingerprints_dict = dict(zip(purch_smiles, purch_fingerprints))
+        purch_fingerprints = list(map(fingerprint_vect_from_smiles, purch_smiles_reduced))
+        purch_fingerprints_dict = dict(zip(purch_smiles_reduced, purch_fingerprints))
         with open(
             f"{checkpoint_folder}/purch_fingerprints_dict.pickle", "wb"
         ) as handle:
@@ -398,8 +414,12 @@ if __name__ == "__main__":
                 device=device,
                 model_type=config["model_type"],
                 model=model,
-                purch_featurizer=purch_featurizer if "purch_featurizer" in locals() else None,
-                purch_fingerprints=purch_fingerprints if "purch_fingerprints" in locals() else None,
+                purch_featurizer=purch_featurizer
+                if "purch_featurizer" in locals()
+                else None,
+                purch_fingerprints=purch_fingerprints
+                if "purch_fingerprints" in locals()
+                else None,
             )
 
             # Compute loss
@@ -516,4 +536,3 @@ if __name__ == "__main__":
     fig.write_image(f"{checkpoint_folder}/Train_and_Val_loss.pdf")
     time.sleep(10)
     fig.write_image(f"{checkpoint_folder}/Train_and_Val_loss.pdf")
-    
