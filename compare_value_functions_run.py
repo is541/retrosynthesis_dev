@@ -362,21 +362,21 @@ if __name__ == "__main__":
     # gnn_emb_model_input_folder = f'GraphRuns/{args.gnn_embedding_model_to_use}'
 
     value_fns_names = [
-        'constant-0',
+        # 'constant-0',
         # 'Tanimoto-distance',
         # 'Tanimoto-distance-TIMES10',
-        # 'Tanimoto-distance-TIMES100',
-        # 'Tanimoto-distance-TIMES1000',
+        'Tanimoto-distance-TIMES100',
+        'Tanimoto-distance-TIMES1000',
         # 'Tanimoto-distance-EXP',
         # 'Tanimoto-distance-SQRT',
-        # 'Tanimoto-distance-NUM_NEIGHBORS_TO_1',
-        "Embedding-from-fingerprints",
-        "Embedding-from-fingerprints-TIMES10",
+        'Tanimoto-distance-NUM_NEIGHBORS_TO_1',
+        # "Embedding-from-fingerprints",
+        # "Embedding-from-fingerprints-TIMES10",
         # "Embedding-from-fingerprints-TIMES100",
         # "Embedding-from-fingerprints-TIMES1000",
         # "Embedding-from-fingerprints-TIMES10000",
-        "Embedding-from-gnn",
-        "Embedding-from-gnn-TIMES10",
+        # "Embedding-from-gnn",
+        # "Embedding-from-gnn-TIMES10",
     ]
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")

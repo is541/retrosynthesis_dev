@@ -16,7 +16,7 @@ import numpy as np
 
 from torch_geometric.nn import GCNConv
 
-
+import random
 import torch
 import torch.nn.functional as F
 
@@ -231,9 +231,46 @@ def gnn_preprocess_input_react(
         cost_pos_react=cost_pos_react,
         cost_neg_react=cost_neg_react,
     )
+    
+def preprocess_input_format(
+    input_data,
+    pos_sampling=None,
+):
+    targets = []
+    positive_samples = []
+    negative_samples = []
+    pos_weights = []
+
+    for target_smiles, samples in tqdm(input_data.items()):
+        targets.append(target_smiles)
+        positive_samples.append(samples["positive_samples"])
+        negative_samples.append(samples["negative_samples"])
+
+        # Deal with pos_sampling
+        if pos_sampling == "uniform":
+            positive_weights = None
+        elif pos_sampling == "prop_num_atoms":
+            positive_weights = [
+                num_heavy_atoms(Chem.MolFromSmiles(positive_smiles))
+                for positive_smiles in samples["positive_samples"]
+            ]
+            positive_weights = torch.tensor(positive_weights, dtype=torch.double)
+            # Normalize the tensor to sum up to 1
+            positive_weights = positive_weights / positive_weights.sum()
+        else:
+            raise NotImplementedError(f"{pos_sampling}")
+
+        pos_weights.append(positive_weights)
+
+    return CustomDataset(
+        targets=targets,
+        positive_samples=positive_samples,
+        negative_samples=negative_samples,
+        pos_weights=pos_weights,
+    )
 
 
-def gnn_preprocess_input(
+def gnn_preprocess_input_staticNegatives(
     input_data,
     featurizer,
     featurizer_dict=None,
@@ -341,7 +378,7 @@ def fingerprint_preprocess_input_react(input_data, fingerprints_dict=None):
     )
 
 
-def fingerprint_preprocess_input(input_data, fingerprints_dict=None, pos_sampling=None):
+def fingerprint_preprocess_input_staticNegatives(input_data, fingerprints_dict=None, pos_sampling=None):
     targets = []
     positive_samples = []
     negative_samples = []
@@ -703,13 +740,14 @@ def compute_embeddings_react(device, model_type, model, batch_data):
         cost_pos_react=cost_pos_react,
         cost_neg_react=cost_neg_react,
     )
-
-
-def compute_embeddings(
+    
+def preprocess_and_compute_embeddings(
     device,
     model_type,
     model,
     batch_data,
+    featur_creator, 
+    not_in_route_sample_size
 ):
     targets = []
     positive_samples = []
@@ -734,12 +772,36 @@ def compute_embeddings(
         batch_negative_samples,
         batch_pos_weights,
     ):
-    # for (
-    #     target_i,
-    #     positives_i,
-    #     negatives_i,
-    #     pos_weights_i,
-    # ) in batch_data:
+        # Prepare data
+        # - Sample the negatives
+        negatives_i_sample = random.sample(
+            negatives_i, not_in_route_sample_size
+        )
+        samples = {
+            "positive_samples": positives_i,
+            "negative_samples": negatives_i_sample,
+        }
+        
+        # - Featurize all
+        if model_type == "gnn":
+            featurizer = featur_creator["featurizer"]
+            featurizer_dict = featur_creator["featurizer_dict"]
+            
+            target_feats_i, pos_feats_i, neg_feats_i = gnn_preprocess_target_pos_negs(
+                target_i, samples, featurizer, featurizer_dict
+            )
+        elif model_type == "fingerprints":
+            fingerprints_dict = featur_creator["fingerprints_dict"]
+            
+            target_feats_i, pos_feats_i, neg_feats_i = fingerprint_preprocess_target_pos_negs(
+                target_smiles=target_i,
+                samples=samples,
+                fingerprints_dict=fingerprints_dict,
+            )
+        else:
+            raise NotImplementedError(f"Model type {model_type}")
+        
+        
         (
             target_embedding,
             positive_samples_embeddings,
@@ -748,9 +810,9 @@ def compute_embeddings(
             device=device,
             model_type=model_type,
             model=model,
-            target=target_i,
-            positives=positives_i,
-            negatives=negatives_i,
+            target=target_feats_i,
+            positives=pos_feats_i,
+            negatives=neg_feats_i,
         )
         targets.append(target_embedding)
         positive_samples.append(positive_samples_embeddings)
@@ -765,6 +827,70 @@ def compute_embeddings(
         negative_samples=negative_samples,
         pos_weights=pos_weights,
     )
+
+
+
+
+# def compute_embeddings(
+#     device,
+#     model_type,
+#     model,
+#     batch_data,
+# ):
+#     targets = []
+#     positive_samples = []
+#     negative_samples = []
+#     pos_weights = []
+    
+#     (
+#         batch_targets,
+#         batch_positive_samples,
+#         batch_negative_samples,
+#         batch_pos_weights,
+#     ) = batch_data
+
+#     for (
+#         target_i,
+#         positives_i,
+#         negatives_i,
+#         pos_weights_i,
+#     ) in zip(
+#         batch_targets,
+#         batch_positive_samples,
+#         batch_negative_samples,
+#         batch_pos_weights,
+#     ):
+#     # for (
+#     #     target_i,
+#     #     positives_i,
+#     #     negatives_i,
+#     #     pos_weights_i,
+#     # ) in batch_data:
+#         (
+#             target_embedding,
+#             positive_samples_embeddings,
+#             negative_samples_embeddings,
+#         ) = compute_actual_embeddings(
+#             device=device,
+#             model_type=model_type,
+#             model=model,
+#             target=target_i,
+#             positives=positives_i,
+#             negatives=negatives_i,
+#         )
+#         targets.append(target_embedding)
+#         positive_samples.append(positive_samples_embeddings)
+#         negative_samples.append(negative_samples_embeddings)
+
+#         pos_weights.append(pos_weights_i)
+
+#     # return embeddings
+#     return CustomDataset(
+#         targets=targets,
+#         positive_samples=positive_samples,
+#         negative_samples=negative_samples,
+#         pos_weights=pos_weights,
+#     )
 
 
 def load_embedding_model(experiment_name, model_name="model_min_val"):

@@ -480,7 +480,7 @@ if __name__ == "__main__":
             best_val_loss = average_val_loss
             best_model = model
 
-        if (epoch % 10 == 0) | (epoch == num_epochs - 1):
+        if (epoch % 1 == 0) | (epoch == num_epochs - 1):
             print(
                 f"{config['model_type']} Model - Epoch {epoch+1}/{num_epochs}, TrainLoss: {average_train_loss}, ValLoss: {average_val_loss}"
             )
