@@ -9,6 +9,8 @@ from tqdm.auto import tqdm
 import torch
 from rdkit import Chem
 from rdkit.Chem import AllChem
+import csv
+import math
 
 from enum import Enum
 
@@ -16,7 +18,7 @@ import numpy as np
 
 from torch_geometric.nn import GCNConv
 
-
+import random
 import torch
 import torch.nn.functional as F
 
@@ -132,20 +134,24 @@ def collate_fn_react(data):
 
 
 class GNNModel(nn.Module):
-    def __init__(self, input_dim, hidden_dim, output_dim):
+    def __init__(self, input_dim, hidden_dim, output_dim, dropout_prob=0):
         super(GNNModel, self).__init__()
         self.input_dim = input_dim
         self.hidden_dim = hidden_dim
         self.output_dim = output_dim
+        self.dropout_prob = dropout_prob
         self.conv1 = GCNConv(input_dim, hidden_dim, dtype=torch.double)
         self.conv2 = GCNConv(hidden_dim, hidden_dim, dtype=torch.double)
         self.fc = nn.Linear(hidden_dim, output_dim, dtype=torch.double)
+        self.dropout = nn.Dropout(p=self.dropout_prob)
 
     def forward(self, x, edge_index):
         x = self.conv1(x, edge_index)
         x = F.relu(x)
+        x = self.dropout(x)
         x = self.conv2(x, edge_index)
         x = F.relu(x)
+        x = self.dropout(x)
 
         # Global max pooling (from node level to graph level embeddings)
         x = custom_global_max_pool(x)
@@ -155,14 +161,20 @@ class GNNModel(nn.Module):
 
 
 class FingerprintModel(nn.Module):
-    def __init__(self, input_dim, hidden_dim, output_dim):
+    def __init__(self, input_dim, hidden_dim, output_dim, dropout_prob=0):
         super(FingerprintModel, self).__init__()
+        self.input_dim = input_dim
+        self.hidden_dim = hidden_dim
+        self.output_dim = output_dim
+        self.dropout_prob = dropout_prob
         self.fc1 = nn.Linear(input_dim, hidden_dim, dtype=torch.double)
         self.fc2 = nn.Linear(hidden_dim, output_dim, dtype=torch.double)
+        self.dropout = nn.Dropout(p=self.dropout_prob)
 
     def forward(self, x):
         x = self.fc1(x)
         x = F.relu(x)
+        x = self.dropout(x)
         x = self.fc2(x)
         return x
 
@@ -231,9 +243,46 @@ def gnn_preprocess_input_react(
         cost_pos_react=cost_pos_react,
         cost_neg_react=cost_neg_react,
     )
+    
+def preprocess_input_format(
+    input_data,
+    pos_sampling=None,
+):
+    targets = []
+    positive_samples = []
+    negative_samples = []
+    pos_weights = []
+
+    for target_smiles, samples in tqdm(input_data.items()):
+        targets.append(target_smiles)
+        positive_samples.append(samples["positive_samples"])
+        negative_samples.append(samples["negative_samples"])
+
+        # Deal with pos_sampling
+        if pos_sampling == "uniform":
+            positive_weights = None
+        elif pos_sampling == "prop_num_atoms":
+            positive_weights = [
+                num_heavy_atoms(Chem.MolFromSmiles(positive_smiles))
+                for positive_smiles in samples["positive_samples"]
+            ]
+            positive_weights = torch.tensor(positive_weights, dtype=torch.double)
+            # Normalize the tensor to sum up to 1
+            positive_weights = positive_weights / positive_weights.sum()
+        else:
+            raise NotImplementedError(f"{pos_sampling}")
+
+        pos_weights.append(positive_weights)
+
+    return CustomDataset(
+        targets=targets,
+        positive_samples=positive_samples,
+        negative_samples=negative_samples,
+        pos_weights=pos_weights,
+    )
 
 
-def gnn_preprocess_input(
+def gnn_preprocess_input_staticNegatives(
     input_data,
     featurizer,
     featurizer_dict=None,
@@ -341,7 +390,7 @@ def fingerprint_preprocess_input_react(input_data, fingerprints_dict=None):
     )
 
 
-def fingerprint_preprocess_input(input_data, fingerprints_dict=None, pos_sampling=None):
+def fingerprint_preprocess_input_staticNegatives(input_data, fingerprints_dict=None, pos_sampling=None):
     targets = []
     positive_samples = []
     negative_samples = []
@@ -447,11 +496,12 @@ def fingerprint_preprocess_input(input_data, fingerprints_dict=None, pos_samplin
 
 
 class ContrastiveReact(nn.Module):
-    def __init__(self, temperature, device):
+    def __init__(self, temperature, device, multiplicative_factor):
         super(ContrastiveReact, self).__init__()
         self.temperature = temperature
         self.cos_sim = nn.CosineSimilarity(dim=-1)
         self.device = device
+        self.multiplicative_factor = multiplicative_factor
 
     def cos_dist(self, a, b):
         return 1.0 - self.cos_sim(a, b)
@@ -483,7 +533,7 @@ class ContrastiveReact(nn.Module):
                         positive_embs.unsqueeze(1), purch_embeddings.unsqueeze(0)
                     ),
                     dim=1,
-                ).values
+                ).values * self.multiplicative_factor
 
                 # Compute the sum of all elements in positive_values
                 positive_value = positive_values.sum() 
@@ -510,9 +560,24 @@ class ContrastiveReact(nn.Module):
                             tensor.unsqueeze(1), purch_embeddings.unsqueeze(0)
                         ),
                         dim=1,
-                    ).values.sum()
+                    ).values.sum() * self.multiplicative_factor
                     + target_cost_neg_react[j]  # Add target_cost_neg_react
                 )
+
+                # with open("react_loss_values.csv", mode='a', newline='') as f:
+                #     writer = csv.writer(f)
+                #     writer.writerow([i, positive_values.sum().item(), target_cost_pos_react.item(),
+                #                     positive_values.sum().item() + target_cost_pos_react.item(),
+                #                     positive_value.item(), j, negative_values[j].item(),
+                #                     target_cost_neg_react[j].item(), 
+                #                     (target_cost_neg_react[j].item() + negative_values[j].item()),
+                #                     (target_cost_neg_react[j].item() + negative_values[j].item()) / self.temperature,
+                #                     math.exp(-positive_value), 
+                #                     math.exp(-(target_cost_neg_react[j].item() + negative_values[j].item()) / self.temperature), 
+                #                     ])
+
+                
+                
             negative_values = torch.tensor(negative_values)
 
             negative_values /= self.temperature
@@ -528,10 +593,18 @@ class ContrastiveReact(nn.Module):
             # sample_loss = -positive_value + torch.logsumexp(
             #     all_similarities, dim=0, keepdims=True
             # )
+            # breakpoint()
 
             # Store sample loss in the tensor
             # breakpoint()
             sample_losses[i] = sample_loss
+            
+            
+            
+            # with open("react_loss_values_agg.csv", mode='a', newline='') as f:
+            #     writer = csv.writer(f)
+            #     writer.writerow([i, numerator, denominator, sample_loss
+            #                     ])
 
         return torch.mean(sample_losses)
 
@@ -628,14 +701,32 @@ def compute_actual_embeddings(device, model_type, model, target, positives, nega
         )
 
     elif model_type == "fingerprints":
-        target_embedding = model(target.to(device))
+        # target_embedding = model(torch.tensor(target, dtype=torch.double).to(device))
+        target_embedding = model(torch.tensor(target, dtype=torch.double).to(device))
         if len(positives) == 0:
             positive_samples_embeddings = torch.empty((0, target_embedding.size(0))).to(
                 device
             )
         else:
-            positive_samples_embeddings = model(positives.to(device))
-        negative_samples_embeddings = model(negatives.to(device))
+            positive_samples_embeddings = torch.stack(
+                [
+                    model(
+                        torch.tensor(example, dtype=torch.double).to(device)
+                    )
+                    for example in positives
+                ],
+                dim=0,
+            )
+            
+        negative_samples_embeddings = torch.stack(
+                [
+                    model(
+                        torch.tensor(example, dtype=torch.double).to(device)
+                    )
+                    for example in negatives
+                ],
+                dim=0,
+            )    
     else:
         raise NotImplementedError(f"Model type {model_type}")
 
@@ -703,13 +794,14 @@ def compute_embeddings_react(device, model_type, model, batch_data):
         cost_pos_react=cost_pos_react,
         cost_neg_react=cost_neg_react,
     )
-
-
-def compute_embeddings(
+    
+def preprocess_and_compute_embeddings(
     device,
     model_type,
     model,
     batch_data,
+    featur_creator, 
+    not_in_route_sample_size
 ):
     targets = []
     positive_samples = []
@@ -734,12 +826,36 @@ def compute_embeddings(
         batch_negative_samples,
         batch_pos_weights,
     ):
-    # for (
-    #     target_i,
-    #     positives_i,
-    #     negatives_i,
-    #     pos_weights_i,
-    # ) in batch_data:
+        # Prepare data
+        # - Sample the negatives
+        negatives_i_sample = random.sample(
+            negatives_i, not_in_route_sample_size
+        )
+        samples = {
+            "positive_samples": positives_i,
+            "negative_samples": negatives_i_sample,
+        }
+        
+        # - Featurize all
+        if model_type == "gnn":
+            featurizer = featur_creator["featurizer"]
+            featurizer_dict = featur_creator["featurizer_dict"]
+            
+            target_feats_i, pos_feats_i, neg_feats_i = gnn_preprocess_target_pos_negs(
+                target_i, samples, featurizer, featurizer_dict
+            )
+        elif model_type == "fingerprints":
+            fingerprints_dict = featur_creator["fingerprints_dict"]
+            
+            target_feats_i, pos_feats_i, neg_feats_i = fingerprint_preprocess_target_pos_negs(
+                target_smiles=target_i,
+                samples=samples,
+                fingerprints_dict=fingerprints_dict,
+            )
+        else:
+            raise NotImplementedError(f"Model type {model_type}")
+        
+        
         (
             target_embedding,
             positive_samples_embeddings,
@@ -748,9 +864,9 @@ def compute_embeddings(
             device=device,
             model_type=model_type,
             model=model,
-            target=target_i,
-            positives=positives_i,
-            negatives=negatives_i,
+            target=target_feats_i,
+            positives=pos_feats_i,
+            negatives=neg_feats_i,
         )
         targets.append(target_embedding)
         positive_samples.append(positive_samples_embeddings)
@@ -767,12 +883,129 @@ def compute_embeddings(
     )
 
 
-def load_embedding_model(experiment_name, model_name="model_min_val"):
+
+
+# def compute_embeddings(
+#     device,
+#     model_type,
+#     model,
+#     batch_data,
+# ):
+#     targets = []
+#     positive_samples = []
+#     negative_samples = []
+#     pos_weights = []
+    
+#     (
+#         batch_targets,
+#         batch_positive_samples,
+#         batch_negative_samples,
+#         batch_pos_weights,
+#     ) = batch_data
+
+#     for (
+#         target_i,
+#         positives_i,
+#         negatives_i,
+#         pos_weights_i,
+#     ) in zip(
+#         batch_targets,
+#         batch_positive_samples,
+#         batch_negative_samples,
+#         batch_pos_weights,
+#     ):
+#     # for (
+#     #     target_i,
+#     #     positives_i,
+#     #     negatives_i,
+#     #     pos_weights_i,
+#     # ) in batch_data:
+#         (
+#             target_embedding,
+#             positive_samples_embeddings,
+#             negative_samples_embeddings,
+#         ) = compute_actual_embeddings(
+#             device=device,
+#             model_type=model_type,
+#             model=model,
+#             target=target_i,
+#             positives=positives_i,
+#             negatives=negatives_i,
+#         )
+#         targets.append(target_embedding)
+#         positive_samples.append(positive_samples_embeddings)
+#         negative_samples.append(negative_samples_embeddings)
+
+#         pos_weights.append(pos_weights_i)
+
+#     # return embeddings
+#     return CustomDataset(
+#         targets=targets,
+#         positive_samples=positive_samples,
+#         negative_samples=negative_samples,
+#         pos_weights=pos_weights,
+#     )
+
+
+def load_embedding_model_from_pickle(experiment_name, model_name="model_min_val"):
     emb_model_input_folder = f"GraphRuns/{experiment_name}"
 
     model_path = f"{emb_model_input_folder}/{model_name}.pkl"
     with open(model_path, "rb") as f:
         model = pickle.load(f)
+
+    with open(f"{emb_model_input_folder}/config.json", "r") as f:
+        config = json.load(f)
+
+    return model, config
+
+def load_embedding_model_from_checkpoint(experiment_name, device, checkpoint_name="model_min_val_checkpoint"):
+    emb_model_input_folder = f"GraphRuns/{experiment_name}"
+    
+    with open(f"{emb_model_input_folder}/config.json", "r") as f:
+        config = json.load(f)
+    
+    if config["model_type"] == 'gnn':
+        with open(f'{emb_model_input_folder}/input_dim.pickle', 'rb') as f:
+            input_dim_dict = pickle.load(f)
+            gnn_input_dim = input_dim_dict['input_dim']
+        gnn_hidden_dim = config["hidden_dim"]
+        gnn_output_dim = config["output_dim"]
+        gnn_dropout_prob = config.get('dropout_prob', 0)
+    elif config["model_type"] == 'fingerprints':
+        with open(f'{emb_model_input_folder}/input_dim.pickle', 'rb') as f:
+            input_dim_dict = pickle.load(f)
+            fingerprint_input_dim = input_dim_dict['input_dim']
+        fingerprint_hidden_dim = config["hidden_dim"]
+        fingerprint_output_dim = config["output_dim"]
+        fingerprint_dropout_prob = config.get('dropout_prob', 0)
+    else:
+        raise NotImplementedError(f'Model type {config["model_type"]}')
+
+    if config["model_type"] == 'gnn':
+        model = GNNModel(
+            input_dim=gnn_input_dim, 
+            hidden_dim=gnn_hidden_dim, 
+            output_dim=gnn_output_dim,
+            dropout_prob=gnn_dropout_prob).to(device)
+        model.double()
+        
+    elif config["model_type"] == 'fingerprints':
+        model = FingerprintModel(
+            input_dim=fingerprint_input_dim, 
+            hidden_dim=fingerprint_hidden_dim, 
+            output_dim=fingerprint_output_dim,
+            dropout_prob=fingerprint_dropout_prob).to(device)
+    else:
+        raise NotImplementedError(f'Model type {config["model_type"]}')
+        
+        
+    checkpoint_path = f'{emb_model_input_folder}/{checkpoint_name}.pth'
+
+    checkpoint = torch.load(checkpoint_path, map_location=device)
+
+    # Load the model state dict from the checkpoint
+    model.load_state_dict(checkpoint['model_state_dict'])
 
     with open(f"{emb_model_input_folder}/config.json", "r") as f:
         config = json.load(f)

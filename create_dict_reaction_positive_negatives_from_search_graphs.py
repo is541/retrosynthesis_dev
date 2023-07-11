@@ -8,7 +8,6 @@ from tqdm.auto import tqdm
 from syntheseus.search.graph.message_passing import run_message_passing
 from syntheseus.search.analysis.tree_solution_counting import num_solutions_update
 
-# from syntheseus.search.analysis.route_extraction import min_cost_routes
 from syntheseus.search.graph.and_or import OrNode, AndNode
 from syntheseus.search.analysis.route_extraction import (
     _iter_top_routes,
@@ -68,7 +67,7 @@ def create_dict_pos_neg_first_reaction(input_folder, keep_only_not_purchasable, 
                     positive_children = []
                     for node in best_route:
                         if isinstance(node, AndNode) & (node.depth==1):
-                            best_reaction_idx = node.reaction.metadata["template_idx"]
+                            best_reaction = node.reaction#.metadata["template_idx"]
                             best_reaction_cost = node.data["retro_star_rxn_cost"]
                         elif isinstance(node, OrNode):
                             if keep_only_not_purchasable:
@@ -83,7 +82,8 @@ def create_dict_pos_neg_first_reaction(input_folder, keep_only_not_purchasable, 
                     # Negatives are: all first reactions not chosen, along with the respective children
                     other_reaction_costs = []
                     for node in output_graph.successors(output_graph._root_node):
-                        if isinstance(node, AndNode) & (node.reaction.metadata["template_idx"]!=best_reaction_idx):
+                        # if isinstance(node, AndNode) & (node.reaction.metadata["template_idx"]!=best_reaction_idx):
+                        if isinstance(node, AndNode) & (node.reaction!=best_reaction):
                             reaction_children_nodes = output_graph.successors(node)
                             
                             if keep_only_not_purchasable:
@@ -111,7 +111,7 @@ if __name__ == "__main__":
         run_id = "Guacamol_combined"
     input_folder = f"Runs/{run_id}/constant0_graph_pickles"
     
-    keep_only_not_purchasable = True
+    keep_only_not_purchasable = False
     if keep_only_not_purchasable:
         only_purch = "not_purch"
     else:

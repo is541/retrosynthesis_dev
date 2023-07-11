@@ -69,9 +69,6 @@ if __name__ == "__main__":
     
     # 1. PREPROCESS DATA
     # if not args.load_from_preprocessed_data:
-    # Save config in output folder
-    with open(f"{checkpoint_folder}/config.json", "w") as f:
-        json.dump(config, f, indent=4)
 
     # Read routes data
     input_file_routes = f'Runs/{config["run_id"]}/targ_routes.pickle'
@@ -173,9 +170,6 @@ if __name__ == "__main__":
         purch_mols = [Chem.MolFromSmiles(smiles) for smiles in purch_smiles]
         purch_featurizer = featurizer.featurize(purch_mols)
         purch_featurizer_dict = dict(zip(purch_smiles, purch_featurizer))
-        with open(f"{checkpoint_folder}/purch_featurizer_dict.pickle", "wb") as handle:
-            pickle.dump(purch_featurizer_dict, handle, protocol=pickle.HIGHEST_PROTOCOL)
-        fingerprint_num_atoms_dict = None
 
         dataset = gnn_preprocess_input(
             input_data=input_data, 
@@ -187,14 +181,8 @@ if __name__ == "__main__":
     elif config["model_type"] == "fingerprints":
         purch_fingerprints = list(map(fingerprint_vect_from_smiles, purch_smiles))
         purch_fingerprints_dict = dict(zip(purch_smiles, purch_fingerprints))
-        with open(
-            f"{checkpoint_folder}/purch_fingerprints_dict.pickle", "wb"
-        ) as handle:
-            pickle.dump(
-                purch_fingerprints_dict, handle, protocol=pickle.HIGHEST_PROTOCOL
-            )
 
-            dataset = fingerprint_preprocess_input(
+        dataset = fingerprint_preprocess_input(
             input_data, 
             fingerprints_dict=purch_fingerprints_dict, 
             pos_sampling=config["pos_sampling"],

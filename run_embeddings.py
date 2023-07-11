@@ -18,13 +18,12 @@ import time
 from tqdm.auto import tqdm
 from paroutes import PaRoutesInventory, get_target_smiles
 from embedding_model import (
-    fingerprint_preprocess_input,
-    gnn_preprocess_input,
+    preprocess_input_format,
+    preprocess_and_compute_embeddings,
     CustomDataset,
     collate_fn,
     # SampleData,
     fingerprint_vect_from_smiles,
-    compute_embeddings,
     GNNModel,
     FingerprintModel,
     NTXentLoss,
@@ -127,16 +126,17 @@ if __name__ == "__main__":
             for purch_smile in purch_smiles
             if purch_smile not in purch_in_route
         ]
-        random.seed(config["seed"])
+        # random.seed(config["seed"])
 
-        if config["neg_sampling"] == "uniform":
-            purch_not_in_route_sample = random.sample(
-                purch_not_in_route, config["not_in_route_sample_size"]
-            )
-        elif config["neg_sampling"] == "...":
-            pass
-        else:
-            raise NotImplementedError(f'{config["neg_sampling"]}')
+        # if config["neg_sampling"] == "uniform":
+        #     purch_not_in_route_sample = random.sample(
+        #         purch_not_in_route, config["not_in_route_sample_size"]
+        #     )
+        # elif config["neg_sampling"] == "...":
+        #     pass
+        # else:
+        #     raise NotImplementedError(f'{config["neg_sampling"]}')
+        purch_not_in_route_sample = purch_not_in_route
 
         # Filter out molecules with only one atom (problems with featurizer)
         purch_in_route = [
@@ -158,12 +158,13 @@ if __name__ == "__main__":
         sample_targets = random.sample(
             list(targ_route_not_in_route_dict.keys()), config["nr_sample_targets"]
         )
+        targ_route_not_in_route_dict_sample = {
+            target: targ_route_not_in_route_dict[target] for target in sample_targets
+        }
     else:
-        sample_targets = targ_route_not_in_route_dict
+        targ_route_not_in_route_dict_sample = targ_route_not_in_route_dict
     # Create targ_routes_dict_sample with the sampled keys and their corresponding values
-    targ_route_not_in_route_dict_sample = {
-        target: targ_route_not_in_route_dict[target] for target in sample_targets
-    }
+    
 
     input_data = targ_route_not_in_route_dict_sample
 
@@ -175,12 +176,14 @@ if __name__ == "__main__":
         purch_featurizer_dict = dict(zip(purch_smiles, purch_featurizer))
         with open(f"{checkpoint_folder}/purch_featurizer_dict.pickle", "wb") as handle:
             pickle.dump(purch_featurizer_dict, handle, protocol=pickle.HIGHEST_PROTOCOL)
-        fingerprint_num_atoms_dict = None
 
-        dataset = gnn_preprocess_input(
+        featur_creator = {
+            "featurizer": featurizer,
+            "featurizer_dict": purch_featurizer_dict
+        }
+
+        dataset = preprocess_input_format(
             input_data=input_data, 
-            featurizer=featurizer, 
-            featurizer_dict=purch_featurizer_dict,
             pos_sampling=config["pos_sampling"],
         )
         
@@ -193,63 +196,18 @@ if __name__ == "__main__":
             pickle.dump(
                 purch_fingerprints_dict, handle, protocol=pickle.HIGHEST_PROTOCOL
             )
+        featur_creator = {
+            "fingerprints_dict": purch_fingerprints_dict
+        }
 
-        # Also save dict to retrieve number of atoms from fingerprints
-        # fingerprint_num_atoms_dict = {
-        #     torch.tensor(fp, dtype=torch.double): purch_nr_heavy_atoms[smiles]
-        #     for smiles, fp in purch_fingerprints_dict.items()
-        # }
-        # with open(
-        #     f"{checkpoint_folder}/fingerprint_num_atoms_dict.pickle", "wb"
-        # ) as handle:
-        #     pickle.dump(
-        #         fingerprint_num_atoms_dict, handle, protocol=pickle.HIGHEST_PROTOCOL
-        #     )
-
-        dataset = fingerprint_preprocess_input(
+        dataset = preprocess_input_format(
             input_data, 
-            fingerprints_dict=purch_fingerprints_dict, 
             pos_sampling=config["pos_sampling"],
         )
         
     else:
         raise NotImplementedError(f'Model type {config["model_type"]}')
 
-    # if args.save_preprocessed_data:
-    #     with open(f"{checkpoint_folder}/preprocessed_targets.pickle", "wb") as handle:
-    #         pickle.dump(preprocessed_targets, handle, protocol=pickle.HIGHEST_PROTOCOL)
-    #     with open(
-    #         f"{checkpoint_folder}/preprocessed_positive_samples.pickle", "wb"
-    #     ) as handle:
-    #         pickle.dump(
-    #             preprocessed_positive_samples, handle, protocol=pickle.HIGHEST_PROTOCOL
-    #         )
-    #     with open(
-    #         f"{checkpoint_folder}/preprocessed_negative_samples.pickle", "wb"
-    #     ) as handle:
-    #         pickle.dump(
-    #             preprocessed_negative_samples, handle, protocol=pickle.HIGHEST_PROTOCOL
-    #         )
-    # else:
-    #     with open(f"{checkpoint_folder}/preprocessed_targets.pickle", "rb") as handle:
-    #         preprocessed_targets = pickle.load(handle)
-    #     with open(f"{checkpoint_folder}/preprocessed_positive_samples.pickle", "rb") as handle:
-    #         preprocessed_positive_samples = pickle.load(handle)
-    #     with open(f"{checkpoint_folder}/preprocessed_negative_samples.pickle", "rb") as handle:
-    #         preprocessed_negative_samples = pickle.load(handle)
-    #     if config["model_type"] == "fingerprints":
-    #         with open(
-    #             f"{checkpoint_folder}/fingerprint_num_atoms_dict.pickle", "rb"
-    #         ) as handle:
-    #             fingerprint_num_atoms_dict = pickle.load(handle)
-    #     else:
-    #         fingerprint_num_atoms_dict = None
-            
-    #     dataset = CustomDataset(
-    #             preprocessed_targets,
-    #             preprocessed_positive_samples,
-    #             preprocessed_negative_samples,
-    #         )
 
     # Train validation split
     validation_ratio = config["validation_ratio"]
@@ -282,20 +240,20 @@ if __name__ == "__main__":
 
     # Define network dimensions
     if config["model_type"] == "gnn":
-        gnn_input_dim = dataset.targets[0].node_features.shape[1]
+        gnn_input_dim = 30 #dataset.targets[0].node_features.shape[1]
         gnn_hidden_dim = config["hidden_dim"]
         gnn_output_dim = config["output_dim"]
+        gnn_dropout_prob = config.get('dropout_prob', 0)
 
         with open(f"{checkpoint_folder}/input_dim.pickle", "wb") as f:
             pickle.dump({"input_dim": gnn_input_dim}, f)
 
     elif config["model_type"] == "fingerprints":
         #     fingerprint_input_dim = preprocessed_targets[0].GetNumBits()
-        fingerprint_input_dim = dataset.targets[0].size()[
-            0
-        ]  # len(preprocessed_targets[0].node_features)
+        fingerprint_input_dim =  2048 
         fingerprint_hidden_dim = config["hidden_dim"]
         fingerprint_output_dim = config["output_dim"]
+        fingerprint_dropout_prob = config.get('dropout_prob', 0)
 
         with open(f"{checkpoint_folder}/input_dim.pickle", "wb") as f:
             pickle.dump({"input_dim": fingerprint_input_dim}, f)
@@ -311,6 +269,7 @@ if __name__ == "__main__":
             input_dim=gnn_input_dim,
             hidden_dim=gnn_hidden_dim,
             output_dim=gnn_output_dim,
+            dropout_prob=gnn_dropout_prob
         ).to(device)
         model.double()
 
@@ -319,6 +278,7 @@ if __name__ == "__main__":
             input_dim=fingerprint_input_dim,
             hidden_dim=fingerprint_hidden_dim,
             output_dim=fingerprint_output_dim,
+            dropout_prob=fingerprint_dropout_prob
         ).to(device)
     else:
         raise NotImplementedError(f'Model type {config["model_type"]}')
@@ -358,6 +318,7 @@ if __name__ == "__main__":
 
     # best_val_loss = float("inf")
     # best_model = None
+    
 
     # epoch_loss = pd.DataFrame(columns=["Epoch", "TrainLoss", "ValLoss"])
     for epoch in tqdm(range(start_epoch, num_epochs)):
@@ -370,11 +331,13 @@ if __name__ == "__main__":
             optimizer.zero_grad()
 
             # Compute embeddings
-            embeddings_dataset = compute_embeddings(
+            embeddings_dataset = preprocess_and_compute_embeddings(
                 device=device,
                 model_type=config['model_type'],
                 model=model,
                 batch_data=batch_data,
+                featur_creator=featur_creator,
+                not_in_route_sample_size=config["not_in_route_sample_size"]
             )
             # Compute loss
             loss = loss_fn(embeddings_dataset)
@@ -394,11 +357,13 @@ if __name__ == "__main__":
         with torch.no_grad():  # Disable gradient calculation during validation
             for val_batch_idx, val_batch_data in enumerate(val_data_loader):
                 # Compute embeddings
-                val_embeddings = compute_embeddings(
+                val_embeddings = preprocess_and_compute_embeddings(
                     device=device,
                     model_type=config['model_type'],
                     model=model,
                     batch_data=val_batch_data,
+                    featur_creator=featur_creator,
+                    not_in_route_sample_size=config["not_in_route_sample_size"]
                 )
                 # Compute loss
                 val_batch_loss = loss_fn(val_embeddings)
@@ -433,7 +398,7 @@ if __name__ == "__main__":
             best_val_loss = average_val_loss
             best_model = model
 
-        if (epoch % 10 == 0) | (epoch == num_epochs - 1):
+        if (epoch % 5 == 0) | (epoch == num_epochs - 1):
             print(
                 f"{config['model_type']} Model - Epoch {epoch+1}/{num_epochs}, TrainLoss: {average_train_loss}, ValLoss: {average_val_loss}"
             )

@@ -15,6 +15,7 @@ import numpy as np
 import torch
 
 from tqdm.auto import tqdm
+
 # from deepchem.utils.save import log as dc_log
 
 
@@ -36,7 +37,7 @@ from syntheseus.search.algorithms.best_first.retro_star import (
     RetroStarSearch,
     MolIsPurchasableCost,
 )
-from syntheseus.search.analysis.route_extraction import min_cost_routes
+from syntheseus.search.analysis.route_extraction import iter_routes_cost_order
 from syntheseus.search.reaction_models.base import BackwardReactionModel
 from syntheseus.search.mol_inventory import BaseMolInventory
 from syntheseus.search.node_evaluation.base import (
@@ -51,7 +52,12 @@ from paroutes import PaRoutesInventory, PaRoutesModel
 
 from syntheseus.search.analysis import diversity
 from value_functions import initialize_value_functions, ConstantMolEvaluator
-from embedding_model import FingerprintModel, GNNModel, load_embedding_model
+from embedding_model import (
+    FingerprintModel,
+    GNNModel,
+    load_embedding_model_from_pickle,
+    load_embedding_model_from_checkpoint,
+)
 
 # from syntheseus.search.algorithms.best_first.retro_star import MolIsPurchasableCost
 
@@ -99,6 +105,7 @@ def run_algorithm(
     limit_rxn_model_calls: int = 100,
     limit_iterations: int = 1_000_000,
     logger: logging.RootLogger = logging.getLogger(),
+    stop_on_first_solution: bool = False,
 ) -> SearchResult:
     """
     Do search on a list of SMILES strings and report the time of first solution.
@@ -112,6 +119,7 @@ def run_algorithm(
         limit_iterations=limit_iterations,
         max_expansion_depth=max_expansion_depth,  # prevent overly-deep solutions
         prevent_repeat_mol_in_trees=prevent_repeat_mol_in_trees,  # original paper did this
+        stop_on_first_solution=stop_on_first_solution,
     )
     alg = ReduceValueFunctionCallsRetroStar(
         and_node_cost_fn=and_node_cost_fn,
@@ -152,7 +160,7 @@ def run_algorithm(
 
         # Analyze number of routes
         MAX_ROUTES = 10000
-        routes = list(min_cost_routes(output_graph, MAX_ROUTES))
+        routes = list(iter_routes_cost_order(output_graph, MAX_ROUTES))
 
         if alg.reaction_model.num_calls() < limit_rxn_model_calls:
             note = " (NOTE: this was less than the maximum budget)"
@@ -203,8 +211,8 @@ if __name__ == "__main__":
     parser.add_argument(
         "--input_file",
         type=str,
-        # required=True,
-        default="Guacamol_100_mid_hard_to_solve"
+        required=True,
+        # default="Guacamol_100_mid_hard_to_solve"
         # help="Text file with SMILES to run search on."
         # " One SMILES per line, no header.",
     )
@@ -212,13 +220,13 @@ if __name__ == "__main__":
         "--fnp_embedding_model_to_use",
         type=str,
         # required=True,
-        default="fnp_nn_0629",  # "fingerprints_v1" # "fnp_nn_0629"
+        default="fnp_nn_0709_sampleInLoss",  # "fingerprints_v1" # "fnp_nn_0629"
     )
     parser.add_argument(
         "--gnn_embedding_model_to_use",
         type=str,
         # required=True,
-        default="gnn_0629",
+        default="gnn_0709_sampleInLoss",
     )
     parser.add_argument(
         "--limit_iterations",
@@ -258,7 +266,7 @@ if __name__ == "__main__":
     parser.add_argument(
         "--max_num_templates",
         type=int,
-        default=10,  # 50
+        default=50,  # 50
     )
     parser.add_argument(
         "--prevent_repeat_mol_in_trees",
@@ -285,19 +293,25 @@ if __name__ == "__main__":
         type=str,
         default="MOL_PURCHASABLE",
     )
-    # parser.add_argument(
-    #     "--save_output_pickle",
-    #     type=bool,
-    #     default=True,
-    #     help="Whether to save the pickle of the output graphs of each target molecule",
-    # )
+    parser.add_argument(
+        "--stop_on_first_solution",
+        type=bool,
+        default=True,
+    )
     args = parser.parse_args()
 
     # Create eventid
     # eventid = datetime.now().strftime("%Y%m-%d%H-%M%S-") + str(uuid4())
-    # eventid = '202306-3017-5132-d4cd54bf-e5a4-44c5-82af-c629a3692d87_HARDEST'
-    # eventid = '202307-0320-4900-d4c27728-a5aa-4177-8681-268a17c3d208_HARD'
-    eventid = '202307-0620-3725-cc7b1f07-14cd-47e8-9d40-f5b2f358fa28_MID_HARD'
+    if args.input_file=="Guacamol_100_hardest_to_solve":
+        eventid = '202306-3017-5132-d4cd54bf-e5a4-44c5-82af-c629a3692d87_HARDEST'
+    if args.input_file=="Guacamol_100_hard_to_solve":
+        eventid = "202307-0320-4900-d4c27728-a5aa-4177-8681-268a17c3d208_HARD"
+    elif args.input_file=="Guacamol_100_mid_hard_to_solve":
+        eventid = '202307-0620-3725-cc7b1f07-14cd-47e8-9d40-f5b2f358fa28_MID_HARD'
+    elif args.input_file=="Guacamol_100_mid_to_solve":
+        eventid = 'MID'
+    elif args.input_file=="Guacamol_100_mid_easy_to_solve":
+        eventid = 'MID_EASY'
     output_folder = f"CompareTanimotoLearnt/{eventid}"
 
     if not os.path.exists(output_folder):
@@ -321,7 +335,7 @@ if __name__ == "__main__":
     logger.addHandler(stdout_handler)
 
     logger.info(args)
-    
+
     # # Reduce logging from DeepChem
     # dc_log.setLevel(logging.DEBUG)
 
@@ -363,39 +377,49 @@ if __name__ == "__main__":
 
     value_fns_names = [
         'constant-0',
-        # 'Tanimoto-distance',
-        # 'Tanimoto-distance-TIMES10',
-        # 'Tanimoto-distance-TIMES100',
+        'Tanimoto-distance',
+        'Tanimoto-distance-TIMES10',
+        'Tanimoto-distance-TIMES100',
         # 'Tanimoto-distance-TIMES1000',
         # 'Tanimoto-distance-EXP',
         # 'Tanimoto-distance-SQRT',
-        # 'Tanimoto-distance-NUM_NEIGHBORS_TO_1',
+        'Tanimoto-distance-NUM_NEIGHBORS_TO_1',
         "Embedding-from-fingerprints",
-        "Embedding-from-fingerprints-TIMES10",
+        # "Embedding-from-fingerprints-TIMES10",
         # "Embedding-from-fingerprints-TIMES100",
         # "Embedding-from-fingerprints-TIMES1000",
         # "Embedding-from-fingerprints-TIMES10000",
         "Embedding-from-gnn",
-        "Embedding-from-gnn-TIMES10",
+        # "Embedding-from-gnn-TIMES10",
     ]
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
     # Fingerprint model
-    model_fnps, config_fnps = load_embedding_model(
-        experiment_name=args.fnp_embedding_model_to_use
+    # model_fnps, config_fnps = load_embedding_model_from_pickle(
+    #     experiment_name=args.fnp_embedding_model_to_use
+    # )
+    model_fnps, config_fnps = load_embedding_model_from_checkpoint(
+        experiment_name=args.fnp_embedding_model_to_use,
+        device=device,
+        checkpoint_name="epoch_11_checkpoint",
     )
 
     # Graph model
-    model_gnn, config_gnn = load_embedding_model(
+    # model_gnn, config_gnn = load_embedding_model_from_pickle(
+    #     experiment_name=args.gnn_embedding_model_to_use,
+    #     # model_name="epoch_51_checkpoint",
+    # )
+    model_gnn, config_gnn = load_embedding_model_from_checkpoint(
         experiment_name=args.gnn_embedding_model_to_use,
-        model_name="epoch_51_checkpoint",
+        device=device,
+        checkpoint_name="epoch_76_checkpoint",
     )
 
     distance_type_fnps = "cosine"
     distance_type_gnn = "cosine"
     featurizer_gnn = dc.feat.MolGraphConvFeaturizer()
-    
+
     value_fns = initialize_value_functions(
         value_fns_names=value_fns_names,
         inventory=inventory,
@@ -404,7 +428,7 @@ if __name__ == "__main__":
         model_gnn=model_gnn,
         distance_type_gnn=distance_type_gnn,
         featurizer_gnn=featurizer_gnn,
-        device=device
+        device=device,
     )
 
     logger.info(f"Start experiment {eventid}")
@@ -431,6 +455,7 @@ if __name__ == "__main__":
             limit_rxn_model_calls=args.limit_rxn_model_calls,
             limit_iterations=args.limit_iterations,
             logger=logger,
+            stop_on_first_solution=args.stop_on_first_solution,
         )
         result[name] = alg_result
 
