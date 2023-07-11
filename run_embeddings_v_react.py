@@ -365,7 +365,7 @@ if __name__ == "__main__":
     else:
         raise NotImplementedError(f'Model type {config["model_type"]}')
 
-    loss_fn = ContrastiveReact(temperature=config["temperature"], device=device)
+    loss_fn = ContrastiveReact(temperature=config["temperature"], device=device, multiplicative_factor=config["value_multiplicative_factor"])
     optimizer = optim.Adam(model.parameters(), lr=config["lr"])
 
     num_epochs = config["num_epochs"]
@@ -479,6 +479,13 @@ if __name__ == "__main__":
         if average_val_loss < best_val_loss:
             best_val_loss = average_val_loss
             best_model = model
+            best_model_checkpoint = {
+                "epoch": epoch,
+                "model_state_dict": model.state_dict(),
+                "optimizer_state_dict": optimizer.state_dict(),
+            }
+            best_model_checkpoint_path = f"{checkpoint_folder}/model_min_val_{checkpoint_name}"  # Specify the checkpoint file path
+
 
         if (epoch % 1 == 0) | (epoch == num_epochs - 1):
             print(
@@ -497,13 +504,14 @@ if __name__ == "__main__":
             #         loss_df = pd.DataFrame({'Epoch': range(len(epoch_loss)), 'TrainLoss': epoch_loss})
             epoch_loss.to_csv(f"{checkpoint_folder}/train_val_loss.csv", index=False)
 
-            # Save the best model as a pickle
+            # Save the best model as a pickle and as checkpoint
             best_model_path = (
                 f"{checkpoint_folder}/model_min_val.pkl"  #'path/to/best_model.pkl'
             )
-
             with open(best_model_path, "wb") as f:
                 pickle.dump(best_model, f)
+                
+            torch.save(best_model_checkpoint, best_model_checkpoint_path)
 
     # Close the SummaryWriter
     writer.close()

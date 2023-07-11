@@ -12,7 +12,7 @@ import torch
 # from syntheseus.search.graph.and_or import AndNode
 # from syntheseus.search.algorithms.best_first.retro_star import RetroStarSearch, MolIsPurchasableCost
 # from syntheseus.search.analysis.solution_time import get_first_solution_time
-# from syntheseus.search.analysis.route_extraction import min_cost_routes
+
 # from syntheseus.search.reaction_models.base import BackwardReactionModel
 # from syntheseus.search.mol_inventory import BaseMolInventory
 # from syntheseus.search.node_evaluation.base import (
@@ -21,7 +21,7 @@ import torch
 # )
 from syntheseus.search.node_evaluation.common import ConstantNodeEvaluator
 from value_functions import initialize_value_functions
-from embedding_model import FingerprintModel, GNNModel, load_embedding_model
+from embedding_model import FingerprintModel, GNNModel, load_embedding_model_from_pickle
 
 from paroutes import PaRoutesInventory#, PaRoutesModel, get_target_smiles
 # from example_paroutes import PaRoutesRxnCost
@@ -71,7 +71,7 @@ if __name__ == "__main__":
     fnps_experiment_name = 'fingerprints_v1'
     
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    model_fnps, config_fnps = load_embedding_model(experiment_name=fnps_experiment_name)
+    model_fnps, config_fnps = load_embedding_model_from_pickle(experiment_name=fnps_experiment_name)
     distance_type_fnps = 'cosine'
     value_fns = initialize_value_functions(value_fns_names=value_fns_names, inventory=inventory, model_fnps=model_fnps, distance_type_fnps=distance_type_fnps)
     

@@ -8,7 +8,7 @@ from tqdm.auto import tqdm
 from paroutes import PaRoutesInventory
 from rdkit.Chem import DataStructs, AllChem
 from value_functions import initialize_value_functions
-from embedding_model import FingerprintModel, GNNModel, load_embedding_model
+from embedding_model import FingerprintModel, GNNModel, load_embedding_model_from_pickle
 
 import numpy as np
 import pandas as pd
@@ -55,7 +55,7 @@ if __name__ == "__main__":
     fnps_experiment_name = 'fingerprints_v1'
     
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    model_fnps, config_fnps = load_embedding_model(experiment_name=fnps_experiment_name)
+    model_fnps, config_fnps = _from_pickle(experiment_name=fnps_experiment_name)
     distance_type_fnps = 'cosine'
     value_fns = initialize_value_functions(value_fns_names=value_fns_names, inventory=inventory, model_fnps=model_fnps, distance_type_fnps=distance_type_fnps)
 

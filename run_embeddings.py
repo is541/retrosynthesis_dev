@@ -24,7 +24,6 @@ from embedding_model import (
     collate_fn,
     # SampleData,
     fingerprint_vect_from_smiles,
-    compute_embeddings,
     GNNModel,
     FingerprintModel,
     NTXentLoss,
@@ -244,6 +243,7 @@ if __name__ == "__main__":
         gnn_input_dim = 30 #dataset.targets[0].node_features.shape[1]
         gnn_hidden_dim = config["hidden_dim"]
         gnn_output_dim = config["output_dim"]
+        gnn_dropout_prob = config.get('dropout_prob', 0)
 
         with open(f"{checkpoint_folder}/input_dim.pickle", "wb") as f:
             pickle.dump({"input_dim": gnn_input_dim}, f)
@@ -253,6 +253,7 @@ if __name__ == "__main__":
         fingerprint_input_dim =  2048 
         fingerprint_hidden_dim = config["hidden_dim"]
         fingerprint_output_dim = config["output_dim"]
+        fingerprint_dropout_prob = config.get('dropout_prob', 0)
 
         with open(f"{checkpoint_folder}/input_dim.pickle", "wb") as f:
             pickle.dump({"input_dim": fingerprint_input_dim}, f)
@@ -268,6 +269,7 @@ if __name__ == "__main__":
             input_dim=gnn_input_dim,
             hidden_dim=gnn_hidden_dim,
             output_dim=gnn_output_dim,
+            dropout_prob=gnn_dropout_prob
         ).to(device)
         model.double()
 
@@ -276,6 +278,7 @@ if __name__ == "__main__":
             input_dim=fingerprint_input_dim,
             hidden_dim=fingerprint_hidden_dim,
             output_dim=fingerprint_output_dim,
+            dropout_prob=fingerprint_dropout_prob
         ).to(device)
     else:
         raise NotImplementedError(f'Model type {config["model_type"]}')
