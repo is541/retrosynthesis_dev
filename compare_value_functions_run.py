@@ -67,19 +67,19 @@ class SearchResult:
         self,
         name,
         soln_time_dict,
-        num_different_routes_dict,
-        final_num_rxn_model_calls_dict,
-        final_num_value_function_calls_dict,
-        output_graph_dict,
-        routes_dict,
+        # num_different_routes_dict,
+        # final_num_rxn_model_calls_dict,
+        # final_num_value_function_calls_dict,
+        # output_graph_dict,
+        # routes_dict,
     ):
         self.name = name
         self.soln_time_dict = soln_time_dict
-        self.num_different_routes_dict = num_different_routes_dict
-        self.final_num_rxn_model_calls_dict = final_num_rxn_model_calls_dict
-        self.output_graph_dict = output_graph_dict
-        self.routes_dict = routes_dict
-        self.final_num_value_function_calls_dict = final_num_value_function_calls_dict
+        # self.num_different_routes_dict = num_different_routes_dict
+        # self.final_num_rxn_model_calls_dict = final_num_rxn_model_calls_dict
+        # self.output_graph_dict = output_graph_dict
+        # self.routes_dict = routes_dict
+        # self.final_num_value_function_calls_dict = final_num_value_function_calls_dict
 
 
 class PaRoutesRxnCost(NoCacheNodeEvaluator[AndNode]):
@@ -136,12 +136,12 @@ def run_algorithm(
     else:
         smiles_iter = smiles_list
 
-    output_graph_dict = {}
+    # output_graph_dict = {}
     soln_time_dict = {}
-    routes_dict = {}
-    final_num_rxn_model_calls_dict = {}
-    final_num_value_function_calls_dict = {}
-    num_different_routes_dict = {}
+    # routes_dict = {}
+    # final_num_rxn_model_calls_dict = {}
+    # final_num_value_function_calls_dict = {}
+    # num_different_routes_dict = {}
 
     for i, smiles in enumerate(smiles_iter):
         logger.debug(f"Start search {i}/{len(smiles_list)}. SMILES: {smiles}")
@@ -158,51 +158,51 @@ def run_algorithm(
         soln_time = get_first_solution_time(output_graph)
         this_soln_times.append(soln_time)
 
-        # Analyze number of routes
-        MAX_ROUTES = 10000
-        routes = list(iter_routes_cost_order(output_graph, MAX_ROUTES))
+        # # Analyze number of routes
+        # MAX_ROUTES = 10000
+        # routes = list(iter_routes_cost_order(output_graph, MAX_ROUTES))
 
-        if alg.reaction_model.num_calls() < limit_rxn_model_calls:
-            note = " (NOTE: this was less than the maximum budget)"
-        else:
-            note = ""
-        logger.debug(
-            f"Done {name}: nodes={len(output_graph)}, solution time = {soln_time}, "
-            f"num routes = {len(routes)} (capped at {MAX_ROUTES}), "
-            f"final num rxn model calls = {alg.reaction_model.num_calls()}{note}, "
-            f"final num value model calls = {alg.value_function.num_calls}."
-        )
+        # if alg.reaction_model.num_calls() < limit_rxn_model_calls:
+        #     note = " (NOTE: this was less than the maximum budget)"
+        # else:
+        #     note = ""
+        # logger.debug(
+        #     f"Done {name}: nodes={len(output_graph)}, solution time = {soln_time}, "
+        #     f"num routes = {len(routes)} (capped at {MAX_ROUTES}), "
+        #     f"final num rxn model calls = {alg.reaction_model.num_calls()}{note}, "
+        #     f"final num value model calls = {alg.value_function.num_calls}."
+        # )
 
-        # Analyze route diversity
-        if (len(routes) > 0) & route_div:
-            route_objects = [output_graph.to_synthesis_graph(nodes) for nodes in routes]
-            packing_set = diversity.estimate_packing_number(
-                routes=route_objects,
-                distance_metric=diversity.reaction_jaccard_distance,
-                radius=0.999,  # because comparison is > not >=
-            )
-            logger.debug((f"number of distinct routes = {len(packing_set)}"))
-        else:
-            packing_set = []
+        # # Analyze route diversity
+        # if (len(routes) > 0) & route_div:
+        #     route_objects = [output_graph.to_synthesis_graph(nodes) for nodes in routes]
+        #     packing_set = diversity.estimate_packing_number(
+        #         routes=route_objects,
+        #         distance_metric=diversity.reaction_jaccard_distance,
+        #         radius=0.999,  # because comparison is > not >=
+        #     )
+        #     logger.debug((f"number of distinct routes = {len(packing_set)}"))
+        # else:
+        #     packing_set = []
 
         # Save results
         soln_time_dict.update({smiles: soln_time})
-        final_num_rxn_model_calls_dict.update({smiles: alg.reaction_model.num_calls()})
-        final_num_value_function_calls_dict.update(
-            {smiles: alg.value_function.num_calls}
-        )
-        num_different_routes_dict.update({smiles: len(packing_set)})
-        output_graph_dict.update({smiles: output_graph})
-        routes_dict.update({smiles: routes})
+        # final_num_rxn_model_calls_dict.update({smiles: alg.reaction_model.num_calls()})
+        # final_num_value_function_calls_dict.update(
+        #     {smiles: alg.value_function.num_calls}
+        # )
+        # num_different_routes_dict.update({smiles: len(packing_set)})
+        # output_graph_dict.update({smiles: output_graph})
+        # routes_dict.update({smiles: routes})
 
     return SearchResult(
         name=name,
         soln_time_dict=soln_time_dict,
-        num_different_routes_dict=num_different_routes_dict,
-        final_num_rxn_model_calls_dict=final_num_rxn_model_calls_dict,
-        final_num_value_function_calls_dict=final_num_value_function_calls_dict,
-        output_graph_dict=output_graph_dict,
-        routes_dict=routes_dict,
+        # num_different_routes_dict=num_different_routes_dict,
+        # final_num_rxn_model_calls_dict=final_num_rxn_model_calls_dict,
+        # final_num_value_function_calls_dict=final_num_value_function_calls_dict,
+        # output_graph_dict=output_graph_dict,
+        # routes_dict=routes_dict,
     )
 
 
@@ -376,21 +376,24 @@ if __name__ == "__main__":
     # gnn_emb_model_input_folder = f'GraphRuns/{args.gnn_embedding_model_to_use}'
 
     value_fns_names = [
-        'constant-0',
-        'Tanimoto-distance',
-        'Tanimoto-distance-TIMES10',
-        'Tanimoto-distance-TIMES100',
+        # 'constant-0',
+        # 'Tanimoto-distance',
+        # 'Tanimoto-distance-TIMES10',
+        # 'Tanimoto-distance-TIMES100',
         # 'Tanimoto-distance-TIMES1000',
         # 'Tanimoto-distance-EXP',
         # 'Tanimoto-distance-SQRT',
-        'Tanimoto-distance-NUM_NEIGHBORS_TO_1',
-        "Embedding-from-fingerprints",
+        # 'Tanimoto-distance-NUM_NEIGHBORS_TO_1',
+        # "Embedding-from-fingerprints",
         # "Embedding-from-fingerprints-TIMES10",
-        # "Embedding-from-fingerprints-TIMES100",
-        # "Embedding-from-fingerprints-TIMES1000",
-        # "Embedding-from-fingerprints-TIMES10000",
-        "Embedding-from-gnn",
+        "Embedding-from-fingerprints-TIMES100",
+        "Embedding-from-fingerprints-TIMES1000",
+        "Embedding-from-fingerprints-TIMES10000",
+        # "Embedding-from-gnn",
         # "Embedding-from-gnn-TIMES10",
+        # "Embedding-from-gnn-TIMES100",
+        "Embedding-from-gnn-TIMES1000",
+        "Embedding-from-gnn-TIMES10000",
     ]
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")

@@ -397,10 +397,10 @@ if __name__ == "__main__":
         model.train()
         train_loss = 0.0
         train_batches = 0
-
+        
         for batch_idx, batch_data in enumerate(train_data_loader):
             optimizer.zero_grad()
-
+            print(f"Epoch {epoch}| Batch {batch_idx}: Compute embeddings - train")
             # Compute embeddings for target and positive samples
             embeddings_dataset = compute_embeddings_react(
                 device=device,
@@ -408,7 +408,7 @@ if __name__ == "__main__":
                 model=model,
                 batch_data=batch_data,
             )
-
+            print(f"Epoch {epoch}| Batch {batch_idx}: Compute embeddings - purch molecules")
             # Compute embeddings for purchasable molecules
             purch_embeddings = compute_embedding_purch_mols(
                 device=device,
@@ -422,11 +422,14 @@ if __name__ == "__main__":
                 else None,
             )
 
+            print(f"Epoch {epoch}| Batch {batch_idx}: Compute loss")
             # Compute loss
             loss = loss_fn(embeddings_dataset, purch_embeddings)
 
             # Backward pass and optimization
+            print(f"Epoch {epoch}| Batch {batch_idx}: Loss backward")
             loss.backward()
+            print(f"Epoch {epoch}| Batch {batch_idx}: Optimizer step")
             optimizer.step()
 
             # Track total loss
@@ -437,6 +440,7 @@ if __name__ == "__main__":
         model.eval()  # Set the model to evaluation mode
         val_loss = 0.0
         val_batches = 0
+        print(f"Epoch {epoch} - Validation")
         with torch.no_grad():  # Disable gradient calculation during validation
             for val_batch_idx, val_batch_data in enumerate(val_data_loader):
                 # Compute embeddings

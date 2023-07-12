@@ -599,8 +599,6 @@ class ContrastiveReact(nn.Module):
             # breakpoint()
             sample_losses[i] = sample_loss
             
-            
-            
             # with open("react_loss_values_agg.csv", mode='a', newline='') as f:
             #     writer = csv.writer(f)
             #     writer.writerow([i, numerator, denominator, sample_loss
