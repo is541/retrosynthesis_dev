@@ -1,3 +1,3 @@
 algorithm,nr_mol_not_solved
-Tanimoto-distance,26
-constant-0,3
+Embedding-from-fingerprints,30
+Embedding-from-gnn,34

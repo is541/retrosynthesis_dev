@@ -40,11 +40,13 @@ class DistanceToCost(Enum):
     NOTHING = 0
     EXP = 1
     SQRT = 2
-    TIMES10 = 3
-    TIMES100 = 4
-    TIMES1000 = 5
-    TIMES10000 = 6
-    NUM_NEIGHBORS_TO_1 = 7
+    TIMES01 = 3
+    TIMES03 = 4
+    TIMES10 = 5
+    TIMES100 = 6
+    TIMES1000 = 7
+    TIMES10000 = 8
+    NUM_NEIGHBORS_TO_1 = 9
 
 
 class TanimotoNNCostEstimator(NoCacheNodeEvaluator):
@@ -117,6 +119,10 @@ class TanimotoNNCostEstimator(NoCacheNodeEvaluator):
             values = np.exp(nn_dists) - 1
         elif self.distance_to_cost == DistanceToCost.SQRT:
             values = np.sqrt(nn_dists)
+        elif self.distance_to_cost == DistanceToCost.TIMES01:
+            values = 0.1 * nn_dists
+        elif self.distance_to_cost == DistanceToCost.TIMES03:
+            values = 0.3 * nn_dists
         elif self.distance_to_cost == DistanceToCost.TIMES10:
             values = 10.0 * nn_dists
         elif self.distance_to_cost == DistanceToCost.TIMES100:
@@ -435,6 +441,8 @@ class ConstantMolEvaluator(NoCacheNodeEvaluator):
 labelalias = {
     "constant-0": "constant-0",
     "Tanimoto-distance": "Tanimoto",
+    "Tanimoto-distance-TIMES01": "Tanimoto * 0.1",
+    "Tanimoto-distance-TIMES03": "Tanimoto * 0.3",
     "Tanimoto-distance-TIMES10": "Tanimoto * 10",
     "Tanimoto-distance-TIMES100": "Tanimoto * 100",
     "Tanimoto-distance-EXP": "Tanimoto exp",
@@ -472,6 +480,24 @@ def initialize_value_functions(
                     ),
                 )
             )
+        elif value_fns_name == "Tanimoto-distance-TIMES01":
+            value_fns.append(
+                (
+                    "Tanimoto-distance-TIMES01",
+                    TanimotoNNCostEstimator(
+                        inventory=inventory, distance_to_cost=DistanceToCost.TIMES01
+                    ),
+                )
+            )
+        elif value_fns_name == "Tanimoto-distance-TIMES03":
+            value_fns.append(
+                (
+                    "Tanimoto-distance-TIMES03",
+                    TanimotoNNCostEstimator(
+                        inventory=inventory, distance_to_cost=DistanceToCost.TIMES03
+                    ),
+                )
+            )
         elif value_fns_name == "Tanimoto-distance-TIMES10":
             value_fns.append(
                 (
@@ -487,6 +513,15 @@ def initialize_value_functions(
                     "Tanimoto-distance-TIMES100",
                     TanimotoNNCostEstimator(
                         inventory=inventory, distance_to_cost=DistanceToCost.TIMES100
+                    ),
+                )
+            )
+        elif value_fns_name == "Tanimoto-distance-TIMES1000":
+            value_fns.append(
+                (
+                    "Tanimoto-distance-TIMES1000",
+                    TanimotoNNCostEstimator(
+                        inventory=inventory, distance_to_cost=DistanceToCost.TIMES1000
                     ),
                 )
             )

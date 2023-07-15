@@ -1,0 +1,5 @@
+algorithm,nr_mol_not_solved
+Tanimoto-distance,86
+Tanimoto-distance-TIMES10,57
+Tanimoto-distance-TIMES100,40
+constant-0,3

@@ -32,7 +32,7 @@ def create_result_df(result, name):
     # df_results = pd.DataFrame()
     df_soln_time = pd.DataFrame({'algorithm': [], 'similes': [], 'property':[], 'value': []})
     # df_different_routes = pd.DataFrame({'algorithm': [], 'similes': [], 'property':[], 'value': []})
-    # print("Create dataframe solution times")
+    print("Create dataframe solution times")
     #     for name_alg, value_dict  in soln_time_dict.items():
     for smiles, value  in soln_time_dict.items():
         row_soln_time = {'algorithm': name, 'similes': smiles, 'property':'sol_time', 'value': value}
@@ -55,22 +55,26 @@ if __name__ == "__main__":
     # eventid = '202307-0620-3725-cc7b1f07-14cd-47e8-9d40-f5b2f358fa28_MID_HARD'
     # eventid = 'MID'
     eventid = 'MID_EASY'
+    # eventid = 'MID_EASY_COST1'
     
     output_folder = f"CompareTanimotoLearnt/{eventid}"
     
-    algs_to_consider = 'all'
-    # algs_to_consider = [
-    #     'constant-0',
-    #     'Tanimoto-distance',
-    #     'Tanimoto-distance-TIMES10',
-    #     'Tanimoto-distance-TIMES100',
-    #     'Tanimoto-distance-EXP',
-    #     'Tanimoto-distance-SQRT',
-    #     "Tanimoto-distance-NUM_NEIGHBORS_TO_1",
-    #     "Embedding-from-fingerprints",
-    #     "Embedding-from-fingerprints-TIMES10",
-    #     "Embedding-from-fingerprints-TIMES100",
-    # ]
+    # algs_to_consider = 'all'
+    algs_to_consider = [
+        # 'constant-0',
+        # 'Tanimoto-distance',
+        # 'Tanimoto-distance-TIMES01',
+        # 'Tanimoto-distance-TIMES03',
+        # 'Tanimoto-distance-TIMES10',
+        # 'Tanimoto-distance-TIMES100',
+        # 'Tanimoto-distance-EXP',
+        # 'Tanimoto-distance-SQRT',
+        # "Tanimoto-distance-NUM_NEIGHBORS_TO_1",
+        "Embedding-from-fingerprints",
+        # "Embedding-from-fingerprints-TIMES10",
+        # "Embedding-from-fingerprints-TIMES100",
+        "Embedding-from-gnn",
+    ]
 
     result = {}
     for file_name in tqdm([file for file in os.listdir(output_folder) if 'pickle' in file]):
@@ -79,15 +83,16 @@ if __name__ == "__main__":
         if (algs_to_consider == 'all') | (name in algs_to_consider):
             with open(f'{output_folder}/{file_name}', 'rb') as handle:
                 result[name] = pickle.load(handle)
-    # print("Loaded algorithm pickle")
+    print("Loaded algorithm pickle")
     df_results_tot = pd.DataFrame({'algorithm': [], 'similes': [], 'property':[], 'value': []})
     
     for name in tqdm(result.keys()):
         df_results_alg = create_result_df(result, name)
         df_results_tot = pd.concat([df_results_tot, df_results_alg], axis=0)
         
-    # print("Save dataframe to csv")
+    print("Save dataframe to csv")
     df_results_tot.to_csv(f'{output_folder}/results_all.csv', index=False)
+    print("Saved dataframe to csv")
     
     # if algs_to_consider != 'all':
     #     df_results_tot = df_results_tot.loc[df_results_tot['algorithm'].isin(algs_to_consider)]
