@@ -18,17 +18,17 @@ import time
 from tqdm.auto import tqdm
 from paroutes import PaRoutesInventory, get_target_smiles
 from embedding_model import (
-    fingerprint_preprocess_input,
-    gnn_preprocess_input,
     CustomDataset,
     collate_fn,
     # SampleData,
     fingerprint_vect_from_smiles,
-    compute_embeddings,
     GNNModel,
     FingerprintModel,
     NTXentLoss,
-    num_heavy_atoms
+    num_heavy_atoms,
+    load_embedding_model_from_checkpoint,
+    preprocess_and_compute_embeddings,
+    preprocess_input_format
 )
 from paroutes import PaRoutesInventory
 from torch.utils.data import Subset
@@ -43,6 +43,9 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument(
         "--config_file", type=str, required=True, help="JSON file with configurations."
+    )
+    parser.add_argument(
+        "--checkpoint_name", type=str, required=True, 
     )
     # parser.add_argument(
     #     "--save_preprocessed_data",
@@ -61,14 +64,22 @@ if __name__ == "__main__":
     with open(f"{args.config_file}.json", "r") as f:
         config = json.load(f)
 
-    # MODEL TO EVALUATE
-    experiment_name = config["experiment_name"]  # gnn_0629
-    checkpoint_folder = f"GraphRuns/{experiment_name}/"
-    input_checkpoint_name = f"epoch_61_checkpoint.pth"
+    # # MODEL TO EVALUATE
+    # experiment_name = config["experiment_name"]
+    # checkpoint_folder = f"GraphRuns/{experiment_name}/"
+    # input_checkpoint_name = f"epoch_76_checkpoint.pth"
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    
+    model, config = load_embedding_model_from_checkpoint(
+        experiment_name=config["experiment_name"],
+        device=device,
+        checkpoint_name=args.checkpoint_name,
+    )
+    loss_fn = NTXentLoss(temperature=config["temperature"], device=device)
+    
     
     
     # 1. PREPROCESS DATA
-    # if not args.load_from_preprocessed_data:
 
     # Read routes data
     input_file_routes = f'Runs/{config["run_id"]}/targ_routes.pickle'
@@ -77,10 +88,6 @@ if __name__ == "__main__":
     # Routes data
     with open(input_file_routes, "rb") as handle:
         targ_routes_dict = pickle.load(handle)
-
-    # # Load distances data
-    # with open(input_file_distances, 'rb') as handle:
-    #     distances_dict = pickle.load(handle)
 
     # Inventory
 
@@ -124,16 +131,17 @@ if __name__ == "__main__":
             for purch_smile in purch_smiles
             if purch_smile not in purch_in_route
         ]
-        random.seed(config["seed"])
+        # random.seed(config["seed"])
 
-        if config["neg_sampling"] == "uniform":
-            purch_not_in_route_sample = random.sample(
-                purch_not_in_route, config["not_in_route_sample_size"]
-            )
-        elif config["neg_sampling"] == "...":
-            pass
-        else:
-            raise NotImplementedError(f'{config["neg_sampling"]}')
+        # if config["neg_sampling"] == "uniform":
+        #     purch_not_in_route_sample = random.sample(
+        #         purch_not_in_route, config["not_in_route_sample_size"]
+        #     )
+        # elif config["neg_sampling"] == "...":
+        #     pass
+        # else:
+        #     raise NotImplementedError(f'{config["neg_sampling"]}')
+        purch_not_in_route_sample = purch_not_in_route
 
         # Filter out molecules with only one atom (problems with featurizer)
         purch_in_route = [
@@ -155,12 +163,13 @@ if __name__ == "__main__":
         sample_targets = random.sample(
             list(targ_route_not_in_route_dict.keys()), config["nr_sample_targets"]
         )
+        targ_route_not_in_route_dict_sample = {
+            target: targ_route_not_in_route_dict[target] for target in sample_targets
+        }
     else:
-        sample_targets = targ_route_not_in_route_dict
+        targ_route_not_in_route_dict_sample = targ_route_not_in_route_dict
     # Create targ_routes_dict_sample with the sampled keys and their corresponding values
-    targ_route_not_in_route_dict_sample = {
-        target: targ_route_not_in_route_dict[target] for target in sample_targets
-    }
+    
 
     input_data = targ_route_not_in_route_dict_sample
 
@@ -171,25 +180,32 @@ if __name__ == "__main__":
         purch_featurizer = featurizer.featurize(purch_mols)
         purch_featurizer_dict = dict(zip(purch_smiles, purch_featurizer))
 
-        dataset = gnn_preprocess_input(
+        featur_creator = {
+            "featurizer": featurizer,
+            "featurizer_dict": purch_featurizer_dict
+        }
+
+        dataset = preprocess_input_format(
             input_data=input_data, 
-            featurizer=featurizer, 
-            featurizer_dict=purch_featurizer_dict,
             pos_sampling=config["pos_sampling"],
         )
         
     elif config["model_type"] == "fingerprints":
         purch_fingerprints = list(map(fingerprint_vect_from_smiles, purch_smiles))
         purch_fingerprints_dict = dict(zip(purch_smiles, purch_fingerprints))
+        
+        featur_creator = {
+            "fingerprints_dict": purch_fingerprints_dict
+        }
 
-        dataset = fingerprint_preprocess_input(
+        dataset = preprocess_input_format(
             input_data, 
-            fingerprints_dict=purch_fingerprints_dict, 
             pos_sampling=config["pos_sampling"],
         )
         
     else:
         raise NotImplementedError(f'Model type {config["model_type"]}')
+
 
 
     # 2. TRAIN VALIDATION SPLIT
@@ -222,75 +238,20 @@ if __name__ == "__main__":
     # No shuffle for validation data: It is generally not necessary to shuffle the validation data because validation is meant to evaluate the model's performance on unseen data that is representative of the real-world scenarios. Shuffling the validation data could lead to inconsistent evaluation results between different validation iterations, making it harder to track the model's progress and compare performance.
 
 
-    # 0. LOAD MODEL 
-    # Option 1: FROM CHECKPOINT
-    input_checkpoint_folder  = f'GraphRuns/{experiment_name}'
-    input_checkpoint_path = f'{input_checkpoint_folder}/{input_checkpoint_name}'
-    
-    # Define network dimensions
-    if config["model_type"] == "gnn":
-        gnn_input_dim = dataset.targets[0].node_features.shape[1]
-        gnn_hidden_dim = config["hidden_dim"]
-        gnn_output_dim = config["output_dim"]
-
-    elif config["model_type"] == "fingerprints":
-        #     fingerprint_input_dim = preprocessed_targets[0].GetNumBits()
-        fingerprint_input_dim = dataset.targets[0].size()[
-            0
-        ]  # len(preprocessed_targets[0].node_features)
-        fingerprint_hidden_dim = config["hidden_dim"]
-        fingerprint_output_dim = config["output_dim"]
-
-    else:
-        raise NotImplementedError(f'Model type {config["model_type"]}')
-
-    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-
-    if config["model_type"] == "gnn":
-        model = GNNModel(
-            input_dim=gnn_input_dim,
-            hidden_dim=gnn_hidden_dim,
-            output_dim=gnn_output_dim,
-        ).to(device)
-        model.double()
-
-    elif config["model_type"] == "fingerprints":
-        model = FingerprintModel(
-            input_dim=fingerprint_input_dim,
-            hidden_dim=fingerprint_hidden_dim,
-            output_dim=fingerprint_output_dim,
-        ).to(device)
-    else:
-        raise NotImplementedError(f'Model type {config["model_type"]}')
-
-    loss_fn = NTXentLoss(temperature=config["temperature"], device=device)
-
-    checkpoint = torch.load(input_checkpoint_path)
-    model.load_state_dict(checkpoint["model_state_dict"])
-    breakpoint()
-            
-    # # # OPTION 2: From pickle
-    # device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    # loss_fn = NTXentLoss(temperature=config["temperature"], device=device)
-    # with open(f'{checkpoint_folder}/model_min_val.pkl', "rb") as f:
-    #     model = pickle.load(f)
-
     
     # 3: EVALUATE MODEL
-    model.eval()  # Set the model to evaluation mode
-    
-    # Loss on train
     train_loss = 0.0
     train_batches = 0
-    
     with torch.no_grad():  # Disable gradient calculation during validation
         for train_batch_idx, train_batch_data in enumerate(train_data_loader):
             # Compute embeddings
-            train_embeddings = compute_embeddings(
+            train_embeddings = preprocess_and_compute_embeddings(
                 device=device,
                 model_type=config['model_type'],
                 model=model,
                 batch_data=train_batch_data,
+                featur_creator=featur_creator,
+                not_in_route_sample_size=config["not_in_route_sample_size"]
             )
             # Compute loss
             train_batch_loss = loss_fn(train_embeddings)
@@ -298,10 +259,8 @@ if __name__ == "__main__":
             train_loss += train_batch_loss.item()
             train_batches += 1
         
-        # Compute average loss
-        average_train_loss = train_loss / train_batches
-    
-    print("Train loss: ", average_train_loss)
+        average_train_loss = train_loss / train_batches   
+        print("Train loss: ", average_train_loss)
 
     # Loss on validation
     val_loss = 0.0
@@ -309,21 +268,21 @@ if __name__ == "__main__":
     with torch.no_grad():  # Disable gradient calculation during validation
         for val_batch_idx, val_batch_data in enumerate(val_data_loader):
             # Compute embeddings
-            val_embeddings = compute_embeddings(
+            val_embeddings = preprocess_and_compute_embeddings(
                 device=device,
                 model_type=config['model_type'],
                 model=model,
                 batch_data=val_batch_data,
+                featur_creator=featur_creator,
+                not_in_route_sample_size=config["not_in_route_sample_size"]
             )
             # Compute loss
             val_batch_loss = loss_fn(val_embeddings)
 
             val_loss += val_batch_loss.item()
             val_batches += 1
-
-        # Compute average loss
-        average_val_loss = val_loss / val_batches
         
-    print("Validation loss: ", average_val_loss)
+        average_val_loss = val_loss / val_batches   
+        print("Val loss: ", average_val_loss)
 
 

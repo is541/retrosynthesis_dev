@@ -284,7 +284,7 @@ if __name__ == "__main__":
         raise NotImplementedError(f'Model type {config["model_type"]}')
 
     loss_fn = NTXentLoss(temperature=config["temperature"], device=device)
-    optimizer = optim.Adam(model.parameters(), lr=config["lr"])
+    optimizer = optim.Adam(model.parameters(), lr=config["lr"], weight_decay=config.get('weight_decay', 0))
 
     num_epochs = config["num_epochs"]
 
@@ -397,6 +397,13 @@ if __name__ == "__main__":
         if average_val_loss < best_val_loss:
             best_val_loss = average_val_loss
             best_model = model
+            best_model_checkpoint = {
+                "epoch": epoch,
+                "model_state_dict": model.state_dict(),
+                "optimizer_state_dict": optimizer.state_dict(),
+            }
+            best_model_checkpoint_path = f"{checkpoint_folder}/model_min_val_{checkpoint_name}"  # Specify the checkpoint file path
+
 
         if (epoch % 5 == 0) | (epoch == num_epochs - 1):
             print(
@@ -422,6 +429,9 @@ if __name__ == "__main__":
 
             with open(best_model_path, "wb") as f:
                 pickle.dump(best_model, f)
+                
+            torch.save(best_model_checkpoint, best_model_checkpoint_path)
+
 
         
 

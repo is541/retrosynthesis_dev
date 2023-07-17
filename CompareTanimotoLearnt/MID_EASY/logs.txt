@@ -1,7 +1,79 @@
-2023-07-14 02:19:33,803 root INFO Namespace(input_file='Guacamol_100_mid_easy_to_solve', fnp_embedding_model_to_use='fnp_nn_0709_sampleInLoss', gnn_embedding_model_to_use='gnn_0709_sampleInLoss', limit_iterations=10000, limit_rxn_model_calls=1000, paroutes_n=5, limit_num_smiles=None, start_from_smiles_index_n=None, max_expansion_depth=20, max_num_templates=50, prevent_repeat_mol_in_trees=True, rxn_model='PAROUTES', inventory='PAROUTES', and_node_cost_fn='PAROUTES', or_node_cost_fn='MOL_PURCHASABLE', stop_on_first_solution=True)
-2023-07-14 02:19:36,137 h5py._conv DEBUG Creating converter from 3 to 5
-2023-07-14 02:19:42,253 root INFO Start experiment MID_EASY
-2023-07-14 02:19:42,254 root INFO Args: 
+2023-07-15 23:03:41,343 root INFO Namespace(input_file='Guacamol_100_mid_easy_to_solve', fnp_embedding_model_to_use='fnp_nn_0709_sampleInLoss', gnn_embedding_model_to_use='gnn_0709_sampleInLoss', limit_iterations=10000, limit_rxn_model_calls=1000, paroutes_n=5, limit_num_smiles=None, start_from_smiles_index_n=None, max_expansion_depth=20, max_num_templates=50, prevent_repeat_mol_in_trees=True, rxn_model='PAROUTES', inventory='PAROUTES', and_node_cost_fn='PAROUTES', or_node_cost_fn='MOL_PURCHASABLE', stop_on_first_solution=True)
+2023-07-15 23:03:43,183 h5py._conv DEBUG Creating converter from 3 to 5
+2023-07-15 23:04:27,128 deepchem.utils.molecule_feature_utils INFO input S not in allowable set ['SP', 'SP2', 'SP3']:
+2023-07-15 23:04:28,180 deepchem.utils.molecule_feature_utils INFO input SP3D not in allowable set ['SP', 'SP2', 'SP3']:
+2023-07-15 23:04:30,088 deepchem.utils.molecule_feature_utils INFO input S not in allowable set ['SP', 'SP2', 'SP3']:
+2023-07-15 23:04:31,740 deepchem.feat.base_classes WARNING Failed to featurize datapoint 2245, N. Appending empty array
+2023-07-15 23:04:31,740 deepchem.feat.base_classes WARNING Exception message: zero-size array to reduction operation maximum which has no identity
+2023-07-15 23:04:33,234 deepchem.utils.molecule_feature_utils INFO input S not in allowable set ['SP', 'SP2', 'SP3']:
+2023-07-15 23:04:34,780 deepchem.utils.molecule_feature_utils INFO input S not in allowable set ['SP', 'SP2', 'SP3']:
+2023-07-15 23:04:35,415 deepchem.utils.molecule_feature_utils INFO input SP3D2 not in allowable set ['SP', 'SP2', 'SP3']:
+2023-07-15 23:04:37,413 deepchem.utils.molecule_feature_utils INFO input S not in allowable set ['SP', 'SP2', 'SP3']:
+2023-07-15 23:04:38,093 deepchem.feat.base_classes WARNING Failed to featurize datapoint 4721, Br. Appending empty array
+2023-07-15 23:04:38,093 deepchem.feat.base_classes WARNING Exception message: zero-size array to reduction operation maximum which has no identity
+2023-07-15 23:04:38,809 deepchem.feat.base_classes WARNING Failed to featurize datapoint 4992, Cl. Appending empty array
+2023-07-15 23:04:38,809 deepchem.feat.base_classes WARNING Exception message: zero-size array to reduction operation maximum which has no identity
+2023-07-15 23:04:39,121 deepchem.utils.molecule_feature_utils INFO input SP3D2 not in allowable set ['SP', 'SP2', 'SP3']:
+2023-07-15 23:04:39,776 deepchem.utils.molecule_feature_utils INFO input SP3D not in allowable set ['SP', 'SP2', 'SP3']:
+2023-07-15 23:04:41,504 deepchem.utils.molecule_feature_utils INFO input SP3D2 not in allowable set ['SP', 'SP2', 'SP3']:
+2023-07-15 23:04:42,526 deepchem.utils.molecule_feature_utils INFO input SP3D2 not in allowable set ['SP', 'SP2', 'SP3']:
+2023-07-15 23:04:50,747 deepchem.utils.molecule_feature_utils INFO input SP3D not in allowable set ['SP', 'SP2', 'SP3']:
+2023-07-15 23:04:51,221 deepchem.feat.base_classes WARNING Failed to featurize datapoint 9564, [S-2]. Appending empty array
+2023-07-15 23:04:51,221 deepchem.feat.base_classes WARNING Exception message: zero-size array to reduction operation maximum which has no identity
+2023-07-15 23:04:51,301 deepchem.feat.base_classes WARNING Failed to featurize datapoint 9598, I. Appending empty array
+2023-07-15 23:04:51,301 deepchem.feat.base_classes WARNING Exception message: zero-size array to reduction operation maximum which has no identity
+2023-07-15 23:04:51,807 deepchem.utils.molecule_feature_utils INFO input SP3D2 not in allowable set ['SP', 'SP2', 'SP3']:
+2023-07-15 23:04:52,539 deepchem.feat.base_classes WARNING Failed to featurize datapoint 10046, S. Appending empty array
+2023-07-15 23:04:52,539 deepchem.feat.base_classes WARNING Exception message: zero-size array to reduction operation maximum which has no identity
+2023-07-15 23:04:54,069 deepchem.utils.molecule_feature_utils INFO input S not in allowable set ['SP', 'SP2', 'SP3']:
+2023-07-15 23:04:54,777 deepchem.feat.base_classes WARNING Failed to featurize datapoint 10868, [Mg]. Appending empty array
+2023-07-15 23:04:54,777 deepchem.feat.base_classes WARNING Exception message: zero-size array to reduction operation maximum which has no identity
+2023-07-15 23:04:56,379 deepchem.utils.molecule_feature_utils INFO input SP3D2 not in allowable set ['SP', 'SP2', 'SP3']:
+2023-07-15 23:04:57,996 deepchem.utils.molecule_feature_utils INFO input SP3D2 not in allowable set ['SP', 'SP2', 'SP3']:
+2023-07-15 23:04:58,608 deepchem.utils.molecule_feature_utils INFO input SP3D2 not in allowable set ['SP', 'SP2', 'SP3']:
+2023-07-15 23:04:59,217 deepchem.utils.molecule_feature_utils INFO input SP3D2 not in allowable set ['SP', 'SP2', 'SP3']:
+2023-07-15 23:04:59,675 deepchem.feat.base_classes WARNING Failed to featurize datapoint 12663, O. Appending empty array
+2023-07-15 23:04:59,675 deepchem.feat.base_classes WARNING Exception message: zero-size array to reduction operation maximum which has no identity
+2023-07-15 23:05:00,082 deepchem.feat.base_classes WARNING Failed to featurize datapoint 12790, F. Appending empty array
+2023-07-15 23:05:00,082 deepchem.feat.base_classes WARNING Exception message: zero-size array to reduction operation maximum which has no identity
+2023-07-15 23:05:15,681 deepchem.utils.molecule_feature_utils INFO input S not in allowable set ['SP', 'SP2', 'SP3']:
+2023-07-15 23:05:16,729 deepchem.utils.molecule_feature_utils INFO input SP3D not in allowable set ['SP', 'SP2', 'SP3']:
+2023-07-15 23:05:18,626 deepchem.utils.molecule_feature_utils INFO input S not in allowable set ['SP', 'SP2', 'SP3']:
+2023-07-15 23:05:20,269 deepchem.feat.base_classes WARNING Failed to featurize datapoint 2245, N. Appending empty array
+2023-07-15 23:05:20,269 deepchem.feat.base_classes WARNING Exception message: zero-size array to reduction operation maximum which has no identity
+2023-07-15 23:05:21,745 deepchem.utils.molecule_feature_utils INFO input S not in allowable set ['SP', 'SP2', 'SP3']:
+2023-07-15 23:05:23,285 deepchem.utils.molecule_feature_utils INFO input S not in allowable set ['SP', 'SP2', 'SP3']:
+2023-07-15 23:05:23,911 deepchem.utils.molecule_feature_utils INFO input SP3D2 not in allowable set ['SP', 'SP2', 'SP3']:
+2023-07-15 23:05:25,891 deepchem.utils.molecule_feature_utils INFO input S not in allowable set ['SP', 'SP2', 'SP3']:
+2023-07-15 23:05:26,562 deepchem.feat.base_classes WARNING Failed to featurize datapoint 4721, Br. Appending empty array
+2023-07-15 23:05:26,562 deepchem.feat.base_classes WARNING Exception message: zero-size array to reduction operation maximum which has no identity
+2023-07-15 23:05:27,270 deepchem.feat.base_classes WARNING Failed to featurize datapoint 4992, Cl. Appending empty array
+2023-07-15 23:05:27,270 deepchem.feat.base_classes WARNING Exception message: zero-size array to reduction operation maximum which has no identity
+2023-07-15 23:05:27,580 deepchem.utils.molecule_feature_utils INFO input SP3D2 not in allowable set ['SP', 'SP2', 'SP3']:
+2023-07-15 23:05:28,229 deepchem.utils.molecule_feature_utils INFO input SP3D not in allowable set ['SP', 'SP2', 'SP3']:
+2023-07-15 23:05:29,943 deepchem.utils.molecule_feature_utils INFO input SP3D2 not in allowable set ['SP', 'SP2', 'SP3']:
+2023-07-15 23:05:30,909 deepchem.utils.molecule_feature_utils INFO input SP3D2 not in allowable set ['SP', 'SP2', 'SP3']:
+2023-07-15 23:05:39,084 deepchem.utils.molecule_feature_utils INFO input SP3D not in allowable set ['SP', 'SP2', 'SP3']:
+2023-07-15 23:05:39,555 deepchem.feat.base_classes WARNING Failed to featurize datapoint 9564, [S-2]. Appending empty array
+2023-07-15 23:05:39,555 deepchem.feat.base_classes WARNING Exception message: zero-size array to reduction operation maximum which has no identity
+2023-07-15 23:05:39,634 deepchem.feat.base_classes WARNING Failed to featurize datapoint 9598, I. Appending empty array
+2023-07-15 23:05:39,634 deepchem.feat.base_classes WARNING Exception message: zero-size array to reduction operation maximum which has no identity
+2023-07-15 23:05:40,138 deepchem.utils.molecule_feature_utils INFO input SP3D2 not in allowable set ['SP', 'SP2', 'SP3']:
+2023-07-15 23:05:40,862 deepchem.feat.base_classes WARNING Failed to featurize datapoint 10046, S. Appending empty array
+2023-07-15 23:05:40,862 deepchem.feat.base_classes WARNING Exception message: zero-size array to reduction operation maximum which has no identity
+2023-07-15 23:05:42,379 deepchem.utils.molecule_feature_utils INFO input S not in allowable set ['SP', 'SP2', 'SP3']:
+2023-07-15 23:05:43,081 deepchem.feat.base_classes WARNING Failed to featurize datapoint 10868, [Mg]. Appending empty array
+2023-07-15 23:05:43,081 deepchem.feat.base_classes WARNING Exception message: zero-size array to reduction operation maximum which has no identity
+2023-07-15 23:05:44,678 deepchem.utils.molecule_feature_utils INFO input SP3D2 not in allowable set ['SP', 'SP2', 'SP3']:
+2023-07-15 23:05:46,279 deepchem.utils.molecule_feature_utils INFO input SP3D2 not in allowable set ['SP', 'SP2', 'SP3']:
+2023-07-15 23:05:46,889 deepchem.utils.molecule_feature_utils INFO input SP3D2 not in allowable set ['SP', 'SP2', 'SP3']:
+2023-07-15 23:05:47,487 deepchem.utils.molecule_feature_utils INFO input SP3D2 not in allowable set ['SP', 'SP2', 'SP3']:
+2023-07-15 23:05:47,935 deepchem.feat.base_classes WARNING Failed to featurize datapoint 12663, O. Appending empty array
+2023-07-15 23:05:47,935 deepchem.feat.base_classes WARNING Exception message: zero-size array to reduction operation maximum which has no identity
+2023-07-15 23:05:48,341 deepchem.feat.base_classes WARNING Failed to featurize datapoint 12790, F. Appending empty array
+2023-07-15 23:05:48,341 deepchem.feat.base_classes WARNING Exception message: zero-size array to reduction operation maximum which has no identity
+2023-07-15 23:06:01,340 root INFO Start experiment MID_EASY
+2023-07-15 23:06:01,340 root INFO Args: 
 and_node_cost_fn: PAROUTES
 fnp_embedding_model_to_use: fnp_nn_0709_sampleInLoss
 gnn_embedding_model_to_use: gnn_0709_sampleInLoss
@@ -18,206 +90,653 @@ prevent_repeat_mol_in_trees: True
 rxn_model: PAROUTES
 start_from_smiles_index_n: None
 stop_on_first_solution: True
-2023-07-14 02:19:42,254 root INFO dim_test: 100
-2023-07-14 02:19:42,254 root INFO Start search with Tanimoto-distance-TIMES01
-2023-07-14 02:19:42,255 root DEBUG Start search 0/100. SMILES: CCOc1ccc(N(CC(=O)NC2CCCCC2)C(=O)CCCC(=O)Nc2ccccn2)cc1
-2023-07-14 02:20:19,518 root DEBUG Start search 1/100. SMILES: CN1CCC(=C2c3ccccc3Oc3ccc(Cl)cc32)CC1
-2023-07-14 02:20:51,611 root DEBUG Start search 2/100. SMILES: COc1cc(O)c2c(=O)cc(-c3cc(O)c(O)cc3Cc3cccc(Cl)c3)oc2c1
-2023-07-14 02:21:57,529 root DEBUG Start search 3/100. SMILES: N#CCCCSC(=S)n1ccnc1
-2023-07-14 02:22:33,137 root DEBUG Start search 4/100. SMILES: CSC(=O)C#CC(C)(C)N(C)Cc1ccccc1
-2023-07-14 02:23:03,430 root DEBUG Start search 5/100. SMILES: CC(=O)Nc1nc(C)c(-c2nc(C(C)(C)CCO)no2)s1
-2023-07-14 02:23:51,259 root DEBUG Start search 6/100. SMILES: NC(=O)C(CCC(F)(F)F)N(CCc1ncon1)S(=O)(=O)c1ccc(Cl)cc1
-2023-07-14 02:24:23,946 root DEBUG Start search 7/100. SMILES: NCC(=O)N1CC(N)CC1C(=O)NC(CCc1ccccc1)C(=O)Nc1ccc2ncccc2c1
-2023-07-14 02:25:03,230 root DEBUG Start search 8/100. SMILES: CCN(CC)C(=O)c1ccc(N(c2cccc(OC)c2)C2CCN(CC=C(C)C)CC2C)cc1
-2023-07-14 02:25:36,829 root DEBUG Start search 9/100. SMILES: N=C(N)NCCCC(NC(=O)CN1CCN(S(=O)(=O)c2ccc(-c3ccccn3)s2)CC1=O)C(=O)c1nccs1
-2023-07-14 02:25:56,848 root DEBUG Start search 10/100. SMILES: Cc1nc(NC2CCCC2)c2nn(C)c(-c3ccc(Cl)cc3Cl)c2n1
-2023-07-14 02:26:25,192 root DEBUG Start search 11/100. SMILES: C#CC(CC(=O)O)NC(=O)Cn1ccc2ccc(N3CCNCC3)cc2c1=O
-2023-07-14 02:27:04,366 root DEBUG Start search 12/100. SMILES: O=c1c(C=NNc2nc(N3CCOCC3)c3ccsc3n2)coc2ccccc12
-2023-07-14 02:27:31,234 root DEBUG Start search 13/100. SMILES: O=C(NC1CCCCC1)C1Cc2c(sc3ccccc23)CN1
-2023-07-14 02:28:03,700 root DEBUG Start search 14/100. SMILES: O=C1CSC(C23CC4CC(CC(C4)C2)C3)N1CCN1CCCCC1
-2023-07-14 02:28:50,649 root DEBUG Start search 15/100. SMILES: O=C1c2cccc3cccc(c23)C(=O)N1CCN1CCN(CC(O)COCc2ccc(Cl)cc2)CC1
-2023-07-14 02:29:24,008 root DEBUG Start search 16/100. SMILES: COc1ccc2oc(NC3CCN(Cc4ccccc4)CC3)cc(=O)c2c1
-2023-07-14 02:30:09,479 root DEBUG Start search 17/100. SMILES: Fc1cccc(CN2CCC(COc3nc4ccsc4n4cccc34)CC2)c1
-2023-07-14 02:30:16,617 root DEBUG Start search 18/100. SMILES: COCc1ccccc1C1C(C(=O)C(C)(C)C)C(=O)C(=O)N1c1ccc(-c2noc(C)n2)cc1
-2023-07-14 02:31:22,906 root DEBUG Start search 19/100. SMILES: CN(C(=O)c1ccccc1OC(F)(F)F)C1COc2nc([N+](=O)[O-])cn2C1
-2023-07-14 02:32:02,929 root DEBUG Start search 20/100. SMILES: O=C(NC1CC(Oc2ccc(-c3ccccc3)cc2)CC1O)C(c1ccccc1)c1ccccc1
-2023-07-14 02:32:30,895 root DEBUG Start search 21/100. SMILES: C=CC(=O)NCCCCC(NC(=O)OCc1ccc(C)cc1)C(=O)O
-2023-07-14 02:33:11,923 root DEBUG Start search 22/100. SMILES: Cc1cc(C=Nn2cnnc2)c(C)n1-c1cc(Cl)ccc1Cl
-2023-07-14 02:33:26,831 root DEBUG Start search 23/100. SMILES: N#Cc1nc(N2CCC(S(=O)(=O)c3ccc(F)cc3Cl)C2)cc(C(F)(F)F)n1
-2023-07-14 02:33:47,610 root DEBUG Start search 24/100. SMILES: CCCN(CCC1CCC(NS(=O)(=O)c2ccccc2)CC1)C1CCc2nc(N)sc2C1
-2023-07-14 02:34:21,159 root DEBUG Start search 25/100. SMILES: O=C(O)c1cn(C2CC2c2ccccc2)c2cc(N3CCNCC3)c(F)cc2c1=O
-2023-07-14 02:34:54,596 root DEBUG Start search 26/100. SMILES: CCc1c(C(=O)c2cccc3ccccc23)n(COCC=C(C)C)c(=O)[nH]c1=O
-2023-07-14 02:35:15,600 root DEBUG Start search 27/100. SMILES: COc1ccc(C(=O)Nc2cc(C(=O)NC(=N)N)ccc2OCCCN2CCN(Cc3ccc(OC)c(OC)c3OC)CC2)cc1
-2023-07-14 02:35:33,430 root DEBUG Start search 28/100. SMILES: CC(C)CC(c1nnnn1C(C)C)N1CCN(C(=O)c2ccco2)CC1
-2023-07-14 02:36:03,462 root DEBUG Start search 29/100. SMILES: CCNC(=O)c1noc(-c2cc(Cl)c(O)cc2O)c1-c1cccc(N2CCN(C(C)=O)CC2)c1
-2023-07-14 02:36:48,152 root DEBUG Start search 30/100. SMILES: CN(C)CCN1C(=O)c2c(c3c4ccccc4[nH]c3c3ccccc23)C1=O
-2023-07-14 02:37:26,064 root DEBUG Start search 31/100. SMILES: COCc1cc(O)nc(N=C(N)Nc2ccc(C)cc2)n1
-2023-07-14 02:37:57,582 root DEBUG Start search 32/100. SMILES: CCN(CC)CC#CCC1(O)c2ccccc2-c2ccccc21
-2023-07-14 02:38:24,578 root DEBUG Start search 33/100. SMILES: CC1CCN(C(c2ccc(F)cn2)c2ccc(C(C)C(=O)O)cc2-c2ccc(C(F)(F)F)cc2)CC1
-2023-07-14 02:39:05,549 root DEBUG Start search 34/100. SMILES: Cn1cc(-c2ccc(-c3c4c(nn3C)CCc3cnc(Nc5cnn(Cc6ccncc6)c5)nc3-4)cc2)cn1
-2023-07-14 02:39:40,330 root DEBUG Start search 35/100. SMILES: [O-][n+]1nc2c(I)cnn2c2cc(OCc3ccc(Cl)cc3)ccc21
-2023-07-14 02:40:40,376 root DEBUG Start search 36/100. SMILES: CCN1C(=O)c2cccc3c(S(=O)(=O)Nc4ccccn4)ccc1c23
-2023-07-14 02:41:17,682 root DEBUG Start search 37/100. SMILES: CCCCC(C=O)NC(=O)OC(CCC)Cc1ccccc1
-2023-07-14 02:41:52,484 root DEBUG Start search 38/100. SMILES: C=CCn1nc(Br)c2c(Br)nc(CCC)n2c1=O
-2023-07-14 02:42:23,789 root DEBUG Start search 39/100. SMILES: O=C(C=Cc1ccc(C(F)(F)F)cc1)OCCc1c(-c2ccccc2Cl)c2cc(Cl)ccc2[nH]c1=O
-2023-07-14 02:43:05,197 root DEBUG Start search 40/100. SMILES: O=c1n(Cc2nc3ccc(C(F)(F)F)cn3c2CCCCO)c2cnccc2n1C1CC1
-2023-07-14 02:43:38,316 root DEBUG Start search 41/100. SMILES: O=C1NC2CCCCC2c2ccccc21
-2023-07-14 02:44:00,330 root DEBUG Start search 42/100. SMILES: CCN(CC)c1nc2ccc(C(O)(c3ccc(Cl)cc3)c3cncn3C)cc2c(Cl)c1N(C(=O)OC(C)(C)C)c1ccccc1
-2023-07-14 02:44:39,545 root DEBUG Start search 43/100. SMILES: CCN1CCN(c2cc(C(=O)Nc3ccc(C)c(Nc4ncnc5cnc(N6CCOCC6)nc45)c3)cc(C(C)(C)C#N)c2)CC1
-2023-07-14 02:45:13,611 root DEBUG Start search 44/100. SMILES: COc1cc(N2CC3(CCN(S(=O)(=O)C4CC4)C3)C2)ncn1
-2023-07-14 02:45:44,049 root DEBUG Start search 45/100. SMILES: CC1=C(C(=O)O)N2C(=O)C(NC(=O)C(N)c3cccc4sccc34)C2SC1
-2023-07-14 02:46:11,266 root DEBUG Start search 46/100. SMILES: C=CCN(C(=O)CCC(=O)Nc1cc(C)on1)C(C(=O)NC1CCCC1)c1ccc(OC)c(OC)c1
-2023-07-14 02:46:37,119 root DEBUG Start search 47/100. SMILES: CC1(C)c2cc(OCC(O)CO)ccc2C(=O)c2c1[nH]c1c(C(=O)O)c(C#N)ccc21
-2023-07-14 02:47:17,668 root DEBUG Start search 48/100. SMILES: Cc1nc(C)c(CN2CCN(S(C)(=O)=O)CC2)nc1C
-2023-07-14 02:47:50,346 root DEBUG Start search 49/100. SMILES: O=S(=O)(c1ccc(F)cn1)N1C(CO)CCC1c1ccc(F)cc1
-2023-07-14 02:48:14,230 root DEBUG Start search 50/100. SMILES: CC(C)=CCCC(C)=CCCC(C)=CCCC1CCc2cc(O)c(C)c(C)c2O1
-2023-07-14 02:48:39,728 root DEBUG Start search 51/100. SMILES: O=S(=O)(NC(CO)C1CCNCC1)c1ccc(Cl)s1
-2023-07-14 02:49:07,278 root DEBUG Start search 52/100. SMILES: Cc1cc(Nc2cc(C(F)(F)F)ccn2)nc(-c2cnc(C3(N)CCCc4cc(C(=O)O)ccc43)s2)c1
-2023-07-14 02:49:46,866 root DEBUG Start search 53/100. SMILES: Cc1cc(C(=O)NC(CC(=O)NCC(C)(C)C)C(=O)NC(CCc2ccccc2)C(=O)NCc2ccccc2Cl)no1
-2023-07-14 02:50:13,053 root DEBUG Start search 54/100. SMILES: Cc1cccc(-c2csc3ncnc(Sc4nnnn4C)c23)c1
-2023-07-14 02:50:42,990 root DEBUG Start search 55/100. SMILES: N#Cc1ccc(NC2CNC(C(=O)N3CCCC3C#N)C2)cc1C#N
-2023-07-14 02:51:07,938 root DEBUG Start search 56/100. SMILES: CC(C)Oc1cccc(F)c1C1CC(F)C(=O)N1Cc1ccc(OC(F)(F)F)cc1
-2023-07-14 02:51:46,419 root DEBUG Start search 57/100. SMILES: Cc1c(C(=O)C2CC2CN2CCC(N3CCCC3)CC2)sc2ccccc12
-2023-07-14 02:52:20,304 root DEBUG Start search 58/100. SMILES: CC(C)CCNC(=O)c1onc(CSc2ccccc2)c1C(=O)NCCC(C)C
-2023-07-14 02:53:10,443 root DEBUG Start search 59/100. SMILES: Oc1ccc2c(c1)CCN(Cc1ccc3c(c1)OCO3)C2c1ccc(OCCN2CCCC2)cc1
-2023-07-14 02:53:54,358 root DEBUG Start search 60/100. SMILES: N#Cc1c(N)ncnc1N1CCCC1c1nn2cccc2c(=O)n1-c1ccccc1
-2023-07-14 02:54:29,449 root DEBUG Start search 61/100. SMILES: CC(C)N(C)CC=CC(=O)N1CCc2sc3ncnc(Nc4ccc(Cl)c(Cl)c4)c3c2C1
-2023-07-14 02:54:48,596 root DEBUG Start search 62/100. SMILES: O=c1ccc2cnc3ccc(-c4cnc5ccccc5c4)cc3c2n1-c1ccc(S(=O)(=O)N2CCNCC2)cc1
-2023-07-14 02:55:34,481 root DEBUG Start search 63/100. SMILES: CCN(CC)CC(=O)Nc1ccc(O)c2c1C(=O)c1c(O)ccc(O)c1C2=O
-2023-07-14 02:56:09,186 root DEBUG Start search 64/100. SMILES: CCCCc1ncc(C=C2C(=O)N(CCCC)C(=O)N2CCc2ccccc2)n1Cc1ccc(C(=O)OC)cc1
-2023-07-14 02:56:42,465 root DEBUG Start search 65/100. SMILES: COC(=O)c1ccc(CN(CCCc2c(N)nc(N)nc2O)c2ccc([N+](=O)[O-])c(F)c2F)cc1
-2023-07-14 02:57:14,030 root DEBUG Start search 66/100. SMILES: NC(=O)NN=C1CCC(O)CC1CC(=O)O
-2023-07-14 02:57:43,629 root DEBUG Start search 67/100. SMILES: CCCCN1CCC(C(=O)CC)(c2cccc(O)c2)CC1
-2023-07-14 02:58:16,774 root DEBUG Start search 68/100. SMILES: CCN1C(=O)C(c2cccc(-c3cnn(C)c3)c2)C(=O)N(c2ccccc2)c2cc(C(F)(F)F)ccc21
-2023-07-14 02:59:02,173 root DEBUG Start search 69/100. SMILES: CCCc1c(C(=O)NCC(N)C(=O)O)[nH]c2cccc(Br)c12
-2023-07-14 02:59:45,300 root DEBUG Start search 70/100. SMILES: C=C(C)COc1cccc(CNC(CC(C)C)c2ncnn2C)c1
-2023-07-14 03:00:23,771 root DEBUG Start search 71/100. SMILES: COC(=O)c1ccc(OC)c(-c2cccc(C(CC(=O)O)c3nccs3)c2)c1
-2023-07-14 03:01:05,418 root DEBUG Start search 72/100. SMILES: Cc1c(CN(C)c2cccc3c2CCCC3)cnc2nc(N)nc(N)c12
-2023-07-14 03:01:27,722 root DEBUG Start search 73/100. SMILES: O=C(C=CNc1ccc([N+](=O)[O-])cc1)c1ccc2c(c1)CCCC2
-2023-07-14 03:01:51,463 root DEBUG Start search 74/100. SMILES: Cc1nc(N)ccc1CNC(=O)Cc1c(C#N)ccc(NCC(F)(F)c2ccccn2)c1F
-2023-07-14 03:02:10,798 root DEBUG Start search 75/100. SMILES: O=C(C1CCCCC1)N1CC(=O)N2CCc3ccc([N+](=O)[O-])cc3C2C1
-2023-07-14 03:02:45,763 root DEBUG Start search 76/100. SMILES: COc1ccc2c(CN3CCOCC3)cn(CCNC(C)=O)c2n1
-2023-07-14 03:03:21,563 root DEBUG Start search 77/100. SMILES: COCCn1c(SCc2nc(O)c3c(C)c(C(=O)OC)sc3n2)nc2ccccc21
-2023-07-14 03:03:38,138 root DEBUG Start search 78/100. SMILES: NC(=O)c1cccc(C2CC3CCC(C2)N3CCN(Cc2ccccc2)C(=O)C2(O)CC2)c1
-2023-07-14 03:04:24,365 root DEBUG Start search 79/100. SMILES: CC(=O)N(CC(Cc1c[nH]c2ccccc12)NC(=O)CN1CCN(c2ccccc2)CC1)c1ccccc1
-2023-07-14 03:05:01,547 root DEBUG Start search 80/100. SMILES: COc1ncc(Nc2ncc(C(C)(C)O)nc2-c2cc(N)nc(C)n2)cc1F
-2023-07-14 03:05:25,108 root DEBUG Start search 81/100. SMILES: Nc1nc(O)c2[nH]cc(Cc3cccs3)c2n1
-2023-07-14 03:05:51,644 root DEBUG Start search 82/100. SMILES: COc1ccc(C2=C(c3ccc(OCc4ccc5ccccc5n4)cc3)C(=O)N(C)C2)cc1
-2023-07-14 03:06:22,480 root DEBUG Start search 83/100. SMILES: CC(C)CNC(=O)C(Cc1c[nH]c2ccccc12)NC(=O)OCCCCN
-2023-07-14 03:07:02,117 root DEBUG Start search 84/100. SMILES: Cn1c(OC2CCN(c3ccc(CN4CCCCC4)cc3)CC2)nc(-c2ccncc2)cc1=O
-2023-07-14 03:07:39,662 root DEBUG Start search 85/100. SMILES: C=CC(=O)N1CCN(S(=O)(=O)c2ccc(Nc3ncc4c(n3)N(C)c3ccc(C)cc3C(=O)N4C)cc2)CC1
-2023-07-14 03:08:07,651 root DEBUG Start search 86/100. SMILES: CCN(c1ccc(OC)cc1)S(=O)(=O)c1c(C(=O)N2CCCCCC2)c(C)n(C)c1C
-2023-07-14 03:08:32,432 root DEBUG Start search 87/100. SMILES: COc1ccccc1-c1ccc(C(CC(=O)O)NC(=O)C2CCN2S(=O)(=O)c2cc(Cl)cc(Cl)c2)cc1
-2023-07-14 03:09:13,072 root DEBUG Start search 88/100. SMILES: CN1CCN(Cc2ccc(-c3cnc(N4CCOC(Cn5nnc6ncc(-c7cccc(C#N)c7)nc65)C4)nc3)cc2)CC1
-2023-07-14 03:10:07,448 root DEBUG Start search 89/100. SMILES: COc1cc(C(=O)C(=O)N2CCCCC2C(=O)OC(CCCc2ccccc2)CCCc2ccccn2)cc(OC)c1OC
-2023-07-14 03:10:21,948 root DEBUG Start search 90/100. SMILES: CC1(C)CC(=O)c2cc(Cl)c(NC3CCCC3)nc2C1
-2023-07-14 03:11:10,525 root DEBUG Start search 91/100. SMILES: CCNC(=O)C1(Nc2nc(NCc3ccccc3)nc(N3CC4CC3CN4C(=O)c3cccc(C(F)(F)F)c3)n2)Cc2ccccc2C1
-2023-07-14 03:11:50,198 root DEBUG Start search 92/100. SMILES: CCN(CC)CCNc1ccc(CO)c2oc3ccccc3c(=O)c12
-2023-07-14 03:12:20,795 root DEBUG Start search 93/100. SMILES: CN1C(C(=O)O)CCCC1C(=O)O
-2023-07-14 03:12:49,574 root DEBUG Start search 94/100. SMILES: CCCCN(CCCC)CCCOc1ccc(S(=O)(=O)c2c(C(C)C)nn3ccccc23)cc1
-2023-07-14 03:14:06,172 root DEBUG Start search 95/100. SMILES: Brc1cccc(-c2nsc(-c3cccc(Br)c3)n2)c1
-2023-07-14 03:14:34,488 root DEBUG Start search 96/100. SMILES: Cc1cccc(CNC(=O)c2cc(-c3nnn(CC4CCC(CO)CC4)n3)cc(C)n2)c1
-2023-07-14 03:14:59,556 root DEBUG Start search 97/100. SMILES: CC(=O)NC1c2c(ccc3ccc(=O)oc23)OC(C)(C)C1O
-2023-07-14 03:15:32,676 root DEBUG Start search 98/100. SMILES: Cc1cc(C)nc(N=C(N)NCc2nc3ccccc3[nH]2)n1
-2023-07-14 03:16:04,395 root DEBUG Start search 99/100. SMILES: Cc1c(C(=O)N2CCC(NC(=O)Nc3ccc(C#N)cc3)(c3ccccc3)CC2)nn(-c2ccc(Cl)cc2Cl)c1-c1ccc(Cl)cc1
-2023-07-14 03:16:43,787 root INFO Start search with Tanimoto-distance-TIMES03
-2023-07-14 03:16:43,787 root DEBUG Start search 0/100. SMILES: CCOc1ccc(N(CC(=O)NC2CCCCC2)C(=O)CCCC(=O)Nc2ccccn2)cc1
-2023-07-14 03:17:27,050 root DEBUG Start search 1/100. SMILES: CN1CCC(=C2c3ccccc3Oc3ccc(Cl)cc32)CC1
-2023-07-14 03:18:04,796 root DEBUG Start search 2/100. SMILES: COc1cc(O)c2c(=O)cc(-c3cc(O)c(O)cc3Cc3cccc(Cl)c3)oc2c1
-2023-07-14 03:19:23,820 root DEBUG Start search 3/100. SMILES: N#CCCCSC(=S)n1ccnc1
-2023-07-14 03:20:03,837 root DEBUG Start search 4/100. SMILES: CSC(=O)C#CC(C)(C)N(C)Cc1ccccc1
-2023-07-14 03:20:38,422 root DEBUG Start search 5/100. SMILES: CC(=O)Nc1nc(C)c(-c2nc(C(C)(C)CCO)no2)s1
-2023-07-14 03:21:33,151 root DEBUG Start search 6/100. SMILES: NC(=O)C(CCC(F)(F)F)N(CCc1ncon1)S(=O)(=O)c1ccc(Cl)cc1
-2023-07-14 03:22:12,304 root DEBUG Start search 7/100. SMILES: NCC(=O)N1CC(N)CC1C(=O)NC(CCc1ccccc1)C(=O)Nc1ccc2ncccc2c1
-2023-07-14 03:23:15,034 root DEBUG Start search 8/100. SMILES: CCN(CC)C(=O)c1ccc(N(c2cccc(OC)c2)C2CCN(CC=C(C)C)CC2C)cc1
-2023-07-14 03:23:52,217 root DEBUG Start search 9/100. SMILES: N=C(N)NCCCC(NC(=O)CN1CCN(S(=O)(=O)c2ccc(-c3ccccn3)s2)CC1=O)C(=O)c1nccs1
-2023-07-14 03:24:11,848 root DEBUG Start search 10/100. SMILES: Cc1nc(NC2CCCC2)c2nn(C)c(-c3ccc(Cl)cc3Cl)c2n1
-2023-07-14 03:24:42,345 root DEBUG Start search 11/100. SMILES: C#CC(CC(=O)O)NC(=O)Cn1ccc2ccc(N3CCNCC3)cc2c1=O
-2023-07-14 03:25:30,012 root DEBUG Start search 12/100. SMILES: O=c1c(C=NNc2nc(N3CCOCC3)c3ccsc3n2)coc2ccccc12
-2023-07-14 03:25:58,784 root DEBUG Start search 13/100. SMILES: O=C(NC1CCCCC1)C1Cc2c(sc3ccccc23)CN1
-2023-07-14 03:26:35,017 root DEBUG Start search 14/100. SMILES: O=C1CSC(C23CC4CC(CC(C4)C2)C3)N1CCN1CCCCC1
-2023-07-14 03:27:25,363 root DEBUG Start search 15/100. SMILES: O=C1c2cccc3cccc(c23)C(=O)N1CCN1CCN(CC(O)COCc2ccc(Cl)cc2)CC1
-2023-07-14 03:28:08,689 root DEBUG Start search 16/100. SMILES: COc1ccc2oc(NC3CCN(Cc4ccccc4)CC3)cc(=O)c2c1
-2023-07-14 03:28:59,444 root DEBUG Start search 17/100. SMILES: Fc1cccc(CN2CCC(COc3nc4ccsc4n4cccc34)CC2)c1
-2023-07-14 03:29:26,803 root DEBUG Start search 18/100. SMILES: COCc1ccccc1C1C(C(=O)C(C)(C)C)C(=O)C(=O)N1c1ccc(-c2noc(C)n2)cc1
-2023-07-14 03:30:41,966 root DEBUG Start search 19/100. SMILES: CN(C(=O)c1ccccc1OC(F)(F)F)C1COc2nc([N+](=O)[O-])cn2C1
-2023-07-14 03:31:27,281 root DEBUG Start search 20/100. SMILES: O=C(NC1CC(Oc2ccc(-c3ccccc3)cc2)CC1O)C(c1ccccc1)c1ccccc1
-2023-07-14 03:32:08,819 root DEBUG Start search 21/100. SMILES: C=CC(=O)NCCCCC(NC(=O)OCc1ccc(C)cc1)C(=O)O
-2023-07-14 03:32:55,819 root DEBUG Start search 22/100. SMILES: Cc1cc(C=Nn2cnnc2)c(C)n1-c1cc(Cl)ccc1Cl
-2023-07-14 03:33:04,295 root DEBUG Start search 23/100. SMILES: N#Cc1nc(N2CCC(S(=O)(=O)c3ccc(F)cc3Cl)C2)cc(C(F)(F)F)n1
-2023-07-14 03:33:27,208 root DEBUG Start search 24/100. SMILES: CCCN(CCC1CCC(NS(=O)(=O)c2ccccc2)CC1)C1CCc2nc(N)sc2C1
-2023-07-14 03:34:04,661 root DEBUG Start search 25/100. SMILES: O=C(O)c1cn(C2CC2c2ccccc2)c2cc(N3CCNCC3)c(F)cc2c1=O
-2023-07-14 03:34:41,580 root DEBUG Start search 26/100. SMILES: CCc1c(C(=O)c2cccc3ccccc23)n(COCC=C(C)C)c(=O)[nH]c1=O
-2023-07-14 03:35:21,962 root DEBUG Start search 27/100. SMILES: COc1ccc(C(=O)Nc2cc(C(=O)NC(=N)N)ccc2OCCCN2CCN(Cc3ccc(OC)c(OC)c3OC)CC2)cc1
-2023-07-14 03:35:40,080 root DEBUG Start search 28/100. SMILES: CC(C)CC(c1nnnn1C(C)C)N1CCN(C(=O)c2ccco2)CC1
-2023-07-14 03:36:10,439 root DEBUG Start search 29/100. SMILES: CCNC(=O)c1noc(-c2cc(Cl)c(O)cc2O)c1-c1cccc(N2CCN(C(C)=O)CC2)c1
-2023-07-14 03:36:58,436 root DEBUG Start search 30/100. SMILES: CN(C)CCN1C(=O)c2c(c3c4ccccc4[nH]c3c3ccccc23)C1=O
-2023-07-14 03:37:39,975 root DEBUG Start search 31/100. SMILES: COCc1cc(O)nc(N=C(N)Nc2ccc(C)cc2)n1
-2023-07-14 03:38:13,593 root DEBUG Start search 32/100. SMILES: CCN(CC)CC#CCC1(O)c2ccccc2-c2ccccc21
-2023-07-14 03:38:42,353 root DEBUG Start search 33/100. SMILES: CC1CCN(C(c2ccc(F)cn2)c2ccc(C(C)C(=O)O)cc2-c2ccc(C(F)(F)F)cc2)CC1
-2023-07-14 03:39:25,517 root DEBUG Start search 34/100. SMILES: Cn1cc(-c2ccc(-c3c4c(nn3C)CCc3cnc(Nc5cnn(Cc6ccncc6)c5)nc3-4)cc2)cn1
-2023-07-14 03:40:02,767 root DEBUG Start search 35/100. SMILES: [O-][n+]1nc2c(I)cnn2c2cc(OCc3ccc(Cl)cc3)ccc21
-2023-07-14 03:41:06,553 root DEBUG Start search 36/100. SMILES: CCN1C(=O)c2cccc3c(S(=O)(=O)Nc4ccccn4)ccc1c23
-2023-07-14 03:41:46,620 root DEBUG Start search 37/100. SMILES: CCCCC(C=O)NC(=O)OC(CCC)Cc1ccccc1
-2023-07-14 03:42:25,342 root DEBUG Start search 38/100. SMILES: C=CCn1nc(Br)c2c(Br)nc(CCC)n2c1=O
-2023-07-14 03:42:57,505 root DEBUG Start search 39/100. SMILES: O=C(C=Cc1ccc(C(F)(F)F)cc1)OCCc1c(-c2ccccc2Cl)c2cc(Cl)ccc2[nH]c1=O
-2023-07-14 03:43:41,932 root DEBUG Start search 40/100. SMILES: O=c1n(Cc2nc3ccc(C(F)(F)F)cn3c2CCCCO)c2cnccc2n1C1CC1
-2023-07-14 03:44:13,423 root DEBUG Start search 41/100. SMILES: O=C1NC2CCCCC2c2ccccc21
-2023-07-14 03:44:37,385 root DEBUG Start search 42/100. SMILES: CCN(CC)c1nc2ccc(C(O)(c3ccc(Cl)cc3)c3cncn3C)cc2c(Cl)c1N(C(=O)OC(C)(C)C)c1ccccc1
-2023-07-14 03:45:14,834 root DEBUG Start search 43/100. SMILES: CCN1CCN(c2cc(C(=O)Nc3ccc(C)c(Nc4ncnc5cnc(N6CCOCC6)nc45)c3)cc(C(C)(C)C#N)c2)CC1
-2023-07-14 03:45:50,154 root DEBUG Start search 44/100. SMILES: COc1cc(N2CC3(CCN(S(=O)(=O)C4CC4)C3)C2)ncn1
-2023-07-14 03:46:21,844 root DEBUG Start search 45/100. SMILES: CC1=C(C(=O)O)N2C(=O)C(NC(=O)C(N)c3cccc4sccc34)C2SC1
-2023-07-14 03:46:49,195 root DEBUG Start search 46/100. SMILES: C=CCN(C(=O)CCC(=O)Nc1cc(C)on1)C(C(=O)NC1CCCC1)c1ccc(OC)c(OC)c1
-2023-07-14 03:47:19,495 root DEBUG Start search 47/100. SMILES: CC1(C)c2cc(OCC(O)CO)ccc2C(=O)c2c1[nH]c1c(C(=O)O)c(C#N)ccc21
-2023-07-14 03:48:02,695 root DEBUG Start search 48/100. SMILES: Cc1nc(C)c(CN2CCN(S(C)(=O)=O)CC2)nc1C
-2023-07-14 03:48:35,625 root DEBUG Start search 49/100. SMILES: O=S(=O)(c1ccc(F)cn1)N1C(CO)CCC1c1ccc(F)cc1
-2023-07-14 03:49:03,034 root DEBUG Start search 50/100. SMILES: CC(C)=CCCC(C)=CCCC(C)=CCCC1CCc2cc(O)c(C)c(C)c2O1
-2023-07-14 03:49:55,739 root DEBUG Start search 51/100. SMILES: O=S(=O)(NC(CO)C1CCNCC1)c1ccc(Cl)s1
-2023-07-14 03:50:24,107 root DEBUG Start search 52/100. SMILES: Cc1cc(Nc2cc(C(F)(F)F)ccn2)nc(-c2cnc(C3(N)CCCc4cc(C(=O)O)ccc43)s2)c1
-2023-07-14 03:51:06,139 root DEBUG Start search 53/100. SMILES: Cc1cc(C(=O)NC(CC(=O)NCC(C)(C)C)C(=O)NC(CCc2ccccc2)C(=O)NCc2ccccc2Cl)no1
-2023-07-14 03:51:34,660 root DEBUG Start search 54/100. SMILES: Cc1cccc(-c2csc3ncnc(Sc4nnnn4C)c23)c1
-2023-07-14 03:52:05,790 root DEBUG Start search 55/100. SMILES: N#Cc1ccc(NC2CNC(C(=O)N3CCCC3C#N)C2)cc1C#N
-2023-07-14 03:52:32,236 root DEBUG Start search 56/100. SMILES: CC(C)Oc1cccc(F)c1C1CC(F)C(=O)N1Cc1ccc(OC(F)(F)F)cc1
-2023-07-14 03:53:13,165 root DEBUG Start search 57/100. SMILES: Cc1c(C(=O)C2CC2CN2CCC(N3CCCC3)CC2)sc2ccccc12
-2023-07-14 03:53:48,155 root DEBUG Start search 58/100. SMILES: CC(C)CCNC(=O)c1onc(CSc2ccccc2)c1C(=O)NCCC(C)C
-2023-07-14 03:54:40,288 root DEBUG Start search 59/100. SMILES: Oc1ccc2c(c1)CCN(Cc1ccc3c(c1)OCO3)C2c1ccc(OCCN2CCCC2)cc1
-2023-07-14 03:56:05,724 root DEBUG Start search 60/100. SMILES: N#Cc1c(N)ncnc1N1CCCC1c1nn2cccc2c(=O)n1-c1ccccc1
-2023-07-14 03:56:43,002 root DEBUG Start search 61/100. SMILES: CC(C)N(C)CC=CC(=O)N1CCc2sc3ncnc(Nc4ccc(Cl)c(Cl)c4)c3c2C1
-2023-07-14 03:57:01,089 root DEBUG Start search 62/100. SMILES: O=c1ccc2cnc3ccc(-c4cnc5ccccc5c4)cc3c2n1-c1ccc(S(=O)(=O)N2CCNCC2)cc1
-2023-07-14 03:58:03,356 root DEBUG Start search 63/100. SMILES: CCN(CC)CC(=O)Nc1ccc(O)c2c1C(=O)c1c(O)ccc(O)c1C2=O
-2023-07-14 03:58:40,795 root DEBUG Start search 64/100. SMILES: CCCCc1ncc(C=C2C(=O)N(CCCC)C(=O)N2CCc2ccccc2)n1Cc1ccc(C(=O)OC)cc1
-2023-07-14 03:59:16,804 root DEBUG Start search 65/100. SMILES: COC(=O)c1ccc(CN(CCCc2c(N)nc(N)nc2O)c2ccc([N+](=O)[O-])c(F)c2F)cc1
-2023-07-14 03:59:50,543 root DEBUG Start search 66/100. SMILES: NC(=O)NN=C1CCC(O)CC1CC(=O)O
-2023-07-14 04:00:01,239 root DEBUG Start search 67/100. SMILES: CCCCN1CCC(C(=O)CC)(c2cccc(O)c2)CC1
-2023-07-14 04:00:34,424 root DEBUG Start search 68/100. SMILES: CCN1C(=O)C(c2cccc(-c3cnn(C)c3)c2)C(=O)N(c2ccccc2)c2cc(C(F)(F)F)ccc21
-2023-07-14 04:01:22,024 root DEBUG Start search 69/100. SMILES: CCCc1c(C(=O)NCC(N)C(=O)O)[nH]c2cccc(Br)c12
-2023-07-14 04:02:04,615 root DEBUG Start search 70/100. SMILES: C=C(C)COc1cccc(CNC(CC(C)C)c2ncnn2C)c1
-2023-07-14 04:02:43,849 root DEBUG Start search 71/100. SMILES: COC(=O)c1ccc(OC)c(-c2cccc(C(CC(=O)O)c3nccs3)c2)c1
-2023-07-14 04:03:22,945 root DEBUG Start search 72/100. SMILES: Cc1c(CN(C)c2cccc3c2CCCC3)cnc2nc(N)nc(N)c12
-2023-07-14 04:03:34,283 root DEBUG Start search 73/100. SMILES: O=C(C=CNc1ccc([N+](=O)[O-])cc1)c1ccc2c(c1)CCCC2
-2023-07-14 04:03:57,417 root DEBUG Start search 74/100. SMILES: Cc1nc(N)ccc1CNC(=O)Cc1c(C#N)ccc(NCC(F)(F)c2ccccn2)c1F
-2023-07-14 04:04:17,856 root DEBUG Start search 75/100. SMILES: O=C(C1CCCCC1)N1CC(=O)N2CCc3ccc([N+](=O)[O-])cc3C2C1
-2023-07-14 04:04:54,690 root DEBUG Start search 76/100. SMILES: COc1ccc2c(CN3CCOCC3)cn(CCNC(C)=O)c2n1
-2023-07-14 04:05:30,321 root DEBUG Start search 77/100. SMILES: COCCn1c(SCc2nc(O)c3c(C)c(C(=O)OC)sc3n2)nc2ccccc21
-2023-07-14 04:05:56,243 root DEBUG Start search 78/100. SMILES: NC(=O)c1cccc(C2CC3CCC(C2)N3CCN(Cc2ccccc2)C(=O)C2(O)CC2)c1
-2023-07-14 04:06:44,358 root DEBUG Start search 79/100. SMILES: CC(=O)N(CC(Cc1c[nH]c2ccccc12)NC(=O)CN1CCN(c2ccccc2)CC1)c1ccccc1
-2023-07-14 04:07:18,867 root DEBUG Start search 80/100. SMILES: COc1ncc(Nc2ncc(C(C)(C)O)nc2-c2cc(N)nc(C)n2)cc1F
-2023-07-14 04:07:54,339 root DEBUG Start search 81/100. SMILES: Nc1nc(O)c2[nH]cc(Cc3cccs3)c2n1
-2023-07-14 04:08:22,403 root DEBUG Start search 82/100. SMILES: COc1ccc(C2=C(c3ccc(OCc4ccc5ccccc5n4)cc3)C(=O)N(C)C2)cc1
-2023-07-14 04:08:55,241 root DEBUG Start search 83/100. SMILES: CC(C)CNC(=O)C(Cc1c[nH]c2ccccc12)NC(=O)OCCCCN
-2023-07-14 04:09:33,698 root DEBUG Start search 84/100. SMILES: Cn1c(OC2CCN(c3ccc(CN4CCCCC4)cc3)CC2)nc(-c2ccncc2)cc1=O
-2023-07-14 04:10:13,795 root DEBUG Start search 85/100. SMILES: C=CC(=O)N1CCN(S(=O)(=O)c2ccc(Nc3ncc4c(n3)N(C)c3ccc(C)cc3C(=O)N4C)cc2)CC1
-2023-07-14 04:10:44,108 root DEBUG Start search 86/100. SMILES: CCN(c1ccc(OC)cc1)S(=O)(=O)c1c(C(=O)N2CCCCCC2)c(C)n(C)c1C
-2023-07-14 04:11:12,884 root DEBUG Start search 87/100. SMILES: COc1ccccc1-c1ccc(C(CC(=O)O)NC(=O)C2CCN2S(=O)(=O)c2cc(Cl)cc(Cl)c2)cc1
-2023-07-14 04:11:56,912 root DEBUG Start search 88/100. SMILES: CN1CCN(Cc2ccc(-c3cnc(N4CCOC(Cn5nnc6ncc(-c7cccc(C#N)c7)nc65)C4)nc3)cc2)CC1
-2023-07-14 04:12:54,884 root DEBUG Start search 89/100. SMILES: COc1cc(C(=O)C(=O)N2CCCCC2C(=O)OC(CCCc2ccccc2)CCCc2ccccn2)cc(OC)c1OC
-2023-07-14 04:13:08,719 root DEBUG Start search 90/100. SMILES: CC1(C)CC(=O)c2cc(Cl)c(NC3CCCC3)nc2C1
-2023-07-14 04:13:58,659 root DEBUG Start search 91/100. SMILES: CCNC(=O)C1(Nc2nc(NCc3ccccc3)nc(N3CC4CC3CN4C(=O)c3cccc(C(F)(F)F)c3)n2)Cc2ccccc2C1
-2023-07-14 04:14:39,657 root DEBUG Start search 92/100. SMILES: CCN(CC)CCNc1ccc(CO)c2oc3ccccc3c(=O)c12
-2023-07-14 04:15:12,684 root DEBUG Start search 93/100. SMILES: CN1C(C(=O)O)CCCC1C(=O)O
-2023-07-14 04:15:43,388 root DEBUG Start search 94/100. SMILES: CCCCN(CCCC)CCCOc1ccc(S(=O)(=O)c2c(C(C)C)nn3ccccc23)cc1
-2023-07-14 04:17:06,256 root DEBUG Start search 95/100. SMILES: Brc1cccc(-c2nsc(-c3cccc(Br)c3)n2)c1
-2023-07-14 04:17:35,206 root DEBUG Start search 96/100. SMILES: Cc1cccc(CNC(=O)c2cc(-c3nnn(CC4CCC(CO)CC4)n3)cc(C)n2)c1
-2023-07-14 04:18:01,774 root DEBUG Start search 97/100. SMILES: CC(=O)NC1c2c(ccc3ccc(=O)oc23)OC(C)(C)C1O
-2023-07-14 04:18:36,627 root DEBUG Start search 98/100. SMILES: Cc1cc(C)nc(N=C(N)NCc2nc3ccccc3[nH]2)n1
-2023-07-14 04:19:09,740 root DEBUG Start search 99/100. SMILES: Cc1c(C(=O)N2CCC(NC(=O)Nc3ccc(C#N)cc3)(c3ccccc3)CC2)nn(-c2ccc(Cl)cc2Cl)c1-c1ccc(Cl)cc1
+2023-07-15 23:06:01,340 root INFO dim_test: 100
+2023-07-15 23:06:01,340 root INFO Start search with Tanimoto-distance-TIMES0
+2023-07-15 23:06:01,341 root DEBUG Start search 0/100. SMILES: CCOc1ccc(N(CC(=O)NC2CCCCC2)C(=O)CCCC(=O)Nc2ccccn2)cc1
+2023-07-15 23:06:43,185 root DEBUG Start search 1/100. SMILES: CN1CCC(=C2c3ccccc3Oc3ccc(Cl)cc32)CC1
+2023-07-15 23:07:18,811 root DEBUG Start search 2/100. SMILES: COc1cc(O)c2c(=O)cc(-c3cc(O)c(O)cc3Cc3cccc(Cl)c3)oc2c1
+2023-07-15 23:08:29,838 root DEBUG Start search 3/100. SMILES: N#CCCCSC(=S)n1ccnc1
+2023-07-15 23:09:08,734 root DEBUG Start search 4/100. SMILES: CSC(=O)C#CC(C)(C)N(C)Cc1ccccc1
+2023-07-15 23:09:41,041 root DEBUG Start search 5/100. SMILES: CC(=O)Nc1nc(C)c(-c2nc(C(C)(C)CCO)no2)s1
+2023-07-15 23:10:31,461 root DEBUG Start search 6/100. SMILES: NC(=O)C(CCC(F)(F)F)N(CCc1ncon1)S(=O)(=O)c1ccc(Cl)cc1
+2023-07-15 23:11:16,421 root DEBUG Start search 7/100. SMILES: NCC(=O)N1CC(N)CC1C(=O)NC(CCc1ccccc1)C(=O)Nc1ccc2ncccc2c1
+2023-07-15 23:12:03,037 root DEBUG Start search 8/100. SMILES: CCN(CC)C(=O)c1ccc(N(c2cccc(OC)c2)C2CCN(CC=C(C)C)CC2C)cc1
+2023-07-15 23:12:39,468 root DEBUG Start search 9/100. SMILES: N=C(N)NCCCC(NC(=O)CN1CCN(S(=O)(=O)c2ccc(-c3ccccn3)s2)CC1=O)C(=O)c1nccs1
+2023-07-15 23:13:21,925 root DEBUG Start search 10/100. SMILES: Cc1nc(NC2CCCC2)c2nn(C)c(-c3ccc(Cl)cc3Cl)c2n1
+2023-07-15 23:13:51,607 root DEBUG Start search 11/100. SMILES: C#CC(CC(=O)O)NC(=O)Cn1ccc2ccc(N3CCNCC3)cc2c1=O
+2023-07-15 23:14:35,490 root DEBUG Start search 12/100. SMILES: O=c1c(C=NNc2nc(N3CCOCC3)c3ccsc3n2)coc2ccccc12
+2023-07-15 23:15:04,982 root DEBUG Start search 13/100. SMILES: O=C(NC1CCCCC1)C1Cc2c(sc3ccccc23)CN1
+2023-07-15 23:15:41,592 root DEBUG Start search 14/100. SMILES: O=C1CSC(C23CC4CC(CC(C4)C2)C3)N1CCN1CCCCC1
+2023-07-15 23:16:44,653 root DEBUG Start search 15/100. SMILES: O=C1c2cccc3cccc(c23)C(=O)N1CCN1CCN(CC(O)COCc2ccc(Cl)cc2)CC1
+2023-07-15 23:17:32,185 root DEBUG Start search 16/100. SMILES: COc1ccc2oc(NC3CCN(Cc4ccccc4)CC3)cc(=O)c2c1
+2023-07-15 23:18:21,373 root DEBUG Start search 17/100. SMILES: Fc1cccc(CN2CCC(COc3nc4ccsc4n4cccc34)CC2)c1
+2023-07-15 23:18:55,290 root DEBUG Start search 18/100. SMILES: COCc1ccccc1C1C(C(=O)C(C)(C)C)C(=O)C(=O)N1c1ccc(-c2noc(C)n2)cc1
+2023-07-15 23:20:07,843 root DEBUG Start search 19/100. SMILES: CN(C(=O)c1ccccc1OC(F)(F)F)C1COc2nc([N+](=O)[O-])cn2C1
+2023-07-15 23:20:39,716 root DEBUG Start search 20/100. SMILES: O=C(NC1CC(Oc2ccc(-c3ccccc3)cc2)CC1O)C(c1ccccc1)c1ccccc1
+2023-07-15 23:21:41,668 root DEBUG Start search 21/100. SMILES: C=CC(=O)NCCCCC(NC(=O)OCc1ccc(C)cc1)C(=O)O
+2023-07-15 23:23:21,763 root DEBUG Start search 22/100. SMILES: Cc1cc(C=Nn2cnnc2)c(C)n1-c1cc(Cl)ccc1Cl
+2023-07-15 23:23:46,141 root DEBUG Start search 23/100. SMILES: N#Cc1nc(N2CCC(S(=O)(=O)c3ccc(F)cc3Cl)C2)cc(C(F)(F)F)n1
+2023-07-15 23:24:26,444 root DEBUG Start search 24/100. SMILES: CCCN(CCC1CCC(NS(=O)(=O)c2ccccc2)CC1)C1CCc2nc(N)sc2C1
+2023-07-15 23:25:07,581 root DEBUG Start search 25/100. SMILES: O=C(O)c1cn(C2CC2c2ccccc2)c2cc(N3CCNCC3)c(F)cc2c1=O
+2023-07-15 23:25:43,494 root DEBUG Start search 26/100. SMILES: CCc1c(C(=O)c2cccc3ccccc23)n(COCC=C(C)C)c(=O)[nH]c1=O
+2023-07-15 23:26:18,474 root DEBUG Start search 27/100. SMILES: COc1ccc(C(=O)Nc2cc(C(=O)NC(=N)N)ccc2OCCCN2CCN(Cc3ccc(OC)c(OC)c3OC)CC2)cc1
+2023-07-15 23:26:38,767 root DEBUG Start search 28/100. SMILES: CC(C)CC(c1nnnn1C(C)C)N1CCN(C(=O)c2ccco2)CC1
+2023-07-15 23:27:12,322 root DEBUG Start search 29/100. SMILES: CCNC(=O)c1noc(-c2cc(Cl)c(O)cc2O)c1-c1cccc(N2CCN(C(C)=O)CC2)c1
+2023-07-15 23:27:57,915 root DEBUG Start search 30/100. SMILES: CN(C)CCN1C(=O)c2c(c3c4ccccc4[nH]c3c3ccccc23)C1=O
+2023-07-15 23:28:39,618 root DEBUG Start search 31/100. SMILES: COCc1cc(O)nc(N=C(N)Nc2ccc(C)cc2)n1
+2023-07-15 23:29:12,840 root DEBUG Start search 32/100. SMILES: CCN(CC)CC#CCC1(O)c2ccccc2-c2ccccc21
+2023-07-15 23:29:41,344 root DEBUG Start search 33/100. SMILES: CC1CCN(C(c2ccc(F)cn2)c2ccc(C(C)C(=O)O)cc2-c2ccc(C(F)(F)F)cc2)CC1
+2023-07-15 23:30:25,335 root DEBUG Start search 34/100. SMILES: Cn1cc(-c2ccc(-c3c4c(nn3C)CCc3cnc(Nc5cnn(Cc6ccncc6)c5)nc3-4)cc2)cn1
+2023-07-15 23:31:35,771 root DEBUG Start search 35/100. SMILES: [O-][n+]1nc2c(I)cnn2c2cc(OCc3ccc(Cl)cc3)ccc21
+2023-07-15 23:32:37,893 root DEBUG Start search 36/100. SMILES: CCN1C(=O)c2cccc3c(S(=O)(=O)Nc4ccccn4)ccc1c23
+2023-07-15 23:33:15,834 root DEBUG Start search 37/100. SMILES: CCCCC(C=O)NC(=O)OC(CCC)Cc1ccccc1
+2023-07-15 23:33:59,675 root DEBUG Start search 38/100. SMILES: C=CCn1nc(Br)c2c(Br)nc(CCC)n2c1=O
+2023-07-15 23:34:39,346 root DEBUG Start search 39/100. SMILES: O=C(C=Cc1ccc(C(F)(F)F)cc1)OCCc1c(-c2ccccc2Cl)c2cc(Cl)ccc2[nH]c1=O
+2023-07-15 23:35:33,393 root DEBUG Start search 40/100. SMILES: O=c1n(Cc2nc3ccc(C(F)(F)F)cn3c2CCCCO)c2cnccc2n1C1CC1
+2023-07-15 23:36:11,510 root DEBUG Start search 41/100. SMILES: O=C1NC2CCCCC2c2ccccc21
+2023-07-15 23:36:40,415 root DEBUG Start search 42/100. SMILES: CCN(CC)c1nc2ccc(C(O)(c3ccc(Cl)cc3)c3cncn3C)cc2c(Cl)c1N(C(=O)OC(C)(C)C)c1ccccc1
+2023-07-15 23:37:27,693 root DEBUG Start search 43/100. SMILES: CCN1CCN(c2cc(C(=O)Nc3ccc(C)c(Nc4ncnc5cnc(N6CCOCC6)nc45)c3)cc(C(C)(C)C#N)c2)CC1
+2023-07-15 23:38:22,726 root DEBUG Start search 44/100. SMILES: COc1cc(N2CC3(CCN(S(=O)(=O)C4CC4)C3)C2)ncn1
+2023-07-15 23:38:59,968 root DEBUG Start search 45/100. SMILES: CC1=C(C(=O)O)N2C(=O)C(NC(=O)C(N)c3cccc4sccc34)C2SC1
+2023-07-15 23:39:49,637 root DEBUG Start search 46/100. SMILES: C=CCN(C(=O)CCC(=O)Nc1cc(C)on1)C(C(=O)NC1CCCC1)c1ccc(OC)c(OC)c1
+2023-07-15 23:40:57,235 root DEBUG Start search 47/100. SMILES: CC1(C)c2cc(OCC(O)CO)ccc2C(=O)c2c1[nH]c1c(C(=O)O)c(C#N)ccc21
+2023-07-15 23:41:49,242 root DEBUG Start search 48/100. SMILES: Cc1nc(C)c(CN2CCN(S(C)(=O)=O)CC2)nc1C
+2023-07-15 23:42:27,092 root DEBUG Start search 49/100. SMILES: O=S(=O)(c1ccc(F)cn1)N1C(CO)CCC1c1ccc(F)cc1
+2023-07-15 23:43:23,765 root DEBUG Start search 50/100. SMILES: CC(C)=CCCC(C)=CCCC(C)=CCCC1CCc2cc(O)c(C)c(C)c2O1
+2023-07-15 23:44:03,188 root DEBUG Start search 51/100. SMILES: O=S(=O)(NC(CO)C1CCNCC1)c1ccc(Cl)s1
+2023-07-15 23:44:38,694 root DEBUG Start search 52/100. SMILES: Cc1cc(Nc2cc(C(F)(F)F)ccn2)nc(-c2cnc(C3(N)CCCc4cc(C(=O)O)ccc43)s2)c1
+2023-07-15 23:45:31,351 root DEBUG Start search 53/100. SMILES: Cc1cc(C(=O)NC(CC(=O)NCC(C)(C)C)C(=O)NC(CCc2ccccc2)C(=O)NCc2ccccc2Cl)no1
+2023-07-15 23:46:25,584 root DEBUG Start search 54/100. SMILES: Cc1cccc(-c2csc3ncnc(Sc4nnnn4C)c23)c1
+2023-07-15 23:46:54,722 root DEBUG Start search 55/100. SMILES: N#Cc1ccc(NC2CNC(C(=O)N3CCCC3C#N)C2)cc1C#N
+2023-07-15 23:47:39,123 root DEBUG Start search 56/100. SMILES: CC(C)Oc1cccc(F)c1C1CC(F)C(=O)N1Cc1ccc(OC(F)(F)F)cc1
+2023-07-15 23:48:26,447 root DEBUG Start search 57/100. SMILES: Cc1c(C(=O)C2CC2CN2CCC(N3CCCC3)CC2)sc2ccccc12
+2023-07-15 23:49:13,411 root DEBUG Start search 58/100. SMILES: CC(C)CCNC(=O)c1onc(CSc2ccccc2)c1C(=O)NCCC(C)C
+2023-07-15 23:50:15,295 root DEBUG Start search 59/100. SMILES: Oc1ccc2c(c1)CCN(Cc1ccc3c(c1)OCO3)C2c1ccc(OCCN2CCCC2)cc1
+2023-07-15 23:51:07,338 root DEBUG Start search 60/100. SMILES: N#Cc1c(N)ncnc1N1CCCC1c1nn2cccc2c(=O)n1-c1ccccc1
+2023-07-15 23:51:45,122 root DEBUG Start search 61/100. SMILES: CC(C)N(C)CC=CC(=O)N1CCc2sc3ncnc(Nc4ccc(Cl)c(Cl)c4)c3c2C1
+2023-07-15 23:52:15,324 root DEBUG Start search 62/100. SMILES: O=c1ccc2cnc3ccc(-c4cnc5ccccc5c4)cc3c2n1-c1ccc(S(=O)(=O)N2CCNCC2)cc1
+2023-07-15 23:54:02,633 root DEBUG Start search 63/100. SMILES: CCN(CC)CC(=O)Nc1ccc(O)c2c1C(=O)c1c(O)ccc(O)c1C2=O
+2023-07-15 23:54:44,089 root DEBUG Start search 64/100. SMILES: CCCCc1ncc(C=C2C(=O)N(CCCC)C(=O)N2CCc2ccccc2)n1Cc1ccc(C(=O)OC)cc1
+2023-07-15 23:55:21,792 root DEBUG Start search 65/100. SMILES: COC(=O)c1ccc(CN(CCCc2c(N)nc(N)nc2O)c2ccc([N+](=O)[O-])c(F)c2F)cc1
+2023-07-15 23:55:59,412 root DEBUG Start search 66/100. SMILES: NC(=O)NN=C1CCC(O)CC1CC(=O)O
+2023-07-15 23:56:06,288 root DEBUG Start search 67/100. SMILES: CCCCN1CCC(C(=O)CC)(c2cccc(O)c2)CC1
+2023-07-15 23:56:44,530 root DEBUG Start search 68/100. SMILES: CCN1C(=O)C(c2cccc(-c3cnn(C)c3)c2)C(=O)N(c2ccccc2)c2cc(C(F)(F)F)ccc21
+2023-07-15 23:57:36,063 root DEBUG Start search 69/100. SMILES: CCCc1c(C(=O)NCC(N)C(=O)O)[nH]c2cccc(Br)c12
+2023-07-15 23:58:10,662 root DEBUG Start search 70/100. SMILES: C=C(C)COc1cccc(CNC(CC(C)C)c2ncnn2C)c1
+2023-07-15 23:58:52,020 root DEBUG Start search 71/100. SMILES: COC(=O)c1ccc(OC)c(-c2cccc(C(CC(=O)O)c3nccs3)c2)c1
+2023-07-15 23:59:41,403 root DEBUG Start search 72/100. SMILES: Cc1c(CN(C)c2cccc3c2CCCC3)cnc2nc(N)nc(N)c12
+2023-07-16 00:00:13,341 root DEBUG Start search 73/100. SMILES: O=C(C=CNc1ccc([N+](=O)[O-])cc1)c1ccc2c(c1)CCCC2
+2023-07-16 00:00:39,839 root DEBUG Start search 74/100. SMILES: Cc1nc(N)ccc1CNC(=O)Cc1c(C#N)ccc(NCC(F)(F)c2ccccn2)c1F
+2023-07-16 00:01:20,112 root DEBUG Start search 75/100. SMILES: O=C(C1CCCCC1)N1CC(=O)N2CCc3ccc([N+](=O)[O-])cc3C2C1
+2023-07-16 00:02:00,551 root DEBUG Start search 76/100. SMILES: COc1ccc2c(CN3CCOCC3)cn(CCNC(C)=O)c2n1
+2023-07-16 00:02:38,864 root DEBUG Start search 77/100. SMILES: COCCn1c(SCc2nc(O)c3c(C)c(C(=O)OC)sc3n2)nc2ccccc21
+2023-07-16 00:03:23,453 root DEBUG Start search 78/100. SMILES: NC(=O)c1cccc(C2CC3CCC(C2)N3CCN(Cc2ccccc2)C(=O)C2(O)CC2)c1
+2023-07-16 00:04:13,277 root DEBUG Start search 79/100. SMILES: CC(=O)N(CC(Cc1c[nH]c2ccccc12)NC(=O)CN1CCN(c2ccccc2)CC1)c1ccccc1
+2023-07-16 00:04:56,327 root DEBUG Start search 80/100. SMILES: COc1ncc(Nc2ncc(C(C)(C)O)nc2-c2cc(N)nc(C)n2)cc1F
+2023-07-16 00:05:46,837 root DEBUG Start search 81/100. SMILES: Nc1nc(O)c2[nH]cc(Cc3cccs3)c2n1
+2023-07-16 00:06:17,598 root DEBUG Start search 82/100. SMILES: COc1ccc(C2=C(c3ccc(OCc4ccc5ccccc5n4)cc3)C(=O)N(C)C2)cc1
+2023-07-16 00:06:53,348 root DEBUG Start search 83/100. SMILES: CC(C)CNC(=O)C(Cc1c[nH]c2ccccc12)NC(=O)OCCCCN
+2023-07-16 00:07:39,663 root DEBUG Start search 84/100. SMILES: Cn1c(OC2CCN(c3ccc(CN4CCCCC4)cc3)CC2)nc(-c2ccncc2)cc1=O
+2023-07-16 00:08:23,227 root DEBUG Start search 85/100. SMILES: C=CC(=O)N1CCN(S(=O)(=O)c2ccc(Nc3ncc4c(n3)N(C)c3ccc(C)cc3C(=O)N4C)cc2)CC1
+2023-07-16 00:09:20,164 root DEBUG Start search 86/100. SMILES: CCN(c1ccc(OC)cc1)S(=O)(=O)c1c(C(=O)N2CCCCCC2)c(C)n(C)c1C
+2023-07-16 00:09:52,915 root DEBUG Start search 87/100. SMILES: COc1ccccc1-c1ccc(C(CC(=O)O)NC(=O)C2CCN2S(=O)(=O)c2cc(Cl)cc(Cl)c2)cc1
+2023-07-16 00:10:46,054 root DEBUG Start search 88/100. SMILES: CN1CCN(Cc2ccc(-c3cnc(N4CCOC(Cn5nnc6ncc(-c7cccc(C#N)c7)nc65)C4)nc3)cc2)CC1
+2023-07-16 00:11:52,662 root DEBUG Start search 89/100. SMILES: COc1cc(C(=O)C(=O)N2CCCCC2C(=O)OC(CCCc2ccccc2)CCCc2ccccn2)cc(OC)c1OC
+2023-07-16 00:12:24,529 root DEBUG Start search 90/100. SMILES: CC1(C)CC(=O)c2cc(Cl)c(NC3CCCC3)nc2C1
+2023-07-16 00:13:17,731 root DEBUG Start search 91/100. SMILES: CCNC(=O)C1(Nc2nc(NCc3ccccc3)nc(N3CC4CC3CN4C(=O)c3cccc(C(F)(F)F)c3)n2)Cc2ccccc2C1
+2023-07-16 00:14:20,537 root DEBUG Start search 92/100. SMILES: CCN(CC)CCNc1ccc(CO)c2oc3ccccc3c(=O)c12
+2023-07-16 00:14:56,747 root DEBUG Start search 93/100. SMILES: CN1C(C(=O)O)CCCC1C(=O)O
+2023-07-16 00:15:30,331 root DEBUG Start search 94/100. SMILES: CCCCN(CCCC)CCCOc1ccc(S(=O)(=O)c2c(C(C)C)nn3ccccc23)cc1
+2023-07-16 00:16:57,011 root DEBUG Start search 95/100. SMILES: Brc1cccc(-c2nsc(-c3cccc(Br)c3)n2)c1
+2023-07-16 00:17:30,438 root DEBUG Start search 96/100. SMILES: Cc1cccc(CNC(=O)c2cc(-c3nnn(CC4CCC(CO)CC4)n3)cc(C)n2)c1
+2023-07-16 00:18:09,882 root DEBUG Start search 97/100. SMILES: CC(=O)NC1c2c(ccc3ccc(=O)oc23)OC(C)(C)C1O
+2023-07-16 00:18:47,175 root DEBUG Start search 98/100. SMILES: Cc1cc(C)nc(N=C(N)NCc2nc3ccccc3[nH]2)n1
+2023-07-16 00:19:22,264 root DEBUG Start search 99/100. SMILES: Cc1c(C(=O)N2CCC(NC(=O)Nc3ccc(C#N)cc3)(c3ccccc3)CC2)nn(-c2ccc(Cl)cc2Cl)c1-c1ccc(Cl)cc1
+2023-07-16 00:19:57,145 root INFO Start search with Tanimoto-distance-TIMES001
+2023-07-16 00:19:57,145 root DEBUG Start search 0/100. SMILES: CCOc1ccc(N(CC(=O)NC2CCCCC2)C(=O)CCCC(=O)Nc2ccccn2)cc1
+2023-07-16 00:21:09,780 root DEBUG Start search 1/100. SMILES: CN1CCC(=C2c3ccccc3Oc3ccc(Cl)cc32)CC1
+2023-07-16 00:21:55,151 root DEBUG Start search 2/100. SMILES: COc1cc(O)c2c(=O)cc(-c3cc(O)c(O)cc3Cc3cccc(Cl)c3)oc2c1
+2023-07-16 00:22:56,578 root DEBUG Start search 3/100. SMILES: N#CCCCSC(=S)n1ccnc1
+2023-07-16 00:23:39,670 root DEBUG Start search 4/100. SMILES: CSC(=O)C#CC(C)(C)N(C)Cc1ccccc1
+2023-07-16 00:24:17,937 root DEBUG Start search 5/100. SMILES: CC(=O)Nc1nc(C)c(-c2nc(C(C)(C)CCO)no2)s1
+2023-07-16 00:25:13,581 root DEBUG Start search 6/100. SMILES: NC(=O)C(CCC(F)(F)F)N(CCc1ncon1)S(=O)(=O)c1ccc(Cl)cc1
+2023-07-16 00:25:57,209 root DEBUG Start search 7/100. SMILES: NCC(=O)N1CC(N)CC1C(=O)NC(CCc1ccccc1)C(=O)Nc1ccc2ncccc2c1
+2023-07-16 00:27:01,451 root DEBUG Start search 8/100. SMILES: CCN(CC)C(=O)c1ccc(N(c2cccc(OC)c2)C2CCN(CC=C(C)C)CC2C)cc1
+2023-07-16 00:27:44,857 root DEBUG Start search 9/100. SMILES: N=C(N)NCCCC(NC(=O)CN1CCN(S(=O)(=O)c2ccc(-c3ccccn3)s2)CC1=O)C(=O)c1nccs1
+2023-07-16 00:28:12,001 root DEBUG Start search 10/100. SMILES: Cc1nc(NC2CCCC2)c2nn(C)c(-c3ccc(Cl)cc3Cl)c2n1
+2023-07-16 00:28:46,789 root DEBUG Start search 11/100. SMILES: C#CC(CC(=O)O)NC(=O)Cn1ccc2ccc(N3CCNCC3)cc2c1=O
+2023-07-16 00:29:33,251 root DEBUG Start search 12/100. SMILES: O=c1c(C=NNc2nc(N3CCOCC3)c3ccsc3n2)coc2ccccc12
+2023-07-16 00:30:07,584 root DEBUG Start search 13/100. SMILES: O=C(NC1CCCCC1)C1Cc2c(sc3ccccc23)CN1
+2023-07-16 00:30:49,513 root DEBUG Start search 14/100. SMILES: O=C1CSC(C23CC4CC(CC(C4)C2)C3)N1CCN1CCCCC1
+2023-07-16 00:31:38,925 root DEBUG Start search 15/100. SMILES: O=C1c2cccc3cccc(c23)C(=O)N1CCN1CCN(CC(O)COCc2ccc(Cl)cc2)CC1
+2023-07-16 00:32:06,396 root DEBUG Start search 16/100. SMILES: COc1ccc2oc(NC3CCN(Cc4ccccc4)CC3)cc(=O)c2c1
+2023-07-16 00:33:02,302 root DEBUG Start search 17/100. SMILES: Fc1cccc(CN2CCC(COc3nc4ccsc4n4cccc34)CC2)c1
+2023-07-16 00:33:37,572 root DEBUG Start search 18/100. SMILES: COCc1ccccc1C1C(C(=O)C(C)(C)C)C(=O)C(=O)N1c1ccc(-c2noc(C)n2)cc1
+2023-07-16 00:34:59,385 root DEBUG Start search 19/100. SMILES: CN(C(=O)c1ccccc1OC(F)(F)F)C1COc2nc([N+](=O)[O-])cn2C1
+2023-07-16 00:35:38,705 root DEBUG Start search 20/100. SMILES: O=C(NC1CC(Oc2ccc(-c3ccccc3)cc2)CC1O)C(c1ccccc1)c1ccccc1
+2023-07-16 00:36:16,992 root DEBUG Start search 21/100. SMILES: C=CC(=O)NCCCCC(NC(=O)OCc1ccc(C)cc1)C(=O)O
+2023-07-16 00:37:35,986 root DEBUG Start search 22/100. SMILES: Cc1cc(C=Nn2cnnc2)c(C)n1-c1cc(Cl)ccc1Cl
+2023-07-16 00:37:55,892 root DEBUG Start search 23/100. SMILES: N#Cc1nc(N2CCC(S(=O)(=O)c3ccc(F)cc3Cl)C2)cc(C(F)(F)F)n1
+2023-07-16 00:38:23,483 root DEBUG Start search 24/100. SMILES: CCCN(CCC1CCC(NS(=O)(=O)c2ccccc2)CC1)C1CCc2nc(N)sc2C1
+2023-07-16 00:39:10,024 root DEBUG Start search 25/100. SMILES: O=C(O)c1cn(C2CC2c2ccccc2)c2cc(N3CCNCC3)c(F)cc2c1=O
+2023-07-16 00:39:51,605 root DEBUG Start search 26/100. SMILES: CCc1c(C(=O)c2cccc3ccccc23)n(COCC=C(C)C)c(=O)[nH]c1=O
+2023-07-16 00:40:48,230 root DEBUG Start search 27/100. SMILES: COc1ccc(C(=O)Nc2cc(C(=O)NC(=N)N)ccc2OCCCN2CCN(Cc3ccc(OC)c(OC)c3OC)CC2)cc1
+2023-07-16 00:41:11,458 root DEBUG Start search 28/100. SMILES: CC(C)CC(c1nnnn1C(C)C)N1CCN(C(=O)c2ccco2)CC1
+2023-07-16 00:41:51,558 root DEBUG Start search 29/100. SMILES: CCNC(=O)c1noc(-c2cc(Cl)c(O)cc2O)c1-c1cccc(N2CCN(C(C)=O)CC2)c1
+2023-07-16 00:42:47,215 root DEBUG Start search 30/100. SMILES: CN(C)CCN1C(=O)c2c(c3c4ccccc4[nH]c3c3ccccc23)C1=O
+2023-07-16 00:43:37,306 root DEBUG Start search 31/100. SMILES: COCc1cc(O)nc(N=C(N)Nc2ccc(C)cc2)n1
+2023-07-16 00:44:14,240 root DEBUG Start search 32/100. SMILES: CCN(CC)CC#CCC1(O)c2ccccc2-c2ccccc21
+2023-07-16 00:44:48,056 root DEBUG Start search 33/100. SMILES: CC1CCN(C(c2ccc(F)cn2)c2ccc(C(C)C(=O)O)cc2-c2ccc(C(F)(F)F)cc2)CC1
+2023-07-16 00:45:39,008 root DEBUG Start search 34/100. SMILES: Cn1cc(-c2ccc(-c3c4c(nn3C)CCc3cnc(Nc5cnn(Cc6ccncc6)c5)nc3-4)cc2)cn1
+2023-07-16 00:46:57,750 root DEBUG Start search 35/100. SMILES: [O-][n+]1nc2c(I)cnn2c2cc(OCc3ccc(Cl)cc3)ccc21
+2023-07-16 00:48:06,456 root DEBUG Start search 36/100. SMILES: CCN1C(=O)c2cccc3c(S(=O)(=O)Nc4ccccn4)ccc1c23
+2023-07-16 00:48:50,426 root DEBUG Start search 37/100. SMILES: CCCCC(C=O)NC(=O)OC(CCC)Cc1ccccc1
+2023-07-16 00:49:31,017 root DEBUG Start search 38/100. SMILES: C=CCn1nc(Br)c2c(Br)nc(CCC)n2c1=O
+2023-07-16 00:50:08,378 root DEBUG Start search 39/100. SMILES: O=C(C=Cc1ccc(C(F)(F)F)cc1)OCCc1c(-c2ccccc2Cl)c2cc(Cl)ccc2[nH]c1=O
+2023-07-16 00:50:58,897 root DEBUG Start search 40/100. SMILES: O=c1n(Cc2nc3ccc(C(F)(F)F)cn3c2CCCCO)c2cnccc2n1C1CC1
+2023-07-16 00:51:33,243 root DEBUG Start search 41/100. SMILES: O=C1NC2CCCCC2c2ccccc21
+2023-07-16 00:52:00,642 root DEBUG Start search 42/100. SMILES: CCN(CC)c1nc2ccc(C(O)(c3ccc(Cl)cc3)c3cncn3C)cc2c(Cl)c1N(C(=O)OC(C)(C)C)c1ccccc1
+2023-07-16 00:52:42,982 root DEBUG Start search 43/100. SMILES: CCN1CCN(c2cc(C(=O)Nc3ccc(C)c(Nc4ncnc5cnc(N6CCOCC6)nc45)c3)cc(C(C)(C)C#N)c2)CC1
+2023-07-16 00:53:24,004 root DEBUG Start search 44/100. SMILES: COc1cc(N2CC3(CCN(S(=O)(=O)C4CC4)C3)C2)ncn1
+2023-07-16 00:53:59,632 root DEBUG Start search 45/100. SMILES: CC1=C(C(=O)O)N2C(=O)C(NC(=O)C(N)c3cccc4sccc34)C2SC1
+2023-07-16 00:54:34,513 root DEBUG Start search 46/100. SMILES: C=CCN(C(=O)CCC(=O)Nc1cc(C)on1)C(C(=O)NC1CCCC1)c1ccc(OC)c(OC)c1
+2023-07-16 00:55:09,283 root DEBUG Start search 47/100. SMILES: CC1(C)c2cc(OCC(O)CO)ccc2C(=O)c2c1[nH]c1c(C(=O)O)c(C#N)ccc21
+2023-07-16 00:55:57,859 root DEBUG Start search 48/100. SMILES: Cc1nc(C)c(CN2CCN(S(C)(=O)=O)CC2)nc1C
+2023-07-16 00:56:35,060 root DEBUG Start search 49/100. SMILES: O=S(=O)(c1ccc(F)cn1)N1C(CO)CCC1c1ccc(F)cc1
+2023-07-16 00:57:06,402 root DEBUG Start search 50/100. SMILES: CC(C)=CCCC(C)=CCCC(C)=CCCC1CCc2cc(O)c(C)c(C)c2O1
+2023-07-16 00:57:32,503 root DEBUG Start search 51/100. SMILES: O=S(=O)(NC(CO)C1CCNCC1)c1ccc(Cl)s1
+2023-07-16 00:58:05,818 root DEBUG Start search 52/100. SMILES: Cc1cc(Nc2cc(C(F)(F)F)ccn2)nc(-c2cnc(C3(N)CCCc4cc(C(=O)O)ccc43)s2)c1
+2023-07-16 00:58:46,795 root DEBUG Start search 53/100. SMILES: Cc1cc(C(=O)NC(CC(=O)NCC(C)(C)C)C(=O)NC(CCc2ccccc2)C(=O)NCc2ccccc2Cl)no1
+2023-07-16 00:59:13,672 root DEBUG Start search 54/100. SMILES: Cc1cccc(-c2csc3ncnc(Sc4nnnn4C)c23)c1
+2023-07-16 00:59:50,303 root DEBUG Start search 55/100. SMILES: N#Cc1ccc(NC2CNC(C(=O)N3CCCC3C#N)C2)cc1C#N
+2023-07-16 01:00:20,792 root DEBUG Start search 56/100. SMILES: CC(C)Oc1cccc(F)c1C1CC(F)C(=O)N1Cc1ccc(OC(F)(F)F)cc1
+2023-07-16 01:01:05,224 root DEBUG Start search 57/100. SMILES: Cc1c(C(=O)C2CC2CN2CCC(N3CCCC3)CC2)sc2ccccc12
+2023-07-16 01:01:46,044 root DEBUG Start search 58/100. SMILES: CC(C)CCNC(=O)c1onc(CSc2ccccc2)c1C(=O)NCCC(C)C
+2023-07-16 01:02:40,110 root DEBUG Start search 59/100. SMILES: Oc1ccc2c(c1)CCN(Cc1ccc3c(c1)OCO3)C2c1ccc(OCCN2CCCC2)cc1
+2023-07-16 01:04:06,978 root DEBUG Start search 60/100. SMILES: N#Cc1c(N)ncnc1N1CCCC1c1nn2cccc2c(=O)n1-c1ccccc1
+2023-07-16 01:04:54,136 root DEBUG Start search 61/100. SMILES: CC(C)N(C)CC=CC(=O)N1CCc2sc3ncnc(Nc4ccc(Cl)c(Cl)c4)c3c2C1
+2023-07-16 01:05:15,968 root DEBUG Start search 62/100. SMILES: O=c1ccc2cnc3ccc(-c4cnc5ccccc5c4)cc3c2n1-c1ccc(S(=O)(=O)N2CCNCC2)cc1
+2023-07-16 01:06:30,474 root DEBUG Start search 63/100. SMILES: CCN(CC)CC(=O)Nc1ccc(O)c2c1C(=O)c1c(O)ccc(O)c1C2=O
+2023-07-16 01:07:13,609 root DEBUG Start search 64/100. SMILES: CCCCc1ncc(C=C2C(=O)N(CCCC)C(=O)N2CCc2ccccc2)n1Cc1ccc(C(=O)OC)cc1
+2023-07-16 01:07:52,249 root DEBUG Start search 65/100. SMILES: COC(=O)c1ccc(CN(CCCc2c(N)nc(N)nc2O)c2ccc([N+](=O)[O-])c(F)c2F)cc1
+2023-07-16 01:08:29,762 root DEBUG Start search 66/100. SMILES: NC(=O)NN=C1CCC(O)CC1CC(=O)O
+2023-07-16 01:08:39,321 root DEBUG Start search 67/100. SMILES: CCCCN1CCC(C(=O)CC)(c2cccc(O)c2)CC1
+2023-07-16 01:09:17,497 root DEBUG Start search 68/100. SMILES: CCN1C(=O)C(c2cccc(-c3cnn(C)c3)c2)C(=O)N(c2ccccc2)c2cc(C(F)(F)F)ccc21
+2023-07-16 01:10:11,329 root DEBUG Start search 69/100. SMILES: CCCc1c(C(=O)NCC(N)C(=O)O)[nH]c2cccc(Br)c12
+2023-07-16 01:10:55,692 root DEBUG Start search 70/100. SMILES: C=C(C)COc1cccc(CNC(CC(C)C)c2ncnn2C)c1
+2023-07-16 01:11:36,414 root DEBUG Start search 71/100. SMILES: COC(=O)c1ccc(OC)c(-c2cccc(C(CC(=O)O)c3nccs3)c2)c1
+2023-07-16 01:12:23,674 root DEBUG Start search 72/100. SMILES: Cc1c(CN(C)c2cccc3c2CCCC3)cnc2nc(N)nc(N)c12
+2023-07-16 01:12:56,375 root DEBUG Start search 73/100. SMILES: O=C(C=CNc1ccc([N+](=O)[O-])cc1)c1ccc2c(c1)CCCC2
+2023-07-16 01:13:24,377 root DEBUG Start search 74/100. SMILES: Cc1nc(N)ccc1CNC(=O)Cc1c(C#N)ccc(NCC(F)(F)c2ccccn2)c1F
+2023-07-16 01:13:45,635 root DEBUG Start search 75/100. SMILES: O=C(C1CCCCC1)N1CC(=O)N2CCc3ccc([N+](=O)[O-])cc3C2C1
+2023-07-16 01:14:27,461 root DEBUG Start search 76/100. SMILES: COc1ccc2c(CN3CCOCC3)cn(CCNC(C)=O)c2n1
+2023-07-16 01:15:06,738 root DEBUG Start search 77/100. SMILES: COCCn1c(SCc2nc(O)c3c(C)c(C(=O)OC)sc3n2)nc2ccccc21
+2023-07-16 01:15:55,703 root DEBUG Start search 78/100. SMILES: NC(=O)c1cccc(C2CC3CCC(C2)N3CCN(Cc2ccccc2)C(=O)C2(O)CC2)c1
+2023-07-16 01:16:46,360 root DEBUG Start search 79/100. SMILES: CC(=O)N(CC(Cc1c[nH]c2ccccc12)NC(=O)CN1CCN(c2ccccc2)CC1)c1ccccc1
+2023-07-16 01:17:31,880 root DEBUG Start search 80/100. SMILES: COc1ncc(Nc2ncc(C(C)(C)O)nc2-c2cc(N)nc(C)n2)cc1F
+2023-07-16 01:17:58,290 root DEBUG Start search 81/100. SMILES: Nc1nc(O)c2[nH]cc(Cc3cccs3)c2n1
+2023-07-16 01:18:26,295 root DEBUG Start search 82/100. SMILES: COc1ccc(C2=C(c3ccc(OCc4ccc5ccccc5n4)cc3)C(=O)N(C)C2)cc1
+2023-07-16 01:19:02,921 root DEBUG Start search 83/100. SMILES: CC(C)CNC(=O)C(Cc1c[nH]c2ccccc12)NC(=O)OCCCCN
+2023-07-16 01:19:49,934 root DEBUG Start search 84/100. SMILES: Cn1c(OC2CCN(c3ccc(CN4CCCCC4)cc3)CC2)nc(-c2ccncc2)cc1=O
+2023-07-16 01:20:36,617 root DEBUG Start search 85/100. SMILES: C=CC(=O)N1CCN(S(=O)(=O)c2ccc(Nc3ncc4c(n3)N(C)c3ccc(C)cc3C(=O)N4C)cc2)CC1
+2023-07-16 01:21:13,507 root DEBUG Start search 86/100. SMILES: CCN(c1ccc(OC)cc1)S(=O)(=O)c1c(C(=O)N2CCCCCC2)c(C)n(C)c1C
+2023-07-16 01:21:46,543 root DEBUG Start search 87/100. SMILES: COc1ccccc1-c1ccc(C(CC(=O)O)NC(=O)C2CCN2S(=O)(=O)c2cc(Cl)cc(Cl)c2)cc1
+2023-07-16 01:22:31,117 root DEBUG Start search 88/100. SMILES: CN1CCN(Cc2ccc(-c3cnc(N4CCOC(Cn5nnc6ncc(-c7cccc(C#N)c7)nc65)C4)nc3)cc2)CC1
+2023-07-16 01:23:38,432 root DEBUG Start search 89/100. SMILES: COc1cc(C(=O)C(=O)N2CCCCC2C(=O)OC(CCCc2ccccc2)CCCc2ccccn2)cc(OC)c1OC
+2023-07-16 01:24:18,095 root DEBUG Start search 90/100. SMILES: CC1(C)CC(=O)c2cc(Cl)c(NC3CCCC3)nc2C1
+2023-07-16 01:25:12,020 root DEBUG Start search 91/100. SMILES: CCNC(=O)C1(Nc2nc(NCc3ccccc3)nc(N3CC4CC3CN4C(=O)c3cccc(C(F)(F)F)c3)n2)Cc2ccccc2C1
+2023-07-16 01:26:00,886 root DEBUG Start search 92/100. SMILES: CCN(CC)CCNc1ccc(CO)c2oc3ccccc3c(=O)c12
+2023-07-16 01:26:39,374 root DEBUG Start search 93/100. SMILES: CN1C(C(=O)O)CCCC1C(=O)O
+2023-07-16 01:27:12,952 root DEBUG Start search 94/100. SMILES: CCCCN(CCCC)CCCOc1ccc(S(=O)(=O)c2c(C(C)C)nn3ccccc23)cc1
+2023-07-16 01:28:05,725 root DEBUG Start search 95/100. SMILES: Brc1cccc(-c2nsc(-c3cccc(Br)c3)n2)c1
+2023-07-16 01:28:40,237 root DEBUG Start search 96/100. SMILES: Cc1cccc(CNC(=O)c2cc(-c3nnn(CC4CCC(CO)CC4)n3)cc(C)n2)c1
+2023-07-16 01:29:03,478 root DEBUG Start search 97/100. SMILES: CC(=O)NC1c2c(ccc3ccc(=O)oc23)OC(C)(C)C1O
+2023-07-16 01:29:40,653 root DEBUG Start search 98/100. SMILES: Cc1cc(C)nc(N=C(N)NCc2nc3ccccc3[nH]2)n1
+2023-07-16 01:30:17,588 root DEBUG Start search 99/100. SMILES: Cc1c(C(=O)N2CCC(NC(=O)Nc3ccc(C#N)cc3)(c3ccccc3)CC2)nn(-c2ccc(Cl)cc2Cl)c1-c1ccc(Cl)cc1
+2023-07-16 01:31:12,985 root INFO Start search with Embedding-from-fingerprints-TIMES01
+2023-07-16 01:31:12,986 root DEBUG Start search 0/100. SMILES: CCOc1ccc(N(CC(=O)NC2CCCCC2)C(=O)CCCC(=O)Nc2ccccn2)cc1
+2023-07-16 01:31:51,535 root DEBUG Start search 1/100. SMILES: CN1CCC(=C2c3ccccc3Oc3ccc(Cl)cc32)CC1
+2023-07-16 01:32:32,378 root DEBUG Start search 2/100. SMILES: COc1cc(O)c2c(=O)cc(-c3cc(O)c(O)cc3Cc3cccc(Cl)c3)oc2c1
+2023-07-16 01:32:57,089 root DEBUG Start search 3/100. SMILES: N#CCCCSC(=S)n1ccnc1
+2023-07-16 01:33:28,395 root DEBUG Start search 4/100. SMILES: CSC(=O)C#CC(C)(C)N(C)Cc1ccccc1
+2023-07-16 01:33:58,729 root DEBUG Start search 5/100. SMILES: CC(=O)Nc1nc(C)c(-c2nc(C(C)(C)CCO)no2)s1
+2023-07-16 01:34:39,184 root DEBUG Start search 6/100. SMILES: NC(=O)C(CCC(F)(F)F)N(CCc1ncon1)S(=O)(=O)c1ccc(Cl)cc1
+2023-07-16 01:35:09,410 root DEBUG Start search 7/100. SMILES: NCC(=O)N1CC(N)CC1C(=O)NC(CCc1ccccc1)C(=O)Nc1ccc2ncccc2c1
+2023-07-16 01:35:52,961 root DEBUG Start search 8/100. SMILES: CCN(CC)C(=O)c1ccc(N(c2cccc(OC)c2)C2CCN(CC=C(C)C)CC2C)cc1
+2023-07-16 01:36:33,015 root DEBUG Start search 9/100. SMILES: N=C(N)NCCCC(NC(=O)CN1CCN(S(=O)(=O)c2ccc(-c3ccccn3)s2)CC1=O)C(=O)c1nccs1
+2023-07-16 01:36:52,060 root DEBUG Start search 10/100. SMILES: Cc1nc(NC2CCCC2)c2nn(C)c(-c3ccc(Cl)cc3Cl)c2n1
+2023-07-16 01:37:21,823 root DEBUG Start search 11/100. SMILES: C#CC(CC(=O)O)NC(=O)Cn1ccc2ccc(N3CCNCC3)cc2c1=O
+2023-07-16 01:38:02,064 root DEBUG Start search 12/100. SMILES: O=c1c(C=NNc2nc(N3CCOCC3)c3ccsc3n2)coc2ccccc12
+2023-07-16 01:38:30,196 root DEBUG Start search 13/100. SMILES: O=C(NC1CCCCC1)C1Cc2c(sc3ccccc23)CN1
+2023-07-16 01:39:04,797 root DEBUG Start search 14/100. SMILES: O=C1CSC(C23CC4CC(CC(C4)C2)C3)N1CCN1CCCCC1
+2023-07-16 01:39:43,571 root DEBUG Start search 15/100. SMILES: O=C1c2cccc3cccc(c23)C(=O)N1CCN1CCN(CC(O)COCc2ccc(Cl)cc2)CC1
+2023-07-16 01:40:08,004 root DEBUG Start search 16/100. SMILES: COc1ccc2oc(NC3CCN(Cc4ccccc4)CC3)cc(=O)c2c1
+2023-07-16 01:40:49,884 root DEBUG Start search 17/100. SMILES: Fc1cccc(CN2CCC(COc3nc4ccsc4n4cccc34)CC2)c1
+2023-07-16 01:41:15,048 root DEBUG Start search 18/100. SMILES: COCc1ccccc1C1C(C(=O)C(C)(C)C)C(=O)C(=O)N1c1ccc(-c2noc(C)n2)cc1
+2023-07-16 01:42:10,651 root DEBUG Start search 19/100. SMILES: CN(C(=O)c1ccccc1OC(F)(F)F)C1COc2nc([N+](=O)[O-])cn2C1
+2023-07-16 01:42:49,708 root DEBUG Start search 20/100. SMILES: O=C(NC1CC(Oc2ccc(-c3ccccc3)cc2)CC1O)C(c1ccccc1)c1ccccc1
+2023-07-16 01:43:22,953 root DEBUG Start search 21/100. SMILES: C=CC(=O)NCCCCC(NC(=O)OCc1ccc(C)cc1)C(=O)O
+2023-07-16 01:44:23,940 root DEBUG Start search 22/100. SMILES: Cc1cc(C=Nn2cnnc2)c(C)n1-c1cc(Cl)ccc1Cl
+2023-07-16 01:44:41,696 root DEBUG Start search 23/100. SMILES: N#Cc1nc(N2CCC(S(=O)(=O)c3ccc(F)cc3Cl)C2)cc(C(F)(F)F)n1
+2023-07-16 01:45:04,499 root DEBUG Start search 24/100. SMILES: CCCN(CCC1CCC(NS(=O)(=O)c2ccccc2)CC1)C1CCc2nc(N)sc2C1
+2023-07-16 01:45:44,955 root DEBUG Start search 25/100. SMILES: O=C(O)c1cn(C2CC2c2ccccc2)c2cc(N3CCNCC3)c(F)cc2c1=O
+2023-07-16 01:46:20,500 root DEBUG Start search 26/100. SMILES: CCc1c(C(=O)c2cccc3ccccc23)n(COCC=C(C)C)c(=O)[nH]c1=O
+2023-07-16 01:47:00,342 root DEBUG Start search 27/100. SMILES: COc1ccc(C(=O)Nc2cc(C(=O)NC(=N)N)ccc2OCCCN2CCN(Cc3ccc(OC)c(OC)c3OC)CC2)cc1
+2023-07-16 01:47:23,048 root DEBUG Start search 28/100. SMILES: CC(C)CC(c1nnnn1C(C)C)N1CCN(C(=O)c2ccco2)CC1
+2023-07-16 01:47:55,053 root DEBUG Start search 29/100. SMILES: CCNC(=O)c1noc(-c2cc(Cl)c(O)cc2O)c1-c1cccc(N2CCN(C(C)=O)CC2)c1
+2023-07-16 01:48:23,007 root DEBUG Start search 30/100. SMILES: CN(C)CCN1C(=O)c2c(c3c4ccccc4[nH]c3c3ccccc23)C1=O
+2023-07-16 01:49:09,971 root DEBUG Start search 31/100. SMILES: COCc1cc(O)nc(N=C(N)Nc2ccc(C)cc2)n1
+2023-07-16 01:49:38,929 root DEBUG Start search 32/100. SMILES: CCN(CC)CC#CCC1(O)c2ccccc2-c2ccccc21
+2023-07-16 01:50:09,418 root DEBUG Start search 33/100. SMILES: CC1CCN(C(c2ccc(F)cn2)c2ccc(C(C)C(=O)O)cc2-c2ccc(C(F)(F)F)cc2)CC1
+2023-07-16 01:50:49,827 root DEBUG Start search 34/100. SMILES: Cn1cc(-c2ccc(-c3c4c(nn3C)CCc3cnc(Nc5cnn(Cc6ccncc6)c5)nc3-4)cc2)cn1
+2023-07-16 01:51:49,313 root DEBUG Start search 35/100. SMILES: [O-][n+]1nc2c(I)cnn2c2cc(OCc3ccc(Cl)cc3)ccc21
+2023-07-16 01:52:36,790 root DEBUG Start search 36/100. SMILES: CCN1C(=O)c2cccc3c(S(=O)(=O)Nc4ccccn4)ccc1c23
+2023-07-16 01:53:12,581 root DEBUG Start search 37/100. SMILES: CCCCC(C=O)NC(=O)OC(CCC)Cc1ccccc1
+2023-07-16 01:53:45,689 root DEBUG Start search 38/100. SMILES: C=CCn1nc(Br)c2c(Br)nc(CCC)n2c1=O
+2023-07-16 01:54:13,469 root DEBUG Start search 39/100. SMILES: O=C(C=Cc1ccc(C(F)(F)F)cc1)OCCc1c(-c2ccccc2Cl)c2cc(Cl)ccc2[nH]c1=O
+2023-07-16 01:54:55,983 root DEBUG Start search 40/100. SMILES: O=c1n(Cc2nc3ccc(C(F)(F)F)cn3c2CCCCO)c2cnccc2n1C1CC1
+2023-07-16 01:55:24,798 root DEBUG Start search 41/100. SMILES: O=C1NC2CCCCC2c2ccccc21
+2023-07-16 01:55:49,406 root DEBUG Start search 42/100. SMILES: CCN(CC)c1nc2ccc(C(O)(c3ccc(Cl)cc3)c3cncn3C)cc2c(Cl)c1N(C(=O)OC(C)(C)C)c1ccccc1
+2023-07-16 01:56:27,148 root DEBUG Start search 43/100. SMILES: CCN1CCN(c2cc(C(=O)Nc3ccc(C)c(Nc4ncnc5cnc(N6CCOCC6)nc45)c3)cc(C(C)(C)C#N)c2)CC1
+2023-07-16 01:56:59,831 root DEBUG Start search 44/100. SMILES: COc1cc(N2CC3(CCN(S(=O)(=O)C4CC4)C3)C2)ncn1
+2023-07-16 01:57:28,839 root DEBUG Start search 45/100. SMILES: CC1=C(C(=O)O)N2C(=O)C(NC(=O)C(N)c3cccc4sccc34)C2SC1
+2023-07-16 01:57:57,842 root DEBUG Start search 46/100. SMILES: C=CCN(C(=O)CCC(=O)Nc1cc(C)on1)C(C(=O)NC1CCCC1)c1ccc(OC)c(OC)c1
+2023-07-16 01:58:28,350 root DEBUG Start search 47/100. SMILES: CC1(C)c2cc(OCC(O)CO)ccc2C(=O)c2c1[nH]c1c(C(=O)O)c(C#N)ccc21
+2023-07-16 01:59:07,563 root DEBUG Start search 48/100. SMILES: Cc1nc(C)c(CN2CCN(S(C)(=O)=O)CC2)nc1C
+2023-07-16 01:59:40,057 root DEBUG Start search 49/100. SMILES: O=S(=O)(c1ccc(F)cn1)N1C(CO)CCC1c1ccc(F)cc1
+2023-07-16 02:00:02,768 root DEBUG Start search 50/100. SMILES: CC(C)=CCCC(C)=CCCC(C)=CCCC1CCc2cc(O)c(C)c(C)c2O1
+2023-07-16 02:00:59,952 root DEBUG Start search 51/100. SMILES: O=S(=O)(NC(CO)C1CCNCC1)c1ccc(Cl)s1
+2023-07-16 02:01:29,053 root DEBUG Start search 52/100. SMILES: Cc1cc(Nc2cc(C(F)(F)F)ccn2)nc(-c2cnc(C3(N)CCCc4cc(C(=O)O)ccc43)s2)c1
+2023-07-16 02:02:05,184 root DEBUG Start search 53/100. SMILES: Cc1cc(C(=O)NC(CC(=O)NCC(C)(C)C)C(=O)NC(CCc2ccccc2)C(=O)NCc2ccccc2Cl)no1
+2023-07-16 02:02:26,772 root DEBUG Start search 54/100. SMILES: Cc1cccc(-c2csc3ncnc(Sc4nnnn4C)c23)c1
+2023-07-16 02:02:56,649 root DEBUG Start search 55/100. SMILES: N#Cc1ccc(NC2CNC(C(=O)N3CCCC3C#N)C2)cc1C#N
+2023-07-16 02:03:21,971 root DEBUG Start search 56/100. SMILES: CC(C)Oc1cccc(F)c1C1CC(F)C(=O)N1Cc1ccc(OC(F)(F)F)cc1
+2023-07-16 02:03:56,929 root DEBUG Start search 57/100. SMILES: Cc1c(C(=O)C2CC2CN2CCC(N3CCCC3)CC2)sc2ccccc12
+2023-07-16 02:04:31,111 root DEBUG Start search 58/100. SMILES: CC(C)CCNC(=O)c1onc(CSc2ccccc2)c1C(=O)NCCC(C)C
+2023-07-16 02:05:09,916 root DEBUG Start search 59/100. SMILES: Oc1ccc2c(c1)CCN(Cc1ccc3c(c1)OCO3)C2c1ccc(OCCN2CCCC2)cc1
+2023-07-16 02:05:58,286 root DEBUG Start search 60/100. SMILES: N#Cc1c(N)ncnc1N1CCCC1c1nn2cccc2c(=O)n1-c1ccccc1
+2023-07-16 02:06:38,157 root DEBUG Start search 61/100. SMILES: CC(C)N(C)CC=CC(=O)N1CCc2sc3ncnc(Nc4ccc(Cl)c(Cl)c4)c3c2C1
+2023-07-16 02:06:55,226 root DEBUG Start search 62/100. SMILES: O=c1ccc2cnc3ccc(-c4cnc5ccccc5c4)cc3c2n1-c1ccc(S(=O)(=O)N2CCNCC2)cc1
+2023-07-16 02:07:46,919 root DEBUG Start search 63/100. SMILES: CCN(CC)CC(=O)Nc1ccc(O)c2c1C(=O)c1c(O)ccc(O)c1C2=O
+2023-07-16 02:08:26,595 root DEBUG Start search 64/100. SMILES: CCCCc1ncc(C=C2C(=O)N(CCCC)C(=O)N2CCc2ccccc2)n1Cc1ccc(C(=O)OC)cc1
+2023-07-16 02:08:56,523 root DEBUG Start search 65/100. SMILES: COC(=O)c1ccc(CN(CCCc2c(N)nc(N)nc2O)c2ccc([N+](=O)[O-])c(F)c2F)cc1
+2023-07-16 02:09:31,958 root DEBUG Start search 66/100. SMILES: NC(=O)NN=C1CCC(O)CC1CC(=O)O
+2023-07-16 02:09:41,410 root DEBUG Start search 67/100. SMILES: CCCCN1CCC(C(=O)CC)(c2cccc(O)c2)CC1
+2023-07-16 02:10:12,661 root DEBUG Start search 68/100. SMILES: CCN1C(=O)C(c2cccc(-c3cnn(C)c3)c2)C(=O)N(c2ccccc2)c2cc(C(F)(F)F)ccc21
+2023-07-16 02:10:56,223 root DEBUG Start search 69/100. SMILES: CCCc1c(C(=O)NCC(N)C(=O)O)[nH]c2cccc(Br)c12
+2023-07-16 02:11:34,961 root DEBUG Start search 70/100. SMILES: C=C(C)COc1cccc(CNC(CC(C)C)c2ncnn2C)c1
+2023-07-16 02:12:05,115 root DEBUG Start search 71/100. SMILES: COC(=O)c1ccc(OC)c(-c2cccc(C(CC(=O)O)c3nccs3)c2)c1
+2023-07-16 02:12:40,251 root DEBUG Start search 72/100. SMILES: Cc1c(CN(C)c2cccc3c2CCCC3)cnc2nc(N)nc(N)c12
+2023-07-16 02:13:08,537 root DEBUG Start search 73/100. SMILES: O=C(C=CNc1ccc([N+](=O)[O-])cc1)c1ccc2c(c1)CCCC2
+2023-07-16 02:13:33,090 root DEBUG Start search 74/100. SMILES: Cc1nc(N)ccc1CNC(=O)Cc1c(C#N)ccc(NCC(F)(F)c2ccccn2)c1F
+2023-07-16 02:13:53,200 root DEBUG Start search 75/100. SMILES: O=C(C1CCCCC1)N1CC(=O)N2CCc3ccc([N+](=O)[O-])cc3C2C1
+2023-07-16 02:14:26,934 root DEBUG Start search 76/100. SMILES: COc1ccc2c(CN3CCOCC3)cn(CCNC(C)=O)c2n1
+2023-07-16 02:14:58,396 root DEBUG Start search 77/100. SMILES: COCCn1c(SCc2nc(O)c3c(C)c(C(=O)OC)sc3n2)nc2ccccc21
+2023-07-16 02:15:30,276 root DEBUG Start search 78/100. SMILES: NC(=O)c1cccc(C2CC3CCC(C2)N3CCN(Cc2ccccc2)C(=O)C2(O)CC2)c1
+2023-07-16 02:16:10,757 root DEBUG Start search 79/100. SMILES: CC(=O)N(CC(Cc1c[nH]c2ccccc12)NC(=O)CN1CCN(c2ccccc2)CC1)c1ccccc1
+2023-07-16 02:16:48,218 root DEBUG Start search 80/100. SMILES: COc1ncc(Nc2ncc(C(C)(C)O)nc2-c2cc(N)nc(C)n2)cc1F
+2023-07-16 02:17:11,296 root DEBUG Start search 81/100. SMILES: Nc1nc(O)c2[nH]cc(Cc3cccs3)c2n1
+2023-07-16 02:17:32,188 root DEBUG Start search 82/100. SMILES: COc1ccc(C2=C(c3ccc(OCc4ccc5ccccc5n4)cc3)C(=O)N(C)C2)cc1
+2023-07-16 02:18:03,887 root DEBUG Start search 83/100. SMILES: CC(C)CNC(=O)C(Cc1c[nH]c2ccccc12)NC(=O)OCCCCN
+2023-07-16 02:18:41,098 root DEBUG Start search 84/100. SMILES: Cn1c(OC2CCN(c3ccc(CN4CCCCC4)cc3)CC2)nc(-c2ccncc2)cc1=O
+2023-07-16 02:19:17,635 root DEBUG Start search 85/100. SMILES: C=CC(=O)N1CCN(S(=O)(=O)c2ccc(Nc3ncc4c(n3)N(C)c3ccc(C)cc3C(=O)N4C)cc2)CC1
+2023-07-16 02:19:43,088 root DEBUG Start search 86/100. SMILES: CCN(c1ccc(OC)cc1)S(=O)(=O)c1c(C(=O)N2CCCCCC2)c(C)n(C)c1C
+2023-07-16 02:20:09,244 root DEBUG Start search 87/100. SMILES: COc1ccccc1-c1ccc(C(CC(=O)O)NC(=O)C2CCN2S(=O)(=O)c2cc(Cl)cc(Cl)c2)cc1
+2023-07-16 02:20:46,311 root DEBUG Start search 88/100. SMILES: CN1CCN(Cc2ccc(-c3cnc(N4CCOC(Cn5nnc6ncc(-c7cccc(C#N)c7)nc65)C4)nc3)cc2)CC1
+2023-07-16 02:21:45,947 root DEBUG Start search 89/100. SMILES: COc1cc(C(=O)C(=O)N2CCCCC2C(=O)OC(CCCc2ccccc2)CCCc2ccccn2)cc(OC)c1OC
+2023-07-16 02:22:02,880 root DEBUG Start search 90/100. SMILES: CC1(C)CC(=O)c2cc(Cl)c(NC3CCCC3)nc2C1
+2023-07-16 02:22:40,400 root DEBUG Start search 91/100. SMILES: CCNC(=O)C1(Nc2nc(NCc3ccccc3)nc(N3CC4CC3CN4C(=O)c3cccc(C(F)(F)F)c3)n2)Cc2ccccc2C1
+2023-07-16 02:23:12,207 root DEBUG Start search 92/100. SMILES: CCN(CC)CCNc1ccc(CO)c2oc3ccccc3c(=O)c12
+2023-07-16 02:23:45,255 root DEBUG Start search 93/100. SMILES: CN1C(C(=O)O)CCCC1C(=O)O
+2023-07-16 02:24:14,107 root DEBUG Start search 94/100. SMILES: CCCCN(CCCC)CCCOc1ccc(S(=O)(=O)c2c(C(C)C)nn3ccccc23)cc1
+2023-07-16 02:24:57,278 root DEBUG Start search 95/100. SMILES: Brc1cccc(-c2nsc(-c3cccc(Br)c3)n2)c1
+2023-07-16 02:25:26,540 root DEBUG Start search 96/100. SMILES: Cc1cccc(CNC(=O)c2cc(-c3nnn(CC4CCC(CO)CC4)n3)cc(C)n2)c1
+2023-07-16 02:25:50,454 root DEBUG Start search 97/100. SMILES: CC(=O)NC1c2c(ccc3ccc(=O)oc23)OC(C)(C)C1O
+2023-07-16 02:26:19,845 root DEBUG Start search 98/100. SMILES: Cc1cc(C)nc(N=C(N)NCc2nc3ccccc3[nH]2)n1
+2023-07-16 02:26:47,375 root DEBUG Start search 99/100. SMILES: Cc1c(C(=O)N2CCC(NC(=O)Nc3ccc(C#N)cc3)(c3ccccc3)CC2)nn(-c2ccc(Cl)cc2Cl)c1-c1ccc(Cl)cc1
+2023-07-16 02:27:36,253 root INFO Start search with Embedding-from-fingerprints-TIMES03
+2023-07-16 02:27:36,254 root DEBUG Start search 0/100. SMILES: CCOc1ccc(N(CC(=O)NC2CCCCC2)C(=O)CCCC(=O)Nc2ccccn2)cc1
+2023-07-16 02:28:01,783 root DEBUG Start search 1/100. SMILES: CN1CCC(=C2c3ccccc3Oc3ccc(Cl)cc32)CC1
+2023-07-16 02:28:43,475 root DEBUG Start search 2/100. SMILES: COc1cc(O)c2c(=O)cc(-c3cc(O)c(O)cc3Cc3cccc(Cl)c3)oc2c1
+2023-07-16 02:29:28,110 root DEBUG Start search 3/100. SMILES: N#CCCCSC(=S)n1ccnc1
+2023-07-16 02:30:00,723 root DEBUG Start search 4/100. SMILES: CSC(=O)C#CC(C)(C)N(C)Cc1ccccc1
+2023-07-16 02:30:31,161 root DEBUG Start search 5/100. SMILES: CC(=O)Nc1nc(C)c(-c2nc(C(C)(C)CCO)no2)s1
+2023-07-16 02:31:14,111 root DEBUG Start search 6/100. SMILES: NC(=O)C(CCC(F)(F)F)N(CCc1ncon1)S(=O)(=O)c1ccc(Cl)cc1
+2023-07-16 02:31:47,119 root DEBUG Start search 7/100. SMILES: NCC(=O)N1CC(N)CC1C(=O)NC(CCc1ccccc1)C(=O)Nc1ccc2ncccc2c1
+2023-07-16 02:32:18,987 root DEBUG Start search 8/100. SMILES: CCN(CC)C(=O)c1ccc(N(c2cccc(OC)c2)C2CCN(CC=C(C)C)CC2C)cc1
+2023-07-16 02:32:59,344 root DEBUG Start search 9/100. SMILES: N=C(N)NCCCC(NC(=O)CN1CCN(S(=O)(=O)c2ccc(-c3ccccn3)s2)CC1=O)C(=O)c1nccs1
+2023-07-16 02:33:20,683 root DEBUG Start search 10/100. SMILES: Cc1nc(NC2CCCC2)c2nn(C)c(-c3ccc(Cl)cc3Cl)c2n1
+2023-07-16 02:33:51,263 root DEBUG Start search 11/100. SMILES: C#CC(CC(=O)O)NC(=O)Cn1ccc2ccc(N3CCNCC3)cc2c1=O
+2023-07-16 02:34:32,553 root DEBUG Start search 12/100. SMILES: O=c1c(C=NNc2nc(N3CCOCC3)c3ccsc3n2)coc2ccccc12
+2023-07-16 02:35:02,463 root DEBUG Start search 13/100. SMILES: O=C(NC1CCCCC1)C1Cc2c(sc3ccccc23)CN1
+2023-07-16 02:35:37,545 root DEBUG Start search 14/100. SMILES: O=C1CSC(C23CC4CC(CC(C4)C2)C3)N1CCN1CCCCC1
+2023-07-16 02:36:16,144 root DEBUG Start search 15/100. SMILES: O=C1c2cccc3cccc(c23)C(=O)N1CCN1CCN(CC(O)COCc2ccc(Cl)cc2)CC1
+2023-07-16 02:36:48,465 root DEBUG Start search 16/100. SMILES: COc1ccc2oc(NC3CCN(Cc4ccccc4)CC3)cc(=O)c2c1
+2023-07-16 02:37:29,773 root DEBUG Start search 17/100. SMILES: Fc1cccc(CN2CCC(COc3nc4ccsc4n4cccc34)CC2)c1
+2023-07-16 02:37:59,585 root DEBUG Start search 18/100. SMILES: COCc1ccccc1C1C(C(=O)C(C)(C)C)C(=O)C(=O)N1c1ccc(-c2noc(C)n2)cc1
+2023-07-16 02:38:56,810 root DEBUG Start search 19/100. SMILES: CN(C(=O)c1ccccc1OC(F)(F)F)C1COc2nc([N+](=O)[O-])cn2C1
+2023-07-16 02:39:36,746 root DEBUG Start search 20/100. SMILES: O=C(NC1CC(Oc2ccc(-c3ccccc3)cc2)CC1O)C(c1ccccc1)c1ccccc1
+2023-07-16 02:40:11,515 root DEBUG Start search 21/100. SMILES: C=CC(=O)NCCCCC(NC(=O)OCc1ccc(C)cc1)C(=O)O
+2023-07-16 02:41:08,233 root DEBUG Start search 22/100. SMILES: Cc1cc(C=Nn2cnnc2)c(C)n1-c1cc(Cl)ccc1Cl
+2023-07-16 02:41:26,052 root DEBUG Start search 23/100. SMILES: N#Cc1nc(N2CCC(S(=O)(=O)c3ccc(F)cc3Cl)C2)cc(C(F)(F)F)n1
+2023-07-16 02:41:49,868 root DEBUG Start search 24/100. SMILES: CCCN(CCC1CCC(NS(=O)(=O)c2ccccc2)CC1)C1CCc2nc(N)sc2C1
+2023-07-16 02:42:25,817 root DEBUG Start search 25/100. SMILES: O=C(O)c1cn(C2CC2c2ccccc2)c2cc(N3CCNCC3)c(F)cc2c1=O
+2023-07-16 02:43:00,902 root DEBUG Start search 26/100. SMILES: CCc1c(C(=O)c2cccc3ccccc23)n(COCC=C(C)C)c(=O)[nH]c1=O
+2023-07-16 02:43:54,214 root DEBUG Start search 27/100. SMILES: COc1ccc(C(=O)Nc2cc(C(=O)NC(=N)N)ccc2OCCCN2CCN(Cc3ccc(OC)c(OC)c3OC)CC2)cc1
+2023-07-16 02:44:16,675 root DEBUG Start search 28/100. SMILES: CC(C)CC(c1nnnn1C(C)C)N1CCN(C(=O)c2ccco2)CC1
+2023-07-16 02:44:47,263 root DEBUG Start search 29/100. SMILES: CCNC(=O)c1noc(-c2cc(Cl)c(O)cc2O)c1-c1cccc(N2CCN(C(C)=O)CC2)c1
+2023-07-16 02:45:36,848 root DEBUG Start search 30/100. SMILES: CN(C)CCN1C(=O)c2c(c3c4ccccc4[nH]c3c3ccccc23)C1=O
+2023-07-16 02:46:24,432 root DEBUG Start search 31/100. SMILES: COCc1cc(O)nc(N=C(N)Nc2ccc(C)cc2)n1
+2023-07-16 02:46:53,149 root DEBUG Start search 32/100. SMILES: CCN(CC)CC#CCC1(O)c2ccccc2-c2ccccc21
+2023-07-16 02:47:24,372 root DEBUG Start search 33/100. SMILES: CC1CCN(C(c2ccc(F)cn2)c2ccc(C(C)C(=O)O)cc2-c2ccc(C(F)(F)F)cc2)CC1
+2023-07-16 02:48:06,804 root DEBUG Start search 34/100. SMILES: Cn1cc(-c2ccc(-c3c4c(nn3C)CCc3cnc(Nc5cnn(Cc6ccncc6)c5)nc3-4)cc2)cn1
+2023-07-16 02:49:08,541 root DEBUG Start search 35/100. SMILES: [O-][n+]1nc2c(I)cnn2c2cc(OCc3ccc(Cl)cc3)ccc21
+2023-07-16 02:49:56,872 root DEBUG Start search 36/100. SMILES: CCN1C(=O)c2cccc3c(S(=O)(=O)Nc4ccccn4)ccc1c23
+2023-07-16 02:50:32,366 root DEBUG Start search 37/100. SMILES: CCCCC(C=O)NC(=O)OC(CCC)Cc1ccccc1
+2023-07-16 02:51:07,099 root DEBUG Start search 38/100. SMILES: C=CCn1nc(Br)c2c(Br)nc(CCC)n2c1=O
+2023-07-16 02:51:35,274 root DEBUG Start search 39/100. SMILES: O=C(C=Cc1ccc(C(F)(F)F)cc1)OCCc1c(-c2ccccc2Cl)c2cc(Cl)ccc2[nH]c1=O
+2023-07-16 02:52:19,684 root DEBUG Start search 40/100. SMILES: O=c1n(Cc2nc3ccc(C(F)(F)F)cn3c2CCCCO)c2cnccc2n1C1CC1
+2023-07-16 02:52:48,873 root DEBUG Start search 41/100. SMILES: O=C1NC2CCCCC2c2ccccc21
+2023-07-16 02:53:13,696 root DEBUG Start search 42/100. SMILES: CCN(CC)c1nc2ccc(C(O)(c3ccc(Cl)cc3)c3cncn3C)cc2c(Cl)c1N(C(=O)OC(C)(C)C)c1ccccc1
+2023-07-16 02:53:56,321 root DEBUG Start search 43/100. SMILES: CCN1CCN(c2cc(C(=O)Nc3ccc(C)c(Nc4ncnc5cnc(N6CCOCC6)nc45)c3)cc(C(C)(C)C#N)c2)CC1
+2023-07-16 02:54:28,886 root DEBUG Start search 44/100. SMILES: COc1cc(N2CC3(CCN(S(=O)(=O)C4CC4)C3)C2)ncn1
+2023-07-16 02:54:58,742 root DEBUG Start search 45/100. SMILES: CC1=C(C(=O)O)N2C(=O)C(NC(=O)C(N)c3cccc4sccc34)C2SC1
+2023-07-16 02:55:26,248 root DEBUG Start search 46/100. SMILES: C=CCN(C(=O)CCC(=O)Nc1cc(C)on1)C(C(=O)NC1CCCC1)c1ccc(OC)c(OC)c1
+2023-07-16 02:55:53,528 root DEBUG Start search 47/100. SMILES: CC1(C)c2cc(OCC(O)CO)ccc2C(=O)c2c1[nH]c1c(C(=O)O)c(C#N)ccc21
+2023-07-16 02:56:33,514 root DEBUG Start search 48/100. SMILES: Cc1nc(C)c(CN2CCN(S(C)(=O)=O)CC2)nc1C
+2023-07-16 02:57:05,874 root DEBUG Start search 49/100. SMILES: O=S(=O)(c1ccc(F)cn1)N1C(CO)CCC1c1ccc(F)cc1
+2023-07-16 02:57:28,603 root DEBUG Start search 50/100. SMILES: CC(C)=CCCC(C)=CCCC(C)=CCCC1CCc2cc(O)c(C)c(C)c2O1
+2023-07-16 02:58:13,822 root DEBUG Start search 51/100. SMILES: O=S(=O)(NC(CO)C1CCNCC1)c1ccc(Cl)s1
+2023-07-16 02:58:42,692 root DEBUG Start search 52/100. SMILES: Cc1cc(Nc2cc(C(F)(F)F)ccn2)nc(-c2cnc(C3(N)CCCc4cc(C(=O)O)ccc43)s2)c1
+2023-07-16 02:59:21,787 root DEBUG Start search 53/100. SMILES: Cc1cc(C(=O)NC(CC(=O)NCC(C)(C)C)C(=O)NC(CCc2ccccc2)C(=O)NCc2ccccc2Cl)no1
+2023-07-16 02:59:47,143 root DEBUG Start search 54/100. SMILES: Cc1cccc(-c2csc3ncnc(Sc4nnnn4C)c23)c1
+2023-07-16 03:00:18,180 root DEBUG Start search 55/100. SMILES: N#Cc1ccc(NC2CNC(C(=O)N3CCCC3C#N)C2)cc1C#N
+2023-07-16 03:00:43,073 root DEBUG Start search 56/100. SMILES: CC(C)Oc1cccc(F)c1C1CC(F)C(=O)N1Cc1ccc(OC(F)(F)F)cc1
+2023-07-16 03:01:18,172 root DEBUG Start search 57/100. SMILES: Cc1c(C(=O)C2CC2CN2CCC(N3CCCC3)CC2)sc2ccccc12
+2023-07-16 03:01:53,919 root DEBUG Start search 58/100. SMILES: CC(C)CCNC(=O)c1onc(CSc2ccccc2)c1C(=O)NCCC(C)C
+2023-07-16 03:02:33,289 root DEBUG Start search 59/100. SMILES: Oc1ccc2c(c1)CCN(Cc1ccc3c(c1)OCO3)C2c1ccc(OCCN2CCCC2)cc1
+2023-07-16 03:03:22,298 root DEBUG Start search 60/100. SMILES: N#Cc1c(N)ncnc1N1CCCC1c1nn2cccc2c(=O)n1-c1ccccc1
+2023-07-16 03:04:01,308 root DEBUG Start search 61/100. SMILES: CC(C)N(C)CC=CC(=O)N1CCc2sc3ncnc(Nc4ccc(Cl)c(Cl)c4)c3c2C1
+2023-07-16 03:04:19,953 root DEBUG Start search 62/100. SMILES: O=c1ccc2cnc3ccc(-c4cnc5ccccc5c4)cc3c2n1-c1ccc(S(=O)(=O)N2CCNCC2)cc1
+2023-07-16 03:05:13,943 root DEBUG Start search 63/100. SMILES: CCN(CC)CC(=O)Nc1ccc(O)c2c1C(=O)c1c(O)ccc(O)c1C2=O
+2023-07-16 03:05:53,103 root DEBUG Start search 64/100. SMILES: CCCCc1ncc(C=C2C(=O)N(CCCC)C(=O)N2CCc2ccccc2)n1Cc1ccc(C(=O)OC)cc1
+2023-07-16 03:06:24,299 root DEBUG Start search 65/100. SMILES: COC(=O)c1ccc(CN(CCCc2c(N)nc(N)nc2O)c2ccc([N+](=O)[O-])c(F)c2F)cc1
+2023-07-16 03:06:58,188 root DEBUG Start search 66/100. SMILES: NC(=O)NN=C1CCC(O)CC1CC(=O)O
+2023-07-16 03:07:10,974 root DEBUG Start search 67/100. SMILES: CCCCN1CCC(C(=O)CC)(c2cccc(O)c2)CC1
+2023-07-16 03:07:42,693 root DEBUG Start search 68/100. SMILES: CCN1C(=O)C(c2cccc(-c3cnn(C)c3)c2)C(=O)N(c2ccccc2)c2cc(C(F)(F)F)ccc21
+2023-07-16 03:08:26,654 root DEBUG Start search 69/100. SMILES: CCCc1c(C(=O)NCC(N)C(=O)O)[nH]c2cccc(Br)c12
+2023-07-16 03:09:03,978 root DEBUG Start search 70/100. SMILES: C=C(C)COc1cccc(CNC(CC(C)C)c2ncnn2C)c1
+2023-07-16 03:09:35,499 root DEBUG Start search 71/100. SMILES: COC(=O)c1ccc(OC)c(-c2cccc(C(CC(=O)O)c3nccs3)c2)c1
+2023-07-16 03:10:11,315 root DEBUG Start search 72/100. SMILES: Cc1c(CN(C)c2cccc3c2CCCC3)cnc2nc(N)nc(N)c12
+2023-07-16 03:10:39,955 root DEBUG Start search 73/100. SMILES: O=C(C=CNc1ccc([N+](=O)[O-])cc1)c1ccc2c(c1)CCCC2
+2023-07-16 03:11:04,801 root DEBUG Start search 74/100. SMILES: Cc1nc(N)ccc1CNC(=O)Cc1c(C#N)ccc(NCC(F)(F)c2ccccn2)c1F
+2023-07-16 03:11:22,577 root DEBUG Start search 75/100. SMILES: O=C(C1CCCCC1)N1CC(=O)N2CCc3ccc([N+](=O)[O-])cc3C2C1
+2023-07-16 03:11:56,637 root DEBUG Start search 76/100. SMILES: COc1ccc2c(CN3CCOCC3)cn(CCNC(C)=O)c2n1
+2023-07-16 03:12:28,719 root DEBUG Start search 77/100. SMILES: COCCn1c(SCc2nc(O)c3c(C)c(C(=O)OC)sc3n2)nc2ccccc21
+2023-07-16 03:13:05,590 root DEBUG Start search 78/100. SMILES: NC(=O)c1cccc(C2CC3CCC(C2)N3CCN(Cc2ccccc2)C(=O)C2(O)CC2)c1
+2023-07-16 03:13:47,207 root DEBUG Start search 79/100. SMILES: CC(=O)N(CC(Cc1c[nH]c2ccccc12)NC(=O)CN1CCN(c2ccccc2)CC1)c1ccccc1
+2023-07-16 03:14:25,429 root DEBUG Start search 80/100. SMILES: COc1ncc(Nc2ncc(C(C)(C)O)nc2-c2cc(N)nc(C)n2)cc1F
+2023-07-16 03:15:03,370 root DEBUG Start search 81/100. SMILES: Nc1nc(O)c2[nH]cc(Cc3cccs3)c2n1
+2023-07-16 03:15:30,762 root DEBUG Start search 82/100. SMILES: COc1ccc(C2=C(c3ccc(OCc4ccc5ccccc5n4)cc3)C(=O)N(C)C2)cc1
+2023-07-16 03:16:01,806 root DEBUG Start search 83/100. SMILES: CC(C)CNC(=O)C(Cc1c[nH]c2ccccc12)NC(=O)OCCCCN
+2023-07-16 03:16:38,556 root DEBUG Start search 84/100. SMILES: Cn1c(OC2CCN(c3ccc(CN4CCCCC4)cc3)CC2)nc(-c2ccncc2)cc1=O
+2023-07-16 03:17:14,515 root DEBUG Start search 85/100. SMILES: C=CC(=O)N1CCN(S(=O)(=O)c2ccc(Nc3ncc4c(n3)N(C)c3ccc(C)cc3C(=O)N4C)cc2)CC1
+2023-07-16 03:17:40,008 root DEBUG Start search 86/100. SMILES: CCN(c1ccc(OC)cc1)S(=O)(=O)c1c(C(=O)N2CCCCCC2)c(C)n(C)c1C
+2023-07-16 03:18:06,659 root DEBUG Start search 87/100. SMILES: COc1ccccc1-c1ccc(C(CC(=O)O)NC(=O)C2CCN2S(=O)(=O)c2cc(Cl)cc(Cl)c2)cc1
+2023-07-16 03:18:46,505 root DEBUG Start search 88/100. SMILES: CN1CCN(Cc2ccc(-c3cnc(N4CCOC(Cn5nnc6ncc(-c7cccc(C#N)c7)nc65)C4)nc3)cc2)CC1
+2023-07-16 03:19:46,826 root DEBUG Start search 89/100. SMILES: COc1cc(C(=O)C(=O)N2CCCCC2C(=O)OC(CCCc2ccccc2)CCCc2ccccn2)cc(OC)c1OC
+2023-07-16 03:20:20,992 root DEBUG Start search 90/100. SMILES: CC1(C)CC(=O)c2cc(Cl)c(NC3CCCC3)nc2C1
+2023-07-16 03:20:57,758 root DEBUG Start search 91/100. SMILES: CCNC(=O)C1(Nc2nc(NCc3ccccc3)nc(N3CC4CC3CN4C(=O)c3cccc(C(F)(F)F)c3)n2)Cc2ccccc2C1
+2023-07-16 03:21:36,636 root DEBUG Start search 92/100. SMILES: CCN(CC)CCNc1ccc(CO)c2oc3ccccc3c(=O)c12
+2023-07-16 03:22:09,565 root DEBUG Start search 93/100. SMILES: CN1C(C(=O)O)CCCC1C(=O)O
+2023-07-16 03:22:38,138 root DEBUG Start search 94/100. SMILES: CCCCN(CCCC)CCCOc1ccc(S(=O)(=O)c2c(C(C)C)nn3ccccc23)cc1
+2023-07-16 03:23:20,238 root DEBUG Start search 95/100. SMILES: Brc1cccc(-c2nsc(-c3cccc(Br)c3)n2)c1
+2023-07-16 03:23:49,722 root DEBUG Start search 96/100. SMILES: Cc1cccc(CNC(=O)c2cc(-c3nnn(CC4CCC(CO)CC4)n3)cc(C)n2)c1
+2023-07-16 03:24:13,229 root DEBUG Start search 97/100. SMILES: CC(=O)NC1c2c(ccc3ccc(=O)oc23)OC(C)(C)C1O
+2023-07-16 03:24:44,372 root DEBUG Start search 98/100. SMILES: Cc1cc(C)nc(N=C(N)NCc2nc3ccccc3[nH]2)n1
+2023-07-16 03:25:11,663 root DEBUG Start search 99/100. SMILES: Cc1c(C(=O)N2CCC(NC(=O)Nc3ccc(C#N)cc3)(c3ccccc3)CC2)nn(-c2ccc(Cl)cc2Cl)c1-c1ccc(Cl)cc1
+2023-07-16 03:26:02,881 root INFO Start search with Embedding-from-gnn-TIMES01
+2023-07-16 03:26:02,881 root DEBUG Start search 0/100. SMILES: CCOc1ccc(N(CC(=O)NC2CCCCC2)C(=O)CCCC(=O)Nc2ccccn2)cc1
+2023-07-16 03:27:04,345 root DEBUG Start search 1/100. SMILES: CN1CCC(=C2c3ccccc3Oc3ccc(Cl)cc32)CC1
+2023-07-16 03:27:21,680 deepchem.utils.molecule_feature_utils INFO input S not in allowable set ['SP', 'SP2', 'SP3']:
+2023-07-16 03:27:21,701 deepchem.utils.molecule_feature_utils INFO input S not in allowable set ['SP', 'SP2', 'SP3']:
+2023-07-16 03:27:39,379 deepchem.utils.molecule_feature_utils INFO input S not in allowable set ['SP', 'SP2', 'SP3']:
+2023-07-16 03:27:43,256 deepchem.utils.molecule_feature_utils INFO input S not in allowable set ['SP', 'SP2', 'SP3']:
+2023-07-16 03:27:54,935 root DEBUG Start search 2/100. SMILES: COc1cc(O)c2c(=O)cc(-c3cc(O)c(O)cc3Cc3cccc(Cl)c3)oc2c1
+2023-07-16 03:28:10,579 root DEBUG Start search 3/100. SMILES: N#CCCCSC(=S)n1ccnc1
+2023-07-16 03:28:48,401 root DEBUG Start search 4/100. SMILES: CSC(=O)C#CC(C)(C)N(C)Cc1ccccc1
+2023-07-16 03:29:24,274 root DEBUG Start search 5/100. SMILES: CC(=O)Nc1nc(C)c(-c2nc(C(C)(C)CCO)no2)s1
+2023-07-16 03:30:27,235 root DEBUG Start search 6/100. SMILES: NC(=O)C(CCC(F)(F)F)N(CCc1ncon1)S(=O)(=O)c1ccc(Cl)cc1
+2023-07-16 03:31:09,574 root DEBUG Start search 7/100. SMILES: NCC(=O)N1CC(N)CC1C(=O)NC(CCc1ccccc1)C(=O)Nc1ccc2ncccc2c1
+2023-07-16 03:31:50,589 root DEBUG Start search 8/100. SMILES: CCN(CC)C(=O)c1ccc(N(c2cccc(OC)c2)C2CCN(CC=C(C)C)CC2C)cc1
+2023-07-16 03:32:40,640 root DEBUG Start search 9/100. SMILES: N=C(N)NCCCC(NC(=O)CN1CCN(S(=O)(=O)c2ccc(-c3ccccn3)s2)CC1=O)C(=O)c1nccs1
+2023-07-16 03:33:11,369 root DEBUG Start search 10/100. SMILES: Cc1nc(NC2CCCC2)c2nn(C)c(-c3ccc(Cl)cc3Cl)c2n1
+2023-07-16 03:33:47,277 root DEBUG Start search 11/100. SMILES: C#CC(CC(=O)O)NC(=O)Cn1ccc2ccc(N3CCNCC3)cc2c1=O
+2023-07-16 03:34:38,455 root DEBUG Start search 12/100. SMILES: O=c1c(C=NNc2nc(N3CCOCC3)c3ccsc3n2)coc2ccccc12
+2023-07-16 03:35:13,546 root DEBUG Start search 13/100. SMILES: O=C(NC1CCCCC1)C1Cc2c(sc3ccccc23)CN1
+2023-07-16 03:35:59,507 root DEBUG Start search 14/100. SMILES: O=C1CSC(C23CC4CC(CC(C4)C2)C3)N1CCN1CCCCC1
+2023-07-16 03:37:00,599 root DEBUG Start search 15/100. SMILES: O=C1c2cccc3cccc(c23)C(=O)N1CCN1CCN(CC(O)COCc2ccc(Cl)cc2)CC1
+2023-07-16 03:37:45,502 root DEBUG Start search 16/100. SMILES: COc1ccc2oc(NC3CCN(Cc4ccccc4)CC3)cc(=O)c2c1
+2023-07-16 03:38:47,485 root DEBUG Start search 17/100. SMILES: Fc1cccc(CN2CCC(COc3nc4ccsc4n4cccc34)CC2)c1
+2023-07-16 03:38:54,358 root DEBUG Start search 18/100. SMILES: COCc1ccccc1C1C(C(=O)C(C)(C)C)C(=O)C(=O)N1c1ccc(-c2noc(C)n2)cc1
+2023-07-16 03:40:34,920 root DEBUG Start search 19/100. SMILES: CN(C(=O)c1ccccc1OC(F)(F)F)C1COc2nc([N+](=O)[O-])cn2C1
+2023-07-16 03:41:16,584 root DEBUG Start search 20/100. SMILES: O=C(NC1CC(Oc2ccc(-c3ccccc3)cc2)CC1O)C(c1ccccc1)c1ccccc1
+2023-07-16 03:42:06,214 root DEBUG Start search 21/100. SMILES: C=CC(=O)NCCCCC(NC(=O)OCc1ccc(C)cc1)C(=O)O
+2023-07-16 03:43:27,028 root DEBUG Start search 22/100. SMILES: Cc1cc(C=Nn2cnnc2)c(C)n1-c1cc(Cl)ccc1Cl
+2023-07-16 03:43:47,522 root DEBUG Start search 23/100. SMILES: N#Cc1nc(N2CCC(S(=O)(=O)c3ccc(F)cc3Cl)C2)cc(C(F)(F)F)n1
+2023-07-16 03:44:16,593 root DEBUG Start search 24/100. SMILES: CCCN(CCC1CCC(NS(=O)(=O)c2ccccc2)CC1)C1CCc2nc(N)sc2C1
+2023-07-16 03:45:01,198 root DEBUG Start search 25/100. SMILES: O=C(O)c1cn(C2CC2c2ccccc2)c2cc(N3CCNCC3)c(F)cc2c1=O
+2023-07-16 03:45:44,848 root DEBUG Start search 26/100. SMILES: CCc1c(C(=O)c2cccc3ccccc23)n(COCC=C(C)C)c(=O)[nH]c1=O
+2023-07-16 03:46:54,337 root DEBUG Start search 27/100. SMILES: COc1ccc(C(=O)Nc2cc(C(=O)NC(=N)N)ccc2OCCCN2CCN(Cc3ccc(OC)c(OC)c3OC)CC2)cc1
+2023-07-16 03:47:22,112 root DEBUG Start search 28/100. SMILES: CC(C)CC(c1nnnn1C(C)C)N1CCN(C(=O)c2ccco2)CC1
+2023-07-16 03:48:03,427 root DEBUG Start search 29/100. SMILES: CCNC(=O)c1noc(-c2cc(Cl)c(O)cc2O)c1-c1cccc(N2CCN(C(C)=O)CC2)c1
+2023-07-16 03:49:05,345 root DEBUG Start search 30/100. SMILES: CN(C)CCN1C(=O)c2c(c3c4ccccc4[nH]c3c3ccccc23)C1=O
+2023-07-16 03:50:05,226 root DEBUG Start search 31/100. SMILES: COCc1cc(O)nc(N=C(N)Nc2ccc(C)cc2)n1
+2023-07-16 03:50:45,271 root DEBUG Start search 32/100. SMILES: CCN(CC)CC#CCC1(O)c2ccccc2-c2ccccc21
+2023-07-16 03:50:47,012 deepchem.utils.molecule_feature_utils INFO input S not in allowable set ['SP', 'SP2', 'SP3']:
+2023-07-16 03:50:48,949 deepchem.utils.molecule_feature_utils INFO input S not in allowable set ['SP', 'SP2', 'SP3']:
+2023-07-16 03:50:52,865 deepchem.utils.molecule_feature_utils INFO input S not in allowable set ['SP', 'SP2', 'SP3']:
+2023-07-16 03:50:54,932 deepchem.utils.molecule_feature_utils INFO input S not in allowable set ['SP', 'SP2', 'SP3']:
+2023-07-16 03:50:55,777 deepchem.utils.molecule_feature_utils INFO input S not in allowable set ['SP', 'SP2', 'SP3']:
+2023-07-16 03:51:00,680 deepchem.utils.molecule_feature_utils INFO input S not in allowable set ['SP', 'SP2', 'SP3']:
+2023-07-16 03:51:04,694 deepchem.utils.molecule_feature_utils INFO input S not in allowable set ['SP', 'SP2', 'SP3']:
+2023-07-16 03:51:05,924 deepchem.utils.molecule_feature_utils INFO input S not in allowable set ['SP', 'SP2', 'SP3']:
+2023-07-16 03:51:11,995 deepchem.utils.molecule_feature_utils INFO input S not in allowable set ['SP', 'SP2', 'SP3']:
+2023-07-16 03:51:18,377 deepchem.utils.molecule_feature_utils INFO input S not in allowable set ['SP', 'SP2', 'SP3']:
+2023-07-16 03:51:18,420 deepchem.utils.molecule_feature_utils INFO input S not in allowable set ['SP', 'SP2', 'SP3']:
+2023-07-16 03:51:21,398 deepchem.utils.molecule_feature_utils INFO input S not in allowable set ['SP', 'SP2', 'SP3']:
+2023-07-16 03:51:23,230 root DEBUG Start search 33/100. SMILES: CC1CCN(C(c2ccc(F)cn2)c2ccc(C(C)C(=O)O)cc2-c2ccc(C(F)(F)F)cc2)CC1
+2023-07-16 03:52:20,524 root DEBUG Start search 34/100. SMILES: Cn1cc(-c2ccc(-c3c4c(nn3C)CCc3cnc(Nc5cnn(Cc6ccncc6)c5)nc3-4)cc2)cn1
+2023-07-16 03:53:59,417 root DEBUG Start search 35/100. SMILES: [O-][n+]1nc2c(I)cnn2c2cc(OCc3ccc(Cl)cc3)ccc21
+2023-07-16 03:55:10,411 root DEBUG Start search 36/100. SMILES: CCN1C(=O)c2cccc3c(S(=O)(=O)Nc4ccccn4)ccc1c23
+2023-07-16 03:55:56,787 root DEBUG Start search 37/100. SMILES: CCCCC(C=O)NC(=O)OC(CCC)Cc1ccccc1
+2023-07-16 03:56:42,102 root DEBUG Start search 38/100. SMILES: C=CCn1nc(Br)c2c(Br)nc(CCC)n2c1=O
+2023-07-16 03:57:17,561 root DEBUG Start search 39/100. SMILES: O=C(C=Cc1ccc(C(F)(F)F)cc1)OCCc1c(-c2ccccc2Cl)c2cc(Cl)ccc2[nH]c1=O
+2023-07-16 03:58:17,011 root DEBUG Start search 40/100. SMILES: O=c1n(Cc2nc3ccc(C(F)(F)F)cn3c2CCCCO)c2cnccc2n1C1CC1
+2023-07-16 03:58:43,320 root DEBUG Start search 41/100. SMILES: O=C1NC2CCCCC2c2ccccc21
+2023-07-16 03:59:11,360 root DEBUG Start search 42/100. SMILES: CCN(CC)c1nc2ccc(C(O)(c3ccc(Cl)cc3)c3cncn3C)cc2c(Cl)c1N(C(=O)OC(C)(C)C)c1ccccc1
+2023-07-16 04:00:02,502 root DEBUG Start search 43/100. SMILES: CCN1CCN(c2cc(C(=O)Nc3ccc(C)c(Nc4ncnc5cnc(N6CCOCC6)nc45)c3)cc(C(C)(C)C#N)c2)CC1
+2023-07-16 04:00:51,355 root DEBUG Start search 44/100. SMILES: COc1cc(N2CC3(CCN(S(=O)(=O)C4CC4)C3)C2)ncn1
+2023-07-16 04:01:25,868 root DEBUG Start search 45/100. SMILES: CC1=C(C(=O)O)N2C(=O)C(NC(=O)C(N)c3cccc4sccc34)C2SC1
+2023-07-16 04:02:04,764 root DEBUG Start search 46/100. SMILES: C=CCN(C(=O)CCC(=O)Nc1cc(C)on1)C(C(=O)NC1CCCC1)c1ccc(OC)c(OC)c1
+2023-07-16 04:02:47,927 root DEBUG Start search 47/100. SMILES: CC1(C)c2cc(OCC(O)CO)ccc2C(=O)c2c1[nH]c1c(C(=O)O)c(C#N)ccc21
+2023-07-16 04:03:49,106 root DEBUG Start search 48/100. SMILES: Cc1nc(C)c(CN2CCN(S(C)(=O)=O)CC2)nc1C
+2023-07-16 04:04:23,840 root DEBUG Start search 49/100. SMILES: O=S(=O)(c1ccc(F)cn1)N1C(CO)CCC1c1ccc(F)cc1
+2023-07-16 04:04:54,987 root DEBUG Start search 50/100. SMILES: CC(C)=CCCC(C)=CCCC(C)=CCCC1CCc2cc(O)c(C)c(C)c2O1
+2023-07-16 04:05:26,878 root DEBUG Start search 51/100. SMILES: O=S(=O)(NC(CO)C1CCNCC1)c1ccc(Cl)s1
+2023-07-16 04:06:02,600 root DEBUG Start search 52/100. SMILES: Cc1cc(Nc2cc(C(F)(F)F)ccn2)nc(-c2cnc(C3(N)CCCc4cc(C(=O)O)ccc43)s2)c1
+2023-07-16 04:06:59,067 root DEBUG Start search 53/100. SMILES: Cc1cc(C(=O)NC(CC(=O)NCC(C)(C)C)C(=O)NC(CCc2ccccc2)C(=O)NCc2ccccc2Cl)no1
+2023-07-16 04:07:32,045 root DEBUG Start search 54/100. SMILES: Cc1cccc(-c2csc3ncnc(Sc4nnnn4C)c23)c1
+2023-07-16 04:08:10,406 root DEBUG Start search 55/100. SMILES: N#Cc1ccc(NC2CNC(C(=O)N3CCCC3C#N)C2)cc1C#N
+2023-07-16 04:08:39,654 root DEBUG Start search 56/100. SMILES: CC(C)Oc1cccc(F)c1C1CC(F)C(=O)N1Cc1ccc(OC(F)(F)F)cc1
+2023-07-16 04:09:25,316 root DEBUG Start search 57/100. SMILES: Cc1c(C(=O)C2CC2CN2CCC(N3CCCC3)CC2)sc2ccccc12
+2023-07-16 04:10:11,018 root DEBUG Start search 58/100. SMILES: CC(C)CCNC(=O)c1onc(CSc2ccccc2)c1C(=O)NCCC(C)C
+2023-07-16 04:11:06,509 root DEBUG Start search 59/100. SMILES: Oc1ccc2c(c1)CCN(Cc1ccc3c(c1)OCO3)C2c1ccc(OCCN2CCCC2)cc1
+2023-07-16 04:12:15,106 root DEBUG Start search 60/100. SMILES: N#Cc1c(N)ncnc1N1CCCC1c1nn2cccc2c(=O)n1-c1ccccc1
+2023-07-16 04:13:05,354 root DEBUG Start search 61/100. SMILES: CC(C)N(C)CC=CC(=O)N1CCc2sc3ncnc(Nc4ccc(Cl)c(Cl)c4)c3c2C1
+2023-07-16 04:13:28,963 root DEBUG Start search 62/100. SMILES: O=c1ccc2cnc3ccc(-c4cnc5ccccc5c4)cc3c2n1-c1ccc(S(=O)(=O)N2CCNCC2)cc1
+2023-07-16 04:14:55,876 root DEBUG Start search 63/100. SMILES: CCN(CC)CC(=O)Nc1ccc(O)c2c1C(=O)c1c(O)ccc(O)c1C2=O
+2023-07-16 04:15:44,058 root DEBUG Start search 64/100. SMILES: CCCCc1ncc(C=C2C(=O)N(CCCC)C(=O)N2CCc2ccccc2)n1Cc1ccc(C(=O)OC)cc1
+2023-07-16 04:16:32,017 root DEBUG Start search 65/100. SMILES: COC(=O)c1ccc(CN(CCCc2c(N)nc(N)nc2O)c2ccc([N+](=O)[O-])c(F)c2F)cc1
+2023-07-16 04:17:18,170 root DEBUG Start search 66/100. SMILES: NC(=O)NN=C1CCC(O)CC1CC(=O)O
+2023-07-16 04:17:53,029 root DEBUG Start search 67/100. SMILES: CCCCN1CCC(C(=O)CC)(c2cccc(O)c2)CC1
+2023-07-16 04:18:34,607 root DEBUG Start search 68/100. SMILES: CCN1C(=O)C(c2cccc(-c3cnn(C)c3)c2)C(=O)N(c2ccccc2)c2cc(C(F)(F)F)ccc21
+2023-07-16 04:19:37,718 root DEBUG Start search 69/100. SMILES: CCCc1c(C(=O)NCC(N)C(=O)O)[nH]c2cccc(Br)c12
+2023-07-16 04:20:19,890 root DEBUG Start search 70/100. SMILES: C=C(C)COc1cccc(CNC(CC(C)C)c2ncnn2C)c1
+2023-07-16 04:21:00,528 root DEBUG Start search 71/100. SMILES: COC(=O)c1ccc(OC)c(-c2cccc(C(CC(=O)O)c3nccs3)c2)c1
+2023-07-16 04:21:46,528 root DEBUG Start search 72/100. SMILES: Cc1c(CN(C)c2cccc3c2CCCC3)cnc2nc(N)nc(N)c12
+2023-07-16 04:22:34,134 root DEBUG Start search 73/100. SMILES: O=C(C=CNc1ccc([N+](=O)[O-])cc1)c1ccc2c(c1)CCCC2
+2023-07-16 04:23:19,378 root DEBUG Start search 74/100. SMILES: Cc1nc(N)ccc1CNC(=O)Cc1c(C#N)ccc(NCC(F)(F)c2ccccn2)c1F
+2023-07-16 04:23:57,362 root DEBUG Start search 75/100. SMILES: O=C(C1CCCCC1)N1CC(=O)N2CCc3ccc([N+](=O)[O-])cc3C2C1
+2023-07-16 04:25:02,757 root DEBUG Start search 76/100. SMILES: COc1ccc2c(CN3CCOCC3)cn(CCNC(C)=O)c2n1
+2023-07-16 04:26:02,888 root DEBUG Start search 77/100. SMILES: COCCn1c(SCc2nc(O)c3c(C)c(C(=O)OC)sc3n2)nc2ccccc21
+2023-07-16 04:26:52,542 root DEBUG Start search 78/100. SMILES: NC(=O)c1cccc(C2CC3CCC(C2)N3CCN(Cc2ccccc2)C(=O)C2(O)CC2)c1
+2023-07-16 04:28:17,627 root DEBUG Start search 79/100. SMILES: CC(=O)N(CC(Cc1c[nH]c2ccccc12)NC(=O)CN1CCN(c2ccccc2)CC1)c1ccccc1
+2023-07-16 04:29:34,137 root DEBUG Start search 80/100. SMILES: COc1ncc(Nc2ncc(C(C)(C)O)nc2-c2cc(N)nc(C)n2)cc1F
+2023-07-16 04:30:43,805 root DEBUG Start search 81/100. SMILES: Nc1nc(O)c2[nH]cc(Cc3cccs3)c2n1
+2023-07-16 04:31:07,262 deepchem.utils.molecule_feature_utils INFO input S not in allowable set ['SP', 'SP2', 'SP3']:
+2023-07-16 04:31:34,921 root DEBUG Start search 82/100. SMILES: COc1ccc(C2=C(c3ccc(OCc4ccc5ccccc5n4)cc3)C(=O)N(C)C2)cc1
+2023-07-16 04:32:40,619 root DEBUG Start search 83/100. SMILES: CC(C)CNC(=O)C(Cc1c[nH]c2ccccc12)NC(=O)OCCCCN
+2023-07-16 04:33:36,947 root DEBUG Start search 84/100. SMILES: Cn1c(OC2CCN(c3ccc(CN4CCCCC4)cc3)CC2)nc(-c2ccncc2)cc1=O
+2023-07-16 04:34:47,550 root DEBUG Start search 85/100. SMILES: C=CC(=O)N1CCN(S(=O)(=O)c2ccc(Nc3ncc4c(n3)N(C)c3ccc(C)cc3C(=O)N4C)cc2)CC1
+2023-07-16 04:35:46,081 root DEBUG Start search 86/100. SMILES: CCN(c1ccc(OC)cc1)S(=O)(=O)c1c(C(=O)N2CCCCCC2)c(C)n(C)c1C
+2023-07-16 04:36:35,341 root DEBUG Start search 87/100. SMILES: COc1ccccc1-c1ccc(C(CC(=O)O)NC(=O)C2CCN2S(=O)(=O)c2cc(Cl)cc(Cl)c2)cc1
+2023-07-16 04:37:45,376 root DEBUG Start search 88/100. SMILES: CN1CCN(Cc2ccc(-c3cnc(N4CCOC(Cn5nnc6ncc(-c7cccc(C#N)c7)nc65)C4)nc3)cc2)CC1
+2023-07-16 04:39:43,292 root DEBUG Start search 89/100. SMILES: COc1cc(C(=O)C(=O)N2CCCCC2C(=O)OC(CCCc2ccccc2)CCCc2ccccn2)cc(OC)c1OC
+2023-07-16 04:40:37,795 root DEBUG Start search 90/100. SMILES: CC1(C)CC(=O)c2cc(Cl)c(NC3CCCC3)nc2C1
+2023-07-16 04:41:22,565 deepchem.utils.molecule_feature_utils INFO input S not in allowable set ['SP', 'SP2', 'SP3']:
+2023-07-16 04:41:39,945 deepchem.utils.molecule_feature_utils INFO input S not in allowable set ['SP', 'SP2', 'SP3']:
+2023-07-16 04:41:55,203 deepchem.utils.molecule_feature_utils INFO input S not in allowable set ['SP', 'SP2', 'SP3']:
+2023-07-16 04:42:00,735 root DEBUG Start search 91/100. SMILES: CCNC(=O)C1(Nc2nc(NCc3ccccc3)nc(N3CC4CC3CN4C(=O)c3cccc(C(F)(F)F)c3)n2)Cc2ccccc2C1
+2023-07-16 04:43:37,272 root DEBUG Start search 92/100. SMILES: CCN(CC)CCNc1ccc(CO)c2oc3ccccc3c(=O)c12
+2023-07-16 04:44:38,165 root DEBUG Start search 93/100. SMILES: CN1C(C(=O)O)CCCC1C(=O)O
+2023-07-16 04:45:27,967 root DEBUG Start search 94/100. SMILES: CCCCN(CCCC)CCCOc1ccc(S(=O)(=O)c2c(C(C)C)nn3ccccc23)cc1
+2023-07-16 04:47:31,396 root DEBUG Start search 95/100. SMILES: Brc1cccc(-c2nsc(-c3cccc(Br)c3)n2)c1
+2023-07-16 04:48:20,278 root DEBUG Start search 96/100. SMILES: Cc1cccc(CNC(=O)c2cc(-c3nnn(CC4CCC(CO)CC4)n3)cc(C)n2)c1
+2023-07-16 04:49:09,699 root DEBUG Start search 97/100. SMILES: CC(=O)NC1c2c(ccc3ccc(=O)oc23)OC(C)(C)C1O
+2023-07-16 04:50:09,755 root DEBUG Start search 98/100. SMILES: Cc1cc(C)nc(N=C(N)NCc2nc3ccccc3[nH]2)n1
+2023-07-16 04:51:03,753 root DEBUG Start search 99/100. SMILES: Cc1c(C(=O)N2CCC(NC(=O)Nc3ccc(C#N)cc3)(c3ccccc3)CC2)nn(-c2ccc(Cl)cc2Cl)c1-c1ccc(Cl)cc1
+2023-07-16 04:53:00,287 root INFO Start search with Embedding-from-gnn-TIMES03
+2023-07-16 04:53:00,288 root DEBUG Start search 0/100. SMILES: CCOc1ccc(N(CC(=O)NC2CCCCC2)C(=O)CCCC(=O)Nc2ccccn2)cc1
+2023-07-16 04:54:27,573 root DEBUG Start search 1/100. SMILES: CN1CCC(=C2c3ccccc3Oc3ccc(Cl)cc32)CC1
+2023-07-16 04:54:50,911 deepchem.utils.molecule_feature_utils INFO input S not in allowable set ['SP', 'SP2', 'SP3']:
+2023-07-16 04:54:50,935 deepchem.utils.molecule_feature_utils INFO input S not in allowable set ['SP', 'SP2', 'SP3']:
+2023-07-16 04:55:15,290 deepchem.utils.molecule_feature_utils INFO input S not in allowable set ['SP', 'SP2', 'SP3']:
+2023-07-16 04:55:19,813 deepchem.utils.molecule_feature_utils INFO input S not in allowable set ['SP', 'SP2', 'SP3']:
+2023-07-16 04:55:47,289 root DEBUG Start search 2/100. SMILES: COc1cc(O)c2c(=O)cc(-c3cc(O)c(O)cc3Cc3cccc(Cl)c3)oc2c1
+2023-07-16 04:57:12,448 root DEBUG Start search 3/100. SMILES: N#CCCCSC(=S)n1ccnc1
+2023-07-16 04:58:14,250 root DEBUG Start search 4/100. SMILES: CSC(=O)C#CC(C)(C)N(C)Cc1ccccc1
+2023-07-16 04:59:13,838 root DEBUG Start search 5/100. SMILES: CC(=O)Nc1nc(C)c(-c2nc(C(C)(C)CCO)no2)s1
+2023-07-16 05:00:21,506 root DEBUG Start search 6/100. SMILES: NC(=O)C(CCC(F)(F)F)N(CCc1ncon1)S(=O)(=O)c1ccc(Cl)cc1
+2023-07-16 05:01:29,940 root DEBUG Start search 7/100. SMILES: NCC(=O)N1CC(N)CC1C(=O)NC(CCc1ccccc1)C(=O)Nc1ccc2ncccc2c1
+2023-07-16 05:03:18,607 root DEBUG Start search 8/100. SMILES: CCN(CC)C(=O)c1ccc(N(c2cccc(OC)c2)C2CCN(CC=C(C)C)CC2C)cc1
+2023-07-16 05:04:40,989 root DEBUG Start search 9/100. SMILES: N=C(N)NCCCC(NC(=O)CN1CCN(S(=O)(=O)c2ccc(-c3ccccn3)s2)CC1=O)C(=O)c1nccs1
+2023-07-16 05:05:31,730 root DEBUG Start search 10/100. SMILES: Cc1nc(NC2CCCC2)c2nn(C)c(-c3ccc(Cl)cc3Cl)c2n1
+2023-07-16 05:06:28,914 root DEBUG Start search 11/100. SMILES: C#CC(CC(=O)O)NC(=O)Cn1ccc2ccc(N3CCNCC3)cc2c1=O
+2023-07-16 05:07:49,750 root DEBUG Start search 12/100. SMILES: O=c1c(C=NNc2nc(N3CCOCC3)c3ccsc3n2)coc2ccccc12
+2023-07-16 05:08:44,831 root DEBUG Start search 13/100. SMILES: O=C(NC1CCCCC1)C1Cc2c(sc3ccccc23)CN1
+2023-07-16 05:10:19,161 root DEBUG Start search 14/100. SMILES: O=C1CSC(C23CC4CC(CC(C4)C2)C3)N1CCN1CCCCC1
+2023-07-16 05:11:56,168 root DEBUG Start search 15/100. SMILES: O=C1c2cccc3cccc(c23)C(=O)N1CCN1CCN(CC(O)COCc2ccc(Cl)cc2)CC1
+2023-07-16 05:13:15,537 root DEBUG Start search 16/100. SMILES: COc1ccc2oc(NC3CCN(Cc4ccccc4)CC3)cc(=O)c2c1
+2023-07-16 05:14:51,078 root DEBUG Start search 17/100. SMILES: Fc1cccc(CN2CCC(COc3nc4ccsc4n4cccc34)CC2)c1
+2023-07-16 05:15:52,599 root DEBUG Start search 18/100. SMILES: COCc1ccccc1C1C(C(=O)C(C)(C)C)C(=O)C(=O)N1c1ccc(-c2noc(C)n2)cc1
+2023-07-16 05:18:40,313 root DEBUG Start search 19/100. SMILES: CN(C(=O)c1ccccc1OC(F)(F)F)C1COc2nc([N+](=O)[O-])cn2C1
+2023-07-16 05:19:54,740 root DEBUG Start search 20/100. SMILES: O=C(NC1CC(Oc2ccc(-c3ccccc3)cc2)CC1O)C(c1ccccc1)c1ccccc1
+2023-07-16 05:21:19,783 root DEBUG Start search 21/100. SMILES: C=CC(=O)NCCCCC(NC(=O)OCc1ccc(C)cc1)C(=O)O
+2023-07-16 05:23:32,055 root DEBUG Start search 22/100. SMILES: Cc1cc(C=Nn2cnnc2)c(C)n1-c1cc(Cl)ccc1Cl
+2023-07-16 05:24:01,078 root DEBUG Start search 23/100. SMILES: N#Cc1nc(N2CCC(S(=O)(=O)c3ccc(F)cc3Cl)C2)cc(C(F)(F)F)n1
+2023-07-16 05:24:42,683 root DEBUG Start search 24/100. SMILES: CCCN(CCC1CCC(NS(=O)(=O)c2ccccc2)CC1)C1CCc2nc(N)sc2C1
+2023-07-16 05:26:10,814 root DEBUG Start search 25/100. SMILES: O=C(O)c1cn(C2CC2c2ccccc2)c2cc(N3CCNCC3)c(F)cc2c1=O
+2023-07-16 05:27:17,573 root DEBUG Start search 26/100. SMILES: CCc1c(C(=O)c2cccc3ccccc23)n(COCC=C(C)C)c(=O)[nH]c1=O
+2023-07-16 05:29:18,417 root DEBUG Start search 27/100. SMILES: COc1ccc(C(=O)Nc2cc(C(=O)NC(=N)N)ccc2OCCCN2CCN(Cc3ccc(OC)c(OC)c3OC)CC2)cc1
+2023-07-16 05:30:06,157 root DEBUG Start search 28/100. SMILES: CC(C)CC(c1nnnn1C(C)C)N1CCN(C(=O)c2ccco2)CC1
+2023-07-16 05:31:12,976 root DEBUG Start search 29/100. SMILES: CCNC(=O)c1noc(-c2cc(Cl)c(O)cc2O)c1-c1cccc(N2CCN(C(C)=O)CC2)c1
+2023-07-16 05:32:52,872 root DEBUG Start search 30/100. SMILES: CN(C)CCN1C(=O)c2c(c3c4ccccc4[nH]c3c3ccccc23)C1=O
+2023-07-16 05:34:43,085 root DEBUG Start search 31/100. SMILES: COCc1cc(O)nc(N=C(N)Nc2ccc(C)cc2)n1
+2023-07-16 05:36:05,975 root DEBUG Start search 32/100. SMILES: CCN(CC)CC#CCC1(O)c2ccccc2-c2ccccc21
+2023-07-16 05:36:08,026 deepchem.utils.molecule_feature_utils INFO input S not in allowable set ['SP', 'SP2', 'SP3']:
+2023-07-16 05:36:11,561 deepchem.utils.molecule_feature_utils INFO input S not in allowable set ['SP', 'SP2', 'SP3']:
+2023-07-16 05:36:17,831 deepchem.utils.molecule_feature_utils INFO input S not in allowable set ['SP', 'SP2', 'SP3']:
+2023-07-16 05:36:21,532 deepchem.utils.molecule_feature_utils INFO input S not in allowable set ['SP', 'SP2', 'SP3']:
+2023-07-16 05:36:22,648 deepchem.utils.molecule_feature_utils INFO input S not in allowable set ['SP', 'SP2', 'SP3']:
+2023-07-16 05:36:31,733 deepchem.utils.molecule_feature_utils INFO input S not in allowable set ['SP', 'SP2', 'SP3']:
+2023-07-16 05:36:36,863 deepchem.utils.molecule_feature_utils INFO input S not in allowable set ['SP', 'SP2', 'SP3']:
+2023-07-16 05:36:42,112 deepchem.utils.molecule_feature_utils INFO input S not in allowable set ['SP', 'SP2', 'SP3']:
+2023-07-16 05:36:51,514 deepchem.utils.molecule_feature_utils INFO input S not in allowable set ['SP', 'SP2', 'SP3']:
+2023-07-16 05:37:01,677 deepchem.utils.molecule_feature_utils INFO input S not in allowable set ['SP', 'SP2', 'SP3']:
+2023-07-16 05:37:01,745 deepchem.utils.molecule_feature_utils INFO input S not in allowable set ['SP', 'SP2', 'SP3']:
+2023-07-16 05:37:06,477 deepchem.utils.molecule_feature_utils INFO input S not in allowable set ['SP', 'SP2', 'SP3']:
+2023-07-16 05:37:06,944 deepchem.utils.molecule_feature_utils INFO input S not in allowable set ['SP', 'SP2', 'SP3']:
+2023-07-16 05:37:15,966 deepchem.utils.molecule_feature_utils INFO input S not in allowable set ['SP', 'SP2', 'SP3']:
+2023-07-16 05:37:19,114 root DEBUG Start search 33/100. SMILES: CC1CCN(C(c2ccc(F)cn2)c2ccc(C(C)C(=O)O)cc2-c2ccc(C(F)(F)F)cc2)CC1
+2023-07-16 05:39:11,535 root DEBUG Start search 34/100. SMILES: Cn1cc(-c2ccc(-c3c4c(nn3C)CCc3cnc(Nc5cnn(Cc6ccncc6)c5)nc3-4)cc2)cn1
+2023-07-16 05:42:00,084 root DEBUG Start search 35/100. SMILES: [O-][n+]1nc2c(I)cnn2c2cc(OCc3ccc(Cl)cc3)ccc21
+2023-07-16 05:44:03,402 root DEBUG Start search 36/100. SMILES: CCN1C(=O)c2cccc3c(S(=O)(=O)Nc4ccccn4)ccc1c23
+2023-07-16 05:45:17,605 root DEBUG Start search 37/100. SMILES: CCCCC(C=O)NC(=O)OC(CCC)Cc1ccccc1
+2023-07-16 05:46:17,414 root DEBUG Start search 38/100. SMILES: C=CCn1nc(Br)c2c(Br)nc(CCC)n2c1=O
+2023-07-16 05:47:47,676 root DEBUG Start search 39/100. SMILES: O=C(C=Cc1ccc(C(F)(F)F)cc1)OCCc1c(-c2ccccc2Cl)c2cc(Cl)ccc2[nH]c1=O
+2023-07-16 05:49:33,213 root DEBUG Start search 40/100. SMILES: O=c1n(Cc2nc3ccc(C(F)(F)F)cn3c2CCCCO)c2cnccc2n1C1CC1
+2023-07-16 05:50:33,513 root DEBUG Start search 41/100. SMILES: O=C1NC2CCCCC2c2ccccc21
+2023-07-16 05:51:13,955 root DEBUG Start search 42/100. SMILES: CCN(CC)c1nc2ccc(C(O)(c3ccc(Cl)cc3)c3cncn3C)cc2c(Cl)c1N(C(=O)OC(C)(C)C)c1ccccc1
+2023-07-16 05:52:36,594 root DEBUG Start search 43/100. SMILES: CCN1CCN(c2cc(C(=O)Nc3ccc(C)c(Nc4ncnc5cnc(N6CCOCC6)nc45)c3)cc(C(C)(C)C#N)c2)CC1
+2023-07-16 05:53:57,569 root DEBUG Start search 44/100. SMILES: COc1cc(N2CC3(CCN(S(=O)(=O)C4CC4)C3)C2)ncn1
+2023-07-16 05:55:15,808 root DEBUG Start search 45/100. SMILES: CC1=C(C(=O)O)N2C(=O)C(NC(=O)C(N)c3cccc4sccc34)C2SC1
+2023-07-16 05:56:35,708 root DEBUG Start search 46/100. SMILES: C=CCN(C(=O)CCC(=O)Nc1cc(C)on1)C(C(=O)NC1CCCC1)c1ccc(OC)c(OC)c1
+2023-07-16 05:57:33,838 root DEBUG Start search 47/100. SMILES: CC1(C)c2cc(OCC(O)CO)ccc2C(=O)c2c1[nH]c1c(C(=O)O)c(C#N)ccc21
+2023-07-16 05:59:51,925 root DEBUG Start search 48/100. SMILES: Cc1nc(C)c(CN2CCN(S(C)(=O)=O)CC2)nc1C
+2023-07-16 06:01:28,957 root DEBUG Start search 49/100. SMILES: O=S(=O)(c1ccc(F)cn1)N1C(CO)CCC1c1ccc(F)cc1
+2023-07-16 06:02:46,219 root DEBUG Start search 50/100. SMILES: CC(C)=CCCC(C)=CCCC(C)=CCCC1CCc2cc(O)c(C)c(C)c2O1
+2023-07-16 06:05:07,805 root DEBUG Start search 51/100. SMILES: O=S(=O)(NC(CO)C1CCNCC1)c1ccc(Cl)s1
+2023-07-16 06:06:22,364 root DEBUG Start search 52/100. SMILES: Cc1cc(Nc2cc(C(F)(F)F)ccn2)nc(-c2cnc(C3(N)CCCc4cc(C(=O)O)ccc43)s2)c1
+2023-07-16 06:08:22,387 root DEBUG Start search 53/100. SMILES: Cc1cc(C(=O)NC(CC(=O)NCC(C)(C)C)C(=O)NC(CCc2ccccc2)C(=O)NCc2ccccc2Cl)no1
+2023-07-16 06:09:37,415 root DEBUG Start search 54/100. SMILES: Cc1cccc(-c2csc3ncnc(Sc4nnnn4C)c23)c1
+2023-07-16 06:11:02,495 root DEBUG Start search 55/100. SMILES: N#Cc1ccc(NC2CNC(C(=O)N3CCCC3C#N)C2)cc1C#N
+2023-07-16 06:11:41,458 root DEBUG Start search 56/100. SMILES: CC(C)Oc1cccc(F)c1C1CC(F)C(=O)N1Cc1ccc(OC(F)(F)F)cc1
+2023-07-16 06:13:30,122 root DEBUG Start search 57/100. SMILES: Cc1c(C(=O)C2CC2CN2CCC(N3CCCC3)CC2)sc2ccccc12
+2023-07-16 06:15:09,318 root DEBUG Start search 58/100. SMILES: CC(C)CCNC(=O)c1onc(CSc2ccccc2)c1C(=O)NCCC(C)C
+2023-07-16 06:17:23,023 root DEBUG Start search 59/100. SMILES: Oc1ccc2c(c1)CCN(Cc1ccc3c(c1)OCO3)C2c1ccc(OCCN2CCCC2)cc1
+2023-07-16 06:19:44,687 root DEBUG Start search 60/100. SMILES: N#Cc1c(N)ncnc1N1CCCC1c1nn2cccc2c(=O)n1-c1ccccc1
+2023-07-16 06:21:28,758 root DEBUG Start search 61/100. SMILES: CC(C)N(C)CC=CC(=O)N1CCc2sc3ncnc(Nc4ccc(Cl)c(Cl)c4)c3c2C1
+2023-07-16 06:22:08,613 root DEBUG Start search 62/100. SMILES: O=c1ccc2cnc3ccc(-c4cnc5ccccc5c4)cc3c2n1-c1ccc(S(=O)(=O)N2CCNCC2)cc1
+2023-07-16 06:25:40,303 root DEBUG Start search 63/100. SMILES: CCN(CC)CC(=O)Nc1ccc(O)c2c1C(=O)c1c(O)ccc(O)c1C2=O
+2023-07-16 06:27:26,319 root DEBUG Start search 64/100. SMILES: CCCCc1ncc(C=C2C(=O)N(CCCC)C(=O)N2CCc2ccccc2)n1Cc1ccc(C(=O)OC)cc1
+2023-07-16 06:29:20,389 root DEBUG Start search 65/100. SMILES: COC(=O)c1ccc(CN(CCCc2c(N)nc(N)nc2O)c2ccc([N+](=O)[O-])c(F)c2F)cc1
+2023-07-16 06:30:54,217 root DEBUG Start search 66/100. SMILES: NC(=O)NN=C1CCC(O)CC1CC(=O)O
+2023-07-16 06:32:16,739 root DEBUG Start search 67/100. SMILES: CCCCN1CCC(C(=O)CC)(c2cccc(O)c2)CC1
+2023-07-16 06:33:54,713 root DEBUG Start search 68/100. SMILES: CCN1C(=O)C(c2cccc(-c3cnn(C)c3)c2)C(=O)N(c2ccccc2)c2cc(C(F)(F)F)ccc21
+2023-07-16 06:36:07,736 root DEBUG Start search 69/100. SMILES: CCCc1c(C(=O)NCC(N)C(=O)O)[nH]c2cccc(Br)c12
+2023-07-16 06:37:24,611 root DEBUG Start search 70/100. SMILES: C=C(C)COc1cccc(CNC(CC(C)C)c2ncnn2C)c1
+2023-07-16 06:39:06,978 root DEBUG Start search 71/100. SMILES: COC(=O)c1ccc(OC)c(-c2cccc(C(CC(=O)O)c3nccs3)c2)c1
+2023-07-16 06:40:32,519 root DEBUG Start search 72/100. SMILES: Cc1c(CN(C)c2cccc3c2CCCC3)cnc2nc(N)nc(N)c12
+2023-07-16 06:41:33,410 root DEBUG Start search 73/100. SMILES: O=C(C=CNc1ccc([N+](=O)[O-])cc1)c1ccc2c(c1)CCCC2
+2023-07-16 06:42:27,064 root DEBUG Start search 74/100. SMILES: Cc1nc(N)ccc1CNC(=O)Cc1c(C#N)ccc(NCC(F)(F)c2ccccn2)c1F
+2023-07-16 06:43:00,632 deepchem.utils.molecule_feature_utils INFO input S not in allowable set ['SP', 'SP2', 'SP3']:
+2023-07-16 06:43:12,996 root DEBUG Start search 75/100. SMILES: O=C(C1CCCCC1)N1CC(=O)N2CCc3ccc([N+](=O)[O-])cc3C2C1
+2023-07-16 06:44:57,794 root DEBUG Start search 76/100. SMILES: COc1ccc2c(CN3CCOCC3)cn(CCNC(C)=O)c2n1
+2023-07-16 06:46:31,490 root DEBUG Start search 77/100. SMILES: COCCn1c(SCc2nc(O)c3c(C)c(C(=O)OC)sc3n2)nc2ccccc21
+2023-07-16 06:47:49,183 root DEBUG Start search 78/100. SMILES: NC(=O)c1cccc(C2CC3CCC(C2)N3CCN(Cc2ccccc2)C(=O)C2(O)CC2)c1
+2023-07-16 06:50:01,154 root DEBUG Start search 79/100. SMILES: CC(=O)N(CC(Cc1c[nH]c2ccccc12)NC(=O)CN1CCN(c2ccccc2)CC1)c1ccccc1
+2023-07-16 06:52:02,568 root DEBUG Start search 80/100. SMILES: COc1ncc(Nc2ncc(C(C)(C)O)nc2-c2cc(N)nc(C)n2)cc1F
+2023-07-16 06:53:46,795 root DEBUG Start search 81/100. SMILES: Nc1nc(O)c2[nH]cc(Cc3cccs3)c2n1
+2023-07-16 06:54:13,507 deepchem.utils.molecule_feature_utils INFO input S not in allowable set ['SP', 'SP2', 'SP3']:
+2023-07-16 06:54:54,373 root DEBUG Start search 82/100. SMILES: COc1ccc(C2=C(c3ccc(OCc4ccc5ccccc5n4)cc3)C(=O)N(C)C2)cc1
+2023-07-16 06:56:19,258 root DEBUG Start search 83/100. SMILES: CC(C)CNC(=O)C(Cc1c[nH]c2ccccc12)NC(=O)OCCCCN
+2023-07-16 06:57:42,856 root DEBUG Start search 84/100. SMILES: Cn1c(OC2CCN(c3ccc(CN4CCCCC4)cc3)CC2)nc(-c2ccncc2)cc1=O
+2023-07-16 06:59:43,625 root DEBUG Start search 85/100. SMILES: C=CC(=O)N1CCN(S(=O)(=O)c2ccc(Nc3ncc4c(n3)N(C)c3ccc(C)cc3C(=O)N4C)cc2)CC1
+2023-07-16 07:01:05,860 root DEBUG Start search 86/100. SMILES: CCN(c1ccc(OC)cc1)S(=O)(=O)c1c(C(=O)N2CCCCCC2)c(C)n(C)c1C
+2023-07-16 07:02:08,770 root DEBUG Start search 87/100. SMILES: COc1ccccc1-c1ccc(C(CC(=O)O)NC(=O)C2CCN2S(=O)(=O)c2cc(Cl)cc(Cl)c2)cc1
+2023-07-16 07:03:54,785 root DEBUG Start search 88/100. SMILES: CN1CCN(Cc2ccc(-c3cnc(N4CCOC(Cn5nnc6ncc(-c7cccc(C#N)c7)nc65)C4)nc3)cc2)CC1
+2023-07-16 07:06:11,594 root DEBUG Start search 89/100. SMILES: COc1cc(C(=O)C(=O)N2CCCCC2C(=O)OC(CCCc2ccccc2)CCCc2ccccn2)cc(OC)c1OC
+2023-07-16 07:07:16,516 root DEBUG Start search 90/100. SMILES: CC1(C)CC(=O)c2cc(Cl)c(NC3CCCC3)nc2C1
+2023-07-16 07:07:33,713 deepchem.utils.molecule_feature_utils INFO input S not in allowable set ['SP', 'SP2', 'SP3']:
+2023-07-16 07:08:31,146 deepchem.utils.molecule_feature_utils INFO input S not in allowable set ['SP', 'SP2', 'SP3']:
+2023-07-16 07:08:36,775 deepchem.utils.molecule_feature_utils INFO input S not in allowable set ['SP', 'SP2', 'SP3']:
+2023-07-16 07:08:41,527 root DEBUG Start search 91/100. SMILES: CCNC(=O)C1(Nc2nc(NCc3ccccc3)nc(N3CC4CC3CN4C(=O)c3cccc(C(F)(F)F)c3)n2)Cc2ccccc2C1
+2023-07-16 07:09:29,480 root DEBUG Start search 92/100. SMILES: CCN(CC)CCNc1ccc(CO)c2oc3ccccc3c(=O)c12
+2023-07-16 07:10:43,401 root DEBUG Start search 93/100. SMILES: CN1C(C(=O)O)CCCC1C(=O)O
+2023-07-16 07:11:41,008 root DEBUG Start search 94/100. SMILES: CCCCN(CCCC)CCCOc1ccc(S(=O)(=O)c2c(C(C)C)nn3ccccc23)cc1
+2023-07-16 07:14:33,181 root DEBUG Start search 95/100. SMILES: Brc1cccc(-c2nsc(-c3cccc(Br)c3)n2)c1
+2023-07-16 07:15:45,012 root DEBUG Start search 96/100. SMILES: Cc1cccc(CNC(=O)c2cc(-c3nnn(CC4CCC(CO)CC4)n3)cc(C)n2)c1
+2023-07-16 07:16:53,733 root DEBUG Start search 97/100. SMILES: CC(=O)NC1c2c(ccc3ccc(=O)oc23)OC(C)(C)C1O
+2023-07-16 07:18:28,227 root DEBUG Start search 98/100. SMILES: Cc1cc(C)nc(N=C(N)NCc2nc3ccccc3[nH]2)n1
+2023-07-16 07:19:52,476 root DEBUG Start search 99/100. SMILES: Cc1c(C(=O)N2CCC(NC(=O)Nc3ccc(C#N)cc3)(c3ccccc3)CC2)nn(-c2ccc(Cl)cc2Cl)c1-c1ccc(Cl)cc1

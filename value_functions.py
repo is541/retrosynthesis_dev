@@ -40,13 +40,18 @@ class DistanceToCost(Enum):
     NOTHING = 0
     EXP = 1
     SQRT = 2
-    TIMES01 = 3
-    TIMES03 = 4
-    TIMES10 = 5
-    TIMES100 = 6
-    TIMES1000 = 7
-    TIMES10000 = 8
-    NUM_NEIGHBORS_TO_1 = 9
+    TIMES0 = 3
+    TIMES001 = 4
+    TIMES01 = 5
+    TIMES03 = 6
+    TIMES5 = 7
+    TIMES10 = 8
+    TIMES50 = 9
+    TIMES100 = 10
+    TIMES150 = 11
+    TIMES1000 = 12
+    TIMES10000 = 13
+    NUM_NEIGHBORS_TO_1 = 14
 
 
 class TanimotoNNCostEstimator(NoCacheNodeEvaluator):
@@ -119,14 +124,24 @@ class TanimotoNNCostEstimator(NoCacheNodeEvaluator):
             values = np.exp(nn_dists) - 1
         elif self.distance_to_cost == DistanceToCost.SQRT:
             values = np.sqrt(nn_dists)
+        elif self.distance_to_cost == DistanceToCost.TIMES0:
+            values = 0.0 * nn_dists
+        elif self.distance_to_cost == DistanceToCost.TIMES001:
+            values = 0.01 * nn_dists
         elif self.distance_to_cost == DistanceToCost.TIMES01:
             values = 0.1 * nn_dists
         elif self.distance_to_cost == DistanceToCost.TIMES03:
             values = 0.3 * nn_dists
+        elif self.distance_to_cost == DistanceToCost.TIMES5:
+            values = 5.0 * nn_dists
         elif self.distance_to_cost == DistanceToCost.TIMES10:
             values = 10.0 * nn_dists
+        elif self.distance_to_cost == DistanceToCost.TIMES50:
+            values = 50.0 * nn_dists
         elif self.distance_to_cost == DistanceToCost.TIMES100:
             values = 100.0 * nn_dists
+        elif self.distance_to_cost == DistanceToCost.TIMES150:
+            values = 150.0 * nn_dists
         elif self.distance_to_cost == DistanceToCost.TIMES1000:
             values = 1000.0 * nn_dists
         elif self.distance_to_cost == DistanceToCost.NUM_NEIGHBORS_TO_1:
@@ -259,6 +274,10 @@ class Emb_from_fingerprints_NNCostEstimator(NoCacheNodeEvaluator):
             values = np.exp(nn_dists) - 1
         elif self.distance_to_cost == DistanceToCost.SQRT:
             values = np.sqrt(nn_dists)
+        elif self.distance_to_cost == DistanceToCost.TIMES01:
+            values = 0.1 * nn_dists
+        elif self.distance_to_cost == DistanceToCost.TIMES03:
+            values = 0.3 * nn_dists
         elif self.distance_to_cost == DistanceToCost.TIMES10:
             values = 10.0 * nn_dists
         elif self.distance_to_cost == DistanceToCost.TIMES100:
@@ -401,6 +420,10 @@ class Emb_from_gnn_NNCostEstimator(NoCacheNodeEvaluator):
             values = np.exp(nn_dists) - 1
         elif self.distance_to_cost == DistanceToCost.SQRT:
             values = np.sqrt(nn_dists)
+        elif self.distance_to_cost == DistanceToCost.TIMES01:
+            values = 0.1 * nn_dists
+        elif self.distance_to_cost == DistanceToCost.TIMES03:
+            values = 0.3 * nn_dists
         elif self.distance_to_cost == DistanceToCost.TIMES10:
             values = 10.0 * nn_dists
         elif self.distance_to_cost == DistanceToCost.TIMES100:
@@ -441,19 +464,34 @@ class ConstantMolEvaluator(NoCacheNodeEvaluator):
 labelalias = {
     "constant-0": "constant-0",
     "Tanimoto-distance": "Tanimoto",
+    "Tanimoto-distance-TIMES0": "Tanimoto * 0.0",
+    "Tanimoto-distance-TIMES001": "Tanimoto * 0.01",
     "Tanimoto-distance-TIMES01": "Tanimoto * 0.1",
     "Tanimoto-distance-TIMES03": "Tanimoto * 0.3",
+    "Tanimoto-distance-TIMES5": "Tanimoto * 5",
     "Tanimoto-distance-TIMES10": "Tanimoto * 10",
+    "Tanimoto-distance-TIMES50": "Tanimoto * 50",
     "Tanimoto-distance-TIMES100": "Tanimoto * 100",
+    "Tanimoto-distance-TIMES150": "Tanimoto * 150",
+    "Tanimoto-distance-TIMES1000": "Tanimoto * 1000",
+    "Tanimoto-distance-TIMES10000": "Tanimoto * 10000",
     "Tanimoto-distance-EXP": "Tanimoto exp",
     "Tanimoto-distance-SQRT": "Tanimoto sqrt",
     "Tanimoto-distance-NUM_NEIGHBORS_TO_1": "Tanimoto neighb to 1",
     "Embedding-from-fingerprints": "Emb fnps",
+    "Embedding-from-fingerprints-TIMES01": "Emb fnps * 0.1",
+    "Embedding-from-fingerprints-TIMES03": "Emb fnps * 0.3",
     "Embedding-from-fingerprints-TIMES10": "Emb fnps * 10",
     "Embedding-from-fingerprints-TIMES100": "Emb_fnps * 100",
     "Embedding-from-fingerprints-TIMES1000": "Emb_fnps * 1000",
     "Embedding-from-fingerprints-TIMES10000": "Emb_fnps * 10000",
     "Embedding-from-gnn": "Emb gnn",
+    "Embedding-from-gnn-TIMES01": "Emb gnn * 0.1",
+    "Embedding-from-gnn-TIMES03": "Emb gnn * 0.3",
+    "Embedding-from-gnn-TIMES10": "Emb gnn * 10",
+    "Embedding-from-gnn-TIMES100": "Emb gnn * 100",
+    "Embedding-from-gnn-TIMES1000": "Emb gnn * 1000",
+    "Embedding-from-gnn-TIMES10000": "Emb gnn * 10000",
 }
 
 
@@ -480,6 +518,24 @@ def initialize_value_functions(
                     ),
                 )
             )
+        elif value_fns_name == "Tanimoto-distance-TIMES0":
+            value_fns.append(
+                (
+                    "Tanimoto-distance-TIMES0",
+                    TanimotoNNCostEstimator(
+                        inventory=inventory, distance_to_cost=DistanceToCost.TIMES0
+                    ),
+                )
+            )
+        elif value_fns_name == "Tanimoto-distance-TIMES001":
+            value_fns.append(
+                (
+                    "Tanimoto-distance-TIMES001",
+                    TanimotoNNCostEstimator(
+                        inventory=inventory, distance_to_cost=DistanceToCost.TIMES001
+                    ),
+                )
+            )
         elif value_fns_name == "Tanimoto-distance-TIMES01":
             value_fns.append(
                 (
@@ -498,6 +554,15 @@ def initialize_value_functions(
                     ),
                 )
             )
+        elif value_fns_name == "Tanimoto-distance-TIMES5":
+            value_fns.append(
+                (
+                    "Tanimoto-distance-TIMES5",
+                    TanimotoNNCostEstimator(
+                        inventory=inventory, distance_to_cost=DistanceToCost.TIMES5
+                    ),
+                )
+            )
         elif value_fns_name == "Tanimoto-distance-TIMES10":
             value_fns.append(
                 (
@@ -507,12 +572,30 @@ def initialize_value_functions(
                     ),
                 )
             )
+        elif value_fns_name == "Tanimoto-distance-TIMES50":
+            value_fns.append(
+                (
+                    "Tanimoto-distance-TIMES50",
+                    TanimotoNNCostEstimator(
+                        inventory=inventory, distance_to_cost=DistanceToCost.TIMES50
+                    ),
+                )
+            )
         elif value_fns_name == "Tanimoto-distance-TIMES100":
             value_fns.append(
                 (
                     "Tanimoto-distance-TIMES100",
                     TanimotoNNCostEstimator(
                         inventory=inventory, distance_to_cost=DistanceToCost.TIMES100
+                    ),
+                )
+            )
+        elif value_fns_name == "Tanimoto-distance-TIMES150":
+            value_fns.append(
+                (
+                    "Tanimoto-distance-TIMES150",
+                    TanimotoNNCostEstimator(
+                        inventory=inventory, distance_to_cost=DistanceToCost.TIMES150
                     ),
                 )
             )
@@ -564,6 +647,38 @@ def initialize_value_functions(
                     Emb_from_fingerprints_NNCostEstimator(
                         inventory=inventory,
                         distance_to_cost=DistanceToCost.NOTHING,
+                        model=model_fnps,
+                        distance_type=distance_type_fnps,
+                    ),
+                )
+            )
+        elif value_fns_name == "Embedding-from-fingerprints-TIMES01":
+            if model_fnps is None or distance_type_fnps is None:
+                raise ValueError(
+                    "Both model_fnps and distance_type_fnps must be provided."
+                )
+            value_fns.append(
+                (
+                    "Embedding-from-fingerprints-TIMES01",
+                    Emb_from_fingerprints_NNCostEstimator(
+                        inventory=inventory,
+                        distance_to_cost=DistanceToCost.TIMES01,
+                        model=model_fnps,
+                        distance_type=distance_type_fnps,
+                    ),
+                )
+            )
+        elif value_fns_name == "Embedding-from-fingerprints-TIMES03":
+            if model_fnps is None or distance_type_fnps is None:
+                raise ValueError(
+                    "Both model_fnps and distance_type_fnps must be provided."
+                )
+            value_fns.append(
+                (
+                    "Embedding-from-fingerprints-TIMES03",
+                    Emb_from_fingerprints_NNCostEstimator(
+                        inventory=inventory,
+                        distance_to_cost=DistanceToCost.TIMES03,
                         model=model_fnps,
                         distance_type=distance_type_fnps,
                     ),
@@ -646,6 +761,106 @@ def initialize_value_functions(
                     Emb_from_gnn_NNCostEstimator(
                         inventory=inventory,
                         distance_to_cost=DistanceToCost.NOTHING,
+                        model=model_gnn,
+                        distance_type=distance_type_gnn,
+                        featurizer=featurizer_gnn,
+                        device=device,
+                    ),
+                )
+            )
+        elif value_fns_name == "Embedding-from-gnn-TIMES01":
+            if model_gnn is None or (
+                distance_type_gnn is None or (featurizer_gnn is None or device is None)
+            ):
+                raise ValueError(
+                    "model_gnn, distance_type_gnn, featurizer_gnn and device must be provided."
+                )
+            value_fns.append(
+                (
+                    "Embedding-from-gnn-TIMES01",
+                    Emb_from_gnn_NNCostEstimator(
+                        inventory=inventory,
+                        distance_to_cost=DistanceToCost.TIMES01,
+                        model=model_gnn,
+                        distance_type=distance_type_gnn,
+                        featurizer=featurizer_gnn,
+                        device=device,
+                    ),
+                )
+            )
+        elif value_fns_name == "Embedding-from-gnn-TIMES03":
+            if model_gnn is None or (
+                distance_type_gnn is None or (featurizer_gnn is None or device is None)
+            ):
+                raise ValueError(
+                    "model_gnn, distance_type_gnn, featurizer_gnn and device must be provided."
+                )
+            value_fns.append(
+                (
+                    "Embedding-from-gnn-TIMES03",
+                    Emb_from_gnn_NNCostEstimator(
+                        inventory=inventory,
+                        distance_to_cost=DistanceToCost.TIMES03,
+                        model=model_gnn,
+                        distance_type=distance_type_gnn,
+                        featurizer=featurizer_gnn,
+                        device=device,
+                    ),
+                )
+            )
+        elif value_fns_name == "Embedding-from-gnn-TIMES10":
+            if model_gnn is None or (
+                distance_type_gnn is None or (featurizer_gnn is None or device is None)
+            ):
+                raise ValueError(
+                    "model_gnn, distance_type_gnn, featurizer_gnn and device must be provided."
+                )
+            value_fns.append(
+                (
+                    "Embedding-from-gnn-TIMES10",
+                    Emb_from_gnn_NNCostEstimator(
+                        inventory=inventory,
+                        distance_to_cost=DistanceToCost.TIMES10,
+                        model=model_gnn,
+                        distance_type=distance_type_gnn,
+                        featurizer=featurizer_gnn,
+                        device=device,
+                    ),
+                )
+            )
+        elif value_fns_name == "Embedding-from-gnn-TIMES100":
+            if model_gnn is None or (
+                distance_type_gnn is None or (featurizer_gnn is None or device is None)
+            ):
+                raise ValueError(
+                    "model_gnn, distance_type_gnn, featurizer_gnn and device must be provided."
+                )
+            value_fns.append(
+                (
+                    "Embedding-from-gnn-TIMES100",
+                    Emb_from_gnn_NNCostEstimator(
+                        inventory=inventory,
+                        distance_to_cost=DistanceToCost.TIMES100,
+                        model=model_gnn,
+                        distance_type=distance_type_gnn,
+                        featurizer=featurizer_gnn,
+                        device=device,
+                    ),
+                )
+            )
+        elif value_fns_name == "Embedding-from-gnn-TIMES1000":
+            if model_gnn is None or (
+                distance_type_gnn is None or (featurizer_gnn is None or device is None)
+            ):
+                raise ValueError(
+                    "model_gnn, distance_type_gnn, featurizer_gnn and device must be provided."
+                )
+            value_fns.append(
+                (
+                    "Embedding-from-gnn-TIMES1000",
+                    Emb_from_gnn_NNCostEstimator(
+                        inventory=inventory,
+                        distance_to_cost=DistanceToCost.TIMES1000,
                         model=model_gnn,
                         distance_type=distance_type_gnn,
                         featurizer=featurizer_gnn,
