@@ -1,0 +1,17 @@
+algorithm,nr_mol_not_solved
+Embedding-from-fingerprints,87
+Embedding-from-fingerprints-TIMES10,79
+Embedding-from-fingerprints-TIMES100,73
+Embedding-from-fingerprints-TIMES1000,76
+Embedding-from-gnn,86
+Embedding-from-gnn-TIMES10,94
+Embedding-from-gnn-TIMES100,94
+Embedding-from-gnn-TIMES1000,94
+Tanimoto-distance,86
+Tanimoto-distance-TIMES10,57
+Tanimoto-distance-TIMES100,40
+Tanimoto-distance-TIMES1000,42
+Tanimoto-distance-TIMES150,43
+Tanimoto-distance-TIMES5,78
+Tanimoto-distance-TIMES50,43
+constant-0,80

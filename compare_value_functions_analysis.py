@@ -147,7 +147,8 @@ if __name__ == "__main__":
     # eventid = '202307-0620-3725-cc7b1f07-14cd-47e8-9d40-f5b2f358fa28_MID_HARD'
     # eventid = 'MID'
     # eventid = 'MID_EASY'
-    eventid = 'MID_EASY_COST1'
+    # eventid = 'MID_EASY_COST1'
+    eventid = 'MID_EASY_COST1_ALL'
     plot_existing_results = False
     
     output_folder = f"CompareTanimotoLearnt/{eventid}"
