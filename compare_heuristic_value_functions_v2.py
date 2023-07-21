@@ -17,6 +17,8 @@ from tqdm import tqdm
 import os
 import torch
 import deepchem as dc
+import numpy as np
+import pandas as pd
 
 
 from syntheseus.search.chem import Molecule
@@ -25,14 +27,16 @@ from syntheseus.search.analysis.solution_time import get_first_solution_time
 from syntheseus.search.node_evaluation.base import BaseNodeEvaluator
 from syntheseus.search.mol_inventory import BaseMolInventory
 from syntheseus.search.reaction_models.base import BackwardReactionModel
+from syntheseus.search.graph.and_or import AndOrGraph, OrNode, AndNode
+from syntheseus.search.node_evaluation.base import NoCacheNodeEvaluator
 
 from paroutes import PaRoutesInventory, PaRoutesModel
-from example_paroutes import PaRoutesRxnCost
-from heuristic_value_functions import ScaledSAScoreCostFunction
-from compare_heuristic_value_functions_v1 import (
-    ScaledTanimotoNNAvgCostEstimator,
-    FiniteMolIsPurchasableCost,
-)
+# from example_paroutes import PaRoutesRxnCost
+# from heuristic_value_functions import ScaledSAScoreCostFunction
+# from compare_heuristic_value_functions_v1 import (
+#     # ScaledTanimotoNNAvgCostEstimator,
+#     FiniteMolIsPurchasableCost,
+# )
 from faster_retro_star import ReduceValueFunctionCallsRetroStar
 from value_functions import initialize_value_functions, ConstantMolEvaluator
 from embedding_model import (
@@ -42,12 +46,35 @@ from embedding_model import (
     load_embedding_model_from_checkpoint,
 )
 
+class PaRoutesRxnCost(NoCacheNodeEvaluator[AndNode]):
+    """Cost of reaction is negative log softmax, floored at -3."""
 
+    def _evaluate_nodes(self, nodes: list[AndNode], graph=None) -> list[float]:
+        softmaxes = np.asarray([node.reaction.metadata["softmax"] for node in nodes])
+        costs = np.clip(-np.log(softmaxes), 1e-1, 10.0)
+        return costs.tolist()
+
+class FiniteMolIsPurchasableCost(NoCacheNodeEvaluator[OrNode]):
+    def __init__(self, non_purchasable_cost: float, **kwargs):
+        super().__init__(**kwargs)
+        self.non_purchasable_cost = non_purchasable_cost
+
+    def _evaluate_nodes(  # type: ignore[override]
+        self,
+        nodes: Sequence[OrNode],
+        graph: Optional[AndOrGraph] = None,
+    ) -> list[float]:
+        return [
+            0.0
+            if node.mol.metadata.get("is_purchasable")
+            else self.non_purchasable_cost
+            for node in nodes
+        ]
 
 def get_parser():
     parser = argparse.ArgumentParser()
     parser.add_argument(
-        "--smiles_file",
+        "--input_file",
         type=str,
         required=True,
     )
@@ -75,7 +102,51 @@ def get_parser():
         required=True,
         help="Which cost function to use for AND nodes.",
     )
+    parser.add_argument(
+        "--fnp_embedding_model_to_use",
+        type=str,
+        # required=True,
+        default="fnp_nn_0709_sampleInLoss",  # "fingerprints_v1" # "fnp_nn_0629"
+    )
+    parser.add_argument(
+        "--gnn_embedding_model_to_use",
+        type=str,
+        # required=True,
+        default="gnn_0709_sampleInLoss",
+    )
     return parser
+
+
+def create_df_from_json(data):
+    algorithm = []
+    similes = []
+    properties = []
+    values = []
+
+    # Extract data from the JSON and store it in lists
+    for alg, result in data["results"].items():
+        for sim, props in result.items():
+            for prop, val in props.items():
+                algorithm.append(alg)
+                similes.append(sim)
+                properties.append(prop)
+                values.append(val)
+
+    # Create DataFrame
+    df = pd.DataFrame({
+        "algorithm": algorithm,
+        "similes": similes,
+        "property": properties,
+        "value": values
+    })
+
+    # Filter and rename the 'solution_time' column to 'sol_time'
+    df["property"] = df["property"].map({'solution_time': "sol_time"})
+    df = df[df["property"] == "sol_time"]#.rename(columns={"value": "sol_time"}).drop(columns=["property"])
+    
+    return df
+
+# def create_quantiles_from_df():⁄
 
 
 def run_graph_retro_star(
@@ -144,7 +215,7 @@ def run_graph_retro_star(
                 del node  # to not interfere with garbage collection below
             soln_time = get_first_solution_time(output_graph)
             output[name][smiles] = {
-                "solution_time": soln_time,
+                "sol_time": soln_time,
                 "num_nodes": len(output_graph),
             }
             logger.debug(
@@ -209,28 +280,28 @@ if __name__ == "__main__":
     value_fns_names = [
         'constant-0',
         'Tanimoto-distance',
-        # 'Tanimoto-distance-TIMES0',
-        # 'Tanimoto-distance-TIMES001',
-        # 'Tanimoto-distance-TIMES01',
-        # 'Tanimoto-distance-TIMES03',
-        # 'Tanimoto-distance-TIMES10',
-        # 'Tanimoto-distance-TIMES100',
-        # 'Tanimoto-distance-TIMES1000',
+        'Tanimoto-distance-TIMES0',
+        'Tanimoto-distance-TIMES001',
+        'Tanimoto-distance-TIMES01',
+        'Tanimoto-distance-TIMES03',
+        'Tanimoto-distance-TIMES10',
+        'Tanimoto-distance-TIMES100',
+        'Tanimoto-distance-TIMES1000',
         # 'Tanimoto-distance-EXP',
         # 'Tanimoto-distance-SQRT',
         # 'Tanimoto-distance-NUM_NEIGHBORS_TO_1',
         # "Embedding-from-fingerprints-TIMES01",
         # "Embedding-from-fingerprints-TIMES03",
-        # "Embedding-from-fingerprints",
-        # "Embedding-from-fingerprints-TIMES10",
-        # "Embedding-from-fingerprints-TIMES100",
+        "Embedding-from-fingerprints",
+        "Embedding-from-fingerprints-TIMES10",
+        "Embedding-from-fingerprints-TIMES100",
         # "Embedding-from-fingerprints-TIMES1000",
         # "Embedding-from-fingerprints-TIMES10000",
         # "Embedding-from-gnn-TIMES01",
         # "Embedding-from-gnn-TIMES03",
-        # "Embedding-from-gnn",
-        # "Embedding-from-gnn-TIMES10",
-        # "Embedding-from-gnn-TIMES100",
+        "Embedding-from-gnn",
+        "Embedding-from-gnn-TIMES10",
+        "Embedding-from-gnn-TIMES100",
         # "Embedding-from-gnn-TIMES1000",
         # "Embedding-from-gnn-TIMES10000",
     ]
@@ -316,3 +387,10 @@ if __name__ == "__main__":
     # Save results
     with open(f"{output_folder}/{args.output_json}", "w") as f:
         json.dump(overall_results, f, indent=2)
+    
+    # # Load data
+    # with open(f"{output_folder}/{args.output_json}", 'r') as file:
+    #     overall_results = json.load(file)  
+    
+    overall_results_df = create_df_from_json(overall_results)
+    overall_results_df.to_csv(f"{output_folder}/results_all.csv", index=False)

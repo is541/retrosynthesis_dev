@@ -16,6 +16,63 @@ import plotly.express as px
 from tqdm.auto import tqdm
 import time
 import plotly.graph_objects as go
+import matplotlib.pyplot as plt
+import seaborn as sns
+from matplotlib.font_manager import FontProperties
+
+def create_quantiles_df(data):
+    grouped_data = data.groupby(['algorithm', 'property'])
+
+    # Define the quantiles to compute
+    # quantiles = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9]
+    quantiles = [0.0, 0.05, 0.1, 0.25, 0.5, 0.75, 0.9, 0.95, 1.0]
+
+    # Function to compute quantiles for a given group
+    def compute_quantiles(group):
+        return group['value'].quantile(quantiles)
+
+    # Compute quantiles for each group
+    result = grouped_data.apply(compute_quantiles)
+    return result
+
+def plot_quantiles_df(df, column_order):
+    # Transpose the DataFrame and drop the 'property' column
+    df_transposed = df.drop(columns=['property']).set_index('algorithm').T
+    df_transposed = df_transposed[column_order]
+    df_transposed = df_transposed.iloc[:, ::-1]
+
+    # Create the plot
+    plt.figure(figsize=(10, 6))
+    ax = plt.gca()
+
+    # Plot the table with color-coded cells (using YlOrRd colormap)
+    sns.heatmap(df_transposed, cmap='YlOrRd', annot=True, fmt='.1f', ax=ax,
+                annot_kws={'weight': 'normal'})
+
+    # Remove ticks from both x and y axes
+    ax.tick_params(bottom=False, left=False)
+    font_properties = FontProperties(weight='bold')
+    plt.xticks(fontproperties=font_properties)
+    plt.yticks(fontproperties=font_properties)
+
+    # Rotate y-axis labels to be horizontal
+    plt.yticks(rotation=0)
+    plt.subplots_adjust(left=0.5)
+
+    # Get the colorbar and set a new label
+    cbar = ax.collections[0].colorbar
+    cbar.set_label('')
+
+    # Add title and axis labels
+    plt.title('Solution Time for different percentiles of solved molecules')
+    plt.xlabel('Algorithm')
+    plt.ylabel('Solved Molecules Percentile')
+
+    plt.tight_layout()
+
+    # Save the plot to a PDF file
+    fig = plt.gcf()
+    return fig
 
 def plot_result(df_result, image_suffix, labelalias):
     df_solved = df_result[df_result['not_solved'] == 0].groupby('algorithm_alias').size().reset_index(name='num_mol_solved')
@@ -52,7 +109,11 @@ def plot_result(df_result, image_suffix, labelalias):
     for _, row in df_solved.iterrows():
         algorithm = row['algorithm_alias']
         num_mol_solved = row['num_mol_solved']
-        num_mol_not_solved = df_not_solved[df_not_solved['algorithm_alias'] == algorithm]['num_mol_not_solved'].item()
+        df_not_solved_algorithm = df_not_solved[df_not_solved['algorithm_alias'] == algorithm]
+        if df_not_solved_algorithm.shape[0] > 0:
+            num_mol_not_solved = df_not_solved_algorithm['num_mol_not_solved'].item()
+        else:
+            num_mol_not_solved = 0
         box_y_1 = max_value*1.32# df_result[df_result['algorithm_alias'] == algorithm]['value'].max()
         box_y_2 = max_value*1.28# df_result[df_result['algorithm_alias'] == algorithm]['value'].max()
 
@@ -90,7 +151,11 @@ def plot_result(df_result, image_suffix, labelalias):
     for _, row in df_solved.iterrows():
         algorithm = row['algorithm_alias']
         num_mol_solved = row['num_mol_solved']
-        num_mol_not_solved = df_not_solved[df_not_solved['algorithm_alias'] == algorithm]['num_mol_not_solved'].item()
+        df_not_solved_algorithm = df_not_solved[df_not_solved['algorithm_alias'] == algorithm]
+        if df_not_solved_algorithm.shape[0] > 0:
+            num_mol_not_solved = df_not_solved_algorithm['num_mol_not_solved'].item()
+        else:
+            num_mol_not_solved = 0
         box_y_1 = max_value*1.32# df_result[df_result['algorithm_alias'] == algorithm]['value'].max()
         box_y_2 = max_value*1.28# df_result[df_result['algorithm_alias'] == algorithm]['value'].max()
 
@@ -148,7 +213,9 @@ if __name__ == "__main__":
     # eventid = 'MID'
     # eventid = 'MID_EASY'
     # eventid = 'MID_EASY_COST1'
-    eventid = 'MID_EASY_COST1_ALL'
+    # eventid = 'MID_EASY_COST1_ALL'
+    # eventid = 'MID_EASY_v2_cost_paroutes'
+    eventid = 'MID_EASY_v3'
     plot_existing_results = False
     
     output_folder = f"CompareTanimotoLearnt/{eventid}"
@@ -204,6 +271,16 @@ if __name__ == "__main__":
     df_result = results_solution_times.copy()
     df_result["algorithm_alias"] = df_result["algorithm"].map(labelalias)
     
+    # Create quantiles df
+    # Group the data by 'algorithm' and 'property'
+    result_quantiles = create_quantiles_df(df_result)
+    result_quantiles = result_quantiles.reset_index()
+    result_quantiles.to_csv(f'{output_folder}/results_quantiles.csv', index=False)
+    
+    column_order = result_quantiles['algorithm'].unique()
+    fig_quantiles = plot_quantiles_df(df=result_quantiles, column_order=column_order)
+    fig_quantiles.savefig(f'{output_folder}/quantiles_table.pdf', format='pdf')
+
     # Deal with unsolved molecules 
     df_result["not_solved"] = (df_result['value'] == np.inf) * 1
     max_value = df_result[df_result['value'] != np.inf]['value'].max()

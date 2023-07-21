@@ -231,13 +231,13 @@ if __name__ == "__main__":
     parser.add_argument(
         "--limit_iterations",
         type=int,
-        default=10_000,  # 2000
+        default=10_000_000_000,  # 2000
         help="Maximum number of algorithm iterations.",
     )
     parser.add_argument(
         "--limit_rxn_model_calls",
         type=int,
-        default=1000,  # 500
+        default=5000,  # 500
         help="Allowed number of calls to reaction model.",
     )
     parser.add_argument(
@@ -303,15 +303,15 @@ if __name__ == "__main__":
     # Create eventid
     # eventid = datetime.now().strftime("%Y%m-%d%H-%M%S-") + str(uuid4())
     if args.input_file=="Guacamol_100_hardest_to_solve":
-        eventid = '202306-3017-5132-d4cd54bf-e5a4-44c5-82af-c629a3692d87_HARDEST_COST1'
+        eventid = '202306-3017-5132-d4cd54bf-e5a4-44c5-82af-c629a3692d87_HARDEST_COST1_v3'
     if args.input_file=="Guacamol_100_hard_to_solve":
-        eventid = "202307-0320-4900-d4c27728-a5aa-4177-8681-268a17c3d208_HARD_COST1"
+        eventid = "202307-0320-4900-d4c27728-a5aa-4177-8681-268a17c3d208_HARD_COST1_v3"
     elif args.input_file=="Guacamol_100_mid_hard_to_solve":
-        eventid = '202307-0620-3725-cc7b1f07-14cd-47e8-9d40-f5b2f358fa28_MID_HARD_COST1'
+        eventid = '202307-0620-3725-cc7b1f07-14cd-47e8-9d40-f5b2f358fa28_MID_HARD_COST1_v3'
     elif args.input_file=="Guacamol_100_mid_to_solve":
-        eventid = 'MID_COST1'
+        eventid = 'MID_COST1_v3'
     elif args.input_file=="Guacamol_100_mid_easy_to_solve":
-        eventid = 'MID_EASY_COST1_ALL'
+        eventid = 'MID_EASY_COST1_ALL_v3'
     output_folder = f"CompareTanimotoLearnt/{eventid}"
 
     if not os.path.exists(output_folder):
@@ -377,7 +377,7 @@ if __name__ == "__main__":
 
     value_fns_names = [
         'constant-0',
-        # 'Tanimoto-distance',
+        'Tanimoto-distance',
         # 'Tanimoto-distance-TIMES01',
         # 'Tanimoto-distance-TIMES03',
         # 'Tanimoto-distance-TIMES5',
