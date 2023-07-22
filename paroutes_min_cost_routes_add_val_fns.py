@@ -21,7 +21,7 @@ import deepchem as dc
 #     NoCacheNodeEvaluator,
 # )
 from syntheseus.search.node_evaluation.common import ConstantNodeEvaluator
-from value_functions import initialize_value_functions
+from value_functions import initialize_value_functions, RetroStarValueMLP, retrostar_evaluate_molecules
 from embedding_model import FingerprintModel, GNNModel, load_embedding_model_from_pickle, load_embedding_model_from_checkpoint
 
 from paroutes import PaRoutesInventory#, PaRoutesModel, get_target_smiles
@@ -60,15 +60,16 @@ if __name__ == "__main__":
     value_fns_names = [
         'constant-0',
         'Tanimoto-distance',
-        # 'Tanimoto-distance-TIMES10',
-        # 'Tanimoto-distance-TIMES100',
-        # 'Tanimoto-distance-EXP',
-        # 'Tanimoto-distance-SQRT',
-        # "Tanimoto-distance-NUM_NEIGHBORS_TO_1",
+        # # 'Tanimoto-distance-TIMES10',
+        # # 'Tanimoto-distance-TIMES100',
+        # # 'Tanimoto-distance-EXP',
+        # # 'Tanimoto-distance-SQRT',
+        # # "Tanimoto-distance-NUM_NEIGHBORS_TO_1",
         "Embedding-from-fingerprints",
-        # "Embedding-from-fingerprints-TIMES10",
-        # "Embedding-from-fingerprints-TIMES100",
+        # # "Embedding-from-fingerprints-TIMES10",
+        # # "Embedding-from-fingerprints-TIMES100",
         "Embedding-from-gnn",
+        "Retro*"
     ]
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     
@@ -153,11 +154,14 @@ if __name__ == "__main__":
         data_dict[name].loc[data_dict[name][cost_variable] == -1, binned_var_name] = 'NotSolved'
         data_dict[name].loc[data_dict[name][cost_variable] == 0, binned_var_name] = '000'
 
-
+    
     for name in data_dict.keys():     
         smiles_list = data_dict[name]['smiles'].unique()
         for value_function_name, value_function in tqdm(value_fns):
-            smiles_value_fn_dict = value_function.evaluate_molecules(smiles_list)
+            if isinstance(value_function, RetroStarValueMLP):
+                smiles_value_fn_dict = retrostar_evaluate_molecules(value_function, smiles_list)
+            else:
+                smiles_value_fn_dict = value_function.evaluate_molecules(smiles_list)
             data_dict[name][value_function_name] = data_dict[name]['smiles'].map(smiles_value_fn_dict)
     
     

@@ -236,6 +236,7 @@ if __name__ == "__main__":
     # eventid = 'MID_EASY_COST1_ALL'
     # eventid = 'MID_EASY_v2_cost_paroutes'
     eventid = 'MID_EASY_v3'
+    # eventid = 'MID_EASY_v3_ReduceCalls'
     plot_existing_results = False
     
     output_folder = f"CompareTanimotoLearnt/{eventid}"
