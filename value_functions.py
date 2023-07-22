@@ -225,7 +225,7 @@ class Emb_from_fingerprints_NNCostEstimator(NoCacheNodeEvaluator):
             cosine_similarity = F.cosine_similarity(emb_1, emb_2, dim=1)
             #             print(cosine_similarity)
             #             cosine_distance = 1 - cosine_similarity
-            cosine_distance = torch.clamp(1 - cosine_similarity, min=0, max=1)
+            cosine_distance = torch.clamp(1 - cosine_similarity, min=0, max=2)
             #             print(cosine_distance)
 
             #             if np.min(cosine_distance)< 0 or np.max(cosine_distance) > 1:
@@ -327,6 +327,7 @@ class Emb_from_gnn_NNCostEstimator(NoCacheNodeEvaluator):
         self._purch_featurized = self._featurize_mols(
             [Chem.MolFromSmiles(mol.smiles) for mol in inventory.purchasable_mols()]
         )
+        # breakpoint()
         # self._set_dim_feat_vect()
         # self._set_fingerprints_vect([mol.smiles for mol in inventory.purchasable_mols()])
         with torch.no_grad():
@@ -362,8 +363,9 @@ class Emb_from_gnn_NNCostEstimator(NoCacheNodeEvaluator):
 
     def compute_embedding_from_feature_vect(self, mol_feat_vect):
         with torch.no_grad():
-            if isinstance(mol_feat_vect, np.ndarray):
-                output = torch.zeros(self.model.output_dim, dtype=torch.double)
+            if isinstance(mol_feat_vect, np.ndarray): # Non featurazable purchasable molecules
+                # output = torch.zeros(self.model.output_dim, dtype=torch.double)
+                output = torch.full((self.model.output_dim,), 1000000000, dtype=torch.double)
             else:
                 node_features = torch.tensor(
                     mol_feat_vect.node_features, dtype=torch.double
@@ -372,7 +374,7 @@ class Emb_from_gnn_NNCostEstimator(NoCacheNodeEvaluator):
                     self.device
                 )
                 output = self.model(node_features, edge_index)
-                
+                    
         return output
 
     def embedding_distance(self, emb_1, emb_2):
@@ -383,7 +385,7 @@ class Emb_from_gnn_NNCostEstimator(NoCacheNodeEvaluator):
         elif self.distance_type == "cosine":
             # Compute cosine similarity
             cosine_similarity = F.cosine_similarity(emb_1, emb_2, dim=1)
-            cosine_distance = torch.clamp(1 - cosine_similarity, min=0, max=1)
+            cosine_distance = torch.clamp(1 - cosine_similarity, min=0, max=2)
             return cosine_distance
         else:
             # Raise error for unsupported distance type
@@ -395,16 +397,20 @@ class Emb_from_gnn_NNCostEstimator(NoCacheNodeEvaluator):
         feat_target = self._featurize_mols(
             Chem.MolFromSmiles(smiles)
         )  # Target feature vector
+        # print(feat_target)
+        # print("Min", torch.min(feat_target).item())
         emb_target = self.compute_embedding_from_feature_vect(
-            feat_target
+            feat_target[0]
         )  # Target embedding
-
+        # breakpoint()
         # Euclidean (or cosine) distance between embeddings
         distances = self.embedding_distance(emb_target, self.emb_purch_molecules)
         return distances
 
     def _get_nearest_neighbour_dist(self, smiles: str) -> float:
         distances = self.get_distances_to_purchasable_molecules(smiles)
+        print("Min", torch.min(distances).item())
+        print("Max", torch.max(distances).item())
         return torch.min(distances).item()
 
     def _evaluate_nodes(self, nodes: list[OrNode], graph=None) -> list[float]:
@@ -515,6 +521,13 @@ class RetroStarValueMLP(NoCacheNodeEvaluator[OrNode]):
             values = self._value_mlp(fp_tensor).detach().cpu().numpy().flatten()
         assert len(values) == len(nodes)
         return [float(v) for v in values.flatten()]
+
+def retrostar_evaluate_molecules(value_function: RetroStarValueMLP, molecules_smiles: list[str]) -> dict:
+    """Returns a dictionary of {molecule_smiles:molecule_value}."""
+    values = value_function._evaluate_nodes(
+        nodes=[FakeOrNode(smiles) for smiles in molecules_smiles]
+    )
+    return {k: v for k, v in zip(molecules_smiles, values)}
 
 labelalias = {
     "constant-0": "constant-0",

@@ -2,6 +2,7 @@
 **/constant0_graph_pickles/
 
 # Other pickle results
+**/targ_to_purch_distances_v2.pickle
 **/targ_to_purch_distances.pickle
 **/targ_routes.pickle
 **/OLDtarg_to_purch_distances.pickle
