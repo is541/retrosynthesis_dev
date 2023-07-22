@@ -1,3 +1,6 @@
 algorithm,nr_mol_not_solved
+Retro*,0
 Tanimoto-distance,0
+Tanimoto-distance-TIMES0,0
+Tanimoto-distance-TIMES001,0
 constant-0,0

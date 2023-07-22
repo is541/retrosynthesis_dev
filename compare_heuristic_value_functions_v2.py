@@ -37,7 +37,7 @@ from paroutes import PaRoutesInventory, PaRoutesModel
 #     # ScaledTanimotoNNAvgCostEstimator,
 #     FiniteMolIsPurchasableCost,
 # )
-from faster_retro_star import ReduceValueFunctionCallsRetroStar
+from faster_retro_star import ReduceValueFunctionCallsRetroStar, RetroStarSearch
 from value_functions import initialize_value_functions, ConstantMolEvaluator
 from embedding_model import (
     FingerprintModel,
@@ -103,6 +103,13 @@ def get_parser():
         help="Which cost function to use for AND nodes.",
     )
     parser.add_argument(
+        "--reduce_value_function_calls",
+        # action="store_true",
+        type=bool,
+        default=False,
+        help="Flag to use reduced value function retro star.",
+    )
+    parser.add_argument(
         "--fnp_embedding_model_to_use",
         type=str,
         # required=True,
@@ -157,14 +164,19 @@ def run_graph_retro_star(
     rxn_cost_fn: BaseNodeEvaluator,
     use_tqdm: bool = False,
     limit_rxn_model_calls: int = 100,
+    reduce_value_function_calls: bool = True,
 ) -> dict[str, dict[str, dict[str, Any]]]:
     """Runs graph retro star on a list of SMILES strings and reports the time of first solution."""
 
     logger = logging.getLogger("retro-star-run")
 
     high_integer = int(1e10)
+    if reduce_value_function_calls:
+        alg_cls = ReduceValueFunctionCallsRetroStar
+    else:
+        alg_cls = RetroStarSearch
     algs = [
-        ReduceValueFunctionCallsRetroStar(
+        alg_cls(
             reaction_model=rxn_model,
             mol_inventory=inventory,
             limit_reaction_model_calls=limit_rxn_model_calls,

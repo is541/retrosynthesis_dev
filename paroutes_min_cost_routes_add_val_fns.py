@@ -7,6 +7,7 @@ import pandas as pd
 import numpy as np
 import torch
 # import os
+import deepchem as dc
 
 # from syntheseus.search.chem import Molecule
 # from syntheseus.search.graph.and_or import AndNode
@@ -21,7 +22,7 @@ import torch
 # )
 from syntheseus.search.node_evaluation.common import ConstantNodeEvaluator
 from value_functions import initialize_value_functions
-from embedding_model import FingerprintModel, GNNModel, load_embedding_model_from_pickle
+from embedding_model import FingerprintModel, GNNModel, load_embedding_model_from_pickle, load_embedding_model_from_checkpoint
 
 from paroutes import PaRoutesInventory#, PaRoutesModel, get_target_smiles
 # from example_paroutes import PaRoutesRxnCost
@@ -63,17 +64,56 @@ if __name__ == "__main__":
         # 'Tanimoto-distance-TIMES100',
         # 'Tanimoto-distance-EXP',
         # 'Tanimoto-distance-SQRT',
-        "Tanimoto-distance-NUM_NEIGHBORS_TO_1",
+        # "Tanimoto-distance-NUM_NEIGHBORS_TO_1",
         "Embedding-from-fingerprints",
         # "Embedding-from-fingerprints-TIMES10",
         # "Embedding-from-fingerprints-TIMES100",
+        "Embedding-from-gnn",
     ]
-    fnps_experiment_name = 'fingerprints_v1'
-    
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    model_fnps, config_fnps = load_embedding_model_from_pickle(experiment_name=fnps_experiment_name)
-    distance_type_fnps = 'cosine'
-    value_fns = initialize_value_functions(value_fns_names=value_fns_names, inventory=inventory, model_fnps=model_fnps, distance_type_fnps=distance_type_fnps)
+    
+    fnp_embedding_model_to_use = "fnp_nn_0720_sampleInLoss_weightDecay_dropout"
+    
+    model_fnps, config_fnps = load_embedding_model_from_checkpoint(
+        experiment_name=fnp_embedding_model_to_use,
+        device=device,
+        checkpoint_name="model_min_val_checkpoint",
+    )
+
+    # Graph model
+    gnn_embedding_model_to_use = "gnn_0715_sampleInLoss_weightDecay"
+    model_gnn, config_gnn = load_embedding_model_from_checkpoint(
+        experiment_name=gnn_embedding_model_to_use,
+        device=device,
+        checkpoint_name="model_min_val_checkpoint",
+        # checkpoint_name="epoch_100_checkpoint",
+    )
+
+    distance_type_fnps = "cosine"
+    distance_type_gnn = "cosine"
+    featurizer_gnn = dc.feat.MolGraphConvFeaturizer()
+    
+    
+    # fnps_experiment_name = 'fingerprints_v1'
+    
+    # device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    # model_fnps, config_fnps = load_embedding_model_from_pickle(experiment_name=fnps_experiment_name)
+    # distance_type_fnps = 'cosine'
+    # value_fns = initialize_value_functions(value_fns_names=value_fns_names, inventory=inventory, model_fnps=model_fnps, distance_type_fnps=distance_type_fnps)
+    
+    retro_star_model_to_use = "RetroStar_savedModels/best_epoch_final_4.pt"
+    
+    value_fns = initialize_value_functions(
+        value_fns_names=value_fns_names,
+        inventory=inventory,
+        model_fnps=model_fnps,
+        distance_type_fnps=distance_type_fnps,
+        model_gnn=model_gnn,
+        distance_type_gnn=distance_type_gnn,
+        featurizer_gnn=featurizer_gnn,
+        device=device,
+        retro_checkpoint=retro_star_model_to_use
+    )
     
     
     # 1. Remove infs
@@ -139,5 +179,5 @@ if __name__ == "__main__":
 
     for test_db_name, test_data in data_dict.items(): 
         test_data = test_data[column_order]
-        test_data.to_csv(f'{output_folder}/{test_db_name}_result_added_value_fns.csv', index=False)
+        test_data.to_csv(f'{output_folder}/{test_db_name}_result_added_value_fns_v2.csv', index=False)
     

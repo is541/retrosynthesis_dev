@@ -20,8 +20,28 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 from matplotlib.font_manager import FontProperties
 
+def sort_names_according_to_labelalias_key_order(list_names, labelalias):
+    labelalias_order = labelalias.keys()
+    index_dict = {name: index for index, name in enumerate(labelalias_order)}
+
+    # Sort list_names based on their index in sorted_list
+    sorted_names = sorted(list_names, key=lambda x: index_dict[x], reverse=True)
+    
+    return sorted_names
+
+def sort_names_according_to_labelalias_value_order(list_names, labelalias):
+    labelalias_order = labelalias.values()
+    # print(labelalias_order)
+    index_dict = {name: index for index, name in enumerate(labelalias_order)}
+
+    # Sort list_names based on their index in sorted_list
+    sorted_names = sorted(list_names, key=lambda x: index_dict[x], reverse=True)
+    # print(sorted_names)
+    
+    return sorted_names
+
 def create_quantiles_df(data):
-    grouped_data = data.groupby(['algorithm', 'property'])
+    grouped_data = data.groupby(['algorithm_alias', 'property'])
 
     # Define the quantiles to compute
     # quantiles = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9]
@@ -37,7 +57,7 @@ def create_quantiles_df(data):
 
 def plot_quantiles_df(df, column_order):
     # Transpose the DataFrame and drop the 'property' column
-    df_transposed = df.drop(columns=['property']).set_index('algorithm').T
+    df_transposed = df.drop(columns=['property']).set_index('algorithm_alias').T
     df_transposed = df_transposed[column_order]
     df_transposed = df_transposed.iloc[:, ::-1]
 
@@ -277,9 +297,9 @@ if __name__ == "__main__":
     result_quantiles = result_quantiles.reset_index()
     result_quantiles.to_csv(f'{output_folder}/results_quantiles.csv', index=False)
     
-    column_order = result_quantiles['algorithm'].unique()
+    column_order = result_quantiles['algorithm_alias'].unique()
     fig_quantiles = plot_quantiles_df(df=result_quantiles, column_order=column_order)
-    fig_quantiles.savefig(f'{output_folder}/quantiles_table.pdf', format='pdf')
+    fig_quantiles.savefig(f'{output_folder}/quantiles_table_all.pdf', format='pdf')
 
     # Deal with unsolved molecules 
     df_result["not_solved"] = (df_result['value'] == np.inf) * 1
@@ -292,12 +312,25 @@ if __name__ == "__main__":
     
     # Plot
     # breakpoint()
+    
     plot_result(df_result=df_result, image_suffix="all", labelalias=labelalias)
     
     df_result_Tanimoto = df_result.loc[(df_result["algorithm"]=='constant-0') | (df_result["algorithm"].str.contains('Tanimoto'))]
     plot_result(df_result=df_result_Tanimoto, image_suffix="Tanimoto", labelalias=labelalias)
     
+    df_result_quantiles_Tanimoto = result_quantiles.loc[(result_quantiles["algorithm_alias"]=='constant-0') | (result_quantiles["algorithm_alias"].str.contains('Tanimoto'))]
+    column_order_Tanimoto = df_result_quantiles_Tanimoto['algorithm_alias'].unique()
+    column_order_Tanimoto = sort_names_according_to_labelalias_value_order(column_order_Tanimoto, labelalias)
+    fig_quantiles_Tanimoto = plot_quantiles_df(df=df_result_quantiles_Tanimoto, column_order=column_order_Tanimoto)
+    fig_quantiles_Tanimoto.savefig(f'{output_folder}/quantiles_table_Tanimoto.pdf', format='pdf')
+    
     df_result_Embedding = df_result.loc[(df_result["algorithm"]=='constant-0') | (df_result["algorithm"].str.contains('Embedding'))]
     plot_result(df_result=df_result_Embedding, image_suffix="Embedding", labelalias=labelalias)
+    
+    df_result_quantiles_Embedding = result_quantiles.loc[(result_quantiles["algorithm_alias"]=='constant-0') | (result_quantiles["algorithm_alias"].str.contains('Embedding'))]
+    column_order_Embedding = df_result_quantiles_Embedding['algorithm_alias'].unique()
+    column_order_Embedding = sort_names_according_to_labelalias_value_order(column_order_Embedding, labelalias)
+    fig_quantiles_Embedding = plot_quantiles_df(df=df_result_quantiles_Embedding, column_order=column_order_Embedding)
+    fig_quantiles_Embedding.savefig(f'{output_folder}/quantiles_table_Embedding.pdf', format='pdf')
     
     

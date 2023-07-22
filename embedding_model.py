@@ -1004,8 +1004,9 @@ def load_embedding_model_from_checkpoint(experiment_name, device, checkpoint_nam
 
     # Load the model state dict from the checkpoint
     model.load_state_dict(checkpoint['model_state_dict'])
+    print(f"Loaded model {config['model_type']} from epoch {checkpoint['epoch']}")
 
-    with open(f"{emb_model_input_folder}/config.json", "r") as f:
-        config = json.load(f)
+    # with open(f"{emb_model_input_folder}/config.json", "r") as f:
+    #     config = json.load(f)
 
     return model, config

@@ -58,6 +58,7 @@ from embedding_model import (
     load_embedding_model_from_pickle,
     load_embedding_model_from_checkpoint,
 )
+from compare_value_functions_run import PaRoutesInventory_sample
 
 # from syntheseus.search.algorithms.best_first.retro_star import MolIsPurchasableCost
 
@@ -99,13 +100,14 @@ def run_algorithm(
     inventory: BaseMolInventory,
     and_node_cost_fn: BaseNodeEvaluator[AndNode],
     or_node_cost_fn: BaseNodeEvaluator[OrNode],
-    max_expansion_depth: int = 15,
-    prevent_repeat_mol_in_trees: bool = True,
-    use_tqdm: bool = False,
-    limit_rxn_model_calls: int = 100,
-    limit_iterations: int = 1_000_000,
-    logger: logging.RootLogger = logging.getLogger(),
-    stop_on_first_solution: bool = False,
+    max_expansion_depth,#: int = 15,
+    prevent_repeat_mol_in_trees,#: bool = True,
+    use_tqdm,#: bool = False,
+    limit_rxn_model_calls,#: int = 100,
+    limit_iterations,#: int = 1_000_000,
+    logger,#: logging.RootLogger = logging.getLogger(),
+    stop_on_first_solution,#: bool = False,
+    reduce_value_function_calls,#: bool = False,
 ) -> SearchResult:
     """
     Do search on a list of SMILES strings and report the time of first solution.
@@ -121,7 +123,11 @@ def run_algorithm(
         prevent_repeat_mol_in_trees=prevent_repeat_mol_in_trees,  # original paper did this
         stop_on_first_solution=stop_on_first_solution,
     )
-    alg = ReduceValueFunctionCallsRetroStar(
+    if reduce_value_function_calls:
+        alg_cls = ReduceValueFunctionCallsRetroStar
+    else:
+        alg_cls = RetroStarSearch
+    alg = alg_cls(
         and_node_cost_fn=and_node_cost_fn,
         value_function=value_function,
         or_node_cost_fn=or_node_cost_fn,
@@ -283,6 +289,13 @@ if __name__ == "__main__":
         type=str,
         default="PAROUTES",
     )
+    parser.add_argument(
+        "--sample_percent_inventory",
+        type=float,
+        # required=True
+        help= "Percentage (number between 0 and 1) of molecules from the inventory to keep",
+        default=1,
+    )
     # parser.add_argument(
     #     "--and_node_cost_fn",
     #     type=str,
@@ -298,20 +311,44 @@ if __name__ == "__main__":
         type=bool,
         default=True,
     )
+    parser.add_argument(
+        "--reduce_value_function_calls",
+        # action="store_true",
+        type=bool,
+        required=True,
+        help="Flag to use reduced value function retro star.",
+    )
+    parser.add_argument(
+        "--retro_star_model_to_use",
+        type=str,
+        # required=True,
+        default="RetroStar_savedModels/best_epoch_final_4.pt",
+    )
     args = parser.parse_args()
 
     # Create eventid
+    if args.inventory != "PAROUTES":
+        inventory_label = "_InventPercent_"+ str(args.sample_percent_inventory)
+    else:
+        inventory_label = ""
+        
+    if args.reduce_value_function_calls:
+        reduce_label = "_ReduceCalls"
+    else:
+        reduce_label = ""
+    
+    
     # eventid = datetime.now().strftime("%Y%m-%d%H-%M%S-") + str(uuid4())
     if args.input_file=="Guacamol_100_hardest_to_solve":
-        eventid = '202306-3017-5132-d4cd54bf-e5a4-44c5-82af-c629a3692d87_HARDEST_COST1_v3'
+        eventid = f'202306-3017-5132-d4cd54bf-e5a4-44c5-82af-c629a3692d87_HARDEST_COST1_ALL_v3{inventory_label}{reduce_label}'
     if args.input_file=="Guacamol_100_hard_to_solve":
-        eventid = "202307-0320-4900-d4c27728-a5aa-4177-8681-268a17c3d208_HARD_COST1_v3"
+        eventid = f"202307-0320-4900-d4c27728-a5aa-4177-8681-268a17c3d208_HARD_COST1_ALL_v3{inventory_label}{reduce_label}"
     elif args.input_file=="Guacamol_100_mid_hard_to_solve":
-        eventid = '202307-0620-3725-cc7b1f07-14cd-47e8-9d40-f5b2f358fa28_MID_HARD_COST1_v3'
+        eventid = f'202307-0620-3725-cc7b1f07-14cd-47e8-9d40-f5b2f358fa28_MID_HARD_COST1_ALL_v3{inventory_label}{reduce_label}'
     elif args.input_file=="Guacamol_100_mid_to_solve":
-        eventid = 'MID_COST1_v3'
+        eventid = f'MID_COST1_ALL_v3{inventory_label}{reduce_label}'
     elif args.input_file=="Guacamol_100_mid_easy_to_solve":
-        eventid = 'MID_EASY_COST1_ALL_v3'
+        eventid = f'MID_EASY_COST1_ALL_v3{inventory_label}{reduce_label}'
     output_folder = f"CompareTanimotoLearnt/{eventid}"
 
     if not os.path.exists(output_folder):
@@ -358,6 +395,8 @@ if __name__ == "__main__":
 
     if args.inventory == "PAROUTES":
         inventory = PaRoutesInventory(n=args.paroutes_n)
+    elif args.inventory == "PAROUTES_SAMPLE":
+        inventory = PaRoutesInventory_sample(n=args.paroutes_n, sample_percent=args.sample_percent_inventory, random_seed=42)
     else:
         raise NotImplementedError(f"inventory: {args.inventory}")
 
@@ -386,9 +425,9 @@ if __name__ == "__main__":
         # 'Tanimoto-distance-TIMES100',
         # 'Tanimoto-distance-TIMES150',
         # 'Tanimoto-distance-TIMES1000',
-        # 'Tanimoto-distance-EXP',
-        # 'Tanimoto-distance-SQRT',
-        # 'Tanimoto-distance-NUM_NEIGHBORS_TO_1',
+        # # 'Tanimoto-distance-EXP',
+        # # 'Tanimoto-distance-SQRT',
+        # # 'Tanimoto-distance-NUM_NEIGHBORS_TO_1',
         # "Embedding-from-fingerprints",
         # "Embedding-from-fingerprints-TIMES10",
         # "Embedding-from-fingerprints-TIMES100",
@@ -399,6 +438,7 @@ if __name__ == "__main__":
         # "Embedding-from-gnn-TIMES100",
         # "Embedding-from-gnn-TIMES1000",
         # "Embedding-from-gnn-TIMES10000",
+        "Retro*"
     ]
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -437,6 +477,7 @@ if __name__ == "__main__":
         distance_type_gnn=distance_type_gnn,
         featurizer_gnn=featurizer_gnn,
         device=device,
+        retro_checkpoint=args.retro_star_model_to_use
     )
 
     logger.info(f"Start experiment {eventid}")
@@ -465,6 +506,7 @@ if __name__ == "__main__":
             limit_iterations=args.limit_iterations,
             logger=logger,
             stop_on_first_solution=args.stop_on_first_solution,
+            reduce_value_function_calls=args.reduce_value_function_calls,
         )
         result[name] = alg_result
 

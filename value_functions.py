@@ -15,8 +15,12 @@ from rdkit import Chem
 import torch
 import torch.nn.functional as F
 
-# from Users.ilariasartori.syntheseus.search.graph.and_or import OrNode
-
+# For Retro* pretrained
+from typing import Optional
+from retro_star_code.value_mlp import ValueMLP
+from retro_star_code.smiles_to_fp import batch_smiles_to_fp
+from syntheseus.search.graph.and_or import AndOrGraph, OrNode
+from collections.abc import Sequence
 
 class FakeMol:
     def __init__(
@@ -460,14 +464,65 @@ class ConstantMolEvaluator(NoCacheNodeEvaluator):
     def _evaluate_nodes(self, nodes, graph=None):
         return [self.constant_value] * len(nodes)
 
+class RetroStarValueMLP(NoCacheNodeEvaluator[OrNode]):
+    """Wrapper for retro*'s pre-trained value function."""
+
+    def __init__(
+        self,
+        model_checkpoint: str,# = file_names.VALUE_MODEL_CHECKPOINT,
+        device: Optional[int] = None,
+        **kwargs,
+    ):
+        super().__init__(**kwargs)
+
+        if device is None:
+            # Smart default: CUDA if it is available
+            device = 0 if torch.cuda.is_available() else -1
+
+        # Default values taken from:
+        # https://github.com/binghong-ml/retro_star/blob/master/retro_star/common/parse_args.py
+        self._fp_dim = 2048
+        self._value_mlp = ValueMLP(
+            n_layers=1,
+            fp_dim=self._fp_dim,
+            latent_dim=128,
+            dropout_rate=0.1,
+            device=device,
+        )
+        self._value_mlp.load_state_dict(torch.load(model_checkpoint))
+        self._value_mlp.eval()
+
+    @property
+    def _mlp_device(self):
+        return self._value_mlp.layers[0].weight.device
+
+    @property
+    def _mlp_dtype(self):
+        return self._value_mlp.layers[0].weight.dtype
+
+    def _evaluate_nodes(
+        self, nodes: Sequence[OrNode], graph: Optional[AndOrGraph] = None
+    ) -> list[float]:
+        # Edge case: no input mols
+        if len(nodes) == 0:
+            return []
+
+        fps = batch_smiles_to_fp(
+            [node.mol.smiles for node in nodes], fp_dim=self._fp_dim
+        )
+        fp_tensor = torch.as_tensor(fps, dtype=self._mlp_dtype).to(self._mlp_device)
+        with torch.no_grad():
+            values = self._value_mlp(fp_tensor).detach().cpu().numpy().flatten()
+        assert len(values) == len(nodes)
+        return [float(v) for v in values.flatten()]
 
 labelalias = {
     "constant-0": "constant-0",
-    "Tanimoto-distance": "Tanimoto",
     "Tanimoto-distance-TIMES0": "Tanimoto * 0.0",
     "Tanimoto-distance-TIMES001": "Tanimoto * 0.01",
     "Tanimoto-distance-TIMES01": "Tanimoto * 0.1",
     "Tanimoto-distance-TIMES03": "Tanimoto * 0.3",
+    "Tanimoto-distance": "Tanimoto",
     "Tanimoto-distance-TIMES5": "Tanimoto * 5",
     "Tanimoto-distance-TIMES10": "Tanimoto * 10",
     "Tanimoto-distance-TIMES50": "Tanimoto * 50",
@@ -492,6 +547,7 @@ labelalias = {
     "Embedding-from-gnn-TIMES100": "Emb gnn * 100",
     "Embedding-from-gnn-TIMES1000": "Emb gnn * 1000",
     "Embedding-from-gnn-TIMES10000": "Emb gnn * 10000",
+    "Retro*": "Retro*",
 }
 
 
@@ -504,6 +560,7 @@ def initialize_value_functions(
     distance_type_gnn=None,
     featurizer_gnn=None,
     device=None,
+    retro_checkpoint=None,
 ):
     value_fns = []
     for value_fns_name in value_fns_names:
@@ -864,6 +921,22 @@ def initialize_value_functions(
                         model=model_gnn,
                         distance_type=distance_type_gnn,
                         featurizer=featurizer_gnn,
+                        device=device,
+                    ),
+                )
+            )
+        elif value_fns_name == "Retro*":
+            if model_gnn is None or (
+                retro_checkpoint is None or (device is None)
+            ):
+                raise ValueError(
+                    "retro_checkpoint and device must be provided."
+                )
+            value_fns.append(
+                (
+                    "Retro*",
+                    RetroStarValueMLP(
+                        model_checkpoint=retro_checkpoint,
                         device=device,
                     ),
                 )
