@@ -15,6 +15,7 @@ import numpy as np
 import torch
 
 from tqdm.auto import tqdm
+import gc
 
 # from deepchem.utils.save import log as dc_log
 
@@ -61,8 +62,34 @@ from embedding_model import (
 from syntheseus.search.mol_inventory import SmilesListInventory
 import random
 from paroutes import STOCK_FILES
+import os
 
 # from syntheseus.search.algorithms.best_first.retro_star import MolIsPurchasableCost
+
+class PaRoutesInventory_sample(SmilesListInventory):
+    def __init__(self, sample_percent, random_seed, n: int = 5, **kwargs):
+        # Check if the file already exists
+        sample_percent_str = str(sample_percent).replace('.', '_')
+        filename = os.path.join("Data", "paroutes_samples", f"sample_stock_smiles_{sample_percent_str}.txt")
+        if os.path.exists(filename):
+            with open(filename) as f:
+                sample_stock_smiles = [line.strip() for line in f]
+        else:
+            # Load stock molecules
+            with open(STOCK_FILES[n]) as f:
+                lines = f.readlines()
+            stock_smiles = lines[1:]  # skip header
+            sample_size = int(len(stock_smiles) * sample_percent)
+            random.seed(random_seed)
+        
+            sample_stock_smiles = random.sample(stock_smiles, sample_size)
+
+            # Save sample_stock_smiles to a txt file with the indication of sample_percent
+            with open(filename, "w") as f:
+                for smile in sample_stock_smiles:
+                    f.write(smile + "\n")
+
+        super().__init__(smiles_list=sample_stock_smiles, canonicalize=True, **kwargs)
 
 class PaRoutesInventory_sample(SmilesListInventory):
     def __init__(self, sample_percent, random_seed, n: int = 5, **kwargs):
@@ -175,6 +202,7 @@ def run_algorithm(
         # Analyze solution time
         for node in output_graph.nodes():
             node.data["analysis_time"] = node.data["num_calls_rxn_model"]
+            del node
         soln_time = get_first_solution_time(output_graph)
         this_soln_times.append(soln_time)
 
@@ -214,6 +242,8 @@ def run_algorithm(
         # num_different_routes_dict.update({smiles: len(packing_set)})
         # output_graph_dict.update({smiles: output_graph})
         # routes_dict.update({smiles: routes})
+        del output_graph
+        gc.collect()
 
     return SearchResult(
         name=name,
@@ -240,13 +270,13 @@ if __name__ == "__main__":
         "--fnp_embedding_model_to_use",
         type=str,
         # required=True,
-        default="fnp_nn_0709_sampleInLoss",  # "fingerprints_v1" # "fnp_nn_0629"
+        default="fnp_nn_0720_sampleInLoss_weightDecay_dropout_v2",  # "fingerprints_v1" # "fnp_nn_0629"
     )
     parser.add_argument(
         "--gnn_embedding_model_to_use",
         type=str,
         # required=True,
-        default="gnn_0709_sampleInLoss",
+        default="gnn_0715_sampleInLoss_weightDecay_v2",
     )
     parser.add_argument(
         "--limit_iterations",
@@ -326,10 +356,10 @@ if __name__ == "__main__":
         default=True,
     )
     parser.add_argument(
-        "--reduce_value_function_calls",
-        # action="store_true",
-        type=bool,
-        required=True,
+        "--reduce_value_function_calls", # If I don't pass anything reduce_value_function_calls will be False
+        action="store_true",
+        # type=bool,
+        # required=True,
         help="Flag to use reduced value function retro star.",
     )
     parser.add_argument(
@@ -346,11 +376,11 @@ if __name__ == "__main__":
     else:
         inventory_label = ""
         
-    if args.reduce_value_function_calls:
+    if args.reduce_value_function_calls is True:
         reduce_label = "_ReduceCalls"
     else:
         reduce_label = ""
-    
+    print(args.reduce_value_function_calls)
     
     # eventid = datetime.now().strftime("%Y%m-%d%H-%M%S-") + str(uuid4())
     if args.input_file=="Guacamol_100_hardest_to_solve":
@@ -364,6 +394,9 @@ if __name__ == "__main__":
     elif args.input_file=="Guacamol_100_mid_easy_to_solve":
         eventid = f'MID_EASY_v3{inventory_label}{reduce_label}'
     output_folder = f"CompareTanimotoLearnt/{eventid}"
+    
+    # print(reduce_label)
+    # print(eventid)
 
     if not os.path.exists(output_folder):
         os.makedirs(output_folder)
@@ -429,12 +462,13 @@ if __name__ == "__main__":
     # gnn_emb_model_input_folder = f'GraphRuns/{args.gnn_embedding_model_to_use}'
 
     value_fns_names = [
-        'constant-0',
-        'Tanimoto-distance',
+        # 'constant-0',
+        # 'Tanimoto-distance',
         # 'Tanimoto-distance-TIMES0',
         # 'Tanimoto-distance-TIMES001',
         # 'Tanimoto-distance-TIMES01',
         # 'Tanimoto-distance-TIMES03',
+        'Tanimoto-distance-TIMES5',
         # 'Tanimoto-distance-TIMES10',
         # 'Tanimoto-distance-TIMES100',
         # 'Tanimoto-distance-TIMES1000',
@@ -455,7 +489,7 @@ if __name__ == "__main__":
         # "Embedding-from-gnn-TIMES100",
         # "Embedding-from-gnn-TIMES1000",
         # "Embedding-from-gnn-TIMES10000",
-        "Retro*",
+        # "Retro*",
     ]
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -467,7 +501,7 @@ if __name__ == "__main__":
     model_fnps, config_fnps = load_embedding_model_from_checkpoint(
         experiment_name=args.fnp_embedding_model_to_use,
         device=device,
-        checkpoint_name="epoch_11_checkpoint",
+        checkpoint_name="model_min_val_checkpoint",
     )
 
     # Graph model
@@ -478,7 +512,7 @@ if __name__ == "__main__":
     model_gnn, config_gnn = load_embedding_model_from_checkpoint(
         experiment_name=args.gnn_embedding_model_to_use,
         device=device,
-        checkpoint_name="epoch_76_checkpoint",
+        checkpoint_name="model_min_val_checkpoint",
     )
 
     distance_type_fnps = "cosine"

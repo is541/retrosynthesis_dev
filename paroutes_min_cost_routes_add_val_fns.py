@@ -73,7 +73,7 @@ if __name__ == "__main__":
     ]
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     
-    fnp_embedding_model_to_use = "fnp_nn_0720_sampleInLoss_weightDecay_dropout"
+    fnp_embedding_model_to_use = "fnp_nn_0720_sampleInLoss_weightDecay_dropout_v2"
     
     model_fnps, config_fnps = load_embedding_model_from_checkpoint(
         experiment_name=fnp_embedding_model_to_use,
@@ -82,7 +82,7 @@ if __name__ == "__main__":
     )
 
     # Graph model
-    gnn_embedding_model_to_use = "gnn_0715_sampleInLoss_weightDecay"
+    gnn_embedding_model_to_use = "gnn_0715_sampleInLoss_weightDecay_v2"
     model_gnn, config_gnn = load_embedding_model_from_checkpoint(
         experiment_name=gnn_embedding_model_to_use,
         device=device,

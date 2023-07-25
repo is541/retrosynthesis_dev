@@ -409,8 +409,8 @@ class Emb_from_gnn_NNCostEstimator(NoCacheNodeEvaluator):
 
     def _get_nearest_neighbour_dist(self, smiles: str) -> float:
         distances = self.get_distances_to_purchasable_molecules(smiles)
-        print("Min", torch.min(distances).item())
-        print("Max", torch.max(distances).item())
+        # print("Min", torch.min(distances).item())
+        # print("Max", torch.max(distances).item())
         return torch.min(distances).item()
 
     def _evaluate_nodes(self, nodes: list[OrNode], graph=None) -> list[float]:

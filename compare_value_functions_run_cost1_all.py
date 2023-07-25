@@ -13,6 +13,7 @@ from uuid import uuid4
 import pickle
 import numpy as np
 import torch
+import gc
 
 from tqdm.auto import tqdm
 
@@ -161,6 +162,7 @@ def run_algorithm(
         # Analyze solution time
         for node in output_graph.nodes():
             node.data["analysis_time"] = node.data["num_calls_rxn_model"]
+            del node
         soln_time = get_first_solution_time(output_graph)
         this_soln_times.append(soln_time)
 
@@ -200,6 +202,8 @@ def run_algorithm(
         # num_different_routes_dict.update({smiles: len(packing_set)})
         # output_graph_dict.update({smiles: output_graph})
         # routes_dict.update({smiles: routes})
+        del output_graph
+        gc.collect()
 
     return SearchResult(
         name=name,
@@ -226,13 +230,13 @@ if __name__ == "__main__":
         "--fnp_embedding_model_to_use",
         type=str,
         # required=True,
-        default="fnp_nn_0709_sampleInLoss",  # "fingerprints_v1" # "fnp_nn_0629"
+        default="fnp_nn_0720_sampleInLoss_weightDecay_dropout_v2",  # "fingerprints_v1" # "fnp_nn_0629"
     )
     parser.add_argument(
         "--gnn_embedding_model_to_use",
         type=str,
         # required=True,
-        default="gnn_0709_sampleInLoss",
+        default="gnn_0715_sampleInLoss_weightDecay_v2",
     )
     parser.add_argument(
         "--limit_iterations",
@@ -313,9 +317,9 @@ if __name__ == "__main__":
     )
     parser.add_argument(
         "--reduce_value_function_calls",
-        # action="store_true",
-        type=bool,
-        required=True,
+        action="store_true",
+        # type=bool,
+        # required=True,
         help="Flag to use reduced value function retro star.",
     )
     parser.add_argument(
@@ -337,6 +341,7 @@ if __name__ == "__main__":
     else:
         reduce_label = ""
     
+    print("reduce_value_function_calls: ", args.reduce_value_function_calls)
     
     # eventid = datetime.now().strftime("%Y%m-%d%H-%M%S-") + str(uuid4())
     if args.input_file=="Guacamol_100_hardest_to_solve":
@@ -382,6 +387,14 @@ if __name__ == "__main__":
 
     if args.limit_num_smiles is not None:
         test_smiles = test_smiles[: args.limit_num_smiles]
+        
+    # test_smiles = [
+    #     "CN(C)CCN1C(=O)c2c(c3c4ccccc4[nH]c3c3ccccc23)C1=O",
+    #     "COCc1cc(O)nc(N=C(N)Nc2ccc(C)cc2)n1",
+    #     "CCN(CC)CC#CCC1(O)c2ccccc2-c2ccccc21",
+    #     "CC1CCN(C(c2ccc(F)cn2)c2ccc(C(C)C(=O)O)cc2-c2ccc(C(F)(F)F)cc2)CC1",
+    #     "Cn1cc(-c2ccc(-c3c4c(nn3C)CCc3cnc(Nc5cnn(Cc6ccncc6)c5)nc3-4)cc2)cn1",
+    # ]
 
     # if args.and_node_cost_fn == "PAROUTES":
     #     and_node_cost_fn = PaRoutesRxnCost()
@@ -416,7 +429,7 @@ if __name__ == "__main__":
 
     value_fns_names = [
         'constant-0',
-        'Tanimoto-distance',
+        # 'Tanimoto-distance',
         # 'Tanimoto-distance-TIMES01',
         # 'Tanimoto-distance-TIMES03',
         # 'Tanimoto-distance-TIMES5',
@@ -438,7 +451,7 @@ if __name__ == "__main__":
         # "Embedding-from-gnn-TIMES100",
         # "Embedding-from-gnn-TIMES1000",
         # "Embedding-from-gnn-TIMES10000",
-        "Retro*"
+        # "Retro*"
     ]
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -450,7 +463,7 @@ if __name__ == "__main__":
     model_fnps, config_fnps = load_embedding_model_from_checkpoint(
         experiment_name=args.fnp_embedding_model_to_use,
         device=device,
-        checkpoint_name="epoch_11_checkpoint",
+        checkpoint_name="model_min_val_checkpoint",
     )
 
     # Graph model
@@ -461,7 +474,7 @@ if __name__ == "__main__":
     model_gnn, config_gnn = load_embedding_model_from_checkpoint(
         experiment_name=args.gnn_embedding_model_to_use,
         device=device,
-        checkpoint_name="epoch_76_checkpoint",
+        checkpoint_name="model_min_val_checkpoint",
     )
 
     distance_type_fnps = "cosine"

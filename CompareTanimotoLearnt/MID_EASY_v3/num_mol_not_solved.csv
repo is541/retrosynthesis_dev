@@ -1,8 +1,4 @@
 algorithm,nr_mol_not_solved
+Embedding-from-fingerprints,0
 Retro*,0
-Tanimoto-distance,0
-Tanimoto-distance-TIMES0,0
-Tanimoto-distance-TIMES001,0
-Tanimoto-distance-TIMES01,0
-Tanimoto-distance-TIMES10,0
 constant-0,0

@@ -235,8 +235,8 @@ if __name__ == "__main__":
     # eventid = 'MID_EASY_COST1'
     # eventid = 'MID_EASY_COST1_ALL'
     # eventid = 'MID_EASY_v2_cost_paroutes'
-    eventid = 'MID_EASY_v3'
-    # eventid = 'MID_EASY_v3_ReduceCalls'
+    # eventid = 'MID_EASY_v3'
+    eventid = 'MID_EASY_v3_ReduceCalls'
     plot_existing_results = False
     
     output_folder = f"CompareTanimotoLearnt/{eventid}"
@@ -299,6 +299,7 @@ if __name__ == "__main__":
     result_quantiles.to_csv(f'{output_folder}/results_quantiles.csv', index=False)
     
     column_order = result_quantiles['algorithm_alias'].unique()
+    column_order = sort_names_according_to_labelalias_value_order(column_order, labelalias)
     fig_quantiles = plot_quantiles_df(df=result_quantiles, column_order=column_order)
     fig_quantiles.savefig(f'{output_folder}/quantiles_table_all.pdf', format='pdf')
 
@@ -315,20 +316,22 @@ if __name__ == "__main__":
     # breakpoint()
     
     plot_result(df_result=df_result, image_suffix="all", labelalias=labelalias)
+    baseline_algs = ['constant-0', 'Retro*']
+    baseline_algs_alias = [labelalias[alg_name] for alg_name in baseline_algs]
     
-    df_result_Tanimoto = df_result.loc[(df_result["algorithm"]=='constant-0') | (df_result["algorithm"].str.contains('Tanimoto'))]
+    df_result_Tanimoto = df_result.loc[(df_result["algorithm"].isin(baseline_algs)) | (df_result["algorithm"].str.contains('Tanimoto'))]
     plot_result(df_result=df_result_Tanimoto, image_suffix="Tanimoto", labelalias=labelalias)
     
-    df_result_quantiles_Tanimoto = result_quantiles.loc[(result_quantiles["algorithm_alias"]=='constant-0') | (result_quantiles["algorithm_alias"].str.contains('Tanimoto'))]
+    df_result_quantiles_Tanimoto = result_quantiles.loc[(result_quantiles["algorithm_alias"].isin(baseline_algs_alias)) | (result_quantiles["algorithm_alias"].str.contains('Tanimoto'))]
     column_order_Tanimoto = df_result_quantiles_Tanimoto['algorithm_alias'].unique()
     column_order_Tanimoto = sort_names_according_to_labelalias_value_order(column_order_Tanimoto, labelalias)
     fig_quantiles_Tanimoto = plot_quantiles_df(df=df_result_quantiles_Tanimoto, column_order=column_order_Tanimoto)
     fig_quantiles_Tanimoto.savefig(f'{output_folder}/quantiles_table_Tanimoto.pdf', format='pdf')
     
-    df_result_Embedding = df_result.loc[(df_result["algorithm"]=='constant-0') | (df_result["algorithm"].str.contains('Embedding'))]
+    df_result_Embedding = df_result.loc[(df_result["algorithm"].isin(baseline_algs)) | (df_result["algorithm"].str.contains('Embedding'))]
     plot_result(df_result=df_result_Embedding, image_suffix="Embedding", labelalias=labelalias)
     
-    df_result_quantiles_Embedding = result_quantiles.loc[(result_quantiles["algorithm_alias"]=='constant-0') | (result_quantiles["algorithm_alias"].str.contains('Embedding'))]
+    df_result_quantiles_Embedding = result_quantiles.loc[(result_quantiles["algorithm_alias"].isin(baseline_algs_alias)) | (result_quantiles["algorithm_alias"].str.contains('Embedding'))]
     column_order_Embedding = df_result_quantiles_Embedding['algorithm_alias'].unique()
     column_order_Embedding = sort_names_according_to_labelalias_value_order(column_order_Embedding, labelalias)
     fig_quantiles_Embedding = plot_quantiles_df(df=df_result_quantiles_Embedding, column_order=column_order_Embedding)
