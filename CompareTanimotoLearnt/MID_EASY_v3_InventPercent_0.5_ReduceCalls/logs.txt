@@ -1,10 +1,11 @@
-2023-07-25 15:01:27,802 root INFO Namespace(input_file='Guacamol_100_mid_easy_to_solve', fnp_embedding_model_to_use='fnp_nn_0720_sampleInLoss_weightDecay_dropout_v2', gnn_embedding_model_to_use='gnn_0715_sampleInLoss_weightDecay_v2', limit_iterations=10000000000, limit_rxn_model_calls=5000, paroutes_n=5, limit_num_smiles=None, start_from_smiles_index_n=None, max_expansion_depth=20, max_num_templates=50, prevent_repeat_mol_in_trees=True, rxn_model='PAROUTES', inventory='PAROUTES_SAMPLE', sample_percent_inventory=0.5, and_node_cost_fn='PAROUTES', or_node_cost_fn='MOL_PURCHASABLE', stop_on_first_solution=True, reduce_value_function_calls=True, retro_star_model_to_use='RetroStar_savedModels/best_epoch_final_4.pt')
-2023-07-25 15:01:28,819 h5py._conv DEBUG Creating converter from 3 to 5
-2023-07-25 15:01:30,392 root INFO Start experiment MID_EASY_v3_InventPercent_0.5_ReduceCalls
-2023-07-25 15:01:30,442 root INFO Args: 
+2023-07-28 16:40:18,902 root INFO Namespace(input_file='Guacamol_100_mid_easy_to_solve', input_chunk_10_index=4, fnp_embedding_model_to_use='fnp_nn_0720_sampleInLoss_weightDecay_dropout_v2', gnn_embedding_model_to_use='gnn_0715_sampleInLoss_weightDecay_v2', limit_iterations=10000000000, limit_rxn_model_calls=5000, paroutes_n=5, limit_num_smiles=None, start_from_smiles_index_n=None, max_expansion_depth=20, max_num_templates=50, prevent_repeat_mol_in_trees=True, rxn_model='PAROUTES', inventory='PAROUTES_SAMPLE', sample_percent_inventory=0.5, and_node_cost_fn='PAROUTES', or_node_cost_fn='MOL_PURCHASABLE', stop_on_first_solution=True, reduce_value_function_calls=True, retro_star_model_to_use='RetroStar_savedModels/best_epoch_final_4.pt')
+2023-07-28 16:40:20,150 h5py._conv DEBUG Creating converter from 3 to 5
+2023-07-28 16:40:45,482 root INFO Start experiment MID_EASY_v3_InventPercent_0.5_ReduceCalls
+2023-07-28 16:40:45,483 root INFO Args: 
 and_node_cost_fn: PAROUTES
 fnp_embedding_model_to_use: fnp_nn_0720_sampleInLoss_weightDecay_dropout_v2
 gnn_embedding_model_to_use: gnn_0715_sampleInLoss_weightDecay_v2
+input_chunk_10_index: 4
 input_file: Guacamol_100_mid_easy_to_solve
 inventory: PAROUTES_SAMPLE
 limit_iterations: 10000000000
@@ -21,22 +22,15 @@ rxn_model: PAROUTES
 sample_percent_inventory: 0.5
 start_from_smiles_index_n: None
 stop_on_first_solution: True
-2023-07-25 15:01:30,442 root INFO dim_test: 100
-2023-07-25 15:01:30,442 root INFO Start search with Tanimoto-distance-TIMES5
-2023-07-25 15:01:30,442 root DEBUG Start search 0/100. SMILES: CCOc1ccc(N(CC(=O)NC2CCCCC2)C(=O)CCCC(=O)Nc2ccccn2)cc1
-2023-07-25 15:07:40,206 root DEBUG Start search 1/100. SMILES: CN1CCC(=C2c3ccccc3Oc3ccc(Cl)cc32)CC1
-2023-07-25 15:11:54,586 root DEBUG Start search 2/100. SMILES: COc1cc(O)c2c(=O)cc(-c3cc(O)c(O)cc3Cc3cccc(Cl)c3)oc2c1
-2023-07-25 18:16:06,946 root DEBUG Start search 3/100. SMILES: N#CCCCSC(=S)n1ccnc1
-2023-07-25 18:16:25,453 root DEBUG Start search 4/100. SMILES: CSC(=O)C#CC(C)(C)N(C)Cc1ccccc1
-2023-07-25 18:21:00,726 root DEBUG Start search 5/100. SMILES: CC(=O)Nc1nc(C)c(-c2nc(C(C)(C)CCO)no2)s1
-2023-07-25 18:24:26,281 root DEBUG Start search 6/100. SMILES: NC(=O)C(CCC(F)(F)F)N(CCc1ncon1)S(=O)(=O)c1ccc(Cl)cc1
-2023-07-25 18:51:53,994 root DEBUG Start search 7/100. SMILES: NCC(=O)N1CC(N)CC1C(=O)NC(CCc1ccccc1)C(=O)Nc1ccc2ncccc2c1
-2023-07-25 19:31:39,893 root DEBUG Start search 8/100. SMILES: CCN(CC)C(=O)c1ccc(N(c2cccc(OC)c2)C2CCN(CC=C(C)C)CC2C)cc1
-2023-07-25 19:45:32,934 root DEBUG Start search 9/100. SMILES: N=C(N)NCCCC(NC(=O)CN1CCN(S(=O)(=O)c2ccc(-c3ccccn3)s2)CC1=O)C(=O)c1nccs1
-2023-07-25 20:11:09,577 root DEBUG Start search 10/100. SMILES: Cc1nc(NC2CCCC2)c2nn(C)c(-c3ccc(Cl)cc3Cl)c2n1
-2023-07-25 20:16:53,991 root DEBUG Start search 11/100. SMILES: C#CC(CC(=O)O)NC(=O)Cn1ccc2ccc(N3CCNCC3)cc2c1=O
-2023-07-25 21:02:59,498 root DEBUG Start search 12/100. SMILES: O=c1c(C=NNc2nc(N3CCOCC3)c3ccsc3n2)coc2ccccc12
-2023-07-25 21:07:50,739 root DEBUG Start search 13/100. SMILES: O=C(NC1CCCCC1)C1Cc2c(sc3ccccc23)CN1
-2023-07-25 21:08:17,730 root DEBUG Start search 14/100. SMILES: O=C1CSC(C23CC4CC(CC(C4)C2)C3)N1CCN1CCCCC1
-2023-07-25 21:09:20,976 root DEBUG Start search 15/100. SMILES: O=C1c2cccc3cccc(c23)C(=O)N1CCN1CCN(CC(O)COCc2ccc(Cl)cc2)CC1
-2023-07-25 21:11:39,817 root DEBUG Start search 16/100. SMILES: COc1ccc2oc(NC3CCN(Cc4ccccc4)CC3)cc(=O)c2c1
+2023-07-28 16:40:45,483 root INFO dim_test: 10
+2023-07-28 16:40:45,483 root INFO Start search with Embedding-from-fingerprints-TIMES10
+2023-07-28 16:40:45,483 root DEBUG Start search 0/10. SMILES: O=c1n(Cc2nc3ccc(C(F)(F)F)cn3c2CCCCO)c2cnccc2n1C1CC1
+2023-07-28 16:55:02,846 root DEBUG Start search 1/10. SMILES: O=C1NC2CCCCC2c2ccccc21
+2023-07-28 17:37:51,949 root DEBUG Start search 2/10. SMILES: CCN(CC)c1nc2ccc(C(O)(c3ccc(Cl)cc3)c3cncn3C)cc2c(Cl)c1N(C(=O)OC(C)(C)C)c1ccccc1
+2023-07-28 17:41:57,085 root DEBUG Start search 3/10. SMILES: CCN1CCN(c2cc(C(=O)Nc3ccc(C)c(Nc4ncnc5cnc(N6CCOCC6)nc45)c3)cc(C(C)(C)C#N)c2)CC1
+2023-07-28 19:18:46,789 root DEBUG Start search 4/10. SMILES: COc1cc(N2CC3(CCN(S(=O)(=O)C4CC4)C3)C2)ncn1
+2023-07-28 19:33:59,747 root DEBUG Start search 5/10. SMILES: CC1=C(C(=O)O)N2C(=O)C(NC(=O)C(N)c3cccc4sccc34)C2SC1
+2023-07-28 19:44:45,028 root DEBUG Start search 6/10. SMILES: C=CCN(C(=O)CCC(=O)Nc1cc(C)on1)C(C(=O)NC1CCCC1)c1ccc(OC)c(OC)c1
+2023-07-28 21:00:36,414 root DEBUG Start search 7/10. SMILES: CC1(C)c2cc(OCC(O)CO)ccc2C(=O)c2c1[nH]c1c(C(=O)O)c(C#N)ccc21
+2023-07-28 21:33:18,521 root DEBUG Start search 8/10. SMILES: Cc1nc(C)c(CN2CCN(S(C)(=O)=O)CC2)nc1C
+2023-07-28 21:54:37,691 root DEBUG Start search 9/10. SMILES: O=S(=O)(c1ccc(F)cn1)N1C(CO)CCC1c1ccc(F)cc1

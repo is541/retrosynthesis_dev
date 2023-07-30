@@ -1,0 +1,5 @@
+algorithm,nr_mol_not_solved
+Embedding-from-fingerprints-TIMES10,21
+Retro*,23
+Tanimoto-distance,28
+constant-0,28

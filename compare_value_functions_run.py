@@ -87,21 +87,21 @@ class PaRoutesInventory_sample(SmilesListInventory):
             # Save sample_stock_smiles to a txt file with the indication of sample_percent
             with open(filename, "w") as f:
                 for smile in sample_stock_smiles:
-                    f.write(smile + "\n")
+                    f.write(smile) # + "\n"
 
         super().__init__(smiles_list=sample_stock_smiles, canonicalize=True, **kwargs)
 
-class PaRoutesInventory_sample(SmilesListInventory):
-    def __init__(self, sample_percent, random_seed, n: int = 5, **kwargs):
-        # Load stock molecules
-        with open(STOCK_FILES[n]) as f:
-            lines = f.readlines()
-        stock_smiles = lines[1:]  # skip header
-        sample_size = int(len(stock_smiles) * sample_percent)
-        random.seed(random_seed)
+# class PaRoutesInventory_sample(SmilesListInventory):
+#     def __init__(self, sample_percent, random_seed, n: int = 5, **kwargs):
+#         # Load stock molecules
+#         with open(STOCK_FILES[n]) as f:
+#             lines = f.readlines()
+#         stock_smiles = lines[1:]  # skip header
+#         sample_size = int(len(stock_smiles) * sample_percent)
+#         random.seed(random_seed)
         
-        sample_stock_smiles = random.sample(stock_smiles, sample_size)
-        super().__init__(smiles_list=sample_stock_smiles, canonicalize=True, **kwargs)
+#         sample_stock_smiles = random.sample(stock_smiles, sample_size)
+#         super().__init__(smiles_list=sample_stock_smiles, canonicalize=True, **kwargs)
 
 
 class SearchResult:
@@ -462,13 +462,13 @@ if __name__ == "__main__":
     # gnn_emb_model_input_folder = f'GraphRuns/{args.gnn_embedding_model_to_use}'
 
     value_fns_names = [
-        # 'constant-0',
+        'constant-0',
         # 'Tanimoto-distance',
         # 'Tanimoto-distance-TIMES0',
         # 'Tanimoto-distance-TIMES001',
         # 'Tanimoto-distance-TIMES01',
         # 'Tanimoto-distance-TIMES03',
-        'Tanimoto-distance-TIMES5',
+        # 'Tanimoto-distance-TIMES5',
         # 'Tanimoto-distance-TIMES10',
         # 'Tanimoto-distance-TIMES100',
         # 'Tanimoto-distance-TIMES1000',

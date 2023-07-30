@@ -66,7 +66,7 @@ def plot_quantiles_df(df, column_order):
     ax = plt.gca()
 
     # Plot the table with color-coded cells (using YlOrRd colormap)
-    sns.heatmap(df_transposed, cmap='YlOrRd', annot=True, fmt='.1f', ax=ax,
+    sns.heatmap(df_transposed, cmap='RdYlGn_r', annot=True, fmt='.1f', ax=ax,
                 annot_kws={'weight': 'normal'})
 
     # Remove ticks from both x and y axes
@@ -103,9 +103,9 @@ def plot_result(df_result, image_suffix, labelalias):
     categoryarray_list = [label for label in labelalias.values() if label in labelalias_considered]
     
     fig = px.box(df_result, x="algorithm_alias", y="value", width=1000, height=600,
-                color='not_solved',
-                color_discrete_sequence=[px.colors.qualitative.Plotly[1], px.colors.qualitative.Plotly[0]],
-                boxmode="overlay", 
+                # color='not_solved',
+                # color_discrete_sequence=[px.colors.qualitative.Plotly[0]],
+                # boxmode="overlay", 
                 points='all',
                 labels={
                     "value": "Time to first solution",
@@ -114,16 +114,6 @@ def plot_result(df_result, image_suffix, labelalias):
                 category_orders={"algorithm_alias": categoryarray_list},
             )
     fig.update_layout(xaxis_title=None)
-
-    # fig.update_layout(xaxis_title=None)
-    # fig.update_layout(xaxis=dict(
-    #     # tickmode='array',
-    #     # tickvals=categoryarray_list,
-    #     # ticktext=categoryarray_list, #list(labelalias),
-    #     categoryorder='array',
-    #     categoryarray=categoryarray_list
-    # ))
-    # fig.update_xaxes(labelalias=labelalias, categoryorder='array', categoryarray=categoryarray_list)
 
     # Add lines above each box
     for _, row in df_solved.iterrows():
@@ -139,7 +129,7 @@ def plot_result(df_result, image_suffix, labelalias):
 
         fig.add_annotation(
             x=algorithm, y=box_y_2, text=f"mol solved: {num_mol_solved}",
-            showarrow=False, font=dict(color=px.colors.qualitative.Plotly[0])
+            showarrow=False, font=dict(color=px.colors.qualitative.Plotly[2])
         )
         
         fig.add_annotation(
@@ -155,7 +145,7 @@ def plot_result(df_result, image_suffix, labelalias):
     # PLOT INVERTING COLORS
     fig = px.box(df_result, x="algorithm_alias", y="value", width=1000, height=600,
                 color='not_solved',
-                color_discrete_sequence=[px.colors.qualitative.Plotly[0], px.colors.qualitative.Plotly[1]],
+                color_discrete_sequence=[px.colors.qualitative.Plotly[2], px.colors.qualitative.Plotly[1]],
                 boxmode="overlay", 
                 points='all',
                 labels={
@@ -181,7 +171,7 @@ def plot_result(df_result, image_suffix, labelalias):
 
         fig.add_annotation(
             x=algorithm, y=box_y_2, text=f"mol solved: {num_mol_solved}",
-            showarrow=False, font=dict(color=px.colors.qualitative.Plotly[0])
+            showarrow=False, font=dict(color=px.colors.qualitative.Plotly[2])
         )
         
         fig.add_annotation(
@@ -236,28 +226,31 @@ if __name__ == "__main__":
     # eventid = 'MID_EASY_COST1_ALL'
     # eventid = 'MID_EASY_v2_cost_paroutes'
     # eventid = 'MID_EASY_v3'
+    # eventid = 'MID_EASY_COST1_ALL_v3_ReduceCalls'
     eventid = 'MID_EASY_v3_ReduceCalls'
+    eventid = 'MID_EASY_v3_InventPercent_0.5_ReduceCalls'
     plot_existing_results = False
     
     output_folder = f"CompareTanimotoLearnt/{eventid}"
     
     
     algs_to_consider = 'all'
-    # algs_to_consider = [
-    #     # 'constant-0',
-    #     # 'Tanimoto-distance',
-    #     # 'Tanimoto-distance-TIMES01',
-    #     # 'Tanimoto-distance-TIMES03',
-    #     # 'Tanimoto-distance-TIMES10',
-    #     # 'Tanimoto-distance-TIMES100',
-    #     # 'Tanimoto-distance-EXP',
-    #     # 'Tanimoto-distance-SQRT',
-    #     # "Tanimoto-distance-NUM_NEIGHBORS_TO_1",
-    #     "Embedding-from-fingerprints",
-    #     # "Embedding-from-fingerprints-TIMES10",
-    #     # "Embedding-from-fingerprints-TIMES100",
-    #     "Embedding-from-gnn",
-    # ]
+    algs_to_consider = [
+        'constant-0',
+        'Tanimoto-distance',
+        # 'Tanimoto-distance-TIMES01',
+        # 'Tanimoto-distance-TIMES03',
+        # 'Tanimoto-distance-TIMES10',
+        # 'Tanimoto-distance-TIMES100',
+        # 'Tanimoto-distance-EXP',
+        # 'Tanimoto-distance-SQRT',
+        # "Tanimoto-distance-NUM_NEIGHBORS_TO_1",
+        # "Embedding-from-fingerprints",
+        "Embedding-from-fingerprints-TIMES10",
+        # "Embedding-from-fingerprints-TIMES100",
+        # "Embedding-from-gnn",
+        "Retro*"
+    ]
     # algs_considered = []
     
     if plot_existing_results:

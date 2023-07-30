@@ -13,9 +13,9 @@ from uuid import uuid4
 import pickle
 import numpy as np
 import torch
-import gc
 
 from tqdm.auto import tqdm
+import gc
 
 # from deepchem.utils.save import log as dc_log
 
@@ -59,9 +59,53 @@ from embedding_model import (
     load_embedding_model_from_pickle,
     load_embedding_model_from_checkpoint,
 )
-from compare_value_functions_run import PaRoutesInventory_sample
+from syntheseus.search.mol_inventory import SmilesListInventory
+import random
+from paroutes import STOCK_FILES
+import os
 
 # from syntheseus.search.algorithms.best_first.retro_star import MolIsPurchasableCost
+
+def split_list_by_length(sample_list, length=10):
+    return [sample_list[i:i+length] for i in range(0, len(sample_list), length)]
+
+
+class PaRoutesInventory_sample(SmilesListInventory):
+    def __init__(self, sample_percent, random_seed, n: int = 5, **kwargs):
+        # Check if the file already exists
+        sample_percent_str = str(sample_percent).replace('.', '_')
+        filename = os.path.join("Data", "paroutes_samples", f"sample_stock_smiles_{sample_percent_str}.txt")
+        if os.path.exists(filename):
+            with open(filename) as f:
+                sample_stock_smiles = [line.strip() for line in f]
+        else:
+            # Load stock molecules
+            with open(STOCK_FILES[n]) as f:
+                lines = f.readlines()
+            stock_smiles = lines[1:]  # skip header
+            sample_size = int(len(stock_smiles) * sample_percent)
+            random.seed(random_seed)
+        
+            sample_stock_smiles = random.sample(stock_smiles, sample_size)
+
+            # Save sample_stock_smiles to a txt file with the indication of sample_percent
+            with open(filename, "w") as f:
+                for smile in sample_stock_smiles:
+                    f.write(smile) # + "\n"
+
+        super().__init__(smiles_list=sample_stock_smiles, canonicalize=True, **kwargs)
+
+# class PaRoutesInventory_sample(SmilesListInventory):
+#     def __init__(self, sample_percent, random_seed, n: int = 5, **kwargs):
+#         # Load stock molecules
+#         with open(STOCK_FILES[n]) as f:
+#             lines = f.readlines()
+#         stock_smiles = lines[1:]  # skip header
+#         sample_size = int(len(stock_smiles) * sample_percent)
+#         random.seed(random_seed)
+        
+#         sample_stock_smiles = random.sample(stock_smiles, sample_size)
+#         super().__init__(smiles_list=sample_stock_smiles, canonicalize=True, **kwargs)
 
 
 class SearchResult:
@@ -227,6 +271,13 @@ if __name__ == "__main__":
         # " One SMILES per line, no header.",
     )
     parser.add_argument(
+        "--input_chunk_10_index",
+        type=int,
+        default=-1,
+        # help="Text file with SMILES to run search on."
+        # " One SMILES per line, no header.",
+    )
+    parser.add_argument(
         "--fnp_embedding_model_to_use",
         type=str,
         # required=True,
@@ -300,11 +351,11 @@ if __name__ == "__main__":
         help= "Percentage (number between 0 and 1) of molecules from the inventory to keep",
         default=1,
     )
-    # parser.add_argument(
-    #     "--and_node_cost_fn",
-    #     type=str,
-    #     default="PAROUTES",
-    # )
+    parser.add_argument(
+        "--and_node_cost_fn",
+        type=str,
+        default="PAROUTES",
+    )
     parser.add_argument(
         "--or_node_cost_fn",
         type=str,
@@ -316,7 +367,7 @@ if __name__ == "__main__":
         default=True,
     )
     parser.add_argument(
-        "--reduce_value_function_calls",
+        "--reduce_value_function_calls", # If I don't pass anything reduce_value_function_calls will be False
         action="store_true",
         # type=bool,
         # required=True,
@@ -336,25 +387,27 @@ if __name__ == "__main__":
     else:
         inventory_label = ""
         
-    if args.reduce_value_function_calls:
+    if args.reduce_value_function_calls is True:
         reduce_label = "_ReduceCalls"
     else:
         reduce_label = ""
-    
-    print("reduce_value_function_calls: ", args.reduce_value_function_calls)
+    print(args.reduce_value_function_calls)
     
     # eventid = datetime.now().strftime("%Y%m-%d%H-%M%S-") + str(uuid4())
     if args.input_file=="Guacamol_100_hardest_to_solve":
-        eventid = f'202306-3017-5132-d4cd54bf-e5a4-44c5-82af-c629a3692d87_HARDEST_COST1_ALL_v3{inventory_label}{reduce_label}'
+        eventid = f'202306-3017-5132-d4cd54bf-e5a4-44c5-82af-c629a3692d87_HARDEST_v3{inventory_label}{reduce_label}'
     if args.input_file=="Guacamol_100_hard_to_solve":
-        eventid = f"202307-0320-4900-d4c27728-a5aa-4177-8681-268a17c3d208_HARD_COST1_ALL_v3{inventory_label}{reduce_label}"
+        eventid = f"202307-0320-4900-d4c27728-a5aa-4177-8681-268a17c3d208_HARD_v3{inventory_label}{reduce_label}"
     elif args.input_file=="Guacamol_100_mid_hard_to_solve":
-        eventid = f'202307-0620-3725-cc7b1f07-14cd-47e8-9d40-f5b2f358fa28_MID_HARD_COST1_ALL_v3{inventory_label}{reduce_label}'
+        eventid = f'202307-0620-3725-cc7b1f07-14cd-47e8-9d40-f5b2f358fa28_MID_HARD_v3{inventory_label}{reduce_label}'
     elif args.input_file=="Guacamol_100_mid_to_solve":
-        eventid = f'MID_COST1_ALL_v3{inventory_label}{reduce_label}'
+        eventid = f'MID_v3{inventory_label}{reduce_label}'
     elif args.input_file=="Guacamol_100_mid_easy_to_solve":
-        eventid = f'MID_EASY_COST1_ALL_v3{inventory_label}{reduce_label}'
+        eventid = f'MID_EASY_v3{inventory_label}{reduce_label}'
     output_folder = f"CompareTanimotoLearnt/{eventid}"
+    
+    # print(reduce_label)
+    # print(eventid)
 
     if not os.path.exists(output_folder):
         os.makedirs(output_folder)
@@ -368,8 +421,14 @@ if __name__ == "__main__":
     stdout_handler = logging.StreamHandler(sys.stdout)
     stdout_handler.setLevel(logging.INFO)
     stdout_handler.setFormatter(formatter)
+    
+    if args.input_chunk_10_index != -1:
+        chunk_suffix_for_logs = f"_{args.input_chunk_10_index}"
+    else:
+        chunk_suffix_for_logs = ""
 
-    file_handler = logging.FileHandler(f"{output_folder}/logs.txt", mode="w")
+
+    file_handler = logging.FileHandler(f"{output_folder}/logs{chunk_suffix_for_logs}.txt", mode="w")
     file_handler.setLevel(logging.DEBUG)
     file_handler.setFormatter(formatter)
 
@@ -387,19 +446,22 @@ if __name__ == "__main__":
 
     if args.limit_num_smiles is not None:
         test_smiles = test_smiles[: args.limit_num_smiles]
-        
-    # test_smiles = [
-    #     "CN(C)CCN1C(=O)c2c(c3c4ccccc4[nH]c3c3ccccc23)C1=O",
-    #     "COCc1cc(O)nc(N=C(N)Nc2ccc(C)cc2)n1",
-    #     "CCN(CC)CC#CCC1(O)c2ccccc2-c2ccccc21",
-    #     "CC1CCN(C(c2ccc(F)cn2)c2ccc(C(C)C(=O)O)cc2-c2ccc(C(F)(F)F)cc2)CC1",
-    #     "Cn1cc(-c2ccc(-c3c4c(nn3C)CCc3cnc(Nc5cnn(Cc6ccncc6)c5)nc3-4)cc2)cn1",
-    # ]
+    
+    if args.input_chunk_10_index != -1:
+        test_smiles_sublists = split_list_by_length(test_smiles, length=10)
+        if args.input_chunk_10_index < len(test_smiles_sublists):
+            test_smiles = test_smiles_sublists[args.input_chunk_10_index]
+            print(f"Considering {args.input_chunk_10_index}-th chunk of test smiles")
+            chunk_suffix = f"_{args.input_chunk_10_index}"
+        else:
+            raise IndexError(f"Index {args.input_chunk_10_index} is out of range. The valid range is 0 to {len(test_smiles_sublists) - 1}.")
+    else:
+        chunk_suffix = ""
 
-    # if args.and_node_cost_fn == "PAROUTES":
-    #     and_node_cost_fn = PaRoutesRxnCost()
-    # else:
-    #     raise NotImplementedError(f"and_node_cost_fn: {args.and_node_cost_fn}")
+    if args.and_node_cost_fn == "PAROUTES":
+        and_node_cost_fn = PaRoutesRxnCost()
+    else:
+        raise NotImplementedError(f"and_node_cost_fn: {args.and_node_cost_fn}")
 
     if args.or_node_cost_fn == "MOL_PURCHASABLE":
         or_node_cost_fn = MolIsPurchasableCost()
@@ -429,29 +491,33 @@ if __name__ == "__main__":
 
     value_fns_names = [
         # 'constant-0',
-        'Tanimoto-distance',
+        # 'Tanimoto-distance',
+        # 'Tanimoto-distance-TIMES0',
+        # 'Tanimoto-distance-TIMES001',
         # 'Tanimoto-distance-TIMES01',
         # 'Tanimoto-distance-TIMES03',
         # 'Tanimoto-distance-TIMES5',
         # 'Tanimoto-distance-TIMES10',
-        # 'Tanimoto-distance-TIMES50',
-        # 'Tanimoto-distance-TIMES100',
-        # 'Tanimoto-distance-TIMES150',
+        'Tanimoto-distance-TIMES100',
         # 'Tanimoto-distance-TIMES1000',
         # # 'Tanimoto-distance-EXP',
         # # 'Tanimoto-distance-SQRT',
         # # 'Tanimoto-distance-NUM_NEIGHBORS_TO_1',
+        # "Embedding-from-fingerprints-TIMES01",
+        # "Embedding-from-fingerprints-TIMES03",
         # "Embedding-from-fingerprints",
         # "Embedding-from-fingerprints-TIMES10",
         # "Embedding-from-fingerprints-TIMES100",
         # "Embedding-from-fingerprints-TIMES1000",
         # "Embedding-from-fingerprints-TIMES10000",
+        # "Embedding-from-gnn-TIMES01",
+        # "Embedding-from-gnn-TIMES03",
         # "Embedding-from-gnn",
         # "Embedding-from-gnn-TIMES10",
         # "Embedding-from-gnn-TIMES100",
         # "Embedding-from-gnn-TIMES1000",
         # "Embedding-from-gnn-TIMES10000",
-        # "Retro*"
+        # "Retro*",
     ]
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -480,7 +546,7 @@ if __name__ == "__main__":
     distance_type_fnps = "cosine"
     distance_type_gnn = "cosine"
     featurizer_gnn = dc.feat.MolGraphConvFeaturizer()
-
+    
     value_fns = initialize_value_functions(
         value_fns_names=value_fns_names,
         inventory=inventory,
@@ -503,7 +569,6 @@ if __name__ == "__main__":
 
     result = {}
     for name, fn in value_fns:
-        and_node_cost_fn = ConstantNodeEvaluator(1.0)
         alg_result = run_algorithm(
             name=name,
             smiles_list=test_smiles,
@@ -519,10 +584,10 @@ if __name__ == "__main__":
             limit_iterations=args.limit_iterations,
             logger=logger,
             stop_on_first_solution=args.stop_on_first_solution,
-            reduce_value_function_calls=args.reduce_value_function_calls,
+            reduce_value_function_calls=args.reduce_value_function_calls
         )
         result[name] = alg_result
 
         # Save pickle
-        with open(f"{output_folder}/result_{name}.pickle", "wb") as handle:
+        with open(f"{output_folder}/result_{name}{chunk_suffix}.pickle", "wb") as handle:
             pickle.dump(alg_result, handle, protocol=pickle.HIGHEST_PROTOCOL)

@@ -333,7 +333,7 @@ class Emb_from_gnn_NNCostEstimator(NoCacheNodeEvaluator):
         with torch.no_grad():
             self.emb_purch_molecules = torch.stack(
                 [
-                    self.compute_embedding_from_feature_vect(purch_featurized)
+                    self.compute_embedding_from_feature_vect(purch_featurized, val_if_not_featurized=100000000)
                     for purch_featurized in self._purch_featurized
                 ],
                 dim=0,
@@ -361,11 +361,11 @@ class Emb_from_gnn_NNCostEstimator(NoCacheNodeEvaluator):
     #     assert None not in mols, "Invalid SMILES encountered."
     #     self._fps = list(map(self.get_fingerprint_vect, mols))
 
-    def compute_embedding_from_feature_vect(self, mol_feat_vect):
+    def compute_embedding_from_feature_vect(self, mol_feat_vect, val_if_not_featurized):
         with torch.no_grad():
             if isinstance(mol_feat_vect, np.ndarray): # Non featurazable purchasable molecules
                 # output = torch.zeros(self.model.output_dim, dtype=torch.double)
-                output = torch.full((self.model.output_dim,), 1000000000, dtype=torch.double)
+                output = torch.full((self.model.output_dim,), val_if_not_featurized, dtype=torch.double)
             else:
                 node_features = torch.tensor(
                     mol_feat_vect.node_features, dtype=torch.double
@@ -400,7 +400,7 @@ class Emb_from_gnn_NNCostEstimator(NoCacheNodeEvaluator):
         # print(feat_target)
         # print("Min", torch.min(feat_target).item())
         emb_target = self.compute_embedding_from_feature_vect(
-            feat_target[0]
+            feat_target[0], val_if_not_featurized=0,
         )  # Target embedding
         # breakpoint()
         # Euclidean (or cosine) distance between embeddings
