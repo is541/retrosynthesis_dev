@@ -201,14 +201,39 @@ def run_algorithm(
         #     pass
         # else:
         alg.reset()
-        output_graph, _ = alg.run_from_mol(Molecule(smiles))
+        # tan_100_not_solvables = [
+        #     "CCCCN(CCCC)CCCOc1ccc(S(=O)(=O)c2c(C(C)C)nn3ccccc23)cc1", 
+        #     "Cc1cc(C=Nn2cnnc2)c(C)n1-c1cc(Cl)ccc1Cl",
+        #     "CCCN(CCC1CCC(NS(=O)(=O)c2ccccc2)CC1)C1CCc2nc(N)sc2C1", # Only inventory
+        #     "COc1cc(O)c2c(=O)cc(-c3cc(O)c(O)cc3Cc3cccc(Cl)c3)oc2c1", # Only inventory
+        #     "Cc1cc(C(=O)NC(CC(=O)NCC(C)(C)C)C(=O)NC(CCc2ccccc2)C(=O)NCc2ccccc2Cl)no1", # Only inventory
+        #     "Cc1cccc(CNC(=O)c2cc(-c3nnn(CC4CCC(CO)CC4)n3)cc(C)n2)c1", # Only inventory
+        #     "NC(=O)C(CCC(F)(F)F)N(CCc1ncon1)S(=O)(=O)c1ccc(Cl)cc1", # Only inventory
+        # ]
+        gnn_100_not_solvable = [
+            'Cc1cc(C=Nn2cnnc2)c(C)n1-c1cc(Cl)ccc1Cl',
+            'NC(=O)c1cccc(C2CC3CCC(C2)N3CCN(Cc2ccccc2)C(=O)C2(O)CC2)c1',
+            'Cc1nc(N)ccc1CNC(=O)Cc1c(C#N)ccc(NCC(F)(F)c2ccccn2)c1F', # Only inventory
+            'CC1(C)c2cc(OCC(O)CO)ccc2C(=O)c2c1[nH]c1c(C(=O)O)c(C#N)ccc21', # Only inventory
+            "Cc1cccc(CNC(=O)c2cc(-c3nnn(CC4CCC(CO)CC4)n3)cc(C)n2)c1", # Only inventory
+            "COc1ccccc1-c1ccc(C(CC(=O)O)NC(=O)C2CCN2S(=O)(=O)c2cc(Cl)cc(Cl)c2)cc1", # Only inventory
+            "CC(=O)NC1c2c(ccc3ccc(=O)oc23)OC(C)(C)C1O", # Only inventory
+        ]
+        # tan_100_not_solvables = []
+        if smiles in gnn_100_not_solvable:
+            soln_time = np.inf
+            this_soln_times.append(soln_time)
+            output_graph = 2
+        else:
+            # breakpoint()
+            output_graph, _ = alg.run_from_mol(Molecule(smiles))
 
-        # Analyze solution time
-        for node in output_graph.nodes():
-            node.data["analysis_time"] = node.data["num_calls_rxn_model"]
-            del node
-        soln_time = get_first_solution_time(output_graph)
-        this_soln_times.append(soln_time)
+            # Analyze solution time
+            for node in output_graph.nodes():
+                node.data["analysis_time"] = node.data["num_calls_rxn_model"]
+                del node
+            soln_time = get_first_solution_time(output_graph)
+            this_soln_times.append(soln_time)
 
         # # Analyze number of routes
         # MAX_ROUTES = 10000
@@ -498,7 +523,7 @@ if __name__ == "__main__":
         # 'Tanimoto-distance-TIMES03',
         # 'Tanimoto-distance-TIMES5',
         # 'Tanimoto-distance-TIMES10',
-        'Tanimoto-distance-TIMES100',
+        # 'Tanimoto-distance-TIMES100',
         # 'Tanimoto-distance-TIMES1000',
         # # 'Tanimoto-distance-EXP',
         # # 'Tanimoto-distance-SQRT',
@@ -514,7 +539,7 @@ if __name__ == "__main__":
         # "Embedding-from-gnn-TIMES03",
         # "Embedding-from-gnn",
         # "Embedding-from-gnn-TIMES10",
-        # "Embedding-from-gnn-TIMES100",
+        "Embedding-from-gnn-TIMES100",
         # "Embedding-from-gnn-TIMES1000",
         # "Embedding-from-gnn-TIMES10000",
         # "Retro*",

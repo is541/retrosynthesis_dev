@@ -330,10 +330,17 @@ class Emb_from_gnn_NNCostEstimator(NoCacheNodeEvaluator):
         # breakpoint()
         # self._set_dim_feat_vect()
         # self._set_fingerprints_vect([mol.smiles for mol in inventory.purchasable_mols()])
+        
+        # Trick to discard purchasable molecules that cannot be featurized. Make them far from all other molecules
+        if self.distance_type == "Euclidean":
+            val_if_not_featurized = 100000000
+        elif self.distance_type == "cosine":
+            val_if_not_featurized = 0
+        
         with torch.no_grad():
             self.emb_purch_molecules = torch.stack(
                 [
-                    self.compute_embedding_from_feature_vect(purch_featurized, val_if_not_featurized=100000000)
+                    self.compute_embedding_from_feature_vect(purch_featurized, val_if_not_featurized=val_if_not_featurized)
                     for purch_featurized in self._purch_featurized
                 ],
                 dim=0,
@@ -361,10 +368,11 @@ class Emb_from_gnn_NNCostEstimator(NoCacheNodeEvaluator):
     #     assert None not in mols, "Invalid SMILES encountered."
     #     self._fps = list(map(self.get_fingerprint_vect, mols))
 
-    def compute_embedding_from_feature_vect(self, mol_feat_vect, val_if_not_featurized):
+    def compute_embedding_from_feature_vect(self, mol_feat_vect, val_if_not_featurized=None):
         with torch.no_grad():
             if isinstance(mol_feat_vect, np.ndarray): # Non featurazable purchasable molecules
                 # output = torch.zeros(self.model.output_dim, dtype=torch.double)
+                # breakpoint()
                 output = torch.full((self.model.output_dim,), val_if_not_featurized, dtype=torch.double)
             else:
                 node_features = torch.tensor(
@@ -394,17 +402,31 @@ class Emb_from_gnn_NNCostEstimator(NoCacheNodeEvaluator):
             )
 
     def get_distances_to_purchasable_molecules(self, smiles: str):
-        feat_target = self._featurize_mols(
-            Chem.MolFromSmiles(smiles)
-        )  # Target feature vector
+        try:
+            feat_target = self._featurize_mols(
+                Chem.MolFromSmiles(smiles)
+            )  # Target feature vector
+            emb_target = self.compute_embedding_from_feature_vect(
+                feat_target[0], # Do not pass val_if_not_featurized since should be caught by except
+            )  # Target embedding
+            # breakpoint()
+            # Euclidean (or cosine) distance between embeddings
+            distances = self.embedding_distance(emb_target, self.emb_purch_molecules)
+        except:
+            if Chem.MolFromSmiles(smiles).GetNumAtoms()==1:
+                distances = torch.zeros(self.emb_purch_molecules.size(0))
+            else:
+                breakpoint()
+                raise Exception("Molecule not featurizable but more than one atom")
+            
+        # if isinstance(feat_target[0], np.ndarray):
+        #     breakpoint()
+        #     print(smiles)
+        # else:
+        #     print("ALL OK with ", smiles)
         # print(feat_target)
         # print("Min", torch.min(feat_target).item())
-        emb_target = self.compute_embedding_from_feature_vect(
-            feat_target[0], val_if_not_featurized=0,
-        )  # Target embedding
-        # breakpoint()
-        # Euclidean (or cosine) distance between embeddings
-        distances = self.embedding_distance(emb_target, self.emb_purch_molecules)
+        
         return distances
 
     def _get_nearest_neighbour_dist(self, smiles: str) -> float:
@@ -421,6 +443,8 @@ class Emb_from_gnn_NNCostEstimator(NoCacheNodeEvaluator):
         nn_dists = np.asarray(
             [self._get_nearest_neighbour_dist(node.mol.smiles) for node in nodes]
         )
+        if np.min(nn_dists) != np.min(nn_dists):
+            breakpoint()
         assert np.min(nn_dists) >= 0, f"Negative distance: {np.min(nn_dists)} "
 
         # Turn into costs
@@ -546,21 +570,21 @@ labelalias = {
     "Tanimoto-distance-EXP": "Tanimoto exp",
     "Tanimoto-distance-SQRT": "Tanimoto sqrt",
     "Tanimoto-distance-NUM_NEIGHBORS_TO_1": "Tanimoto neighb to 1",
-    "Embedding-from-fingerprints": "Emb fnps",
-    "Embedding-from-fingerprints-TIMES01": "Emb fnps * 0.1",
-    "Embedding-from-fingerprints-TIMES03": "Emb fnps * 0.3",
-    "Embedding-from-fingerprints-TIMES10": "Emb fnps * 10",
-    "Embedding-from-fingerprints-TIMES100": "Emb_fnps * 100",
-    "Embedding-from-fingerprints-TIMES1000": "Emb_fnps * 1000",
-    "Embedding-from-fingerprints-TIMES10000": "Emb_fnps * 10000",
-    "Embedding-from-gnn": "Emb gnn",
-    "Embedding-from-gnn-TIMES01": "Emb gnn * 0.1",
-    "Embedding-from-gnn-TIMES03": "Emb gnn * 0.3",
-    "Embedding-from-gnn-TIMES10": "Emb gnn * 10",
-    "Embedding-from-gnn-TIMES100": "Emb gnn * 100",
-    "Embedding-from-gnn-TIMES1000": "Emb gnn * 1000",
-    "Embedding-from-gnn-TIMES10000": "Emb gnn * 10000",
-    "Retro*": "Retro*",
+    "Embedding-from-fingerprints": "FNP-NN",
+    "Embedding-from-fingerprints-TIMES01": "FNP-NN * 0.1",
+    "Embedding-from-fingerprints-TIMES03": "FNP-NN * 0.3",
+    "Embedding-from-fingerprints-TIMES10": "FNP-NN * 10",
+    "Embedding-from-fingerprints-TIMES100": "FNP-NN * 100",
+    "Embedding-from-fingerprints-TIMES1000": "FNP-NN * 1000",
+    "Embedding-from-fingerprints-TIMES10000": "FNP-NN * 10000",
+    "Embedding-from-gnn": "GNN",
+    "Embedding-from-gnn-TIMES01": "GNN * 0.1",
+    "Embedding-from-gnn-TIMES03": "GNN * 0.3",
+    "Embedding-from-gnn-TIMES10": "GNN * 10",
+    "Embedding-from-gnn-TIMES100": "GNN * 100",
+    "Embedding-from-gnn-TIMES1000": "GNN * 1000",
+    "Embedding-from-gnn-TIMES10000": "GNN * 10000",
+    "Retro*": "Retro* PT",
 }
 
 

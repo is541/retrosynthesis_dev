@@ -1,7 +1,43 @@
-2023-07-29 18:55:03,502 root INFO Namespace(input_file='Guacamol_100_mid_easy_to_solve', input_chunk_10_index=7, fnp_embedding_model_to_use='fnp_nn_0720_sampleInLoss_weightDecay_dropout_v2', gnn_embedding_model_to_use='gnn_0715_sampleInLoss_weightDecay_v2', limit_iterations=10000000000, limit_rxn_model_calls=5000, paroutes_n=5, limit_num_smiles=None, start_from_smiles_index_n=None, max_expansion_depth=20, max_num_templates=50, prevent_repeat_mol_in_trees=True, rxn_model='PAROUTES', inventory='PAROUTES', sample_percent_inventory=1, and_node_cost_fn='PAROUTES', or_node_cost_fn='MOL_PURCHASABLE', stop_on_first_solution=True, reduce_value_function_calls=True, retro_star_model_to_use='RetroStar_savedModels/best_epoch_final_4.pt')
-2023-07-29 18:55:05,331 h5py._conv DEBUG Creating converter from 3 to 5
-2023-07-29 18:55:07,922 root INFO Start experiment MID_EASY_v3_ReduceCalls
-2023-07-29 18:55:07,922 root INFO Args: 
+2023-07-31 23:34:45,762 root INFO Namespace(input_file='Guacamol_100_mid_easy_to_solve', input_chunk_10_index=7, fnp_embedding_model_to_use='fnp_nn_0720_sampleInLoss_weightDecay_dropout_v2', gnn_embedding_model_to_use='gnn_0715_sampleInLoss_weightDecay_v2', limit_iterations=10000000000, limit_rxn_model_calls=5000, paroutes_n=5, limit_num_smiles=None, start_from_smiles_index_n=None, max_expansion_depth=20, max_num_templates=50, prevent_repeat_mol_in_trees=True, rxn_model='PAROUTES', inventory='PAROUTES', sample_percent_inventory=1, and_node_cost_fn='PAROUTES', or_node_cost_fn='MOL_PURCHASABLE', stop_on_first_solution=True, reduce_value_function_calls=True, retro_star_model_to_use='RetroStar_savedModels/best_epoch_final_4.pt')
+2023-07-31 23:34:47,527 h5py._conv DEBUG Creating converter from 3 to 5
+2023-07-31 23:34:50,800 deepchem.utils.molecule_feature_utils INFO input SP3D2 not in allowable set ['SP', 'SP2', 'SP3']:
+2023-07-31 23:34:51,072 deepchem.utils.molecule_feature_utils INFO input SP3D2 not in allowable set ['SP', 'SP2', 'SP3']:
+2023-07-31 23:34:53,096 deepchem.utils.molecule_feature_utils INFO input S not in allowable set ['SP', 'SP2', 'SP3']:
+2023-07-31 23:34:54,231 deepchem.utils.molecule_feature_utils INFO input SP3D not in allowable set ['SP', 'SP2', 'SP3']:
+2023-07-31 23:34:56,765 deepchem.feat.base_classes WARNING Failed to featurize datapoint 2934, F. Appending empty array
+2023-07-31 23:34:56,765 deepchem.feat.base_classes WARNING Exception message: zero-size array to reduction operation maximum which has no identity
+2023-07-31 23:34:57,053 deepchem.utils.molecule_feature_utils INFO input SP3D2 not in allowable set ['SP', 'SP2', 'SP3']:
+2023-07-31 23:34:57,317 deepchem.feat.base_classes WARNING Failed to featurize datapoint 3153, Cl. Appending empty array
+2023-07-31 23:34:57,317 deepchem.feat.base_classes WARNING Exception message: zero-size array to reduction operation maximum which has no identity
+2023-07-31 23:34:58,143 deepchem.utils.molecule_feature_utils INFO input SP3D2 not in allowable set ['SP', 'SP2', 'SP3']:
+2023-07-31 23:34:58,215 deepchem.utils.molecule_feature_utils INFO input SP3D not in allowable set ['SP', 'SP2', 'SP3']:
+2023-07-31 23:34:59,147 deepchem.utils.molecule_feature_utils INFO input S not in allowable set ['SP', 'SP2', 'SP3']:
+2023-07-31 23:35:00,031 deepchem.utils.molecule_feature_utils INFO input S not in allowable set ['SP', 'SP2', 'SP3']:
+2023-07-31 23:35:04,180 deepchem.utils.molecule_feature_utils INFO input S not in allowable set ['SP', 'SP2', 'SP3']:
+2023-07-31 23:35:04,679 deepchem.utils.molecule_feature_utils INFO input SP3D2 not in allowable set ['SP', 'SP2', 'SP3']:
+2023-07-31 23:35:05,389 deepchem.feat.base_classes WARNING Failed to featurize datapoint 6238, [Mg]. Appending empty array
+2023-07-31 23:35:05,389 deepchem.feat.base_classes WARNING Exception message: zero-size array to reduction operation maximum which has no identity
+2023-07-31 23:35:07,016 deepchem.utils.molecule_feature_utils INFO input SP3D2 not in allowable set ['SP', 'SP2', 'SP3']:
+2023-07-31 23:35:08,362 deepchem.feat.base_classes WARNING Failed to featurize datapoint 7315, O. Appending empty array
+2023-07-31 23:35:08,362 deepchem.feat.base_classes WARNING Exception message: zero-size array to reduction operation maximum which has no identity
+2023-07-31 23:35:09,220 deepchem.utils.molecule_feature_utils INFO input S not in allowable set ['SP', 'SP2', 'SP3']:
+2023-07-31 23:35:09,617 deepchem.feat.base_classes WARNING Failed to featurize datapoint 7763, N. Appending empty array
+2023-07-31 23:35:09,617 deepchem.feat.base_classes WARNING Exception message: zero-size array to reduction operation maximum which has no identity
+2023-07-31 23:35:10,430 deepchem.utils.molecule_feature_utils INFO input S not in allowable set ['SP', 'SP2', 'SP3']:
+2023-07-31 23:35:16,697 deepchem.utils.molecule_feature_utils INFO input SP3D2 not in allowable set ['SP', 'SP2', 'SP3']:
+2023-07-31 23:35:19,724 deepchem.utils.molecule_feature_utils INFO input SP3D2 not in allowable set ['SP', 'SP2', 'SP3']:
+2023-07-31 23:35:20,954 deepchem.feat.base_classes WARNING Failed to featurize datapoint 11816, [S-2]. Appending empty array
+2023-07-31 23:35:20,954 deepchem.feat.base_classes WARNING Exception message: zero-size array to reduction operation maximum which has no identity
+2023-07-31 23:35:21,583 deepchem.feat.base_classes WARNING Failed to featurize datapoint 12041, I. Appending empty array
+2023-07-31 23:35:21,583 deepchem.feat.base_classes WARNING Exception message: zero-size array to reduction operation maximum which has no identity
+2023-07-31 23:35:22,812 deepchem.utils.molecule_feature_utils INFO input SP3D2 not in allowable set ['SP', 'SP2', 'SP3']:
+2023-07-31 23:35:23,101 deepchem.utils.molecule_feature_utils INFO input SP3D not in allowable set ['SP', 'SP2', 'SP3']:
+2023-07-31 23:35:23,787 deepchem.feat.base_classes WARNING Failed to featurize datapoint 12826, S. Appending empty array
+2023-07-31 23:35:23,787 deepchem.feat.base_classes WARNING Exception message: zero-size array to reduction operation maximum which has no identity
+2023-07-31 23:35:24,686 deepchem.feat.base_classes WARNING Failed to featurize datapoint 13165, Br. Appending empty array
+2023-07-31 23:35:24,686 deepchem.feat.base_classes WARNING Exception message: zero-size array to reduction operation maximum which has no identity
+2023-07-31 23:35:37,217 root INFO Start experiment MID_EASY_v3_ReduceCalls
+2023-07-31 23:35:37,218 root INFO Args: 
 and_node_cost_fn: PAROUTES
 fnp_embedding_model_to_use: fnp_nn_0720_sampleInLoss_weightDecay_dropout_v2
 gnn_embedding_model_to_use: gnn_0715_sampleInLoss_weightDecay_v2
@@ -22,15 +58,15 @@ rxn_model: PAROUTES
 sample_percent_inventory: 1
 start_from_smiles_index_n: None
 stop_on_first_solution: True
-2023-07-29 18:55:07,922 root INFO dim_test: 10
-2023-07-29 18:55:07,922 root INFO Start search with Tanimoto-distance-TIMES100
-2023-07-29 18:55:07,923 root DEBUG Start search 0/10. SMILES: C=C(C)COc1cccc(CNC(CC(C)C)c2ncnn2C)c1
-2023-07-29 18:55:31,829 root DEBUG Start search 1/10. SMILES: COC(=O)c1ccc(OC)c(-c2cccc(C(CC(=O)O)c3nccs3)c2)c1
-2023-07-29 18:55:37,249 root DEBUG Start search 2/10. SMILES: Cc1c(CN(C)c2cccc3c2CCCC3)cnc2nc(N)nc(N)c12
-2023-07-29 18:55:50,356 root DEBUG Start search 3/10. SMILES: O=C(C=CNc1ccc([N+](=O)[O-])cc1)c1ccc2c(c1)CCCC2
-2023-07-29 19:35:08,131 root DEBUG Start search 4/10. SMILES: Cc1nc(N)ccc1CNC(=O)Cc1c(C#N)ccc(NCC(F)(F)c2ccccn2)c1F
-2023-07-29 19:35:15,481 root DEBUG Start search 5/10. SMILES: O=C(C1CCCCC1)N1CC(=O)N2CCc3ccc([N+](=O)[O-])cc3C2C1
-2023-07-29 19:35:55,839 root DEBUG Start search 6/10. SMILES: COc1ccc2c(CN3CCOCC3)cn(CCNC(C)=O)c2n1
-2023-07-29 19:36:14,888 root DEBUG Start search 7/10. SMILES: COCCn1c(SCc2nc(O)c3c(C)c(C(=O)OC)sc3n2)nc2ccccc21
-2023-07-29 19:36:17,567 root DEBUG Start search 8/10. SMILES: NC(=O)c1cccc(C2CC3CCC(C2)N3CCN(Cc2ccccc2)C(=O)C2(O)CC2)c1
-2023-07-29 19:37:17,903 root DEBUG Start search 9/10. SMILES: CC(=O)N(CC(Cc1c[nH]c2ccccc12)NC(=O)CN1CCN(c2ccccc2)CC1)c1ccccc1
+2023-07-31 23:35:37,218 root INFO dim_test: 10
+2023-07-31 23:35:37,218 root INFO Start search with Embedding-from-gnn-TIMES100
+2023-07-31 23:35:37,218 root DEBUG Start search 0/10. SMILES: C=C(C)COc1cccc(CNC(CC(C)C)c2ncnn2C)c1
+2023-07-31 23:36:05,429 root DEBUG Start search 1/10. SMILES: COC(=O)c1ccc(OC)c(-c2cccc(C(CC(=O)O)c3nccs3)c2)c1
+2023-07-31 23:36:16,858 root DEBUG Start search 2/10. SMILES: Cc1c(CN(C)c2cccc3c2CCCC3)cnc2nc(N)nc(N)c12
+2023-07-31 23:36:42,064 root DEBUG Start search 3/10. SMILES: O=C(C=CNc1ccc([N+](=O)[O-])cc1)c1ccc2c(c1)CCCC2
+2023-07-31 23:36:47,037 root DEBUG Start search 4/10. SMILES: Cc1nc(N)ccc1CNC(=O)Cc1c(C#N)ccc(NCC(F)(F)c2ccccn2)c1F
+2023-07-31 23:36:56,772 root DEBUG Start search 5/10. SMILES: O=C(C1CCCCC1)N1CC(=O)N2CCc3ccc([N+](=O)[O-])cc3C2C1
+2023-07-31 23:37:13,651 root DEBUG Start search 6/10. SMILES: COc1ccc2c(CN3CCOCC3)cn(CCNC(C)=O)c2n1
+2023-07-31 23:38:18,271 root DEBUG Start search 7/10. SMILES: COCCn1c(SCc2nc(O)c3c(C)c(C(=O)OC)sc3n2)nc2ccccc21
+2023-07-31 23:38:21,619 root DEBUG Start search 8/10. SMILES: NC(=O)c1cccc(C2CC3CCC(C2)N3CCN(Cc2ccccc2)C(=O)C2(O)CC2)c1
+2023-07-31 23:38:21,823 root DEBUG Start search 9/10. SMILES: CC(=O)N(CC(Cc1c[nH]c2ccccc12)NC(=O)CN1CCN(c2ccccc2)CC1)c1ccccc1

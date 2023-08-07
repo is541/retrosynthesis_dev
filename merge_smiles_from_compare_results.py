@@ -30,7 +30,11 @@ def read_pickle_files(folder_path, alg_name):
 
 if __name__ == "__main__":
     folder_path = 'CompareTanimotoLearnt/MID_EASY_v3_InventPercent_0.5_ReduceCalls/'
+    # folder_path = 'CompareTanimotoLearnt/MID_EASY_v3_ReduceCalls/'
     # alg_name = 'constant-0'
     # alg_name = 'Retro*'
-    alg_name = 'Embedding-from-fingerprints-TIMES10'
+    # alg_name = 'Embedding-from-fingerprints-TIMES100'
+    # alg_name = 'Tanimoto-distance-TIMES100'
+    # alg_name = 'Embedding-from-fingerprints-TIMES100'
+    alg_name = 'Embedding-from-gnn-TIMES100'
     read_pickle_files(folder_path, alg_name)

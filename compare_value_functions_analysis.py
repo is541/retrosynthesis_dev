@@ -9,6 +9,7 @@ import pandas as pd
 
 from value_functions import labelalias
 from compare_value_functions_run import SearchResult
+import matplotlib.colors as mcolors
 
 import pickle
 import os
@@ -66,8 +67,36 @@ def plot_quantiles_df(df, column_order):
     ax = plt.gca()
 
     # Plot the table with color-coded cells (using YlOrRd colormap)
-    sns.heatmap(df_transposed, cmap='RdYlGn_r', annot=True, fmt='.1f', ax=ax,
-                annot_kws={'weight': 'normal'})
+    # df_log = np.log(df_transposed)
+    cmap = plt.get_cmap('RdYlGn_r')
+    cmap.set_bad('darkred')
+    # norm = mcolors.LogNorm(vmin=df_log.min().min(), vmax=df_log.max().max())
+    min_tick = df_transposed.min().min() // 100 * 100
+    max_tick = df_transposed.max().max() // 100 * 100
+    center_value = df_transposed.stack().quantile(0.75)
+    # print("min_tick: ", min_tick)
+    # print("max_tick: ", max_tick)
+    # print("center_value: ", center_value)
+    if center_value < max_tick:
+        norm = mcolors.TwoSlopeNorm(vcenter=center_value, vmin=min_tick, vmax=max_tick)
+    else:
+        center_value = df_transposed.stack().quantile(0.5)
+        norm = mcolors.TwoSlopeNorm(vcenter=center_value, vmin=min_tick, vmax=max_tick)
+    
+    sns.heatmap(df_transposed, cmap=cmap, annot=True, fmt='.1f', ax=ax, annot_kws={'weight': 'normal'},
+                norm=norm)
+    # cbar = ax.collections[0].colorbar
+    # cbar.set_label('')
+    # min_tick = df_transposed.min().min() // 100 * 100
+    # max_tick = df_transposed.max().max() // 100 * 100
+    # cbar_ticks = np.arange(min_tick, max_tick + 1, 100)
+    # # print(cbar_ticks)
+    # cbar.set_ticks(cbar_ticks)
+    # cbar.set_ticklabels(cbar_ticks)
+
+    
+    # sns.heatmap(df_transposed, cmap='RdYlGn_r', annot=True, fmt='.1f', ax=ax,
+    #             annot_kws={'weight': 'normal'})
 
     # Remove ticks from both x and y axes
     ax.tick_params(bottom=False, left=False)
@@ -113,7 +142,7 @@ def plot_result(df_result, image_suffix, labelalias):
                 title="Time to first solution using different value functions",
                 category_orders={"algorithm_alias": categoryarray_list},
             )
-    fig.update_layout(xaxis_title=None)
+    fig.update_layout(xaxis_title=None, xaxis_tickangle=270)
 
     # Add lines above each box
     for _, row in df_solved.iterrows():
@@ -128,12 +157,12 @@ def plot_result(df_result, image_suffix, labelalias):
         box_y_2 = max_value*1.28# df_result[df_result['algorithm_alias'] == algorithm]['value'].max()
 
         fig.add_annotation(
-            x=algorithm, y=box_y_2, text=f"mol solved: {num_mol_solved}",
+            x=algorithm, y=box_y_2, text=f"#s: {num_mol_solved}",
             showarrow=False, font=dict(color=px.colors.qualitative.Plotly[2])
         )
         
         fig.add_annotation(
-            x=algorithm, y=box_y_1, text=f"mol not solved: {num_mol_not_solved}",
+            x=algorithm, y=box_y_1, text=f"#ns: {num_mol_not_solved}",
             showarrow=False, font=dict(color=px.colors.qualitative.Plotly[1])
         )
 
@@ -154,7 +183,7 @@ def plot_result(df_result, image_suffix, labelalias):
                 title="Time to first solution using different value functions",
                 category_orders={"algorithm_alias": categoryarray_list},
             )
-    fig.update_layout(xaxis_title=None)
+    fig.update_layout(xaxis_title=None, xaxis_tickangle=270)
 
 
     # Add lines above each box
@@ -170,12 +199,12 @@ def plot_result(df_result, image_suffix, labelalias):
         box_y_2 = max_value*1.28# df_result[df_result['algorithm_alias'] == algorithm]['value'].max()
 
         fig.add_annotation(
-            x=algorithm, y=box_y_2, text=f"mol solved: {num_mol_solved}",
+            x=algorithm, y=box_y_2, text=f"#s: {num_mol_solved}",
             showarrow=False, font=dict(color=px.colors.qualitative.Plotly[2])
         )
         
         fig.add_annotation(
-            x=algorithm, y=box_y_1, text=f"mol not solved: {num_mol_not_solved}",
+            x=algorithm, y=box_y_1, text=f"#ns: {num_mol_not_solved}",
             showarrow=False, font=dict(color=px.colors.qualitative.Plotly[1])
         )
     
@@ -227,7 +256,7 @@ if __name__ == "__main__":
     # eventid = 'MID_EASY_v2_cost_paroutes'
     # eventid = 'MID_EASY_v3'
     # eventid = 'MID_EASY_COST1_ALL_v3_ReduceCalls'
-    eventid = 'MID_EASY_v3_ReduceCalls'
+    # eventid = 'MID_EASY_v3_ReduceCalls'
     eventid = 'MID_EASY_v3_InventPercent_0.5_ReduceCalls'
     plot_existing_results = False
     
@@ -240,15 +269,17 @@ if __name__ == "__main__":
         'Tanimoto-distance',
         # 'Tanimoto-distance-TIMES01',
         # 'Tanimoto-distance-TIMES03',
-        # 'Tanimoto-distance-TIMES10',
-        # 'Tanimoto-distance-TIMES100',
+        'Tanimoto-distance-TIMES10',
+        'Tanimoto-distance-TIMES100',
         # 'Tanimoto-distance-EXP',
         # 'Tanimoto-distance-SQRT',
         # "Tanimoto-distance-NUM_NEIGHBORS_TO_1",
-        # "Embedding-from-fingerprints",
+        "Embedding-from-fingerprints",
         "Embedding-from-fingerprints-TIMES10",
-        # "Embedding-from-fingerprints-TIMES100",
-        # "Embedding-from-gnn",
+        "Embedding-from-fingerprints-TIMES100",
+        "Embedding-from-gnn",
+        "Embedding-from-gnn-TIMES10",
+        "Embedding-from-gnn-TIMES100",
         "Retro*"
     ]
     # algs_considered = []
@@ -288,21 +319,36 @@ if __name__ == "__main__":
     # Create quantiles df
     # Group the data by 'algorithm' and 'property'
     result_quantiles = create_quantiles_df(df_result)
+    result_quantiles = result_quantiles.replace([np.inf, -np.inf], np.nan)
     result_quantiles = result_quantiles.reset_index()
     result_quantiles.to_csv(f'{output_folder}/results_quantiles.csv', index=False)
     
     column_order = result_quantiles['algorithm_alias'].unique()
     column_order = sort_names_according_to_labelalias_value_order(column_order, labelalias)
+    # breakpoint()
     fig_quantiles = plot_quantiles_df(df=result_quantiles, column_order=column_order)
     fig_quantiles.savefig(f'{output_folder}/quantiles_table_all.pdf', format='pdf')
 
     # Deal with unsolved molecules 
     df_result["not_solved"] = (df_result['value'] == np.inf) * 1
-    max_value = df_result[df_result['value'] != np.inf]['value'].max()
+    if eventid == 'MID_EASY_v3_ReduceCalls':
+        max_value = df_result[df_result['value'] != np.inf]['value'].max()
+    else:
+        max_value = 5000
     df_result.loc[df_result['value'] == np.inf, 'value'] = 1.2 * max_value
     
     df_results_grouped = df_result.groupby(["algorithm"], as_index=False).agg(nr_mol_not_solved=pd.NamedAgg(column="not_solved", aggfunc="sum"))
     df_results_grouped.to_csv(f'{output_folder}/num_mol_not_solved.csv', index=False)
+
+    # Plot quantiles considering fictitious data
+    result_quantiles_fict = create_quantiles_df(df_result)
+    result_quantiles_fict = result_quantiles_fict.reset_index()
+    result_quantiles_fict.to_csv(f'{output_folder}/results_quantiles_fict.csv', index=False)
+    
+    column_order = result_quantiles_fict['algorithm_alias'].unique()
+    column_order = sort_names_according_to_labelalias_value_order(column_order, labelalias)
+    fig_quantiles_fict = plot_quantiles_df(df=result_quantiles_fict, column_order=column_order)
+    fig_quantiles_fict.savefig(f'{output_folder}/quantiles_table_all_fict.pdf', format='pdf')
 
     
     # Plot
