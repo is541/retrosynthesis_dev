@@ -1,0 +1,17 @@
+{
+  "experiment_name": "gnn_0629_react",
+  "seed": 42,
+  "run_id": "202305-2911-2320-5a95df0e-3008-4ebe-acd8-ecb3b50607c7",
+  "nr_sample_targets": -1,
+  "model_type": "gnn",
+  "validation_ratio": 0.2,
+  "train_batch_size": 64,
+  "train_shuffle": true,
+  "val_batch_size": 64,
+  "val_shuffle": false,
+  "hidden_dim": 512,
+  "output_dim": 256,
+  "temperature": 0.1,
+  "lr": 0.001,
+  "num_epochs": 100
+  }

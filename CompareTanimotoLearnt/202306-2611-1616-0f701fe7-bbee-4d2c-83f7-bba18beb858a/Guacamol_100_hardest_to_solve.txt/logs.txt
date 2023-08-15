@@ -1,0 +1,19 @@
+2023-06-29 11:04:17,896 h5py._conv DEBUG Creating converter from 3 to 5
+2023-06-29 11:05:40,314 root INFO Start experiment 202306-2611-1616-0f701fe7-bbee-4d2c-83f7-bba18beb858a
+2023-06-29 11:05:40,316 root INFO Args: 
+and_node_cost_fn: PAROUTES
+inventory: PAROUTES
+limit_iterations: 100000
+limit_num_smiles: 100
+limit_rxn_model_calls: 500
+max_expansion_depth: 20
+max_num_templates: 50
+or_node_cost_fn: MOL_PURCHASABLE
+paroutes_n: 5
+prevent_repeat_mol_in_trees: True
+rxn_model: PAROUTES
+2023-06-29 11:05:40,317 root INFO dim_test: 100
+2023-06-29 11:05:40,318 root INFO Start search with constant-0
+2023-06-29 11:05:40,348 root DEBUG Start search 0/100. SMILES: CCCSc1nsnc1OC1CN2CCC1C2
+2023-06-29 11:10:22,510 root DEBUG Done constant-0: nodes=39511, solution time = inf, num routes = 0 (capped at 10000), final num rxn model calls = 500, final num value model calls = 1161.
+2023-06-29 11:10:22,512 root DEBUG Start search 1/100. SMILES: Cn1nc(N)c2c3c(c(N4CCCCC4)nc21)CN(Cc1ccccc1)CC3

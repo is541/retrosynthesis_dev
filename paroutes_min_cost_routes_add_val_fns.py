@@ -1,18 +1,19 @@
 """
-Script to find minimum cost routes for PaRoutes benchmark
-on a list of SMILES provided by the user.
+Script to compute value of target smiles to compare with actual costs registered
 """
 from __future__ import annotations
 
 import pandas as pd
 import numpy as np
+import torch
 # import os
+import deepchem as dc
 
 # from syntheseus.search.chem import Molecule
 # from syntheseus.search.graph.and_or import AndNode
 # from syntheseus.search.algorithms.best_first.retro_star import RetroStarSearch, MolIsPurchasableCost
 # from syntheseus.search.analysis.solution_time import get_first_solution_time
-# from syntheseus.search.analysis.route_extraction import min_cost_routes
+
 # from syntheseus.search.reaction_models.base import BackwardReactionModel
 # from syntheseus.search.mol_inventory import BaseMolInventory
 # from syntheseus.search.node_evaluation.base import (
@@ -20,91 +21,101 @@ import numpy as np
 #     NoCacheNodeEvaluator,
 # )
 from syntheseus.search.node_evaluation.common import ConstantNodeEvaluator
+from value_functions import initialize_value_functions, RetroStarValueMLP, retrostar_evaluate_molecules
+from embedding_model import FingerprintModel, GNNModel, load_embedding_model_from_pickle, load_embedding_model_from_checkpoint
 
 from paroutes import PaRoutesInventory#, PaRoutesModel, get_target_smiles
 # from example_paroutes import PaRoutesRxnCost
-from neighbour_value_functions import (
-    DistanceToCost,
-    TanimotoNNCostEstimator,
-    ConstantMolEvaluator,
-)
+# from neighbour_value_functions import (
+#     DistanceToCost,
+#     TanimotoNNCostEstimator,
+#     ConstantMolEvaluator,
+# )
 from tqdm.auto import tqdm
 
 
 if __name__ == "__main__":
     # Define input and output folders
     input_folder = 'Runs'
-    run_id = '202305-2911-2320-5a95df0e-3008-4ebe-acd8-ecb3b50607c7'
-    input_path = f'{input_folder}/{run_id}'
-    output_folder = input_path
+    dataset_str = 'paroutes'
+    # dataset_str = 'guacamol'
     
     # Read data
     data_dict = {}
     # for test_db in [file for file in os.listdir(f'Input/{input_folder}') if '.csv' in file]:
     #     test_db_name = test_db.replace('.csv','')
     #     data_dict[test_db_name] = pd.read_csv(f'Input/{input_folder}/{test_db}')
-    data_dict['paroutes_n5'] = pd.read_csv(f'{input_path}/{run_id}_results.csv')
+    # for dataset_str in dataset_strs:
+    if dataset_str=='paroutes':
+        run_id = "202305-2911-2320-5a95df0e-3008-4ebe-acd8-ecb3b50607c7"
+    elif dataset_str=='guacamol':
+        run_id = "Guacamol_combined"
+    input_path = f'{input_folder}/{run_id}'
+    output_folder = input_path
+    data_dict[dataset_str] = pd.read_csv(f'{input_path}/{run_id}_results.csv')
     
     # Define inventory
     inventory=PaRoutesInventory(n=5)
     
-    # Define value functions to use
-    value_fns = [
-        ("constant-0", ConstantMolEvaluator(0.0)),
-        (
-            "Tanimoto-distance",
-            TanimotoNNCostEstimator(
-                inventory=inventory, distance_to_cost=DistanceToCost.NOTHING
-            ),
-        ),
-        (
-            "Tanimoto-distance-TIMES10",
-            TanimotoNNCostEstimator(
-                inventory=inventory, distance_to_cost=DistanceToCost.TIMES10
-            ),
-        ),
-    #     (
-    #         "Tanimoto-distance-TIMES100",
-    #         TanimotoNNCostEstimator(
-    #             inventory=inventory, distance_to_cost=DistanceToCost.TIMES100
-    #         ),
-    #     ),
-        (
-            "Tanimoto-distance-EXP",
-            TanimotoNNCostEstimator(
-                inventory=inventory, distance_to_cost=DistanceToCost.EXP
-            ),
-        ),
-        (
-            "Tanimoto-distance-SQRT",
-            TanimotoNNCostEstimator(
-                inventory=inventory, distance_to_cost=DistanceToCost.SQRT
-            ),
-        ),
-        (
-            "Tanimoto-distance-NUM_NEIGHBORS_TO_1",
-            TanimotoNNCostEstimator(
-                inventory=inventory, distance_to_cost=DistanceToCost.NUM_NEIGHBORS_TO_1
-            ),
-        ),
-        (
-            "Tanimoto-distance-NUM_NEIGHBORS_TO_1_TIMES1000",
-            TanimotoNNCostEstimator(
-                inventory=inventory, distance_to_cost=DistanceToCost.NUM_NEIGHBORS_TO_1_TIMES1000
-            ),
-        ),
+    value_fns_names = [
+        'constant-0',
+        'Tanimoto-distance',
+        # # 'Tanimoto-distance-TIMES10',
+        # # 'Tanimoto-distance-TIMES100',
+        # # 'Tanimoto-distance-EXP',
+        # # 'Tanimoto-distance-SQRT',
+        # # "Tanimoto-distance-NUM_NEIGHBORS_TO_1",
+        "Embedding-from-fingerprints",
+        # # "Embedding-from-fingerprints-TIMES10",
+        # # "Embedding-from-fingerprints-TIMES100",
+        "Embedding-from-gnn",
+        "Retro*"
     ]
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    
+    fnp_embedding_model_to_use = "fnp_nn_0720_sampleInLoss_weightDecay_dropout_v2"
+    
+    model_fnps, config_fnps = load_embedding_model_from_checkpoint(
+        experiment_name=fnp_embedding_model_to_use,
+        device=device,
+        checkpoint_name="model_min_val_checkpoint",
+    )
 
-    labelalias = {
-        'constant-0': 'constant-0',
-        'Tanimoto-distance': 'Tanimoto',
-        'Tanimoto-distance-TIMES10': 'Tanimoto_times10',
-        'Tanimoto-distance-TIMES100': 'Tanimoto_times100',
-        'Tanimoto-distance-EXP': 'Tanimoto_exp',
-        'Tanimoto-distance-SQRT': 'Tanimoto_sqrt',
-        "Tanimoto-distance-NUM_NEIGHBORS_TO_1": "Tanimoto_nn_to_1",
-        "Tanimoto-distance-NUM_NEIGHBORS_TO_1_TIMES1000": "Tanimoto_nn_to_1_times1000",
-    }
+    # Graph model
+    gnn_embedding_model_to_use = "gnn_0715_sampleInLoss_weightDecay_v2"
+    model_gnn, config_gnn = load_embedding_model_from_checkpoint(
+        experiment_name=gnn_embedding_model_to_use,
+        device=device,
+        checkpoint_name="model_min_val_checkpoint",
+        # checkpoint_name="epoch_100_checkpoint",
+    )
+
+    distance_type_fnps = "cosine"
+    distance_type_gnn = "cosine"
+    featurizer_gnn = dc.feat.MolGraphConvFeaturizer()
+    
+    
+    # fnps_experiment_name = 'fingerprints_v1'
+    
+    # device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    # model_fnps, config_fnps = load_embedding_model_from_pickle(experiment_name=fnps_experiment_name)
+    # distance_type_fnps = 'cosine'
+    # value_fns = initialize_value_functions(value_fns_names=value_fns_names, inventory=inventory, model_fnps=model_fnps, distance_type_fnps=distance_type_fnps)
+    
+    retro_star_model_to_use = "RetroStar_savedModels/best_epoch_final_4.pt"
+    
+    value_fns = initialize_value_functions(
+        value_fns_names=value_fns_names,
+        inventory=inventory,
+        model_fnps=model_fnps,
+        distance_type_fnps=distance_type_fnps,
+        model_gnn=model_gnn,
+        distance_type_gnn=distance_type_gnn,
+        featurizer_gnn=featurizer_gnn,
+        device=device,
+        retro_checkpoint=retro_star_model_to_use
+    )
+    
     
     # 1. Remove infs
     for name in data_dict.keys(): 
@@ -143,11 +154,14 @@ if __name__ == "__main__":
         data_dict[name].loc[data_dict[name][cost_variable] == -1, binned_var_name] = 'NotSolved'
         data_dict[name].loc[data_dict[name][cost_variable] == 0, binned_var_name] = '000'
 
-
+    
     for name in data_dict.keys():     
         smiles_list = data_dict[name]['smiles'].unique()
         for value_function_name, value_function in tqdm(value_fns):
-            smiles_value_fn_dict = value_function.evaluate_molecules(smiles_list)
+            if isinstance(value_function, RetroStarValueMLP):
+                smiles_value_fn_dict = retrostar_evaluate_molecules(value_function, smiles_list)
+            else:
+                smiles_value_fn_dict = value_function.evaluate_molecules(smiles_list)
             data_dict[name][value_function_name] = data_dict[name]['smiles'].map(smiles_value_fn_dict)
     
     
@@ -158,15 +172,16 @@ if __name__ == "__main__":
         'best_route_depth_lower_bound', 'num_calls_rxn_model',
         'num_nodes_in_tree', 
         'is_purchasable',
-        'constant-0', 'Tanimoto-distance',
-        'Tanimoto-distance-TIMES10', 
-        'Tanimoto-distance-EXP',
-        'Tanimoto-distance-SQRT', 
-        'Tanimoto-distance-NUM_NEIGHBORS_TO_1',
-        'Tanimoto-distance-NUM_NEIGHBORS_TO_1_TIMES1000',
+        # 'constant-0', 'Tanimoto-distance',
+        # 'Tanimoto-distance-TIMES10', 
+        # 'Tanimoto-distance-EXP',
+        # 'Tanimoto-distance-SQRT', 
+        # 'Tanimoto-distance-NUM_NEIGHBORS_TO_1',
+        # 'Tanimoto-distance-NUM_NEIGHBORS_TO_1_TIMES1000',
     ]
+    column_order = column_order + value_fns_names
 
     for test_db_name, test_data in data_dict.items(): 
         test_data = test_data[column_order]
-        test_data.to_csv(f'{output_folder}/{test_db_name}_result_added_value_fns.csv', index=False)
+        test_data.to_csv(f'{output_folder}/{test_db_name}_result_added_value_fns_v2.csv', index=False)
     

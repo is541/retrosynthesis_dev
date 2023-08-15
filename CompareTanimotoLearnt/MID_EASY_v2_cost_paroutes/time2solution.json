@@ -1,0 +1,817 @@
+{
+  "args": {
+    "input_file": "Guacamol_100_mid_easy_to_solve",
+    "output_json": "time2solution.json",
+    "limit_rxn_model_calls": 5000,
+    "paroutes_n": 5,
+    "and_node_cost_function": "paroutes",
+    "fnp_embedding_model_to_use": "fnp_nn_0709_sampleInLoss",
+    "gnn_embedding_model_to_use": "gnn_0709_sampleInLoss"
+  },
+  "results": {
+    "constant-0": {
+      "CCOc1ccc(N(CC(=O)NC2CCCCC2)C(=O)CCCC(=O)Nc2ccccn2)cc1": {
+        "solution_time": 192,
+        "num_nodes": 5271
+      },
+      "CN1CCC(=C2c3ccccc3Oc3ccc(Cl)cc32)CC1": {
+        "solution_time": 229,
+        "num_nodes": 9108
+      },
+      "COc1cc(O)c2c(=O)cc(-c3cc(O)c(O)cc3Cc3cccc(Cl)c3)oc2c1": {
+        "solution_time": 295,
+        "num_nodes": 20079
+      },
+      "N#CCCCSC(=S)n1ccnc1": {
+        "solution_time": 267,
+        "num_nodes": 4248
+      },
+      "CSC(=O)C#CC(C)(C)N(C)Cc1ccccc1": {
+        "solution_time": 267,
+        "num_nodes": 3836
+      },
+      "CC(=O)Nc1nc(C)c(-c2nc(C(C)(C)CCO)no2)s1": {
+        "solution_time": 284,
+        "num_nodes": 5850
+      },
+      "NC(=O)C(CCC(F)(F)F)N(CCc1ncon1)S(=O)(=O)c1ccc(Cl)cc1": {
+        "solution_time": 237,
+        "num_nodes": 4994
+      },
+      "NCC(=O)N1CC(N)CC1C(=O)NC(CCc1ccccc1)C(=O)Nc1ccc2ncccc2c1": {
+        "solution_time": 1234,
+        "num_nodes": 27281
+      },
+      "CCN(CC)C(=O)c1ccc(N(c2cccc(OC)c2)C2CCN(CC=C(C)C)CC2C)cc1": {
+        "solution_time": 262,
+        "num_nodes": 8186
+      },
+      "N=C(N)NCCCC(NC(=O)CN1CCN(S(=O)(=O)c2ccc(-c3ccccn3)s2)CC1=O)C(=O)c1nccs1": {
+        "solution_time": 271,
+        "num_nodes": 7388
+      },
+      "Cc1nc(NC2CCCC2)c2nn(C)c(-c3ccc(Cl)cc3Cl)c2n1": {
+        "solution_time": 269,
+        "num_nodes": 6239
+      },
+      "C#CC(CC(=O)O)NC(=O)Cn1ccc2ccc(N3CCNCC3)cc2c1=O": {
+        "solution_time": 210,
+        "num_nodes": 5826
+      },
+      "O=c1c(C=NNc2nc(N3CCOCC3)c3ccsc3n2)coc2ccccc12": {
+        "solution_time": 272,
+        "num_nodes": 6338
+      },
+      "O=C(NC1CCCCC1)C1Cc2c(sc3ccccc23)CN1": {
+        "solution_time": 286,
+        "num_nodes": 6500
+      },
+      "O=C1CSC(C23CC4CC(CC(C4)C2)C3)N1CCN1CCCCC1": {
+        "solution_time": 171,
+        "num_nodes": 5649
+      },
+      "O=C1c2cccc3cccc(c23)C(=O)N1CCN1CCN(CC(O)COCc2ccc(Cl)cc2)CC1": {
+        "solution_time": 44,
+        "num_nodes": 2351
+      },
+      "COc1ccc2oc(NC3CCN(Cc4ccccc4)CC3)cc(=O)c2c1": {
+        "solution_time": 286,
+        "num_nodes": 7827
+      },
+      "Fc1cccc(CN2CCC(COc3nc4ccsc4n4cccc34)CC2)c1": {
+        "solution_time": 225,
+        "num_nodes": 4857
+      },
+      "COCc1ccccc1C1C(C(=O)C(C)(C)C)C(=O)C(=O)N1c1ccc(-c2noc(C)n2)cc1": {
+        "solution_time": 278,
+        "num_nodes": 6145
+      },
+      "CN(C(=O)c1ccccc1OC(F)(F)F)C1COc2nc([N+](=O)[O-])cn2C1": {
+        "solution_time": 419,
+        "num_nodes": 8648
+      },
+      "O=C(NC1CC(Oc2ccc(-c3ccccc3)cc2)CC1O)C(c1ccccc1)c1ccccc1": {
+        "solution_time": 343,
+        "num_nodes": 12021
+      },
+      "C=CC(=O)NCCCCC(NC(=O)OCc1ccc(C)cc1)C(=O)O": {
+        "solution_time": 120,
+        "num_nodes": 3701
+      },
+      "Cc1cc(C=Nn2cnnc2)c(C)n1-c1cc(Cl)ccc1Cl": {
+        "solution_time": 257,
+        "num_nodes": 3410
+      },
+      "N#Cc1nc(N2CCC(S(=O)(=O)c3ccc(F)cc3Cl)C2)cc(C(F)(F)F)n1": {
+        "solution_time": 128,
+        "num_nodes": 4254
+      },
+      "CCCN(CCC1CCC(NS(=O)(=O)c2ccccc2)CC1)C1CCc2nc(N)sc2C1": {
+        "solution_time": 215,
+        "num_nodes": 6743
+      },
+      "O=C(O)c1cn(C2CC2c2ccccc2)c2cc(N3CCNCC3)c(F)cc2c1=O": {
+        "solution_time": 241,
+        "num_nodes": 6500
+      },
+      "CCc1c(C(=O)c2cccc3ccccc23)n(COCC=C(C)C)c(=O)[nH]c1=O": {
+        "solution_time": 489,
+        "num_nodes": 11635
+      },
+      "COc1ccc(C(=O)Nc2cc(C(=O)NC(=N)N)ccc2OCCCN2CCN(Cc3ccc(OC)c(OC)c3OC)CC2)cc1": {
+        "solution_time": 77,
+        "num_nodes": 3559
+      },
+      "CC(C)CC(c1nnnn1C(C)C)N1CCN(C(=O)c2ccco2)CC1": {
+        "solution_time": 259,
+        "num_nodes": 6791
+      },
+      "CCNC(=O)c1noc(-c2cc(Cl)c(O)cc2O)c1-c1cccc(N2CCN(C(C)=O)CC2)c1": {
+        "solution_time": 269,
+        "num_nodes": 11962
+      },
+      "CN(C)CCN1C(=O)c2c(c3c4ccccc4[nH]c3c3ccccc23)C1=O": {
+        "solution_time": 274,
+        "num_nodes": 18058
+      },
+      "COCc1cc(O)nc(N=C(N)Nc2ccc(C)cc2)n1": {
+        "solution_time": 274,
+        "num_nodes": 5400
+      },
+      "CCN(CC)CC#CCC1(O)c2ccccc2-c2ccccc21": {
+        "solution_time": 205,
+        "num_nodes": 7288
+      },
+      "CC1CCN(C(c2ccc(F)cn2)c2ccc(C(C)C(=O)O)cc2-c2ccc(C(F)(F)F)cc2)CC1": {
+        "solution_time": 271,
+        "num_nodes": 6735
+      },
+      "Cn1cc(-c2ccc(-c3c4c(nn3C)CCc3cnc(Nc5cnn(Cc6ccncc6)c5)nc3-4)cc2)cn1": {
+        "solution_time": 259,
+        "num_nodes": 6523
+      },
+      "[O-][n+]1nc2c(I)cnn2c2cc(OCc3ccc(Cl)cc3)ccc21": {
+        "solution_time": 277,
+        "num_nodes": 5628
+      },
+      "CCN1C(=O)c2cccc3c(S(=O)(=O)Nc4ccccn4)ccc1c23": {
+        "solution_time": 274,
+        "num_nodes": 7928
+      },
+      "CCCCC(C=O)NC(=O)OC(CCC)Cc1ccccc1": {
+        "solution_time": 165,
+        "num_nodes": 4293
+      },
+      "C=CCn1nc(Br)c2c(Br)nc(CCC)n2c1=O": {
+        "solution_time": 256,
+        "num_nodes": 5149
+      },
+      "O=C(C=Cc1ccc(C(F)(F)F)cc1)OCCc1c(-c2ccccc2Cl)c2cc(Cl)ccc2[nH]c1=O": {
+        "solution_time": 131,
+        "num_nodes": 5150
+      },
+      "O=c1n(Cc2nc3ccc(C(F)(F)F)cn3c2CCCCO)c2cnccc2n1C1CC1": {
+        "solution_time": 238,
+        "num_nodes": 5032
+      },
+      "O=C1NC2CCCCC2c2ccccc21": {
+        "solution_time": 277,
+        "num_nodes": 7745
+      },
+      "CCN(CC)c1nc2ccc(C(O)(c3ccc(Cl)cc3)c3cncn3C)cc2c(Cl)c1N(C(=O)OC(C)(C)C)c1ccccc1": {
+        "solution_time": 146,
+        "num_nodes": 2615
+      },
+      "CCN1CCN(c2cc(C(=O)Nc3ccc(C)c(Nc4ncnc5cnc(N6CCOCC6)nc45)c3)cc(C(C)(C)C#N)c2)CC1": {
+        "solution_time": 142,
+        "num_nodes": 3471
+      },
+      "COc1cc(N2CC3(CCN(S(=O)(=O)C4CC4)C3)C2)ncn1": {
+        "solution_time": 168,
+        "num_nodes": 3706
+      },
+      "CC1=C(C(=O)O)N2C(=O)C(NC(=O)C(N)c3cccc4sccc34)C2SC1": {
+        "solution_time": 268,
+        "num_nodes": 6329
+      },
+      "C=CCN(C(=O)CCC(=O)Nc1cc(C)on1)C(C(=O)NC1CCCC1)c1ccc(OC)c(OC)c1": {
+        "solution_time": 242,
+        "num_nodes": 5448
+      },
+      "CC1(C)c2cc(OCC(O)CO)ccc2C(=O)c2c1[nH]c1c(C(=O)O)c(C#N)ccc21": {
+        "solution_time": 263,
+        "num_nodes": 7285
+      },
+      "Cc1nc(C)c(CN2CCN(S(C)(=O)=O)CC2)nc1C": {
+        "solution_time": 220,
+        "num_nodes": 7448
+      },
+      "O=S(=O)(c1ccc(F)cn1)N1C(CO)CCC1c1ccc(F)cc1": {
+        "solution_time": 235,
+        "num_nodes": 3906
+      },
+      "CC(C)=CCCC(C)=CCCC(C)=CCCC1CCc2cc(O)c(C)c(C)c2O1": {
+        "solution_time": 452,
+        "num_nodes": 8515
+      },
+      "O=S(=O)(NC(CO)C1CCNCC1)c1ccc(Cl)s1": {
+        "solution_time": 272,
+        "num_nodes": 8090
+      },
+      "Cc1cc(Nc2cc(C(F)(F)F)ccn2)nc(-c2cnc(C3(N)CCCc4cc(C(=O)O)ccc43)s2)c1": {
+        "solution_time": 253,
+        "num_nodes": 5288
+      },
+      "Cc1cc(C(=O)NC(CC(=O)NCC(C)(C)C)C(=O)NC(CCc2ccccc2)C(=O)NCc2ccccc2Cl)no1": {
+        "solution_time": 665,
+        "num_nodes": 16562
+      },
+      "Cc1cccc(-c2csc3ncnc(Sc4nnnn4C)c23)c1": {
+        "solution_time": 259,
+        "num_nodes": 5014
+      },
+      "N#Cc1ccc(NC2CNC(C(=O)N3CCCC3C#N)C2)cc1C#N": {
+        "solution_time": 256,
+        "num_nodes": 7805
+      },
+      "CC(C)Oc1cccc(F)c1C1CC(F)C(=O)N1Cc1ccc(OC(F)(F)F)cc1": {
+        "solution_time": 244,
+        "num_nodes": 5666
+      },
+      "Cc1c(C(=O)C2CC2CN2CCC(N3CCCC3)CC2)sc2ccccc12": {
+        "solution_time": 186,
+        "num_nodes": 7323
+      },
+      "CC(C)CCNC(=O)c1onc(CSc2ccccc2)c1C(=O)NCCC(C)C": {
+        "solution_time": 250,
+        "num_nodes": 5116
+      },
+      "Oc1ccc2c(c1)CCN(Cc1ccc3c(c1)OCO3)C2c1ccc(OCCN2CCCC2)cc1": {
+        "solution_time": 244,
+        "num_nodes": 8539
+      },
+      "N#Cc1c(N)ncnc1N1CCCC1c1nn2cccc2c(=O)n1-c1ccccc1": {
+        "solution_time": 245,
+        "num_nodes": 5858
+      },
+      "CC(C)N(C)CC=CC(=O)N1CCc2sc3ncnc(Nc4ccc(Cl)c(Cl)c4)c3c2C1": {
+        "solution_time": 198,
+        "num_nodes": 4248
+      },
+      "O=c1ccc2cnc3ccc(-c4cnc5ccccc5c4)cc3c2n1-c1ccc(S(=O)(=O)N2CCNCC2)cc1": {
+        "solution_time": 182,
+        "num_nodes": 4171
+      },
+      "CCN(CC)CC(=O)Nc1ccc(O)c2c1C(=O)c1c(O)ccc(O)c1C2=O": {
+        "solution_time": 263,
+        "num_nodes": 16276
+      },
+      "CCCCc1ncc(C=C2C(=O)N(CCCC)C(=O)N2CCc2ccccc2)n1Cc1ccc(C(=O)OC)cc1": {
+        "solution_time": 250,
+        "num_nodes": 4340
+      },
+      "COC(=O)c1ccc(CN(CCCc2c(N)nc(N)nc2O)c2ccc([N+](=O)[O-])c(F)c2F)cc1": {
+        "solution_time": 250,
+        "num_nodes": 7775
+      },
+      "NC(=O)NN=C1CCC(O)CC1CC(=O)O": {
+        "solution_time": 251,
+        "num_nodes": 5479
+      },
+      "CCCCN1CCC(C(=O)CC)(c2cccc(O)c2)CC1": {
+        "solution_time": 259,
+        "num_nodes": 8923
+      },
+      "CCN1C(=O)C(c2cccc(-c3cnn(C)c3)c2)C(=O)N(c2ccccc2)c2cc(C(F)(F)F)ccc21": {
+        "solution_time": 248,
+        "num_nodes": 7232
+      },
+      "CCCc1c(C(=O)NCC(N)C(=O)O)[nH]c2cccc(Br)c12": {
+        "solution_time": 136,
+        "num_nodes": 4101
+      },
+      "C=C(C)COc1cccc(CNC(CC(C)C)c2ncnn2C)c1": {
+        "solution_time": 198,
+        "num_nodes": 3448
+      },
+      "COC(=O)c1ccc(OC)c(-c2cccc(C(CC(=O)O)c3nccs3)c2)c1": {
+        "solution_time": 224,
+        "num_nodes": 5679
+      },
+      "Cc1c(CN(C)c2cccc3c2CCCC3)cnc2nc(N)nc(N)c12": {
+        "solution_time": 160,
+        "num_nodes": 4504
+      },
+      "O=C(C=CNc1ccc([N+](=O)[O-])cc1)c1ccc2c(c1)CCCC2": {
+        "solution_time": 245,
+        "num_nodes": 5663
+      },
+      "Cc1nc(N)ccc1CNC(=O)Cc1c(C#N)ccc(NCC(F)(F)c2ccccn2)c1F": {
+        "solution_time": 104,
+        "num_nodes": 2667
+      },
+      "O=C(C1CCCCC1)N1CC(=O)N2CCc3ccc([N+](=O)[O-])cc3C2C1": {
+        "solution_time": 253,
+        "num_nodes": 7217
+      },
+      "COc1ccc2c(CN3CCOCC3)cn(CCNC(C)=O)c2n1": {
+        "solution_time": 250,
+        "num_nodes": 7523
+      },
+      "COCCn1c(SCc2nc(O)c3c(C)c(C(=O)OC)sc3n2)nc2ccccc21": {
+        "solution_time": 246,
+        "num_nodes": 5709
+      },
+      "NC(=O)c1cccc(C2CC3CCC(C2)N3CCN(Cc2ccccc2)C(=O)C2(O)CC2)c1": {
+        "solution_time": 244,
+        "num_nodes": 7273
+      },
+      "CC(=O)N(CC(Cc1c[nH]c2ccccc12)NC(=O)CN1CCN(c2ccccc2)CC1)c1ccccc1": {
+        "solution_time": 209,
+        "num_nodes": 9261
+      },
+      "COc1ncc(Nc2ncc(C(C)(C)O)nc2-c2cc(N)nc(C)n2)cc1F": {
+        "solution_time": 262,
+        "num_nodes": 5299
+      },
+      "Nc1nc(O)c2[nH]cc(Cc3cccs3)c2n1": {
+        "solution_time": 272,
+        "num_nodes": 5719
+      },
+      "COc1ccc(C2=C(c3ccc(OCc4ccc5ccccc5n4)cc3)C(=O)N(C)C2)cc1": {
+        "solution_time": 247,
+        "num_nodes": 6732
+      },
+      "CC(C)CNC(=O)C(Cc1c[nH]c2ccccc12)NC(=O)OCCCCN": {
+        "solution_time": 215,
+        "num_nodes": 7108
+      },
+      "Cn1c(OC2CCN(c3ccc(CN4CCCCC4)cc3)CC2)nc(-c2ccncc2)cc1=O": {
+        "solution_time": 162,
+        "num_nodes": 3983
+      },
+      "C=CC(=O)N1CCN(S(=O)(=O)c2ccc(Nc3ncc4c(n3)N(C)c3ccc(C)cc3C(=O)N4C)cc2)CC1": {
+        "solution_time": 195,
+        "num_nodes": 4230
+      },
+      "CCN(c1ccc(OC)cc1)S(=O)(=O)c1c(C(=O)N2CCCCCC2)c(C)n(C)c1C": {
+        "solution_time": 217,
+        "num_nodes": 4374
+      },
+      "COc1ccccc1-c1ccc(C(CC(=O)O)NC(=O)C2CCN2S(=O)(=O)c2cc(Cl)cc(Cl)c2)cc1": {
+        "solution_time": 184,
+        "num_nodes": 4941
+      },
+      "CN1CCN(Cc2ccc(-c3cnc(N4CCOC(Cn5nnc6ncc(-c7cccc(C#N)c7)nc65)C4)nc3)cc2)CC1": {
+        "solution_time": 170,
+        "num_nodes": 6415
+      },
+      "COc1cc(C(=O)C(=O)N2CCCCC2C(=O)OC(CCCc2ccccc2)CCCc2ccccn2)cc(OC)c1OC": {
+        "solution_time": 220,
+        "num_nodes": 4933
+      },
+      "CC1(C)CC(=O)c2cc(Cl)c(NC3CCCC3)nc2C1": {
+        "solution_time": 231,
+        "num_nodes": 4506
+      },
+      "CCNC(=O)C1(Nc2nc(NCc3ccccc3)nc(N3CC4CC3CN4C(=O)c3cccc(C(F)(F)F)c3)n2)Cc2ccccc2C1": {
+        "solution_time": 33,
+        "num_nodes": 1089
+      },
+      "CCN(CC)CCNc1ccc(CO)c2oc3ccccc3c(=O)c12": {
+        "solution_time": 243,
+        "num_nodes": 9674
+      },
+      "CN1C(C(=O)O)CCCC1C(=O)O": {
+        "solution_time": 244,
+        "num_nodes": 7095
+      },
+      "CCCCN(CCCC)CCCOc1ccc(S(=O)(=O)c2c(C(C)C)nn3ccccc23)cc1": {
+        "solution_time": 198,
+        "num_nodes": 4428
+      },
+      "Brc1cccc(-c2nsc(-c3cccc(Br)c3)n2)c1": {
+        "solution_time": 234,
+        "num_nodes": 6087
+      },
+      "Cc1cccc(CNC(=O)c2cc(-c3nnn(CC4CCC(CO)CC4)n3)cc(C)n2)c1": {
+        "solution_time": 434,
+        "num_nodes": 8148
+      },
+      "CC(=O)NC1c2c(ccc3ccc(=O)oc23)OC(C)(C)C1O": {
+        "solution_time": 237,
+        "num_nodes": 6144
+      },
+      "Cc1cc(C)nc(N=C(N)NCc2nc3ccccc3[nH]2)n1": {
+        "solution_time": 212,
+        "num_nodes": 2995
+      },
+      "Cc1c(C(=O)N2CCC(NC(=O)Nc3ccc(C#N)cc3)(c3ccccc3)CC2)nn(-c2ccc(Cl)cc2Cl)c1-c1ccc(Cl)cc1": {
+        "solution_time": 210,
+        "num_nodes": 7465
+      }
+    },
+    "Tanimoto-distance": {
+      "CCOc1ccc(N(CC(=O)NC2CCCCC2)C(=O)CCCC(=O)Nc2ccccn2)cc1": {
+        "solution_time": 110,
+        "num_nodes": 3268
+      },
+      "CN1CCC(=C2c3ccccc3Oc3ccc(Cl)cc32)CC1": {
+        "solution_time": 206,
+        "num_nodes": 8089
+      },
+      "COc1cc(O)c2c(=O)cc(-c3cc(O)c(O)cc3Cc3cccc(Cl)c3)oc2c1": {
+        "solution_time": 295,
+        "num_nodes": 20033
+      },
+      "N#CCCCSC(=S)n1ccnc1": {
+        "solution_time": 252,
+        "num_nodes": 3957
+      },
+      "CSC(=O)C#CC(C)(C)N(C)Cc1ccccc1": {
+        "solution_time": 249,
+        "num_nodes": 3556
+      },
+      "CC(=O)Nc1nc(C)c(-c2nc(C(C)(C)CCO)no2)s1": {
+        "solution_time": 277,
+        "num_nodes": 5570
+      },
+      "NC(=O)C(CCC(F)(F)F)N(CCc1ncon1)S(=O)(=O)c1ccc(Cl)cc1": {
+        "solution_time": 68,
+        "num_nodes": 1399
+      },
+      "NCC(=O)N1CC(N)CC1C(=O)NC(CCc1ccccc1)C(=O)Nc1ccc2ncccc2c1": {
+        "solution_time": 569,
+        "num_nodes": 13273
+      },
+      "CCN(CC)C(=O)c1ccc(N(c2cccc(OC)c2)C2CCN(CC=C(C)C)CC2C)cc1": {
+        "solution_time": 247,
+        "num_nodes": 7829
+      },
+      "N=C(N)NCCCC(NC(=O)CN1CCN(S(=O)(=O)c2ccc(-c3ccccn3)s2)CC1=O)C(=O)c1nccs1": {
+        "solution_time": 230,
+        "num_nodes": 6318
+      },
+      "Cc1nc(NC2CCCC2)c2nn(C)c(-c3ccc(Cl)cc3Cl)c2n1": {
+        "solution_time": 254,
+        "num_nodes": 5905
+      },
+      "C#CC(CC(=O)O)NC(=O)Cn1ccc2ccc(N3CCNCC3)cc2c1=O": {
+        "solution_time": 245,
+        "num_nodes": 6755
+      },
+      "O=c1c(C=NNc2nc(N3CCOCC3)c3ccsc3n2)coc2ccccc12": {
+        "solution_time": 238,
+        "num_nodes": 5387
+      },
+      "O=C(NC1CCCCC1)C1Cc2c(sc3ccccc23)CN1": {
+        "solution_time": 262,
+        "num_nodes": 6052
+      },
+      "O=C1CSC(C23CC4CC(CC(C4)C2)C3)N1CCN1CCCCC1": {
+        "solution_time": 269,
+        "num_nodes": 8401
+      },
+      "O=C1c2cccc3cccc(c23)C(=O)N1CCN1CCN(CC(O)COCc2ccc(Cl)cc2)CC1": {
+        "solution_time": 46,
+        "num_nodes": 2542
+      },
+      "COc1ccc2oc(NC3CCN(Cc4ccccc4)CC3)cc(=O)c2c1": {
+        "solution_time": 251,
+        "num_nodes": 6913
+      },
+      "Fc1cccc(CN2CCC(COc3nc4ccsc4n4cccc34)CC2)c1": {
+        "solution_time": 238,
+        "num_nodes": 5136
+      },
+      "COCc1ccccc1C1C(C(=O)C(C)(C)C)C(=O)C(=O)N1c1ccc(-c2noc(C)n2)cc1": {
+        "solution_time": 244,
+        "num_nodes": 5291
+      },
+      "CN(C(=O)c1ccccc1OC(F)(F)F)C1COc2nc([N+](=O)[O-])cn2C1": {
+        "solution_time": 396,
+        "num_nodes": 8160
+      },
+      "O=C(NC1CC(Oc2ccc(-c3ccccc3)cc2)CC1O)C(c1ccccc1)c1ccccc1": {
+        "solution_time": 353,
+        "num_nodes": 12198
+      },
+      "C=CC(=O)NCCCCC(NC(=O)OCc1ccc(C)cc1)C(=O)O": {
+        "solution_time": 122,
+        "num_nodes": 3778
+      },
+      "Cc1cc(C=Nn2cnnc2)c(C)n1-c1cc(Cl)ccc1Cl": {
+        "solution_time": 259,
+        "num_nodes": 3400
+      },
+      "N#Cc1nc(N2CCC(S(=O)(=O)c3ccc(F)cc3Cl)C2)cc(C(F)(F)F)n1": {
+        "solution_time": 220,
+        "num_nodes": 6811
+      },
+      "CCCN(CCC1CCC(NS(=O)(=O)c2ccccc2)CC1)C1CCc2nc(N)sc2C1": {
+        "solution_time": 243,
+        "num_nodes": 7501
+      },
+      "O=C(O)c1cn(C2CC2c2ccccc2)c2cc(N3CCNCC3)c(F)cc2c1=O": {
+        "solution_time": 217,
+        "num_nodes": 5945
+      },
+      "CCc1c(C(=O)c2cccc3ccccc23)n(COCC=C(C)C)c(=O)[nH]c1=O": {
+        "solution_time": 451,
+        "num_nodes": 10802
+      },
+      "COc1ccc(C(=O)Nc2cc(C(=O)NC(=N)N)ccc2OCCCN2CCN(Cc3ccc(OC)c(OC)c3OC)CC2)cc1": {
+        "solution_time": 128,
+        "num_nodes": 5501
+      },
+      "CC(C)CC(c1nnnn1C(C)C)N1CCN(C(=O)c2ccco2)CC1": {
+        "solution_time": 180,
+        "num_nodes": 4838
+      },
+      "CCNC(=O)c1noc(-c2cc(Cl)c(O)cc2O)c1-c1cccc(N2CCN(C(C)=O)CC2)c1": {
+        "solution_time": 147,
+        "num_nodes": 6926
+      },
+      "CN(C)CCN1C(=O)c2c(c3c4ccccc4[nH]c3c3ccccc23)C1=O": {
+        "solution_time": 252,
+        "num_nodes": 16856
+      },
+      "COCc1cc(O)nc(N=C(N)Nc2ccc(C)cc2)n1": {
+        "solution_time": 237,
+        "num_nodes": 4710
+      },
+      "CCN(CC)CC#CCC1(O)c2ccccc2-c2ccccc21": {
+        "solution_time": 256,
+        "num_nodes": 8724
+      },
+      "CC1CCN(C(c2ccc(F)cn2)c2ccc(C(C)C(=O)O)cc2-c2ccc(C(F)(F)F)cc2)CC1": {
+        "solution_time": 236,
+        "num_nodes": 5829
+      },
+      "Cn1cc(-c2ccc(-c3c4c(nn3C)CCc3cnc(Nc5cnn(Cc6ccncc6)c5)nc3-4)cc2)cn1": {
+        "solution_time": 243,
+        "num_nodes": 6161
+      },
+      "[O-][n+]1nc2c(I)cnn2c2cc(OCc3ccc(Cl)cc3)ccc21": {
+        "solution_time": 250,
+        "num_nodes": 5055
+      },
+      "CCN1C(=O)c2cccc3c(S(=O)(=O)Nc4ccccn4)ccc1c23": {
+        "solution_time": 263,
+        "num_nodes": 7504
+      },
+      "CCCCC(C=O)NC(=O)OC(CCC)Cc1ccccc1": {
+        "solution_time": 160,
+        "num_nodes": 4135
+      },
+      "C=CCn1nc(Br)c2c(Br)nc(CCC)n2c1=O": {
+        "solution_time": 226,
+        "num_nodes": 4453
+      },
+      "O=C(C=Cc1ccc(C(F)(F)F)cc1)OCCc1c(-c2ccccc2Cl)c2cc(Cl)ccc2[nH]c1=O": {
+        "solution_time": 108,
+        "num_nodes": 3924
+      },
+      "O=c1n(Cc2nc3ccc(C(F)(F)F)cn3c2CCCCO)c2cnccc2n1C1CC1": {
+        "solution_time": 227,
+        "num_nodes": 4819
+      },
+      "O=C1NC2CCCCC2c2ccccc21": {
+        "solution_time": 272,
+        "num_nodes": 7727
+      },
+      "CCN(CC)c1nc2ccc(C(O)(c3ccc(Cl)cc3)c3cncn3C)cc2c(Cl)c1N(C(=O)OC(C)(C)C)c1ccccc1": {
+        "solution_time": 137,
+        "num_nodes": 2416
+      },
+      "CCN1CCN(c2cc(C(=O)Nc3ccc(C)c(Nc4ncnc5cnc(N6CCOCC6)nc45)c3)cc(C(C)(C)C#N)c2)CC1": {
+        "solution_time": 277,
+        "num_nodes": 6103
+      },
+      "COc1cc(N2CC3(CCN(S(=O)(=O)C4CC4)C3)C2)ncn1": {
+        "solution_time": 242,
+        "num_nodes": 5225
+      },
+      "CC1=C(C(=O)O)N2C(=O)C(NC(=O)C(N)c3cccc4sccc34)C2SC1": {
+        "solution_time": 424,
+        "num_nodes": 9809
+      },
+      "C=CCN(C(=O)CCC(=O)Nc1cc(C)on1)C(C(=O)NC1CCCC1)c1ccc(OC)c(OC)c1": {
+        "solution_time": 250,
+        "num_nodes": 5657
+      },
+      "CC1(C)c2cc(OCC(O)CO)ccc2C(=O)c2c1[nH]c1c(C(=O)O)c(C#N)ccc21": {
+        "solution_time": 242,
+        "num_nodes": 6813
+      },
+      "Cc1nc(C)c(CN2CCN(S(C)(=O)=O)CC2)nc1C": {
+        "solution_time": 201,
+        "num_nodes": 7071
+      },
+      "O=S(=O)(c1ccc(F)cn1)N1C(CO)CCC1c1ccc(F)cc1": {
+        "solution_time": 209,
+        "num_nodes": 3384
+      },
+      "CC(C)=CCCC(C)=CCCC(C)=CCCC1CCc2cc(O)c(C)c(C)c2O1": {
+        "solution_time": 473,
+        "num_nodes": 9578
+      },
+      "O=S(=O)(NC(CO)C1CCNCC1)c1ccc(Cl)s1": {
+        "solution_time": 245,
+        "num_nodes": 7241
+      },
+      "Cc1cc(Nc2cc(C(F)(F)F)ccn2)nc(-c2cnc(C3(N)CCCc4cc(C(=O)O)ccc43)s2)c1": {
+        "solution_time": 229,
+        "num_nodes": 4796
+      },
+      "Cc1cc(C(=O)NC(CC(=O)NCC(C)(C)C)C(=O)NC(CCc2ccccc2)C(=O)NCc2ccccc2Cl)no1": {
+        "solution_time": 715,
+        "num_nodes": 17788
+      },
+      "Cc1cccc(-c2csc3ncnc(Sc4nnnn4C)c23)c1": {
+        "solution_time": 249,
+        "num_nodes": 4848
+      },
+      "N#Cc1ccc(NC2CNC(C(=O)N3CCCC3C#N)C2)cc1C#N": {
+        "solution_time": 104,
+        "num_nodes": 3415
+      },
+      "CC(C)Oc1cccc(F)c1C1CC(F)C(=O)N1Cc1ccc(OC(F)(F)F)cc1": {
+        "solution_time": 232,
+        "num_nodes": 5427
+      },
+      "Cc1c(C(=O)C2CC2CN2CCC(N3CCCC3)CC2)sc2ccccc12": {
+        "solution_time": 171,
+        "num_nodes": 6980
+      },
+      "CC(C)CCNC(=O)c1onc(CSc2ccccc2)c1C(=O)NCCC(C)C": {
+        "solution_time": 101,
+        "num_nodes": 1918
+      },
+      "Oc1ccc2c(c1)CCN(Cc1ccc3c(c1)OCO3)C2c1ccc(OCCN2CCCC2)cc1": {
+        "solution_time": 152,
+        "num_nodes": 5619
+      },
+      "N#Cc1c(N)ncnc1N1CCCC1c1nn2cccc2c(=O)n1-c1ccccc1": {
+        "solution_time": 228,
+        "num_nodes": 5358
+      },
+      "CC(C)N(C)CC=CC(=O)N1CCc2sc3ncnc(Nc4ccc(Cl)c(Cl)c4)c3c2C1": {
+        "solution_time": 177,
+        "num_nodes": 3876
+      },
+      "O=c1ccc2cnc3ccc(-c4cnc5ccccc5c4)cc3c2n1-c1ccc(S(=O)(=O)N2CCNCC2)cc1": {
+        "solution_time": 225,
+        "num_nodes": 5165
+      },
+      "CCN(CC)CC(=O)Nc1ccc(O)c2c1C(=O)c1c(O)ccc(O)c1C2=O": {
+        "solution_time": 226,
+        "num_nodes": 14331
+      },
+      "CCCCc1ncc(C=C2C(=O)N(CCCC)C(=O)N2CCc2ccccc2)n1Cc1ccc(C(=O)OC)cc1": {
+        "solution_time": 255,
+        "num_nodes": 4412
+      },
+      "COC(=O)c1ccc(CN(CCCc2c(N)nc(N)nc2O)c2ccc([N+](=O)[O-])c(F)c2F)cc1": {
+        "solution_time": 222,
+        "num_nodes": 6828
+      },
+      "NC(=O)NN=C1CCC(O)CC1CC(=O)O": {
+        "solution_time": 249,
+        "num_nodes": 5401
+      },
+      "CCCCN1CCC(C(=O)CC)(c2cccc(O)c2)CC1": {
+        "solution_time": 216,
+        "num_nodes": 7618
+      },
+      "CCN1C(=O)C(c2cccc(-c3cnn(C)c3)c2)C(=O)N(c2ccccc2)c2cc(C(F)(F)F)ccc21": {
+        "solution_time": 241,
+        "num_nodes": 7091
+      },
+      "CCCc1c(C(=O)NCC(N)C(=O)O)[nH]c2cccc(Br)c12": {
+        "solution_time": 92,
+        "num_nodes": 2682
+      },
+      "C=C(C)COc1cccc(CNC(CC(C)C)c2ncnn2C)c1": {
+        "solution_time": 176,
+        "num_nodes": 3055
+      },
+      "COC(=O)c1ccc(OC)c(-c2cccc(C(CC(=O)O)c3nccs3)c2)c1": {
+        "solution_time": 230,
+        "num_nodes": 5812
+      },
+      "Cc1c(CN(C)c2cccc3c2CCCC3)cnc2nc(N)nc(N)c12": {
+        "solution_time": 201,
+        "num_nodes": 5541
+      },
+      "O=C(C=CNc1ccc([N+](=O)[O-])cc1)c1ccc2c(c1)CCCC2": {
+        "solution_time": 240,
+        "num_nodes": 5542
+      },
+      "Cc1nc(N)ccc1CNC(=O)Cc1c(C#N)ccc(NCC(F)(F)c2ccccn2)c1F": {
+        "solution_time": 71,
+        "num_nodes": 2100
+      },
+      "O=C(C1CCCCC1)N1CC(=O)N2CCc3ccc([N+](=O)[O-])cc3C2C1": {
+        "solution_time": 231,
+        "num_nodes": 6714
+      },
+      "COc1ccc2c(CN3CCOCC3)cn(CCNC(C)=O)c2n1": {
+        "solution_time": 196,
+        "num_nodes": 6102
+      },
+      "COCCn1c(SCc2nc(O)c3c(C)c(C(=O)OC)sc3n2)nc2ccccc21": {
+        "solution_time": 220,
+        "num_nodes": 5316
+      },
+      "NC(=O)c1cccc(C2CC3CCC(C2)N3CCN(Cc2ccccc2)C(=O)C2(O)CC2)c1": {
+        "solution_time": 258,
+        "num_nodes": 7698
+      },
+      "CC(=O)N(CC(Cc1c[nH]c2ccccc12)NC(=O)CN1CCN(c2ccccc2)CC1)c1ccccc1": {
+        "solution_time": 170,
+        "num_nodes": 7785
+      },
+      "COc1ncc(Nc2ncc(C(C)(C)O)nc2-c2cc(N)nc(C)n2)cc1F": {
+        "solution_time": 199,
+        "num_nodes": 3933
+      },
+      "Nc1nc(O)c2[nH]cc(Cc3cccs3)c2n1": {
+        "solution_time": 252,
+        "num_nodes": 5282
+      },
+      "COc1ccc(C2=C(c3ccc(OCc4ccc5ccccc5n4)cc3)C(=O)N(C)C2)cc1": {
+        "solution_time": 233,
+        "num_nodes": 6477
+      },
+      "CC(C)CNC(=O)C(Cc1c[nH]c2ccccc12)NC(=O)OCCCCN": {
+        "solution_time": 167,
+        "num_nodes": 5558
+      },
+      "Cn1c(OC2CCN(c3ccc(CN4CCCCC4)cc3)CC2)nc(-c2ccncc2)cc1=O": {
+        "solution_time": 147,
+        "num_nodes": 3614
+      },
+      "C=CC(=O)N1CCN(S(=O)(=O)c2ccc(Nc3ncc4c(n3)N(C)c3ccc(C)cc3C(=O)N4C)cc2)CC1": {
+        "solution_time": 185,
+        "num_nodes": 3954
+      },
+      "CCN(c1ccc(OC)cc1)S(=O)(=O)c1c(C(=O)N2CCCCCC2)c(C)n(C)c1C": {
+        "solution_time": 182,
+        "num_nodes": 3667
+      },
+      "COc1ccccc1-c1ccc(C(CC(=O)O)NC(=O)C2CCN2S(=O)(=O)c2cc(Cl)cc(Cl)c2)cc1": {
+        "solution_time": 172,
+        "num_nodes": 4616
+      },
+      "CN1CCN(Cc2ccc(-c3cnc(N4CCOC(Cn5nnc6ncc(-c7cccc(C#N)c7)nc65)C4)nc3)cc2)CC1": {
+        "solution_time": 172,
+        "num_nodes": 6422
+      },
+      "COc1cc(C(=O)C(=O)N2CCCCC2C(=O)OC(CCCc2ccccc2)CCCc2ccccn2)cc(OC)c1OC": {
+        "solution_time": 90,
+        "num_nodes": 2080
+      },
+      "CC1(C)CC(=O)c2cc(Cl)c(NC3CCCC3)nc2C1": {
+        "solution_time": 205,
+        "num_nodes": 3963
+      },
+      "CCNC(=O)C1(Nc2nc(NCc3ccccc3)nc(N3CC4CC3CN4C(=O)c3cccc(C(F)(F)F)c3)n2)Cc2ccccc2C1": {
+        "solution_time": 36,
+        "num_nodes": 1139
+      },
+      "CCN(CC)CCNc1ccc(CO)c2oc3ccccc3c(=O)c12": {
+        "solution_time": 227,
+        "num_nodes": 9119
+      },
+      "CN1C(C(=O)O)CCCC1C(=O)O": {
+        "solution_time": 240,
+        "num_nodes": 6959
+      },
+      "CCCCN(CCCC)CCCOc1ccc(S(=O)(=O)c2c(C(C)C)nn3ccccc23)cc1": {
+        "solution_time": 179,
+        "num_nodes": 4030
+      },
+      "Brc1cccc(-c2nsc(-c3cccc(Br)c3)n2)c1": {
+        "solution_time": 231,
+        "num_nodes": 5937
+      },
+      "Cc1cccc(CNC(=O)c2cc(-c3nnn(CC4CCC(CO)CC4)n3)cc(C)n2)c1": {
+        "solution_time": 240,
+        "num_nodes": 4651
+      },
+      "CC(=O)NC1c2c(ccc3ccc(=O)oc23)OC(C)(C)C1O": {
+        "solution_time": 236,
+        "num_nodes": 6139
+      },
+      "Cc1cc(C)nc(N=C(N)NCc2nc3ccccc3[nH]2)n1": {
+        "solution_time": 211,
+        "num_nodes": 3048
+      },
+      "Cc1c(C(=O)N2CCC(NC(=O)Nc3ccc(C#N)cc3)(c3ccccc3)CC2)nn(-c2ccc(Cl)cc2Cl)c1-c1ccc(Cl)cc1": {
+        "solution_time": 351,
+        "num_nodes": 11740
+      }
+    }
+  }
+}

@@ -206,3 +206,5 @@ if __name__ == "__main__":
             )
             f.write(output_str)
             f.flush()
+            
+            del output_graph
